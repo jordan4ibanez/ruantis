@@ -1,8 +1,7 @@
+import { CameraModeType } from "../utility/globals";
+
 export function setUpCamera(player: ObjectRef): void {
 	assert(player.is_player());
-
-	print("hi");
-
 	player.hud_set_flags({
 		hotbar: false,
 		healthbar: false,
@@ -10,4 +9,5 @@ export function setUpCamera(player: ObjectRef): void {
 		breathbar: false,
 		minimap: true,
 	});
+	player.set_camera({ mode: CameraModeType.first });
 }
