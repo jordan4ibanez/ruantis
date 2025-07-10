@@ -160,7 +160,9 @@ function tick(delta: number): void {
 
 	serverTimer += delta;
 
-	if (serverTimer > 0.5) {
+	if (serverTimer >= 0.5) {
+		serverTimer -= 0.5;
+		
 		//? Forever.
 		for (const func of serverFunctions) {
 			func(delta);
