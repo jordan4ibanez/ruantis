@@ -8,7 +8,7 @@ export function deployTickTimer(): void {
 type clientTickFunctionType = (player: ObjectRef, delta: number) => void;
 
 /** If returns true the function stops running. */
-type serverTickFunctionType = (delta: number) => boolean | void;
+type serverTickFunctionType = (delta: number) => void;
 
 let functionID = 0;
 
