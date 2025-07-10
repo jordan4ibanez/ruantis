@@ -13,6 +13,7 @@ export function terminalColorize(
 	g: number,
 	b: number
 ): string {
+	// todo: this probably doesn't work!!!
 	// tostring in case anything stupid happens.
 	return (
 		"\x1b[38;2;" +
