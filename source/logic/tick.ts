@@ -13,10 +13,18 @@ type serverTickFunctionType = (delta: number) => void;
 const clientFunctions: clientTickFunctionType[] = [];
 const serverFunctions: serverTickFunctionType[] = [];
 
+/**
+ * Run a function every client tick. (smoother)
+ * @param func Function.
+ */
 export function registerClientTickFunction(func: clientTickFunctionType) {
 	clientFunctions.push(func);
 }
 
+/**
+ * Run a function every server tick. (lighter)
+ * @param func Function.
+ */
 export function registerServerTickFunction(func: serverTickFunctionType) {
 	serverFunctions.push(func);
 }
