@@ -5,10 +5,7 @@ export function deployTickTimer(): void {
 }
 
 /** If returns true the function stops running. */
-type clientTickFunctionType = (
-	player: ObjectRef,
-	delta: number
-) => boolean | void;
+type clientTickFunctionType = (player: ObjectRef, delta: number) => void;
 
 /** If returns true the function stops running. */
 type serverTickFunctionType = (delta: number) => boolean | void;
