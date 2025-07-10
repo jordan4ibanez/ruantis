@@ -99,6 +99,8 @@ let serverTimer = 0;
 const tempClientDeletionQueue: number[] = [];
 const tempServerDeletionQueue: number[] = [];
 
+const tempTargetedClientDeletionQueue: number[] = [];
+
 function tick(delta: number): void {
 	// Client tick always runs.
 
@@ -116,13 +118,25 @@ function tick(delta: number): void {
 		}
 
 		//? Temporary targeted.
-		const funcs = temporaryTargetedClientTickFunctions.get(
+		// This is specific to the player so it must remain in this scope.
+		const tFuncs = temporaryTargetedClientTickFunctions.get(
 			player.get_player_name()
 		);
-		if (funcs == null) {
+		if (tFuncs == null) {
 			throw new Error(
 				`Player ${player.get_player_name()} was never given a client temp target map.`
 			);
+		}
+		for (const [id, func] of tFuncs) {
+			if (func(player, delta)) {
+				tempTargetedClientDeletionQueue.push(id);
+			}
+		}
+		while (tempTargetedClientDeletionQueue.length > 0) {
+			const id = tempTargetedClientDeletionQueue.pop();
+			if (id != null) {
+				tFuncs.delete(id);
+			}
 		}
 	}
 
