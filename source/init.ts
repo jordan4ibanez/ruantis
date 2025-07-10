@@ -1,3 +1,4 @@
+import { whenPlayerJoins } from "./logic/player";
 import { deployTickTimer } from "./logic/tick";
 import { setUpCamera } from "./player/camera";
 import { deployInventory } from "./player/inventory";
@@ -7,7 +8,7 @@ function main() {
 	deployTickTimer();
 	deployTracker();
 
-	core.register_on_joinplayer((player: ObjectRef) => {
+	whenPlayerJoins((player: ObjectRef) => {
 		setUpCamera(player);
 		deployInventory(player);
 	});
