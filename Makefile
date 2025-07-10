@@ -2,7 +2,7 @@
 defaults:
 	@node --no-warnings=ExperimentalWarning ts_lua_project_bridge.ts
 	@echo Starting Luanti.
-	@luanti --go --gameid ruantis --world $$HOME/.minetest/worlds/world1
+	@luanti --server --gameid ruantis --world $$HOME/.minetest/worlds/world1
 
 assets:
 	@node --no-warnings=ExperimentalWarning ts_lua_project_bridge.ts --copy-media
