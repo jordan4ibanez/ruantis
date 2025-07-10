@@ -6,6 +6,8 @@ function main() {
 
 	core.register_on_joinplayer((player: ObjectRef) => {
 		setUpCamera(player);
+
+		
 	});
 }
 main();
