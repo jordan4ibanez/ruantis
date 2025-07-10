@@ -1,13 +1,16 @@
 import { LogLevel } from "../utility/enums";
 
 const playerList: ObjectRef[] = [];
+const playerMap = new Map<string, ObjectRef>();
 
 export function deployTracker(): void {
 	core.register_on_joinplayer((player: ObjectRef) => {
 		playerList.push(player);
+		playerMap.set(player.get_player_name(), player);
 	});
 
 	core.register_on_leaveplayer((player: ObjectRef) => {
+		playerMap.delete(player.get_player_name());
 		let found = false;
 		let index = 0;
 		for (const p of playerList) {
@@ -30,6 +33,19 @@ export function deployTracker(): void {
 	});
 }
 
-export function getPlayers(): readonly ObjectRef[] {
+/**
+ * Gets all players currently online.
+ * @returns All players currently online.
+ */
+export function getAllPlayers(): readonly ObjectRef[] {
 	return playerList;
+}
+
+/**
+ * Try to get a player by name.
+ * @param name The player's name.
+ * @returns The player. Or null.
+ */
+export function getPlayer(name: string): ObjectRef | null {
+	return playerMap.get(name) || null;
 }
