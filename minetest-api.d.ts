@@ -1,3 +1,5 @@
+import { PointedThingType } from "./source/utility/globals";
+
 export {};
 
 //* note: All enums were moved to mods/utility/enums.ts
@@ -2491,11 +2493,6 @@ declare global {
 
 /** @noSelf **/
 declare global {
-	enum PointedThingType {
-		node,
-		object,
-	}
-
 	enum InputKeys {
 		up = "up",
 		down = "down",
