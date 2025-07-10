@@ -1,9 +1,9 @@
+import { deployTickTimer } from "./logic/tick";
 import { setUpCamera } from "./player/camera";
 import { deployInventory } from "./player/inventory";
-import { PointedThingType } from "./utility/globals";
 
 function main() {
-	print(PointedThingType.node);
+	deployTickTimer();
 
 	core.register_on_joinplayer((player: ObjectRef) => {
 		setUpCamera(player);

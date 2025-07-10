@@ -66,7 +66,7 @@ interface core {
 	is_singleplayer(): boolean;
 	has_feature(featureName: string): boolean;
 	get_player_information(playerName: string): PlayerInformation;
-	get_player_window_information(playerName: string): WindowInformation;
+	get_player_window_information(playerName: string): WindowInformation | null;
 	mkdir(dir: string): boolean;
 	rmdir(dir: string): boolean;
 	cpdir(dir: string, dst: string): boolean;
