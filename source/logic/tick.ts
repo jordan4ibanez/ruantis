@@ -179,5 +179,32 @@ function tick(delta: number): void {
 				temporaryServerFuncs.delete(id);
 			}
 		}
+
+		//? Temporary targeted.
+
+		for (const player of getAllPlayers()) {
+			// This is specific to the player so it must remain in this scope.
+
+			const tFuncs = temporaryTargetedServerTickFunctions.get(
+				player.get_player_name()
+			);
+			if (tFuncs == null) {
+				throw new Error(
+					`Player ${player.get_player_name()} was never given a server temp target map.`
+				);
+			}
+			for (const [id, func] of tFuncs) {
+				if (func(player, delta)) {
+					tempTargetedServerDeletionQueue.push(id);
+				}
+			}
+
+			while (tempTargetedServerDeletionQueue.length > 0) {
+				const id = tempTargetedServerDeletionQueue.pop();
+				if (id != null) {
+					tFuncs.delete(id);
+				}
+			}
+		}
 	}
 }
