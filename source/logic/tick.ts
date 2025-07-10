@@ -79,6 +79,7 @@ function tick(delta: number): void {
 	}
 
 	serverTimer += delta;
+
 	if (serverTimer > 0.5) {
 		for (const func of serverFunctions) {
 			func(delta);
@@ -94,6 +95,7 @@ function tick(delta: number): void {
 			const id = tempServerDeletionQueue.pop();
 			if (id != null) {
 				temporaryServerFuncs.delete(id);
+			}
 		}
 	}
 }
