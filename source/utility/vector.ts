@@ -2,7 +2,7 @@ import { randomRange } from "./math";
 
 const rr = randomRange;
 
-class Vec3 {
+export class Vec3 {
 	x: number = 0;
 	y: number = 0;
 	z: number = 0;
@@ -31,12 +31,12 @@ class Vec3 {
 		return this;
 	}
 
-	distance(other: Vec2): number {
+	distance(other: Vec3): number {
 		return vector.distance(this, other);
 	}
 }
 
-class Vec2 {
+export  class Vec2 {
 	x: number = 0;
 	y: number = 0;
 

@@ -44,6 +44,7 @@ import {
 	TexturePoolComponentFade,
 	TileAnimationType,
 } from "./source/utility/globals";
+import { Vec2, Vec3 } from "./source/utility/vector";
 
 export {};
 
@@ -2508,22 +2509,6 @@ declare global {
 
 	interface Job {
 		cancel(): void;
-	}
-
-	interface Vec2 {
-		x: number;
-		y: number;
-	}
-
-	interface Vec3 extends Vec2 {
-		__eq(other: Vec3): boolean;
-		__unm(): Vec3;
-		__add(other: Vec3): Vec3;
-		__sub(other: Vec3): Vec3;
-		__mul(other: Vec3): Vec3;
-		__div(other: Vec3): Vec3;
-
-		z: number;
 	}
 
 	interface NodeTimerObject {
