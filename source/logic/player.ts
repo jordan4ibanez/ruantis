@@ -19,4 +19,16 @@ export function whenPlayerLeaves(func: pFunc): void {
 	leaveFuncs.push(func);
 }
 
-print("running!!!!");
+// And then the implementation.
+
+core.register_on_joinplayer((p: ObjectRef) => {
+	for (const f of joinFuncs) {
+		f(p);
+	}
+});
+
+core.register_on_leaveplayer((p: ObjectRef) => {
+	for (const f of leaveFuncs) {
+		f(p);
+	}
+});
