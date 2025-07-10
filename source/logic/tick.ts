@@ -104,6 +104,44 @@ function deployTargetedFunctionLogic(): void {
 	});
 }
 
+/**
+ * Register a temporary client tick function targeted at a player. (smoother)
+ * @param name The player's name.
+ * @param func A function that returns true when it's completed.
+ */
+export function registerTargetedTemporaryClientTickFunction(
+	name: string,
+	func: temporaryTargetedClientTickFunctionType
+): void {
+	const database = temporaryTargetedClientTickFunctions.get(name);
+	if (database == null) {
+		throw new Error(
+			`Player ${name} was never given a client temp target map.`
+		);
+	}
+	database.set(functionID, func);
+	functionID++;
+}
+
+/**
+ * Register a temporary server tick function targeted at a player. (lighter)
+ * @param name The player's name.
+ * @param func A function that returns true when it's completed.
+ */
+export function registerTargetedTemporaryServerTickFunction(
+	name: string,
+	func: temporaryTargetedServerTickFunctionType
+): void {
+	const database = temporaryTargetedServerTickFunctions.get(name);
+	if (database == null) {
+		throw new Error(
+			`Player ${name} was never given a server temp target map.`
+		);
+	}
+	database.set(functionID, func);
+	functionID++;
+}
+
 let serverTimer = 0;
 
 const tempClientDeletionQueue: number[] = [];
