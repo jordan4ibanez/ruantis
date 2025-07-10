@@ -21,7 +21,8 @@ export function deployDisplayHandling(): void {
 
 				print(dump(windowInfo));
 
-				print(windowInfo.size.x * 2);
+				//! note: This is the actual window resolution in pixels.
+				print(windowInfo.size.x);
 
 				return true;
 			}
@@ -37,7 +38,7 @@ export function deployDisplayHandling(): void {
 				continue;
 			}
 
-			print(dump(windowInfo.size));
+			print(dump(windowInfo.size.x * windowInfo.real_hud_scaling));
 		}
 	});
 }
