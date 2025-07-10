@@ -56,7 +56,7 @@ export function registerTemporaryClientTickFunction(
 
 /**
  * Register a temporary server tick function. (lighter)
- * @param func
+ * @param func A function that returns true when it is completed.
  */
 export function registerTemporaryServerTickFunction(
 	func: temporaryServerTickFunctionType
