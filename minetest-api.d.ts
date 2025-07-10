@@ -2296,7 +2296,7 @@ declare global {
 		get_wield_list(): string;
 		get_wield_index(): number;
 		get_wielded_item(): ItemStackObject;
-		set_wielded_item(item: ItemStackObject): boolean;
+		set_wielded_item(item: ItemStackObject | string): boolean;
 		get_armor_groups(): { string: number };
 		set_armor_groups(groups: Dictionary<string, number>): void;
 		get_animation(): Array<Vec2 | number>;
