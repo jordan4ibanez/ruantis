@@ -1,4 +1,4 @@
-import { PointedThingType } from "./source/utility/globals";
+import { CameraModeType, PointedThingType } from "./source/utility/globals";
 
 export {};
 
@@ -1670,6 +1670,10 @@ declare global {
 		new_move?: boolean;
 	}
 
+	/** @noSelf **/ interface CameraMode {
+		mode: CameraModeType;
+	}
+
 	/** @noSelf **/ interface SkyParametersColor {
 		day_sky?: DynamicColorSpec;
 		day_horizon?: DynamicColorSpec;
@@ -2351,6 +2355,8 @@ declare global {
 		//! From what I read in the api.md, it seems like these are just all no-ops for non-players.
 		//! This can be broken out into a different interface that extends if this causes too many problems.
 		//! IE: PlayerObjectRef extends ObjectRef.
+		set_camera_modes(): void;
+		get_camera(): CameraMode;
 		get_player_name(): string;
 		get_look_dir(): Vec3;
 		get_look_vertical(): number;
