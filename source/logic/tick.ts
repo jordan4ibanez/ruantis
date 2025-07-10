@@ -97,12 +97,12 @@ function deployTargetedFunctionLogic(): void {
 			new Map<number, temporaryTargetedServerTickFunctionType>()
 		);
 	});
-}
 
-whenPlayerLeaves((player) => {
-	temporaryTargetedClientTickFunctions.delete(player.get_player_name());
-	temporaryTargetedServerTickFunctions.delete(player.get_player_name());
-});
+	whenPlayerLeaves((player) => {
+		temporaryTargetedClientTickFunctions.delete(player.get_player_name());
+		temporaryTargetedServerTickFunctions.delete(player.get_player_name());
+	});
+}
 
 let serverTimer = 0;
 
@@ -162,7 +162,7 @@ function tick(delta: number): void {
 
 	if (serverTimer >= 0.5) {
 		serverTimer -= 0.5;
-		
+
 		//? Forever.
 		for (const func of serverFunctions) {
 			func(delta);
