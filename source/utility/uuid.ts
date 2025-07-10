@@ -1,4 +1,4 @@
-export class UuidTicker {
+export class UUID {
 	private data: number = 0;
 	constructor() {}
 	/**
