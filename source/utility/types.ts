@@ -1,4 +1,3 @@
-import { fakeRef } from "./init";
 import { Vec2, Vec3 } from "./vector";
 
 export interface EntityFireTable {
@@ -10,7 +9,7 @@ export interface EntityFireTable {
 export abstract class Entity implements LuaEntity {
 	// Name is required.
 	abstract name: string;
-	object: ObjectRef = fakeRef();
+	object: ObjectRef = {} as ObjectRef;
 	fireEntity: ObjectRef | null = null;
 	fireTable: EntityFireTable | null = null;
 

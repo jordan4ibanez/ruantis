@@ -1,4 +1,4 @@
-import { textureSize } from "./init";
+const textureSize = 16;
 
 /**
  * Converts a pixel into nodebox coordinate.
