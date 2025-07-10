@@ -1,4 +1,4 @@
-import { setUpCamera } from "./player/camera_setup";
+import { setUpCamera } from "./player/camera";
 import { PointedThingType } from "./utility/globals";
 
 function main() {
