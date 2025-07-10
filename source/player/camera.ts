@@ -1,4 +1,4 @@
-import { CameraModeType } from "../utility/globals";
+import { CameraModeType } from "../utility/enums";
 
 export function setUpCamera(player: ObjectRef): void {
 	assert(player.is_player());

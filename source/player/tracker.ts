@@ -1,4 +1,4 @@
-import { LogLevel } from "../utility/globals";
+import { LogLevel } from "../utility/enums";
 
 const playerList: ObjectRef[] = [];
 

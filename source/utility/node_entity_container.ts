@@ -1,5 +1,5 @@
-import { LogLevel } from "./globals";
-import { Entity } from "./types";
+import { LogLevel } from "./enums";
+import { Entity } from "./entity";
 import { Vec3 } from "./vector";
 
 type constructorFunction = (pos: Vec3, entity: ObjectRef) => void;

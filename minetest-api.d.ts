@@ -43,7 +43,7 @@ import {
 	TextureAlpha,
 	TexturePoolComponentFade,
 	TileAnimationType,
-} from "./source/utility/globals";
+} from "./source/utility/enums";
 import { Vec2, Vec3 } from "./source/utility/vector";
 
 export {};
