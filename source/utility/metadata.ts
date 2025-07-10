@@ -1,3 +1,5 @@
+import { Vec3 } from "./vector";
+
 /** Metadata wrapper for type safety.
  *
  * Can only have keys of type:

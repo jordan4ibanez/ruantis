@@ -1,4 +1,6 @@
+import { LogLevel } from "./globals";
 import { Entity } from "./types";
+import { Vec3 } from "./vector";
 
 type constructorFunction = (pos: Vec3, entity: ObjectRef) => void;
 const hashPosition = core.hash_node_position;

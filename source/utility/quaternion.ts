@@ -1,4 +1,5 @@
 import { cosFromSin, fma, invsqrt, safeAsin } from "./math";
+import { Vec3 } from "./vector";
 
 const sin = math.sin;
 const abs = math.abs;

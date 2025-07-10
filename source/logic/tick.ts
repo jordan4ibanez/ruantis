@@ -31,9 +31,9 @@ let serverTimer = 0;
 function tick(delta: number): void {
 	// Client tick always runs.
 
+	for (const [_, player] of ipairs(core.get_connected_players())) {
+	}
 	for (const [funcID, func] of clientFunctions) {
-		print(funcID, func);
-		print(functionID);
 	}
 
 	serverTimer += delta;

@@ -1,4 +1,5 @@
 import { fakeRef } from "./init";
+import { Vec2, Vec3 } from "./vector";
 
 export interface EntityFireTable {
 	position: Vec3;

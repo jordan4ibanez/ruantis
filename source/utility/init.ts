@@ -1,3 +1,5 @@
+import { Vec3 } from "./vector";
+
 export const textureSize = 16;
 
 export function concat(...input: string[]): string {
