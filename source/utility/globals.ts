@@ -1,3 +1,10 @@
+export enum CameraModeType {
+	any = "any",
+	first = "first",
+	third = "third",
+	third_front = "third_front",
+}
+
 export enum PointedThingType {
 	node = "node",
 	object = "object",
