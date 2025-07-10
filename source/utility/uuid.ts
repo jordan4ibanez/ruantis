@@ -1,13 +1,11 @@
-export class UUID {
-	private data: number = 0;
-	constructor() {}
-	/**
-	 * Get a new UUID. This automatically creates the next UUID internally.
-	 * @returns A new UUID.
-	 */
-	get(): number {
-		const ret = this.data + 1;
-		this.data++;
-		return ret;
-	}
+let data: number = 0;
+
+/**
+ * Get a new UUID. This automatically creates the next UUID internally.
+ * @returns A new UUID.
+ */
+export function getUUID(): number {
+	const ret = data + 1;
+	data++;
+	return ret;
 }
