@@ -3,6 +3,11 @@ import { Vec2 } from "../utility/vector";
 
 const displayResolutions = new Map<string, Vec2>();
 
+core.register_on_player_receive_fields((player, formname
+) => {
+	// todo: force the inventory back open.
+})
+
 export function deployInventory(player: ObjectRef): void {
 	assert(player.is_player());
 
@@ -10,17 +15,7 @@ export function deployInventory(player: ObjectRef): void {
 
 	const name = player.get_player_name();
 
-	registerClientTickFunction((player: ObjectRef, delta: number) => {
-		const windowInfo = core.get_player_window_information(name);
-		if (windowInfo == null) {
-			print("going again");
-			return;
-		}
-
-		print("done");
-
-		return true;
-	});
+	
 
 	// print(name);
 
