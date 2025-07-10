@@ -37,6 +37,10 @@ let functionID = 0;
 const temporaryClientFuncs = new Map<number, temporaryClientTickFunctionType>();
 const temporaryServerFuncs = new Map<number, temporaryServerTickFunctionType>();
 
+/**
+ * Register a temporary client tick function. (smoother)
+ * @param func A function that returns true when it is completed.
+ */
 export function registerTemporaryClientTickFunction(
 	func: temporaryClientTickFunctionType
 ): void {
@@ -44,6 +48,10 @@ export function registerTemporaryClientTickFunction(
 	functionID++;
 }
 
+/**
+ * Register a temporary server tick function. (lighter)
+ * @param func
+ */
 export function registerTemporaryServerTickFunction(
 	func: temporaryServerTickFunctionType
 ): void {
