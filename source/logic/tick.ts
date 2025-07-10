@@ -4,10 +4,7 @@ export function deployTickTimer(): void {
 	core.register_globalstep(tick);
 }
 
-/** If returns true the function stops running. */
 type clientTickFunctionType = (player: ObjectRef, delta: number) => void;
-
-/** If returns true the function stops running. */
 type serverTickFunctionType = (delta: number) => void;
 
 const clientFunctions: clientTickFunctionType[] = [];
