@@ -110,6 +110,7 @@ const tempClientDeletionQueue: number[] = [];
 const tempServerDeletionQueue: number[] = [];
 
 const tempTargetedClientDeletionQueue: number[] = [];
+const tempTargetedServerDeletionQueue: number[] = [];
 
 function tick(delta: number): void {
 	// Client tick always runs.
