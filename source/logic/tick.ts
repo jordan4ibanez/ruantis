@@ -64,6 +64,33 @@ export function registerTemporaryServerTickFunction(
 	functionID++;
 }
 
+//? Temporary targeted functions.
+
+const temporaryTargetedClientTickFunctions = new Map<
+	string,
+	Map<number, temporaryClientTickFunctionType>
+>();
+const temporaryTargetedServerTickFunctions = new Map<
+	string,
+	Map<number, temporaryServerTickFunctionType>
+>();
+
+whenPlayerJoins((player) => {
+	temporaryTargetedClientTickFunctions.set(
+		player.get_player_name(),
+		new Map<number, temporaryClientTickFunctionType>()
+	);
+	temporaryTargetedServerTickFunctions.set(
+		player.get_player_name(),
+		new Map<number, temporaryServerTickFunctionType>()
+	);
+});
+
+whenPlayerLeaves((player) => {
+	temporaryTargetedClientTickFunctions.delete(player.get_player_name());
+	temporaryTargetedServerTickFunctions.delete(player.get_player_name());
+});
+
 let serverTimer = 0;
 
 const tempClientDeletionQueue: number[] = [];
