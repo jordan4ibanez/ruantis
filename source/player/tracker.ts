@@ -1,18 +1,13 @@
+import { LogLevel } from "../utility/globals";
+
 const playerList: ObjectRef[] = [];
-const playerMap = new Map<string, ObjectRef>();
 
 export function deployTracker(): void {
 	core.register_on_joinplayer((player: ObjectRef) => {
 		playerList.push(player);
-		playerMap.set(player.get_player_name(), player);
-
-		print(dump(playerList));
 	});
 
 	core.register_on_leaveplayer((player: ObjectRef) => {
-		const name = player.get_player_name();
-		playerMap.delete(name);
-
 		let found = false;
 		let index = 0;
 		for (const p of playerList) {
@@ -22,10 +17,19 @@ export function deployTracker(): void {
 			}
 			index++;
 		}
-		if (found) {
-			delete playerList[index];
+		// If this is ever hit, I accidentally found a bug in the engine.
+		if (!found) {
+			core.log(
+				LogLevel.error,
+				`Player ${player.get_player_name()} is a ghost player now. Please report this issue.`
+			);
+			return;
 		}
 
-		print(dump(playerList));
+		delete playerList[index];
 	});
+}
+
+export function getPlayers(): readonly ObjectRef[] {
+	return playerList;
 }
