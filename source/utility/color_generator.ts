@@ -1,6 +1,8 @@
 // Taken from: https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4 (Thanks lopspower & LeoMacherla!)
 // Written into this abomination.
 
+import { clamp } from "./math";
+
 export const hexValues: { [id: number]: string } = {
 	100: "FF",
 	99: "FC",
@@ -106,7 +108,7 @@ export const hexValues: { [id: number]: string } = {
 };
 
 export function lockChannel(input: number): number {
-	return math.floor(math.clamp(0, 100, input));
+	return math.floor(clamp(0, 100, input));
 }
 
 /**
