@@ -89,12 +89,11 @@ function tick(delta: number): void {
 				tempServerDeletionQueue.push(id);
 			}
 		}
-	}
 
-	while (tempServerDeletionQueue.length > 0) {
-		const id = tempServerDeletionQueue.pop();
-		if (id != null) {
-			temporaryServerFuncs.delete(id);
+		while (tempServerDeletionQueue.length > 0) {
+			const id = tempServerDeletionQueue.pop();
+			if (id != null) {
+				temporaryServerFuncs.delete(id);
 		}
 	}
 }
