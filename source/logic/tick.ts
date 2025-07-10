@@ -1,8 +1,11 @@
 import { getAllPlayers } from "../player/tracker";
+import { whenPlayerJoins, whenPlayerLeaves } from "./player";
 
 export function deployTickTimer(): void {
 	core.register_globalstep(tick);
 }
+
+//? Forever functions.
 
 type clientTickFunctionType = (player: ObjectRef, delta: number) => void;
 type serverTickFunctionType = (delta: number) => void;
@@ -25,6 +28,8 @@ export function registerClientTickFunction(func: clientTickFunctionType): void {
 export function registerServerTickFunction(func: serverTickFunctionType): void {
 	serverFunctions.push(func);
 }
+
+//? Temporary non-targeted functions.
 
 type temporaryClientTickFunctionType = (
 	player: ObjectRef,
