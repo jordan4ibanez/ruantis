@@ -67,24 +67,34 @@ export function registerTemporaryServerTickFunction(
 
 //? Temporary targeted functions.
 
+type temporaryTargetedClientTickFunctionType = (
+	player: ObjectRef,
+	delta: number
+) => boolean;
+
+type temporaryTargetedServerTickFunctionType = (
+	player: ObjectRef,
+	delta: number
+) => boolean;
+
 const temporaryTargetedClientTickFunctions = new Map<
 	string,
-	Map<number, temporaryClientTickFunctionType>
+	Map<number, temporaryTargetedClientTickFunctionType>
 >();
 const temporaryTargetedServerTickFunctions = new Map<
 	string,
-	Map<number, temporaryServerTickFunctionType>
+	Map<number, temporaryTargetedServerTickFunctionType>
 >();
 
 function deployTargetedFunctionLogic(): void {
 	whenPlayerJoins((player) => {
 		temporaryTargetedClientTickFunctions.set(
 			player.get_player_name(),
-			new Map<number, temporaryClientTickFunctionType>()
+			new Map<number, temporaryTargetedClientTickFunctionType>()
 		);
 		temporaryTargetedServerTickFunctions.set(
 			player.get_player_name(),
-			new Map<number, temporaryServerTickFunctionType>()
+			new Map<number, temporaryTargetedServerTickFunctionType>()
 		);
 	});
 }
