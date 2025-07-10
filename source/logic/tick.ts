@@ -1,3 +1,5 @@
+import { getAllPlayers } from "../player/tracker";
+
 export function deployTickTimer(): void {
 	core.register_globalstep(tick);
 }
