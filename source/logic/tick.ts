@@ -10,19 +10,15 @@ type clientTickFunctionType = (player: ObjectRef, delta: number) => void;
 /** If returns true the function stops running. */
 type serverTickFunctionType = (delta: number) => void;
 
-let functionID = 0;
-
-const clientFunctions = new Map<number, clientTickFunctionType>();
-const serverFunctions = new Map<number, serverTickFunctionType>();
+const clientFunctions: clientTickFunctionType[] = [];
+const serverFunctions: serverTickFunctionType[] = [];
 
 export function registerClientTickFunction(func: clientTickFunctionType) {
-	clientFunctions.set(functionID, func);
-	functionID++;
+	clientFunctions.push(func);
 }
 
 export function registerServerTickFunction(func: serverTickFunctionType) {
-	serverFunctions.set(functionID, func);
-	functionID++;
+	serverFunctions.push(func);
 }
 
 let serverTimer = 0;
@@ -30,13 +26,16 @@ let serverTimer = 0;
 function tick(delta: number): void {
 	// Client tick always runs.
 
-	for (const [_, player] of ipairs(core.get_connected_players())) {
-	}
-	for (const [funcID, func] of clientFunctions) {
+	for (const player of getAllPlayers()) {
+		for (const func of clientFunctions) {
+			func(player, delta);
+		}
 	}
 
 	serverTimer += delta;
 	if (serverTimer > 0.5) {
-		// todo: server tick.
+		for (const func of serverFunctions) {
+			func(delta);
+		}
 	}
 }
