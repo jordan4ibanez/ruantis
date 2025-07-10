@@ -100,15 +100,29 @@ function tick(delta: number): void {
 	// Client tick always runs.
 
 	for (const player of getAllPlayers()) {
+
+		//? Forever.
 		for (const func of clientFunctions) {
 			func(player, delta);
 		}
 
+		//? Temporary non-targeted.
 		for (const [id, func] of temporaryClientFuncs) {
 			if (func(player, delta)) {
 				tempClientDeletionQueue.push(id);
 			}
 		}
+
+		//? Temporary targeted.
+		const funcs = temporaryTargetedClientTickFunctions.get(
+			player.get_player_name()
+		);
+		if (funcs == null) {
+			throw new Error(
+				`Player ${player.get_player_name()} was never given a client temp target map.`
+			);
+		}
+
 	}
 
 	while (tempClientDeletionQueue.length > 0) {
