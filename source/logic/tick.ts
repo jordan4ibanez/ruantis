@@ -160,10 +160,12 @@ function tick(delta: number): void {
 	serverTimer += delta;
 
 	if (serverTimer > 0.5) {
+		//? Forever.
 		for (const func of serverFunctions) {
 			func(delta);
 		}
 
+		//? Temporary non-targeted.
 		for (const [id, func] of temporaryServerFuncs) {
 			if (func(delta)) {
 				tempServerDeletionQueue.push(id);
