@@ -1,4 +1,6 @@
 import { getAllPlayers } from "../player/tracker";
+import { getUUID } from "../utility/uuid";
+
 import { whenPlayerJoins, whenPlayerLeaves } from "./player";
 
 export function deployTickTimer(): void {
@@ -38,8 +40,6 @@ type temporaryClientTickFunctionType = (
 ) => boolean;
 type temporaryServerTickFunctionType = (delta: number) => boolean;
 
-let functionID = 0;
-
 const temporaryClientFuncs = new Map<number, temporaryClientTickFunctionType>();
 const temporaryServerFuncs = new Map<number, temporaryServerTickFunctionType>();
 
@@ -50,8 +50,7 @@ const temporaryServerFuncs = new Map<number, temporaryServerTickFunctionType>();
 export function registerTemporaryClientTickFunction(
 	func: temporaryClientTickFunctionType
 ): void {
-	temporaryClientFuncs.set(functionID, func);
-	functionID++;
+	temporaryClientFuncs.set(getUUID(), func);
 }
 
 /**
@@ -61,8 +60,7 @@ export function registerTemporaryClientTickFunction(
 export function registerTemporaryServerTickFunction(
 	func: temporaryServerTickFunctionType
 ): void {
-	temporaryServerFuncs.set(functionID, func);
-	functionID++;
+	temporaryServerFuncs.set(getUUID(), func);
 }
 
 //? Temporary targeted functions.
@@ -119,8 +117,7 @@ export function registerTargetedTemporaryClientTickFunction(
 			`Player ${name} was never given a client temp target map.`
 		);
 	}
-	database.set(functionID, func);
-	functionID++;
+	database.set(getUUID(), func);
 }
 
 /**
@@ -138,8 +135,7 @@ export function registerTargetedTemporaryServerTickFunction(
 			`Player ${name} was never given a server temp target map.`
 		);
 	}
-	database.set(functionID, func);
-	functionID++;
+	database.set(getUUID(), func);
 }
 
 let serverTimer = 0;
