@@ -3,6 +3,7 @@ import { whenPlayerJoins, whenPlayerLeaves } from "./player";
 
 export function deployTickTimer(): void {
 	core.register_globalstep(tick);
+	deployTargetedFunctionLogic();
 }
 
 //? Forever functions.
@@ -75,16 +76,18 @@ const temporaryTargetedServerTickFunctions = new Map<
 	Map<number, temporaryServerTickFunctionType>
 >();
 
-whenPlayerJoins((player) => {
-	temporaryTargetedClientTickFunctions.set(
-		player.get_player_name(),
-		new Map<number, temporaryClientTickFunctionType>()
-	);
-	temporaryTargetedServerTickFunctions.set(
-		player.get_player_name(),
-		new Map<number, temporaryServerTickFunctionType>()
-	);
-});
+function deployTargetedFunctionLogic(): void {
+	whenPlayerJoins((player) => {
+		temporaryTargetedClientTickFunctions.set(
+			player.get_player_name(),
+			new Map<number, temporaryClientTickFunctionType>()
+		);
+		temporaryTargetedServerTickFunctions.set(
+			player.get_player_name(),
+			new Map<number, temporaryServerTickFunctionType>()
+		);
+	});
+}
 
 whenPlayerLeaves((player) => {
 	temporaryTargetedClientTickFunctions.delete(player.get_player_name());
@@ -100,7 +103,6 @@ function tick(delta: number): void {
 	// Client tick always runs.
 
 	for (const player of getAllPlayers()) {
-
 		//? Forever.
 		for (const func of clientFunctions) {
 			func(player, delta);
@@ -122,7 +124,6 @@ function tick(delta: number): void {
 				`Player ${player.get_player_name()} was never given a client temp target map.`
 			);
 		}
-
 	}
 
 	while (tempClientDeletionQueue.length > 0) {
