@@ -1,4 +1,3 @@
-import { whenPlayerJoins } from "./logic/player";
 import { deployTickTimer } from "./logic/tick";
 import { deployCameraHandling } from "./player/camera";
 import { deployDisplayHandling } from "./player/display";
