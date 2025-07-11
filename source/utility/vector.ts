@@ -35,6 +35,10 @@ export class Vec3 {
 		return vector.distance(this, other);
 	}
 
+	equals(other: Vec3): boolean {
+		return this.x == other.x && this.y == other.y && this.z == other.z;
+	}
+
 	toString(): string {
 		return (
 			"(" +
@@ -70,6 +74,10 @@ export class Vec2 {
 
 	distance(other: Vec2): number {
 		return vector.distance(this, other);
+	}
+
+	equals(other: Vec2): boolean {
+		return this.x == other.x && this.y == other.y;
 	}
 
 	toString(): string {
