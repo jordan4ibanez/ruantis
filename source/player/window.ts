@@ -16,35 +16,30 @@ const prototype__winInfoGet = core.get_player_window_information;
 export class WindowInfo {
 	size: Vec2 = new Vec2();
 	formSpecSize: Vec2 = new Vec2();
-	firstRun: boolean = true;
-
-	constructor(init: ShallowVector2, formSpecSize: ShallowVector2) {
-		this.size.copyFrom(init);
-		this.formSpecSize.copyFrom(formSpecSize);
-	}
 }
 
 /**
  * Gets the window information for a player.
  */
-function getWinInfo(name: string): WindowInfo | null {
-	const data = prototype__winInfoGet(name);
-	if (data == null) {
-		return null;
-	}
-	return new WindowInfo(data.size, data.max_formspec_size);
-}
+// function getWinInfo(name: string): WindowInfo | null {
+// 	const data = prototype__winInfoGet(name);
+// 	if (data == null) {
+// 		return null;
+// 	}
+// 	return new WindowInfo(data.size, data.max_formspec_size);
+// }
 
 const windowSizes = new Map<string, WindowInfo>();
 
 export function deployWindowHandling(): void {
-	function createPlayerWindowData(player: ObjectRef): WindowInfo | null {
+	function createPlayerWindowData(player: ObjectRef): WindowInfo {
 		const name = player.get_player_name();
-		const windowInfo = getWinInfo(name);
-		if (windowInfo == null) {
-			return null;
+		const newData =
+			windowSizes.set(name, new WindowInfo()).get(name) || null;
+		if (newData == null) {
+			throw new Error("Failed to create player window data.");
 		}
-		return windowSizes.set(name, windowInfo).get(name) || null;
+		return newData;
 	}
 
 	whenPlayerLeaves((player) => {
@@ -59,27 +54,17 @@ export function deployWindowHandling(): void {
 				windowSizes.get(player.get_player_name()) ||
 				createPlayerWindowData(player);
 
-			// Client has to submit their display information before this can be run.
-			if (sizeInfo == null) {
-				continue;
-			}
-
 			const __rawWindowInfo = prototype__winInfoGet(name);
 
 			// Player's window info has not been submitted by the client.
 			// If this starts hitting null randomly there is probably an issue with the client.
 			if (__rawWindowInfo == null) {
-				core.log(
-					LogLevel.warning,
-					`Player ${name} submitted null window info.`
-				);
 				continue;
 			}
 
 			const changed = !sizeInfo.size.equals(__rawWindowInfo.size);
 
-			if (changed || sizeInfo.firstRun) {
-				sizeInfo.firstRun = false;
+			if (changed) {
 				sizeInfo.size.copyFrom(__rawWindowInfo.size);
 
 				for (const func of windowChangeFuncs) {
