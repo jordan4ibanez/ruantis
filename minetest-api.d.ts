@@ -46,13 +46,15 @@ import {
 } from "./source/utility/enums";
 import { Vec3 } from "./source/utility/vector";
 
+export {};
+
 //? Everything was just dumped in as I looked down the lua_api.md
 
 // Shallow vectors are only known to have the xy and z fields when getting returned from engine functions.
 // The game can use this to implement the interface for QOL extensions.
 // This allows for a more modular implementation.
 
-interface ShallowVec2 {
+export interface ShallowVector2 {
 	x: number;
 	y: number;
 }
@@ -901,8 +903,8 @@ declare global {
 	}
 
 	/** @noSelf **/ interface WindowInformation {
-		size: ShallowVec2;
-		max_formspec_size: ShallowVec2;
+		size: ShallowVector2;
+		max_formspec_size: ShallowVector2;
 		real_gui_scaling: number;
 		real_hud_scaling: number;
 	}
@@ -1707,7 +1709,7 @@ declare global {
 		ambient: DynamicColorSpec;
 		height: number;
 		thickness: number;
-		speed: ShallowVec2;
+		speed: ShallowVector2;
 	}
 
 	/** @noSelf **/ interface LightShadowsSpec {
@@ -1743,14 +1745,14 @@ declare global {
 		selectionbox?: number[];
 		pointable?: boolean;
 		visual?: EntityVisual;
-		visual_size?: Vec3 | ShallowVec2;
+		visual_size?: Vec3 | ShallowVector2;
 		mesh?: string;
 		textures?: (string | TileDefinition)[] | TileDefinition;
 		colors?: DynamicColorSpec[];
 		use_texture_alpha?: boolean;
-		spritediv?: ShallowVec2;
+		spritediv?: ShallowVector2;
 		node?: NodeTable;
-		initial_sprite_basepos?: ShallowVec2;
+		initial_sprite_basepos?: ShallowVector2;
 		is_visible?: boolean;
 		makes_footstep_sound?: boolean;
 		automatic_rotate?: number;
@@ -1790,18 +1792,18 @@ declare global {
 
 	/** @noSelf **/ interface HudDefinition {
 		type: HudElementType;
-		position?: ShallowVec2;
+		position?: ShallowVector2;
 		name?: string;
-		scale?: ShallowVec2;
+		scale?: ShallowVector2;
 		text?: string;
 		text2?: string;
 		number?: number;
 		item?: number;
 		direction?: number;
-		alignment?: ShallowVec2;
-		offset?: ShallowVec2;
+		alignment?: ShallowVector2;
+		offset?: ShallowVector2;
 		world_pos?: Vec3;
-		size?: ShallowVec2;
+		size?: ShallowVector2;
 		z_index?: number;
 		style?: number;
 	}
@@ -1874,13 +1876,13 @@ declare global {
 		z: number;
 	}
 
-	type ParticleSpawnerTextureScaleTween = Array<ShallowVec2>;
+	type ParticleSpawnerTextureScaleTween = Array<ShallowVector2>;
 
 	/** @noSelf **/ interface ParticleSpawnerTextureDefinition {
 		name: string;
 		alpha: number;
 		alpha_tween: number[];
-		scale: number | ShallowVec2;
+		scale: number | ShallowVector2;
 		scale_tween: ParticleSpawnerTextureScaleTween;
 		blend: ParticleSpawnerTextureBlend;
 		animation: TileAnimationDefinition;
@@ -1907,7 +1909,7 @@ declare global {
 
 	/** @noSelf **/ interface ParticleSpawnerAttractionDefinition {
 		kind: ParticleSpawnerAttractionType;
-		strength: ShallowVec2;
+		strength: ShallowVector2;
 		origin: Vec3;
 		direction: Vec3;
 		origin_attached: ObjectRef;
@@ -1942,7 +1944,7 @@ declare global {
 		jitter?: Vec3RangeBias;
 		drag?: Vec3RangeBias;
 		bounce?: Vec3RangeBias;
-		exptime?: ShallowVec2;
+		exptime?: ShallowVector2;
 		attract?: ParticleSpawnerAttractionDefinition;
 		radius?: Vec3RangeBias;
 		pos_tween?: ParticleSpawnerTweenDefinition;
@@ -2278,9 +2280,9 @@ declare global {
 		set_wielded_item(item: ItemStackObject | string): boolean;
 		get_armor_groups(): { string: number };
 		set_armor_groups(groups: Dictionary<string, number>): void;
-		get_animation(): Array<ShallowVec2 | number>;
+		get_animation(): Array<ShallowVector2 | number>;
 		set_animation(
-			frameRange: ShallowVec2,
+			frameRange: ShallowVector2,
 			frameSpeed: number,
 			frameBlend: number,
 			loop?: boolean
@@ -2317,7 +2319,7 @@ declare global {
 		set_texture_mod(mod: string): void;
 		get_texture_mod(): string;
 		set_sprite(
-			startFrame: ShallowVec2,
+			startFrame: ShallowVector2,
 			numberOfFrames: number,
 			frameLength: number,
 			selectXByCamera: boolean
@@ -2387,17 +2389,17 @@ declare global {
 		override_day_night_ratio(ratio: number | null): void;
 		get_day_night_ratio(): number | null;
 		set_local_animation(
-			idle: ShallowVec2,
-			walk: ShallowVec2,
-			dig: ShallowVec2,
-			walkWhileDig: ShallowVec2,
+			idle: ShallowVector2,
+			walk: ShallowVector2,
+			dig: ShallowVector2,
+			walkWhileDig: ShallowVector2,
 			frameSpeed: number
 		): void;
 		get_local_animation(): [
-			ShallowVec2,
-			ShallowVec2,
-			ShallowVec2,
-			ShallowVec2,
+			ShallowVector2,
+			ShallowVector2,
+			ShallowVector2,
+			ShallowVector2,
 			number
 		];
 		set_eye_offset(
@@ -2419,16 +2421,16 @@ declare global {
 	}
 
 	interface PerlinNoiseObject {
-		get_2d(position: ShallowVec2): number;
+		get_2d(position: ShallowVector2): number;
 		get_3d(position: Vec3): number;
 	}
 
 	interface PerlinNoiseMapObject {
-		get_2d_map(pos: ShallowVec2): number[][];
+		get_2d_map(pos: ShallowVector2): number[][];
 		get_3d_map(pos: Vec3): number[][][];
-		get_2d_map_flat(pos: ShallowVec2, buffer: number[]): number[];
+		get_2d_map_flat(pos: ShallowVector2, buffer: number[]): number[];
 		get_3d_map_flat(pos: Vec3, buffer: number[]): number[];
-		calc_2d_map(pos: ShallowVec2): void;
+		calc_2d_map(pos: ShallowVector2): void;
 		calc_3d_map(pos: Vec3): void;
 		get_map_slice(
 			sliceOffset: Vec3,
