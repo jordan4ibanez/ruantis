@@ -24,6 +24,12 @@ export class Vec3 implements ShallowVector3 {
 		this.z = z;
 	}
 
+	copyFrom(other: ShallowVector3) {
+		this.x = other.x;
+		this.y = other.y;
+		this.z = other.z;
+	}
+
 	randomize(
 		minX: number,
 		maxX: number,
