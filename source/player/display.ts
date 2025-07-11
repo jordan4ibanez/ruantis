@@ -35,10 +35,7 @@ export function deployDisplayHandling(): void {
 					return false;
 				}
 
-				print(dump(windowInfo));
-
-				//! note: This is the actual window resolution in pixels.
-				print(windowInfo.size.x);
+				windowSizes.set(name, new WindowInfo(windowInfo.size));
 
 				return true;
 			}
