@@ -10,50 +10,7 @@ import { Vec3 } from "../utility/vector";
 
 // todo: maybe keep track of this? Could make movable windows in a horrific manor.
 
-class Cuboid extends Entity {
-	initial_properties: ObjectProperties = {
-		visual: EntityVisual.mesh,
-		mesh: "cube.gltf",
-		textures: ["smile.png"],
-		static_save: false,
-		glow: 10,
-		visual_size: new Vec3(1, 1, 1),
-	};
-
-	on_activate(staticData: string, delta: number): void {
-		print("hello!");
-		print(this.object.get_pos());
-	}
-}
-registerEntity(Cuboid);
-
 export function deployInventoryHandling(): void {
-	afterPlayerJoins((player) => {
-		player.set_pos(new Vec3(0, 0, 0));
-
-		player.set_physics_override({
-			speed: 0,
-			jump: 0,
-			gravity: 0,
-			speed_climb: 0,
-			speed_crouch: 0,
-			liquid_fluidity: 0,
-			liquid_fluidity_smooth: 0,
-			liquid_sink: 0,
-			acceleration_default: 0,
-			acceleration_air: 0,
-			sneak: false,
-		});
-
-		// core.after(0, () => {
-		spawnEntity(new Vec3(0, 0, 2), Cuboid, (obj) => {
-			print(obj.is_valid(), "v");
-			// print(core.load_area(new Vec3(0, 0, 2), new Vec3(0, 0, 2)));
-		});
-		// });
-		// core.add_entity(new Vec3(0, 0, 2), "undefined");
-	});
-
 	registerClientTickFunction((player, delta) => {
 		// player.set_look_horizontal(0);
 		// player.set_look_vertical(0);
