@@ -61,8 +61,7 @@ export function deployDisplayHandling(): void {
 		windowSizes.delete(player.get_player_name());
 	});
 
-	// todo: convert this into a screen polling function.
-	registerServerTickFunction((delta) => {
+	registerServerTickFunction(() => {
 		for (const player of getAllPlayers()) {
 			const name = player.get_player_name();
 
@@ -97,15 +96,3 @@ export function deployDisplayHandling(): void {
 		}
 	});
 }
-
-// registerClientTickFunction((player: ObjectRef, delta: number) => {
-// 	// const windowInfo = winInfoGet(name);
-// 	// if (windowInfo == null) {
-// 	// 	print("going again");
-// 	// 	return;
-// 	// }
-
-// 	// print("done");
-
-// 	return true;
-// });
