@@ -69,7 +69,7 @@ export function deployDisplayHandling(): void {
 
 			const sizeInfo = windowSizes.get(player.get_player_name());
 
-			// Client info always
+			// Client has to submit their display information before this can be run.
 			if (sizeInfo == null) {
 				continue;
 			}
