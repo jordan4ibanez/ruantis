@@ -3,6 +3,7 @@ import {
 	registerServerTickFunction,
 	registerTargetedTemporaryClientTickFunction,
 } from "../logic/tick";
+import { Vec2 } from "../utility/vector";
 import { getAllPlayers } from "./tracker";
 
 const winInfoGet = core.get_player_window_information;
