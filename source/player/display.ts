@@ -1,4 +1,4 @@
-import { whenPlayerJoins } from "../logic/player";
+import { whenPlayerJoins, whenPlayerLeaves } from "../logic/player";
 import {
 	registerServerTickFunction,
 	registerTargetedTemporaryClientTickFunction,
@@ -55,6 +55,10 @@ export function deployDisplayHandling(): void {
 				return true;
 			}
 		);
+	});
+
+	whenPlayerLeaves((player) => {
+		windowSizes.delete(player.get_player_name());
 	});
 
 	// todo: convert this into a screen polling function.
