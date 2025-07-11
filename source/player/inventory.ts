@@ -20,23 +20,44 @@ export function deployInventoryHandling(): void {
 
 		// Attempt to put a button in the middle of the screen.
 
-		const xPos = windowInfo.size.x / 2 / magicNumber;
-		const yPos = windowInfo.size.y / 2 / magicNumber;
+		const centerXPos = windowInfo.size.x / 2 / magicNumber;
+		const centerYPos = windowInfo.size.y / 2 / magicNumber;
 
 		//attempt to put a 1 pixel button on the screen
+		const pixel1 = math.floor((1 / magicNumber + 0.001) * 100) / 100;
 
-		let hackjob =
+		let hackjob: string[] = [];
+
+		hackjob.push(
 			"formspec_version[9]" +
-			`size[${width},${height},true]` +
-			"position[0.5,0.5]" +
-			"anchor[0.5,0.5]" +
-			"no_prepend[]" +
-			"real_coordinates[true]" +
-			"padding[0,0]" +
+				`size[${width},${height},true]` +
+				"position[0.5,0.5]" +
+				"anchor[0.5,0.5]" +
+				"no_prepend[]" +
+				"real_coordinates[true]" +
+				"padding[0,0]" +
+				"button[0,0;1,1;test;]"
 			// "allow_close[false]" +
-			"button[0,0;1,1;test;]" +
-			`button[${xPos},${yPos};1,1;test;]`;
+		);
+		print("started");
 
-		core.show_formspec(name, "current_player", hackjob);
+		for (const x of $range(-100, 100)) {
+			for (const y of $range(-100, 100)) {
+				hackjob.push(
+					`button[${
+						math.floor((centerXPos + x * pixel1) * 100) / 100
+					},${
+						math.floor((centerYPos + y * pixel1) * 100) / 100
+					};${pixel1},${pixel1};${x},${y};]`
+				);
+			}
+		}
+		print("ended");
+
+		const output = hackjob.join("");
+
+		print(output);
+
+		core.show_formspec(name, "current_player", output);
 	});
 }
