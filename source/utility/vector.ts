@@ -24,7 +24,7 @@ export class Vec3 implements ShallowVector3 {
 		this.z = z;
 	}
 
-	copyFrom(other: ShallowVector3) {
+	copyFrom(other: ShallowVector3): void {
 		this.x = other.x;
 		this.y = other.y;
 		this.z = other.z;
