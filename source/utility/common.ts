@@ -1,7 +1,5 @@
 import { Vec3 } from "./vector";
 
-
-
 // export function concat(...input: string[]): string {
 // 	let accumulator = "";
 // 	input.forEach((val: string) => {
@@ -42,22 +40,7 @@ import { Vec3 } from "./vector";
 // 	return newSchematic;
 // }
 
-/**
- * A bolt on to allow you to directly register MT lua entities as TS classes.
- * @param clazz Class definition.
- */
-export function registerEntity(clazz: { new (): LuaEntity }) {
-	let instance: LuaEntity = new clazz();
-	// print(dump(instance))
-	if (instance.name == null) {
-		throw new Error("Unable to register entity: Name is null");
-	}
-	if (core.registered_entities[instance.name]) {
-		print("Overriding entity: " + instance.name);
-	}
-	instance.__index = instance;
-	core.register_entity(instance.name, instance);
-}
+
 
 // /**
 //  * Register a node regardless of it's name.
@@ -70,8 +53,6 @@ export function registerEntity(clazz: { new (): LuaEntity }) {
 // ): void {
 // 	core.register_node(":" + nodeName, definition);
 // }
-
-
 
 // /**
 //  * Print a warning message instead of an error.
