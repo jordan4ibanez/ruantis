@@ -48,11 +48,16 @@ import { Vec2, Vec3 } from "./source/utility/vector";
 
 export {};
 
-//* note: All enums were moved to mods/utility/enums.ts
-
 //? Everything was just dumped in as I looked down the lua_api.md
 
-//! If you don't have your mod depend on the utility library, this will just blow up when you try to use it.
+// Shallow vectors are only known to have the xy and z fields when getting returned from engine functions.
+// The game can use this to implement the interface for QOL extensions.
+// This allows for a more modular implementation.
+
+interface ShallowVec2 {
+	x: number;
+	y: number;
+}
 
 /** @noSelf **/
 interface core {
@@ -1546,64 +1551,6 @@ declare global {
 	): PerlinNoiseMapObject;
 	function PseudoRandom(seed: number): PseudoRandomObject;
 	function AreaStore(_: AreaStoreType): AreaStoreObject;
-
-	namespace vector {
-		function zero(): Vec3;
-		function copy(vec: Vec3): Vec3;
-		function from_string(s: string, init: string): Vec3;
-		function to_string(vec: Vec3): string;
-		function direction(vec1: Vec3, vec2: Vec3): Vec3;
-		function distance(vec1: Vec3, vec2: Vec3): number;
-		function distance(vec1: Vec2, vec2: Vec2): number;
-		function length(vec: Vec3): number;
-		function normalize(vec: Vec3): Vec3;
-		function floor(vec: Vec3): Vec3;
-		function round(vec: Vec3): Vec3;
-		function apply(vec: Vec3, fun: (input: number) => number): Vec3;
-		function combine(
-			vec1: Vec3,
-			vec2: Vec3,
-			fun: (...any: any) => void
-		): Vec3; //! fixme: test this
-		function equals(vec1: Vec3, vec2: Vec3): boolean;
-		function sort(vec1: Vec3, vec2: Vec3): [Vec3, Vec3];
-		function angle(vec1: Vec3, vec2: Vec3): number;
-		function dot(vec1: Vec3, vec2: Vec3): number;
-		function cross(vec1: Vec3, vec2: Vec3): number;
-		function check(vec: Vec3): boolean;
-		function in_area(vec: Vec3, min: Vec3, max: Vec3): boolean;
-
-		function add(vec: Vec3, scalarOrVec: Vec3 | number): Vec3;
-		function subtract(vec: Vec3, scalarOrVec: Vec3 | number): Vec3;
-		function multiply(vec: Vec3, scalarOrVec: Vec3 | number): Vec3;
-		function divide(vec: Vec3, scalarOrVec: Vec3 | number): Vec3;
-
-		function rotate(vec: Vec3, radians: number): Vec3;
-		function rotate_around_axis(
-			vec: Vec3,
-			vec2: Vec3,
-			radians: number
-		): Vec3;
-		function dir_to_rotation(vec: Vec3, up: Vec3): Vec3;
-
-		// This is created in the utility module because new is a reserved keyword in TS.
-		function create3d(
-			x?: number | { x: number; y: number; z: number },
-			y?: number,
-			z?: number
-		): Vec3;
-		// Everything else is a bolt on created in the utility module.
-		function create2d(x?: number, y?: number): Vec2;
-		function random(
-			minX: number,
-			maxX: number,
-			minY: number,
-			maxY: number,
-			minZ: number,
-			maxZ: number
-		): Vec3;
-		function distance2d(vec1: Vec3, vec2: Vec3): number;
-	}
 
 	/** @noSelf **/ interface VoxelAreaInitializer {
 		MinEdge: Vec3;
