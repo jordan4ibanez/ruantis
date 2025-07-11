@@ -50,6 +50,9 @@ export function deployWindowHandling(): void {
 
 			if (changed) {
 				sizeInfo.size.copyFrom(__rawWindowInfo.size);
+				sizeInfo.formSpecSize.copyFrom(
+					__rawWindowInfo.max_formspec_size
+				);
 
 				for (const func of windowChangeFuncs) {
 					func(player, sizeInfo);
