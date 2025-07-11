@@ -57,7 +57,7 @@ class Player {
 		if (this.visualEntity == null) {
 			const newVisual = spawnEntity(this.position, Cuboid);
 
-			if (newVisual == null) {
+			if (newVisual == null || !newVisual.is_valid()) {
 				throw new Error(`Failed to add visual entity to ${this.name}`);
 			}
 			this.visualEntity = newVisual;
