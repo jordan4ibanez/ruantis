@@ -7,6 +7,6 @@ const meta: MetaRef = core.get_mod_storage();
  * Get mod storage.
  * @returns The mod storage instance.
  */
-export function getStorage(): MetaRef {
+export function getDatabase(): MetaRef {
 	return meta;
 }
