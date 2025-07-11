@@ -109,3 +109,15 @@ export function getPlayerWindowInfo(name: string): WindowInfo | null {
 }
 
 type windowChangeFunction = (player: ObjectRef, windowInfo: WindowInfo) => void;
+
+const windowChangeFuncs: windowChangeFunction[] = [];
+
+/**
+ * Register a function to run when a window changes size.
+ * @param func The function to run.
+ */
+export function registerWindowSizeChangeFunction(
+	func: windowChangeFunction
+): void {
+	windowChangeFuncs.push(func);
+}
