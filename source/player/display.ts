@@ -46,18 +46,32 @@ export function deployDisplayHandling(): void {
 	registerServerTickFunction((delta) => {
 		for (const player of getAllPlayers()) {
 			const name = player.get_player_name();
-			const windowInfo = core.get_player_window_information(name);
+			const windowInfo = winInfoGet(name);
+			// Player's window info has not been submitted by the client.
+			// If this starts hitting null randomly there is probably an issue with the client.
 			if (windowInfo == null) {
 				continue;
 			}
 
-			print(dump(windowInfo.size.x * windowInfo.real_hud_scaling));
+			const sizeInfo = windowSizes.get(player.get_player_name());
+
+			// Client info always
+			if (sizeInfo == null) {
+				continue;
+			}
+
+			const changed = windowInfo.size.equals;
+
+			print(changed);
+
+			// sizeInfo.x = windowInfo.size.x;
+			// sizeInfo.y = windowInfo.size.y;
 		}
 	});
 }
 
 // registerClientTickFunction((player: ObjectRef, delta: number) => {
-// 	// const windowInfo = core.get_player_window_information(name);
+// 	// const windowInfo = winInfoGet(name);
 // 	// if (windowInfo == null) {
 // 	// 	print("going again");
 // 	// 	return;
