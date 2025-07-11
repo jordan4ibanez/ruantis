@@ -11,6 +11,19 @@ function setUpCamera(player: ObjectRef): void {
 		breathbar: false,
 		minimap: true,
 	});
+	player.set_physics_override({
+		speed: 1,
+		jump: 0,
+		gravity: 0,
+		speed_climb: 0,
+		speed_crouch: 0,
+		liquid_fluidity: 0,
+		liquid_fluidity_smooth: 0,
+		liquid_sink: 0,
+		acceleration_default: 0,
+		acceleration_air: 0,
+		sneak: false,
+	});
 	player.set_camera({ mode: CameraModeType.first });
 	const offset = player.get_properties().eye_height;
 	if (offset == null) {
@@ -21,6 +34,9 @@ function setUpCamera(player: ObjectRef): void {
 		new Vec3(0, -offset * 10, 0),
 		new Vec3(0, -offset * 10, 0)
 	);
+	core.override_item("", {
+		range: 100,
+	});
 }
 
 export function deployCameraHandling(): void {
