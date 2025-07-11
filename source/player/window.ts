@@ -81,6 +81,10 @@ export function deployWindowHandling(): void {
 			if (changed || sizeInfo.firstRun) {
 				sizeInfo.firstRun = false;
 				sizeInfo.size.copyFrom(__rawWindowInfo.size);
+
+				for (const func of windowChangeFuncs) {
+					func(player, sizeInfo);
+				}
 			}
 		}
 	});
