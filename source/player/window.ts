@@ -46,7 +46,9 @@ export function deployWindowHandling(): void {
 				continue;
 			}
 
-			const changed = !sizeInfo.size.equals(__rawWindowInfo.size);
+			const changed =
+				!sizeInfo.size.equals(__rawWindowInfo.size) ||
+				sizeInfo.guiScale != __rawWindowInfo.real_gui_scaling;
 
 			if (changed) {
 				sizeInfo.size.copyFrom(__rawWindowInfo.size);
