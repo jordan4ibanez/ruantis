@@ -6,6 +6,7 @@ import {
 import { getAllPlayers } from "./tracker";
 
 class DisplayInformation {}
+const windowSizes = new Map<string, WindowInfo>();
 
 export function deployDisplayHandling(): void {
 	whenPlayerJoins((player) => {
