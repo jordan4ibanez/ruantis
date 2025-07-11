@@ -46,10 +46,10 @@ class Cuboid extends Entity {
 registerEntity(Cuboid);
 
 class Player {
-	name: string;
-	ltPlayer: ObjectRef;
-	position: Vec3 = new Vec3();
-	cameraPosition: Vec3 = new Vec3();
+	private name: string;
+	private ltPlayer: ObjectRef;
+	private position: Vec3 = new Vec3();
+	private cameraPosition: Vec3 = new Vec3();
 	private visualEntity: ObjectRef | null = null;
 
 	constructor(ltPlayer: ObjectRef) {
