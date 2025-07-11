@@ -1,3 +1,4 @@
+import { ShallowVector2 } from "../../minetest-api";
 import { randomRange } from "./math";
 
 const rr = randomRange;
@@ -55,7 +56,7 @@ export class Vec3 {
 	}
 }
 
-export class Vec2 {
+export class Vec2 implements ShallowVector2 {
 	x: number = 0;
 	y: number = 0;
 
@@ -75,13 +76,13 @@ export class Vec2 {
 		return this;
 	}
 
-	distance(other: Vec2): number {
+	distance(other: ShallowVector2): number {
 		const x = this.x - other.x;
 		const y = this.y - other.y;
 		return math.sqrt(x * x + y * y);
 	}
 
-	equals(other: Vec2): boolean {
+	equals(other: ShallowVector2): boolean {
 		return this.x == other.x && this.y == other.y;
 	}
 
