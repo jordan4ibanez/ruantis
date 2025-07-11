@@ -2,34 +2,40 @@ import { LogLevel } from "../utility/enums";
 
 const playerList: ObjectRef[] = [];
 const playerMap = new Map<string, ObjectRef>();
+const nameList: string[] = [];
 
 export function deployTracker(): void {
 	core.register_on_joinplayer((player: ObjectRef) => {
 		playerList.push(player);
 		playerMap.set(player.get_player_name(), player);
+		nameList.push(player.get_player_name());
 	});
 
 	core.register_on_leaveplayer((player: ObjectRef) => {
 		playerMap.delete(player.get_player_name());
-		let found = false;
-		let index = 0;
-		for (const p of playerList) {
-			if (p == player) {
-				found = true;
-				break;
+		{
+			let found = false;
+			let index = 0;
+			for (const p of playerList) {
+				if (p == player) {
+					found = true;
+					break;
+				}
+				index++;
 			}
-			index++;
-		}
-		// If this is ever hit, I accidentally found a bug in the engine.
-		if (!found) {
-			core.log(
-				LogLevel.error,
-				`Player ${player.get_player_name()} is a ghost player now. Please report this issue.`
-			);
-			return;
+			// If this is ever hit, I accidentally found a bug in the engine.
+			if (!found) {
+				core.log(
+					LogLevel.error,
+					`Player ${player.get_player_name()} is a ghost player now. Please report this issue.`
+				);
+				return;
+			}
+
+			delete playerList[index];
 		}
 
-		delete playerList[index];
+		
 	});
 }
 
