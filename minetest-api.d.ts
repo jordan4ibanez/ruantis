@@ -44,7 +44,6 @@ import {
 	TexturePoolComponentFade,
 	TileAnimationType,
 } from "./source/utility/enums";
-import { Vec3 } from "./source/utility/vector";
 
 export {};
 
@@ -57,6 +56,12 @@ export {};
 export interface ShallowVector2 {
 	x: number;
 	y: number;
+}
+
+export interface ShallowVector3 {
+	x: number;
+	y: number;
+	z: number;
 }
 
 /** @noSelf **/
@@ -133,7 +138,7 @@ interface core {
 	register_on_shutdown(fun: () => void): void;
 	register_on_placenode(
 		fun: (
-			pos: Vec3,
+			pos: ShallowVector3,
 			node: NodeTable,
 			placer: ObjectRef | null,
 			oldNode: NodeTable,
@@ -142,18 +147,22 @@ interface core {
 		) => void
 	): void;
 	register_on_dignode(
-		fun: (pos: Vec3, oldNode: NodeTable, digger: ObjectRef | null) => void
+		fun: (
+			pos: ShallowVector3,
+			oldNode: NodeTable,
+			digger: ObjectRef | null
+		) => void
 	): void;
 	register_on_punchnode(
 		fun: (
-			pos: Vec3,
+			pos: ShallowVector3,
 			node: NodeTable,
 			puncher: ObjectRef | null,
 			pointedThing: PointedThing
 		) => void
 	): void;
 	register_on_generated(
-		fun: (minp: Vec3, maxp: Vec3, blockSeed: number) => void
+		fun: (minp: ShallowVector3, maxp: ShallowVector3, blockSeed: number) => void
 	): void;
 	register_on_newplayer(fun: (player: ObjectRef) => void): void;
 	register_on_punchplayer(
@@ -162,7 +171,7 @@ interface core {
 			hitter: ObjectRef | null,
 			timeFromLastPunch: number | null,
 			toolCapabilities: ToolCapabilities | null,
-			dir: Vec3 | null,
+			dir: ShallowVector3 | null,
 			damage: number
 		) => void
 	): void;
@@ -241,7 +250,7 @@ interface core {
 		) => void
 	): void;
 	register_on_protection_violation(
-		fun: (position: Vec3, name: string) => void
+		fun: (position: ShallowVector3, name: string) => void
 	): void;
 	register_on_item_eat(
 		fun: (
@@ -274,13 +283,13 @@ interface core {
 		fun: (channelName: string, sender: string, message: string) => void
 	): void;
 	register_on_liquid_transformed(
-		fun: (posList: Vec3[], nodeList: string[]) => void
+		fun: (posList: ShallowVector3[], nodeList: string[]) => void
 	): void;
 	register_on_mapblocks_changed(
 		fun: (modifiedBlocks: string[], nodeList: any[]) => void
 	): void;
 	settings: LuantiSettingsObject;
-	setting_get_pos(name: string): Vec3;
+	setting_get_pos(name: string): ShallowVector3;
 	string_to_privs(str: string, delim: string): string;
 	privs_to_string(privs: string, delim: string): string;
 	get_player_privs(playerName: string): Dictionary<string, boolean>;
@@ -303,59 +312,68 @@ interface core {
 	chat_send_all(message: string): void;
 	chat_send_player(playerName: string, message: string): void;
 	format_chat_message(playerName: string, message: string): void;
-	set_node(position: Vec3, nodeTable: NodeTable): void;
-	add_node(position: Vec3, nodeTable: NodeTable): void;
-	bulk_set_node(positions: Vec3[], nodeTable: NodeTable): void;
-	swap_node(position: Vec3, nodeTable: NodeTable): void;
-	remove_node(position: Vec3): void;
-	get_node(position: Vec3): NodeTable;
-	get_node_or_nil(position: Vec3): NodeTable | null;
-	get_node_light(position: Vec3, timeOfDay: number | null): number | null;
-	get_natural_light(position: Vec3, timeOfDay: number): number;
+	set_node(position: ShallowVector3, nodeTable: NodeTable): void;
+	add_node(position: ShallowVector3, nodeTable: NodeTable): void;
+	bulk_set_node(positions: ShallowVector3[], nodeTable: NodeTable): void;
+	swap_node(position: ShallowVector3, nodeTable: NodeTable): void;
+	remove_node(position: ShallowVector3): void;
+	get_node(position: ShallowVector3): NodeTable;
+	get_node_or_nil(position: ShallowVector3): NodeTable | null;
+	get_node_light(
+		position: ShallowVector3,
+		timeOfDay: number | null
+	): number | null;
+	get_natural_light(position: ShallowVector3, timeOfDay: number): number;
 	get_artificial_light(param1: number): number;
-	place_node(position: Vec3, nodeTable: NodeTable): void;
-	dig_node(position: Vec3): boolean;
-	punch_node(position: Vec3): void;
-	spawn_falling_node(position: Vec3): [boolean, ObjectRef] | boolean;
-	find_nodes_with_meta(pos1: Vec3, pos2: Vec3): Vec3[];
-	get_meta(position: Vec3): MetaRef;
-	get_node_timer(position: Vec3): NodeTimerObject;
+	place_node(position: ShallowVector3, nodeTable: NodeTable): void;
+	dig_node(position: ShallowVector3): boolean;
+	punch_node(position: ShallowVector3): void;
+	spawn_falling_node(position: ShallowVector3): [boolean, ObjectRef] | boolean;
+	find_nodes_with_meta(pos1: ShallowVector3, pos2: ShallowVector3): ShallowVector3[];
+	get_meta(position: ShallowVector3): MetaRef;
+	get_node_timer(position: ShallowVector3): NodeTimerObject;
 	add_entity(
-		position: Vec3,
+		position: ShallowVector3,
 		entityName: string,
 		staticData?: string
 	): ObjectRef | null;
-	add_item(position: Vec3, item: ItemStackObject | string): ObjectRef | null;
+	add_item(
+		position: ShallowVector3,
+		item: ItemStackObject | string
+	): ObjectRef | null;
 	get_player_by_name(playerName: string): ObjectRef | null;
-	get_objects_inside_radius(position: Vec3, radius: number): ObjectRef[];
-	get_objects_in_area(pos1: Vec3, pos2: Vec3): ObjectRef[];
+	get_objects_inside_radius(
+		position: ShallowVector3,
+		radius: number
+	): ObjectRef[];
+	get_objects_in_area(pos1: ShallowVector3, pos2: ShallowVector3): ObjectRef[];
 	set_timeofday(newTimeOfDay: number): void;
 	get_timeofday(): number;
 	get_gametime(): number;
 	get_day_count(): number;
 	find_node_near(
-		position: Vec3,
+		position: ShallowVector3,
 		radius: number,
 		nodeNames: string[],
 		searchCenter?: boolean
-	): Vec3 | null;
+	): ShallowVector3 | null;
 	find_nodes_in_area(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		nodeNames: string[],
 		grouped: true
-	): Dictionary<string, Vec3[]>;
+	): Dictionary<string, ShallowVector3[]>;
 	find_nodes_in_area(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		nodeNames: string | string[]
 		// grouped?: false //? This is ommited to simplify the api.
-	): LuaMultiReturn<[Vec3[], Dictionary<string, number>]>;
+	): LuaMultiReturn<[ShallowVector3[], Dictionary<string, number>]>;
 	find_nodes_in_area_under_air(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		nodeNames: string[]
-	): Vec3[];
+	): ShallowVector3[];
 	get_perlin(nodeParams: NoiseParams): PerlinNoiseObject;
 	get_perlin(
 		seedDiff: number,
@@ -363,14 +381,14 @@ interface core {
 		persistence: number,
 		spread: number
 	): PerlinNoiseObject;
-	get_voxel_manip(pos1: Vec3, pos2: Vec3): VoxelManipObject;
+	get_voxel_manip(pos1: ShallowVector3, pos2: ShallowVector3): VoxelManipObject;
 	set_gen_notify(flags: GenNotifyFlags, decorationIDs: number[]): void;
 	get_gen_notify(): number[];
 	get_decoration_id(decorationName: string): number;
 	get_mapgen_object(objectName: string): GenNotifyObject;
-	get_heat(position: Vec3): number;
-	get_humidity(position: Vec3): number;
-	get_biome_data(position: Vec3): BiomeDataDefinition | null;
+	get_heat(position: ShallowVector3): number;
+	get_humidity(position: ShallowVector3): number;
+	get_biome_data(position: ShallowVector3): BiomeDataDefinition | null;
 	get_biome_id(biomeName: string): number;
 	get_biome_name(biomeID: number): string;
 	get_mapgen_setting(settingName: string): MapGenSettingsDefinition;
@@ -385,48 +403,55 @@ interface core {
 		overrideMeta: boolean
 	): void;
 	get_noiseparams(name: string): NoiseParams;
-	generate_ores(voxelManip: VoxelManipObject, pos1: Vec3, pos2: Vec3): void;
+	generate_ores(
+		voxelManip: VoxelManipObject,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3
+	): void;
 	generate_decorations(
 		voxelManip: VoxelManipObject,
-		pos1: Vec3,
-		pos2: Vec3
+		pos1: ShallowVector3,
+		pos2: ShallowVector3
 	): void;
 	clear_objects(options: ClearObjectsOptions): void;
-	load_area(pos1: Vec3, pos2: Vec3): void;
+	load_area(pos1: ShallowVector3, pos2: ShallowVector3): void;
 	emerge_area(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		fun: EmergeAreaCallback,
 		param: any
 	): void;
-	delete_area(pos1: Vec3, pos2: Vec3): void;
-	line_of_sight(pos1: Vec3, pos2: Vec3): [boolean, Vec3];
+	delete_area(pos1: ShallowVector3, pos2: ShallowVector3): void;
+	line_of_sight(pos1: ShallowVector3, pos2: ShallowVector3): [boolean, ShallowVector3];
 	raycast(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		hitObjects: boolean,
 		hitLiquids: boolean
 	): RaycastObject;
 	find_path(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		searchDistance: number,
 		maxJump: number,
 		maxDrop: number,
 		algorithm: SearchAlgorithm
-	): Vec3[];
-	spawn_tree(position: Vec3, definition: TreeDefinition): void;
-	transforming_liquid_add(position: Vec3): void;
-	get_node_max_level(position: Vec3): number;
-	get_node_level(position: Vec3): number;
-	set_node_level(position: Vec3, level: number): number;
-	add_node_level(position: Vec3, level: number): number;
-	fix_light(pos1: Vec3, pos2: Vec3): boolean;
-	check_single_for_falling(position: Vec3): void;
-	check_for_falling(position: Vec3): void;
+	): ShallowVector3[];
+	spawn_tree(position: ShallowVector3, definition: TreeDefinition): void;
+	transforming_liquid_add(position: ShallowVector3): void;
+	get_node_max_level(position: ShallowVector3): number;
+	get_node_level(position: ShallowVector3): number;
+	set_node_level(position: ShallowVector3, level: number): number;
+	add_node_level(position: ShallowVector3, level: number): number;
+	fix_light(pos1: ShallowVector3, pos2: ShallowVector3): boolean;
+	check_single_for_falling(position: ShallowVector3): void;
+	check_for_falling(position: ShallowVector3): void;
 	get_spawn_level(x: number, z: number): number | null;
 	mod_channel_join(channelName: string): ModChannel;
-	get_perlin_map(params: NoiseParams, size: Vec3): PerlinNoiseMapObject;
+	get_perlin_map(
+		params: NoiseParams,
+		size: ShallowVector3
+	): PerlinNoiseMapObject;
 	get_inventory(position: InvRefLocation): InvRef;
 	create_detached_inventory(
 		name: string,
@@ -451,15 +476,15 @@ interface core {
 	get_pointed_thing_position(
 		pointedThing: PointedThing,
 		above?: boolean
-	): Vec3 | null;
-	dir_to_facedir(direction: Vec3, is6d?: boolean): number;
-	facedir_to_dir(faceDir: number): Vec3;
-	dir_to_fourdir(direction: Vec3): number;
-	fourdir_to_dir(faceDir: number): Vec3;
-	dir_to_wallmounted(direction: Vec3): number;
-	wallmounted_to_dir(faceDir: number): Vec3;
-	dir_to_yaw(direction: Vec3): number;
-	yaw_to_dir(yaw: number): Vec3;
+	): ShallowVector3 | null;
+	dir_to_facedir(direction: ShallowVector3, is6d?: boolean): number;
+	facedir_to_dir(faceDir: number): ShallowVector3;
+	dir_to_fourdir(direction: ShallowVector3): number;
+	fourdir_to_dir(faceDir: number): ShallowVector3;
+	dir_to_wallmounted(direction: ShallowVector3): number;
+	wallmounted_to_dir(faceDir: number): ShallowVector3;
+	dir_to_yaw(direction: ShallowVector3): number;
+	yaw_to_dir(yaw: number): ShallowVector3;
 	is_colored_paramtype(pType: number): boolean;
 	strip_param2_color(param2: number, paramType2: ParamType2): number | null;
 	get_node_drops(node: string | NodeTable, toolName: string): string[];
@@ -471,7 +496,7 @@ interface core {
 		queryItem: string | NodeTable
 	): CraftRecipeDefinition[] | null;
 	handle_node_drops(
-		position: Vec3,
+		position: ShallowVector3,
 		drops: string[] | ItemStackObject[],
 		digger: ObjectRef
 	): void;
@@ -484,7 +509,7 @@ interface core {
 		colorString: DynamicColorSpec
 	): string;
 	rollback_get_node_actions(
-		position: Vec3,
+		position: ShallowVector3,
 		range: number,
 		seconds: number,
 		limit: number
@@ -499,7 +524,7 @@ interface core {
 		pointedThing: PointedThing,
 		param2?: number,
 		preventAfterPlace?: boolean
-	): LuaMultiReturn<[ItemStackObject, Vec3 | null]>;
+	): LuaMultiReturn<[ItemStackObject, ShallowVector3 | null]>;
 	//? Deprecated.
 	// item_place_object(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): ItemStackObject
 	item_place(
@@ -507,7 +532,7 @@ interface core {
 		placer: ObjectRef,
 		pointedThing: PointedThing,
 		param2?: number
-	): LuaMultiReturn<[ItemStackObject, Vec3 | null]>;
+	): LuaMultiReturn<[ItemStackObject, ShallowVector3 | null]>;
 	item_pickup(
 		itemStack: ItemStackObject,
 		picker: ObjectRef,
@@ -518,16 +543,20 @@ interface core {
 	item_drop(
 		itemStack: ItemStackObject,
 		dropper: ObjectRef | null,
-		position: Vec3
+		position: ShallowVector3
 	): [ItemStackObject, ObjectRef] | null;
 	item_eat(hpChange: number, replaceWithItem: string): void;
 	node_punch(
-		position: Vec3,
+		position: ShallowVector3,
 		nodeTable: NodeTable,
 		puncher: ObjectRef,
 		pointedThing: PointedThing
 	): void;
-	node_dig(position: Vec3, nodeTable: NodeTable, digger: ObjectRef): void;
+	node_dig(
+		position: ShallowVector3,
+		nodeTable: NodeTable,
+		digger: ObjectRef
+	): void;
 
 	// Optional: Variable number of arguments that are passed to func.
 	// Aka: It's up to you to make it type safe.
@@ -560,14 +589,14 @@ interface core {
 	add_particlespawner(definition: ParticleSpawnerDefinition): number;
 	delete_particlespawner(id: number, playerName: string): void;
 	create_schematic(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		probabilityList: SchematicProbability[],
 		fileName: string,
 		sliceProbList: SchematicSliceProbability[]
 	): void;
 	place_schematic(
-		position: Vec3,
+		position: ShallowVector3,
 		schematic: SchematicDefinition | string,
 		rotation: SchematicRotation,
 		replacements: Map<string, string> | null,
@@ -576,7 +605,7 @@ interface core {
 	): void;
 	place_schematic_on_vmanip(
 		voxelManip: VoxelManipObject,
-		position: Vec3,
+		position: ShallowVector3,
 		schematic: SchematicDefinition,
 		rotation: SchematicRotation,
 		replacement: Map<string, string>,
@@ -610,8 +639,8 @@ interface core {
 	): number | null;
 	send_join_message(playerName: string): void;
 	send_leave_message(playerName: string, timedOut: boolean): void;
-	hash_node_position(position: Vec3): number;
-	get_position_from_hash(hash: number): Vec3;
+	hash_node_position(position: ShallowVector3): number;
+	get_position_from_hash(hash: number): ShallowVector3;
 	get_item_group(name: string, group: string): number;
 	raillike_group(name: string): number;
 	get_content_id(name: string): number;
@@ -626,12 +655,12 @@ interface core {
 	rgba(red: number, green: number, blue: number, alpha: number): string;
 	encode_base64(string: string): string;
 	decode_base64(string: string): string;
-	is_protected(position: Vec3, name: string): boolean;
-	record_protection_violation(position: Vec3, name: string): void;
+	is_protected(position: ShallowVector3, name: string): boolean;
+	record_protection_violation(position: ShallowVector3, name: string): void;
 	is_creative_enabled(name: string): boolean;
 	is_area_protected(
-		pos1: Vec3,
-		pos2: Vec3,
+		pos1: ShallowVector3,
+		pos2: ShallowVector3,
 		playerName: string,
 		interval: number
 	): boolean;
@@ -653,14 +682,18 @@ interface core {
 		hitter: ObjectRef,
 		timeFromLastPunch: number,
 		toolCapabilities: ToolCapabilities,
-		dir: Vec3,
+		dir: ShallowVector3,
 		distance: number,
 		damage: number
 	): number;
-	forceload_block(position: Vec3, transient: boolean, limit: number): boolean;
-	forceload_free_block(position: Vec3, transient: boolean): void;
+	forceload_block(
+		position: ShallowVector3,
+		transient: boolean,
+		limit: number
+	): boolean;
+	forceload_free_block(position: ShallowVector3, transient: boolean): void;
 	compare_block_status(
-		position: Vec3,
+		position: ShallowVector3,
 		condition: BlockStatusCondition
 	): boolean | null;
 	request_insecure_environment(): any;
@@ -684,9 +717,12 @@ interface core {
 	registered_privileges: Dictionary<string, PrivilegeDefinition>;
 
 	wrap_text(str: string, limit: number, asTable: boolean): string | string[];
-	pos_to_string(position: Vec3, decimalPlaces?: number): string;
-	string_to_pos(string: string): Vec3;
-	string_to_area(positions: string, relativeTo: Vec3): [Vec3, Vec3];
+	pos_to_string(position: ShallowVector3, decimalPlaces?: number): string;
+	string_to_pos(string: string): ShallowVector3;
+	string_to_area(
+		positions: string,
+		relativeTo: ShallowVector3
+	): [ShallowVector3, ShallowVector3];
 	formspec_escape(string: string): string;
 	is_yes(arg: any): boolean;
 	is_nan(arg: number): boolean;
@@ -694,7 +730,7 @@ interface core {
 	pointed_thing_to_face_pos(
 		placer: ObjectRef,
 		pointedThing: PointedThing
-	): Vec3;
+	): ShallowVector3;
 	get_tool_wear_after_use(uses: number, initialWear: number): number;
 	get_dig_params(
 		groups: Dictionary<string, number>,
@@ -733,7 +769,10 @@ interface core {
 	 * WARNING! THIS IS NOT MEANT TO BE USED IN PRODUCTION!
 	 * This is only exposed to allow extension!
 	 */
-	spawn_item(pos: Vec3, item: ItemStackObject | string): ObjectRef | null;
+	spawn_item(
+		pos: ShallowVector3,
+		item: ItemStackObject | string
+	): ObjectRef | null;
 
 	features: {
 		glasslike_framed: boolean;
@@ -796,7 +835,7 @@ declare global {
 	/** @noSelf **/ interface InvRefLocation {
 		type: string;
 		name?: string;
-		pos?: Vec3;
+		pos?: ShallowVector3;
 	}
 
 	/** @noSelf **/ interface TreeDefinition {
@@ -819,7 +858,7 @@ declare global {
 		seed: number;
 	}
 
-	type GenNotifyObject = Map<string, Vec3[]>;
+	type GenNotifyObject = Map<string, ShallowVector3[]>;
 
 	/** @noSelf **/ interface SimpleSoundSpec {
 		name?: string;
@@ -840,7 +879,7 @@ declare global {
 	/** @noSelf **/ interface SoundParameterTable extends SimpleSoundSpec {
 		start_time?: number;
 		loop?: boolean;
-		pos?: Vec3;
+		pos?: ShallowVector3;
 		object?: ObjectRef;
 		to_player?: string;
 		max_hear_distance?: number;
@@ -965,15 +1004,15 @@ declare global {
 
 	/** @noSelf **/ interface PointedThing {
 		type: PointedThingType;
-		under?: Vec3;
-		above?: Vec3;
+		under?: ShallowVector3;
+		above?: ShallowVector3;
 		ref?: ObjectRef;
 		// Currently only Raycast supports these fields.
-		intersection_point?: Vec3;
+		intersection_point?: ShallowVector3;
 		// The ID of the pointed selection box (counting starts from 1).
 		box_id?: number;
 		// Unit vector, points outwards of the selected selection box.
-		intersection_normal?: Vec3;
+		intersection_normal?: ShallowVector3;
 	}
 
 	/** @noSelf **/ interface GroupCap {
@@ -1003,12 +1042,12 @@ declare global {
 	/** @noSelf **/ interface Collision {
 		type: string;
 		axis: string;
-		node_pos: Vec3;
+		node_pos: ShallowVector3;
 		object: ObjectRef;
-		old_velocity: Vec3;
-		new_velocity: Vec3;
+		old_velocity: ShallowVector3;
+		new_velocity: ShallowVector3;
 		// Available since 5.9.0.
-		new_pos: Vec3;
+		new_pos: ShallowVector3;
 	}
 
 	/** @noSelf **/ interface MoveResult {
@@ -1029,7 +1068,7 @@ declare global {
 		inventory_overlay?: string;
 		wield_image?: string;
 		wield_overlay?: string;
-		wield_scale?: Vec3;
+		wield_scale?: ShallowVector3;
 		palette?: string;
 		color?: DynamicColorSpec;
 		stack_max?: number;
@@ -1059,7 +1098,7 @@ declare global {
 		on_drop?(
 			itemStack: ItemStackObject | null,
 			dropper: ObjectRef,
-			position: Vec3
+			position: ShallowVector3
 		): ItemStackObject | void;
 		on_pickup?(
 			itemStack: ItemStackObject,
@@ -1103,7 +1142,7 @@ declare global {
 		): ItemStackObject | void;
 		overlay_tiles?: string[];
 		special_tiles?: string[] | TileDefinition[];
-		wield_scale?: Vec3;
+		wield_scale?: ShallowVector3;
 		color?: DynamicColorSpec;
 		light_source?: number;
 		use_texture_alpha?: TextureAlpha;
@@ -1147,56 +1186,60 @@ declare global {
 		waving?: number;
 		sounds?: NodeSoundSpec;
 		drop?: NodeDropSpec | string;
-		on_construct?(position: Vec3): void;
-		on_destruct?(position: Vec3): void;
-		after_destruct?(position: Vec3, oldNode: MapNode): void;
-		on_flood?(position: Vec3, oldNode: NodeTable, newNode: NodeTable): void;
+		on_construct?(position: ShallowVector3): void;
+		on_destruct?(position: ShallowVector3): void;
+		after_destruct?(position: ShallowVector3, oldNode: MapNode): void;
+		on_flood?(
+			position: ShallowVector3,
+			oldNode: NodeTable,
+			newNode: NodeTable
+		): void;
 		preserve_metadata?(
-			position: Vec3,
+			position: ShallowVector3,
 			oldNode: NodeTable,
 			oldMeta: NodeTable,
 			drops: ItemStackObject[]
 		): void;
 		after_place_node?(
-			position: Vec3,
+			position: ShallowVector3,
 			placer: ObjectRef | null,
 			itemStack: ItemStackObject,
 			pointedThing: PointedThing
 		): void;
 		after_dig_node?(
-			position: Vec3,
+			position: ShallowVector3,
 			oldNode: NodeTable,
 			oldMeta: string,
 			digger: ObjectRef | null
 		): void;
-		can_dig?(position: Vec3, canDig: ObjectRef): boolean;
+		can_dig?(position: ShallowVector3, canDig: ObjectRef): boolean;
 		on_punch?(
-			position: Vec3,
+			position: ShallowVector3,
 			node: NodeTable,
 			puncher: ObjectRef | null,
 			pointedThing: PointedThing
 		): void;
 		on_rightclick?(
-			position: Vec3,
+			position: ShallowVector3,
 			node: NodeTable,
 			clicker: ObjectRef | null,
 			itemStack: ItemStackObject,
 			pointedThing: PointedThing
 		): void;
 		on_dig?(
-			position: Vec3,
+			position: ShallowVector3,
 			node: NodeTable,
 			digger: ObjectRef | null
 		): void;
-		on_timer?(position: Vec3, elapsed: number): void;
+		on_timer?(position: ShallowVector3, elapsed: number): void;
 		on_receive_fields?(
-			position: Vec3,
+			position: ShallowVector3,
 			formName: string,
 			fields: Dictionary<string, any>,
 			sender: ObjectRef | null
 		): void;
 		allow_metadata_inventory_move?(
-			position: Vec3,
+			position: ShallowVector3,
 			fromList: string,
 			fromIndex: number,
 			toList: string,
@@ -1205,21 +1248,21 @@ declare global {
 			player: ObjectRef | null
 		): void;
 		allow_metadata_inventory_put?(
-			position: Vec3,
+			position: ShallowVector3,
 			listName: string,
 			index: number,
 			stack: ItemStackObject,
 			player: ObjectRef | null
 		): number;
 		allow_metadata_inventory_take?(
-			position: Vec3,
+			position: ShallowVector3,
 			listName: string,
 			index: number,
 			stack: ItemStackObject,
 			player: ObjectRef | null
 		): number;
 		on_metadata_inventory_move?(
-			position: Vec3,
+			position: ShallowVector3,
 			fromList: string,
 			fromIndex: number,
 			toList: string,
@@ -1228,20 +1271,20 @@ declare global {
 			player: ObjectRef | null
 		): void;
 		on_metadata_inventory_put?(
-			position: Vec3,
+			position: ShallowVector3,
 			listName: string,
 			index: number,
 			stack: ItemStackObject,
 			player: ObjectRef | null
 		): void;
 		on_metadata_inventory_take?(
-			position: Vec3,
+			position: ShallowVector3,
 			listName: string,
 			index: number,
 			stack: ItemStackObject,
 			player: ObjectRef | null
 		): void;
-		on_blast?(position: Vec3, intensity: number): void;
+		on_blast?(position: ShallowVector3, intensity: number): void;
 		mod_origin?: string;
 	}
 
@@ -1255,7 +1298,7 @@ declare global {
 		max_y?: number;
 		catch_up?: boolean;
 		action(
-			pos: Vec3,
+			pos: ShallowVector3,
 			node: NodeTable,
 			activeObjectCount: number,
 			activeObjectCountWider: number
@@ -1267,7 +1310,7 @@ declare global {
 		name: string;
 		nodenames: string[];
 		run_at_every_load: boolean;
-		action(pos: Vec3, node: NodeTable, delta: number): void;
+		action(pos: ShallowVector3, node: NodeTable, delta: number): void;
 	}
 
 	/** @noSelf **/ interface SchematicReadOptionYSlice {
@@ -1283,7 +1326,7 @@ declare global {
 	}
 
 	/** @noSelf **/ interface SchematicProbability {
-		pos: Vec3;
+		pos: ShallowVector3;
 		prob: number;
 	}
 
@@ -1293,7 +1336,7 @@ declare global {
 	}
 
 	/** @noSelf **/ interface SchematicDefinition {
-		size: Vec3;
+		size: ShallowVector3;
 		data: SchematicData[];
 		yslice_prob?: number[][];
 	}
@@ -1320,7 +1363,7 @@ declare global {
 	/** @noSelf **/ interface NoiseParams {
 		offset?: number;
 		scale?: number;
-		spread?: Vec3;
+		spread?: ShallowVector3;
 		seed?: number;
 		octaves?: number;
 		// These two have the same effect.
@@ -1374,8 +1417,8 @@ declare global {
 		node_dungeon_stair?: string;
 		y_max?: number;
 		y_min?: number;
-		max_pos?: Vec3;
-		min_pos?: Vec3;
+		max_pos?: ShallowVector3;
+		min_pos?: ShallowVector3;
 		vertical_blend?: number;
 		heat_point?: number;
 		humidity_point?: number;
@@ -1468,7 +1511,7 @@ declare global {
 	/** @noSelf **/ interface HPChangeReasonDefinition {
 		type: HPChangeReasonType;
 		node?: string;
-		node_pos?: Vec3;
+		node_pos?: ShallowVector3;
 		object?: ObjectRef;
 		from?: string;
 	}
@@ -1489,7 +1532,7 @@ declare global {
 	}
 
 	type EmergeAreaCallback = (
-		blockPos: Vec3,
+		blockPos: ShallowVector3,
 		action: any,
 		callsRemaining: number,
 		param: any
@@ -1517,11 +1560,14 @@ declare global {
 	function ItemStack(
 		stringOrObject: ItemStackObject | string
 	): ItemStackObject;
-	function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject;
-	function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject;
+	function VoxelManip(
+		_pos1: ShallowVector3,
+		_pos2: ShallowVector3
+	): VoxelManipObject;
+	function VoxelArea(_min: ShallowVector3, _max: ShallowVector3): VoxelAreaObject;
 	function Raycast(
-		_pos1: Vec3,
-		_pos2: Vec3,
+		_pos1: ShallowVector3,
+		_pos2: ShallowVector3,
 		_object: boolean,
 		_liquids: boolean
 	): RaycastObject;
@@ -1531,14 +1577,14 @@ declare global {
 	function PerlinNoise(params: NoiseParams): PerlinNoiseObject;
 	function PerlinNoiseMap(
 		params: NoiseParams,
-		size: Vec3
+		size: ShallowVector3
 	): PerlinNoiseMapObject;
 	function PseudoRandom(seed: number): PseudoRandomObject;
 	function AreaStore(_: AreaStoreType): AreaStoreObject;
 
 	/** @noSelf **/ interface VoxelAreaInitializer {
-		MinEdge: Vec3;
-		MaxEdge: Vec3;
+		MinEdge: ShallowVector3;
+		MaxEdge: ShallowVector3;
 	}
 
 	/** @noSelf **/ interface DetachedInventoryCallbacks {
@@ -1597,7 +1643,7 @@ declare global {
 	}
 
 	/** @noSelf **/ interface BoneOverrideProperty {
-		vec: Vec3;
+		vec: ShallowVector3;
 		interpolation?: number;
 		/** If set to false, it's relative to the animated property. */
 		absolute?: boolean;
@@ -1745,7 +1791,7 @@ declare global {
 		selectionbox?: number[];
 		pointable?: boolean;
 		visual?: EntityVisual;
-		visual_size?: Vec3 | ShallowVector2;
+		visual_size?: ShallowVector3 | ShallowVector2;
 		mesh?: string;
 		textures?: (string | TileDefinition)[] | TileDefinition;
 		colors?: DynamicColorSpec[];
@@ -1802,7 +1848,7 @@ declare global {
 		direction?: number;
 		alignment?: ShallowVector2;
 		offset?: ShallowVector2;
-		world_pos?: Vec3;
+		world_pos?: ShallowVector3;
 		size?: ShallowVector2;
 		z_index?: number;
 		style?: number;
@@ -1820,7 +1866,7 @@ declare global {
 
 	/** @noSelf **/ interface Rollback {
 		actor: string;
-		pos: Vec3;
+		pos: ShallowVector3;
 		time: number;
 		oldnode: string;
 		newnode: string;
@@ -1839,9 +1885,9 @@ declare global {
 	}
 
 	/** @noSelf **/ interface ParticleDefinition {
-		pos: Vec3;
-		velocity: Vec3;
-		acceleration: Vec3;
+		pos: ShallowVector3;
+		velocity: ShallowVector3;
+		acceleration: ShallowVector3;
 		expirationtime: number;
 		size: number;
 		collisiondetection?: boolean;
@@ -1854,7 +1900,7 @@ declare global {
 		glow?: number;
 		node?: NodeTable;
 		node_tile?: NodeSoundSpec;
-		drag?: Vec3;
+		drag?: ShallowVector3;
 		bounce?: ParticleBounceDefinition;
 	}
 
@@ -1867,8 +1913,8 @@ declare global {
 	}
 
 	/** @noSelf **/ interface ParticleSpawnerRangeDefinition {
-		min: Vec3;
-		max: Vec3;
+		min: ShallowVector3;
+		max: ShallowVector3;
 		bias: number;
 		pos_tween: ParticleSpawnerTweenDefinition;
 		x: number;
@@ -1910,8 +1956,8 @@ declare global {
 	/** @noSelf **/ interface ParticleSpawnerAttractionDefinition {
 		kind: ParticleSpawnerAttractionType;
 		strength: ShallowVector2;
-		origin: Vec3;
-		direction: Vec3;
+		origin: ShallowVector3;
+		direction: ShallowVector3;
 		origin_attached: ObjectRef;
 		direction_attached: ObjectRef;
 		die_on_contact: boolean;
@@ -1925,12 +1971,12 @@ declare global {
 		// End 5.6.0 def.
 		amount?: number;
 		time?: number;
-		maxpos?: Vec3;
-		minpos?: Vec3;
-		minvel?: Vec3;
-		maxvel?: Vec3;
-		minacc?: Vec3;
-		maxacc?: Vec3;
+		maxpos?: ShallowVector3;
+		minpos?: ShallowVector3;
+		minvel?: ShallowVector3;
+		maxvel?: ShallowVector3;
+		minacc?: ShallowVector3;
+		maxacc?: ShallowVector3;
 		minexptime?: number;
 		maxexptime?: number;
 		minsize?: number;
@@ -1939,22 +1985,22 @@ declare global {
 		vertical?: boolean;
 		node?: { name: string; param2?: number };
 		pos?: number | ParticleSpawnerRangeDefinition;
-		vel?: Vec3RangeBias;
-		acc?: Vec3RangeBias;
-		jitter?: Vec3RangeBias;
-		drag?: Vec3RangeBias;
-		bounce?: Vec3RangeBias;
+		vel?: ShallowVec3RangeBias;
+		acc?: ShallowVec3RangeBias;
+		jitter?: ShallowVec3RangeBias;
+		drag?: ShallowVec3RangeBias;
+		bounce?: ShallowVec3RangeBias;
 		exptime?: ShallowVector2;
 		attract?: ParticleSpawnerAttractionDefinition;
-		radius?: Vec3RangeBias;
+		radius?: ShallowVec3RangeBias;
 		pos_tween?: ParticleSpawnerTweenDefinition;
 		texture?: string | ParticleSpawnerTextureDefinition;
 		texpool?: ParticleSpawnerTexturePoolDefinition;
 	}
 
 	/** @noSelf **/ interface AreaStoreArea {
-		min: Vec3;
-		max: Vec3;
+		min: ShallowVector3;
+		max: ShallowVector3;
 		data: string;
 	}
 
@@ -1964,10 +2010,10 @@ declare global {
 		limit: number;
 	}
 
-	/** @noSelf **/ interface Vec3RangeBias {
-		min: Vec3;
-		max: Vec3;
-		bias: Vec3;
+	/** @noSelf **/ interface ShallowVec3RangeBias {
+		min: ShallowVector3;
+		max: ShallowVector3;
+		bias: ShallowVector3;
 	}
 
 	/** @noSelf **/ interface RGBA {
@@ -2140,32 +2186,39 @@ declare global {
 	}
 
 	interface VoxelManipObject {
-		read_from_map(pos1: Vec3, pos2: Vec3): LuaMultiReturn<[Vec3, Vec3]>;
+		read_from_map(
+			pos1: ShallowVector3,
+			pos2: ShallowVector3
+		): LuaMultiReturn<[ShallowVector3, ShallowVector3]>;
 		write_to_map(light?: boolean): void;
-		get_node_at(position: Vec3): MapNode;
-		set_node_at(position: Vec3, node: MapNode): void;
+		get_node_at(position: ShallowVector3): MapNode;
+		set_node_at(position: ShallowVector3, node: MapNode): void;
 		get_data(): number[];
 		set_data(buffer: number[]): void;
-		set_lighting(light: number, p1: Vec3, p2: Vec3): void;
+		set_lighting(light: number, p1: ShallowVector3, p2: ShallowVector3): void;
 		get_light_data(): number[];
 		set_light_data(lightData: number[]): void;
 		get_param2_data(buffer: number[]): number[];
 		set_param2_data(param2Data: number[]): void;
-		calc_lighting(p1: Vec3, p2: Vec3, propagateShadows: boolean): void;
+		calc_lighting(
+			p1: ShallowVector3,
+			p2: ShallowVector3,
+			propagateShadows: boolean
+		): void;
 		update_liquids(): void;
 		was_modified(): boolean;
-		get_emerged_area(): [Vec3, Vec3];
+		get_emerged_area(): [ShallowVector3, ShallowVector3];
 	}
 
 	interface VoxelAreaObject {
 		ystride: number;
 		zstride: number;
-		getExtent(): Vec3;
+		getExtent(): ShallowVector3;
 		index(x: number, y: number, z: number): number;
-		indexp(p: Vec3): number;
-		position(i: number): Vec3;
+		indexp(p: ShallowVector3): number;
+		position(i: number): ShallowVector3;
 		contains(x: number, y: number, z: number): boolean;
-		containsp(p: Vec3): boolean;
+		containsp(p: ShallowVector3): boolean;
 		containsi(i: number): boolean;
 		iter(
 			minX: number,
@@ -2175,7 +2228,7 @@ declare global {
 			maxY: number,
 			maxZ: number
 		): Iterator<number>;
-		iterp(minp: Vec3, maxp: Vec3): Iterator<number>;
+		iterp(minp: ShallowVector3, maxp: ShallowVector3): Iterator<number>;
 	}
 
 	interface RaycastObject extends LuaIterable<PointedThing> {
@@ -2193,20 +2246,20 @@ declare global {
 			includeData: boolean
 		): Array<AreaStoreArea | boolean> | null;
 		get_areas_for_pos(
-			pos: Vec3,
+			pos: ShallowVector3,
 			includeCorners: boolean,
 			includeData: boolean
 		): Array<AreaStoreArea | boolean> | null;
 		get_areas_in_area(
-			corner1: Vec3,
-			corner2: Vec3,
+			corner1: ShallowVector3,
+			corner2: ShallowVector3,
 			acceptOverlap: boolean,
 			includeCorners: boolean,
 			includeData: boolean
 		): Array<AreaStoreArea | boolean> | null;
 		insert_area(
-			corner1: Vec3,
-			corner2: Vec3,
+			corner1: ShallowVector3,
+			corner2: ShallowVector3,
 			data: string,
 			id: number
 		): number;
@@ -2246,7 +2299,7 @@ declare global {
 			puncher: ObjectRef | null,
 			timeFromLastPunch: number | null,
 			toolCapabilities: ToolCapabilities | null,
-			dir: Vec3 | null,
+			dir: ShallowVector3 | null,
 			damage: number
 		): void;
 		on_death?(killer: ObjectRef): void;
@@ -2259,16 +2312,16 @@ declare global {
 
 	interface ObjectRef {
 		is_valid(): boolean;
-		get_pos(): Vec3;
-		set_pos(position: Vec3): void;
-		get_velocity(): Vec3;
-		add_velocity(velocity: Vec3): void;
-		move_to(newPos: Vec3, continuous?: boolean): void;
+		get_pos(): ShallowVector3;
+		set_pos(position: ShallowVector3): void;
+		get_velocity(): ShallowVector3;
+		add_velocity(velocity: ShallowVector3): void;
+		move_to(newPos: ShallowVector3, continuous?: boolean): void;
 		punch(
 			puncher: ObjectRef,
 			timeFromLastPunch: number,
 			toolCapabilities: ToolCapabilities,
-			dir?: Vec3
+			dir?: ShallowVector3
 		): void;
 		right_click(clicker: ObjectRef): void;
 		get_hp(): number;
@@ -2291,12 +2344,12 @@ declare global {
 		set_attach(
 			parent: ObjectRef,
 			bone: string,
-			position: Vec3,
-			rotation: Vec3,
+			position: ShallowVector3,
+			rotation: ShallowVector3,
 			forcedVisible?: boolean
 		): void;
 		get_attach(): LuaMultiReturn<
-			[ObjectRef?, string?, Vec3?, Vec3?, boolean?]
+			[ObjectRef?, string?, ShallowVector3?, ShallowVector3?, boolean?]
 		>;
 		get_children(): ObjectRef[];
 		set_detach(): void;
@@ -2309,11 +2362,11 @@ declare global {
 		get_nametag_attributes(): NametagAttributes;
 		set_nametag_attributes(attributes: NametagAttributes): void;
 		remove(): void;
-		set_velocity(velocity: Vec3): void;
-		set_acceleration(acceleration: Vec3): void;
-		get_acceleration(): Vec3;
-		set_rotation(rotation: Vec3): void;
-		get_rotation(): Vec3;
+		set_velocity(velocity: ShallowVector3): void;
+		set_acceleration(acceleration: ShallowVector3): void;
+		get_acceleration(): ShallowVector3;
+		set_rotation(rotation: ShallowVector3): void;
+		get_rotation(): ShallowVector3;
 		set_yaw(yaw: number): void;
 		get_yaw(): number;
 		set_texture_mod(mod: string): void;
@@ -2335,7 +2388,7 @@ declare global {
 		set_camera(mode: CameraMode): void;
 		get_camera(): CameraMode;
 		get_player_name(): string;
-		get_look_dir(): Vec3;
+		get_look_dir(): ShallowVector3;
 		get_look_vertical(): number;
 		get_look_horizontal(): number;
 		set_look_vertical(radians: number): void;
@@ -2403,12 +2456,12 @@ declare global {
 			number
 		];
 		set_eye_offset(
-			firstPerson: Vec3,
-			thirdPersonBack: Vec3,
-			thirdPersonFront?: Vec3
+			firstPerson: ShallowVector3,
+			thirdPersonBack: ShallowVector3,
+			thirdPersonFront?: ShallowVector3
 		): void;
-		get_eye_offset(): [Vec3, Vec3, Vec3];
-		send_mapblock(blockPos: Vec3): boolean;
+		get_eye_offset(): [ShallowVector3, ShallowVector3, ShallowVector3];
+		send_mapblock(blockPos: ShallowVector3): boolean;
 		set_lighting(definition: LightingDefinition): void;
 		get_lighting(): LightingDefinition;
 		respawn(): void;
@@ -2422,19 +2475,19 @@ declare global {
 
 	interface PerlinNoiseObject {
 		get_2d(position: ShallowVector2): number;
-		get_3d(position: Vec3): number;
+		get_3d(position: ShallowVector3): number;
 	}
 
 	interface PerlinNoiseMapObject {
 		get_2d_map(pos: ShallowVector2): number[][];
-		get_3d_map(pos: Vec3): number[][][];
+		get_3d_map(pos: ShallowVector3): number[][][];
 		get_2d_map_flat(pos: ShallowVector2, buffer: number[]): number[];
-		get_3d_map_flat(pos: Vec3, buffer: number[]): number[];
+		get_3d_map_flat(pos: ShallowVector3, buffer: number[]): number[];
 		calc_2d_map(pos: ShallowVector2): void;
-		calc_3d_map(pos: Vec3): void;
+		calc_3d_map(pos: ShallowVector3): void;
 		get_map_slice(
-			sliceOffset: Vec3,
-			sliceSize: Vec3,
+			sliceOffset: ShallowVector3,
+			sliceSize: ShallowVector3,
 			buffer: number[]
 		): number[];
 	}
