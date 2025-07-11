@@ -38,25 +38,14 @@ function getWinInfo(name: string): WindowInfo | null {
 const windowSizes = new Map<string, WindowInfo>();
 
 export function deployWindowHandling(): void {
-	whenPlayerJoins((player) => {
-		// Get this data into memory as fast as possible.
-		registerTargetedTemporaryClientTickFunction(
-			player.get_player_name(),
-			(player) => {
-				const name = player.get_player_name();
-
-				const windowInfo = getWinInfo(name);
-
-				if (windowInfo == null) {
-					return false;
-				}
-
-				windowSizes.set(name, windowInfo);
-
-				return true;
-			}
-		);
-	});
+	function createPlayerWindowData(player: ObjectRef): WindowInfo | null {
+		const name = player.get_player_name();
+		const windowInfo = getWinInfo(name);
+		if (windowInfo == null) {
+			return null;
+		}
+		return windowSizes.set(name, windowInfo).get(name) || null;
+	}
 
 	whenPlayerLeaves((player) => {
 		windowSizes.delete(player.get_player_name());
@@ -66,7 +55,9 @@ export function deployWindowHandling(): void {
 		for (const player of getAllPlayers()) {
 			const name = player.get_player_name();
 
-			const sizeInfo = windowSizes.get(player.get_player_name());
+			const sizeInfo =
+				windowSizes.get(player.get_player_name()) ||
+				createPlayerWindowData(player);
 
 			// Client has to submit their display information before this can be run.
 			if (sizeInfo == null) {
