@@ -1,11 +1,14 @@
 import { afterPlayerJoins, whenPlayerJoins } from "../logic/player";
-import { registerClientTickFunction } from "../logic/tick";
+import {
+	registerClientTickFunction,
+	registerServerTickFunction,
+} from "../logic/tick";
 import { getDatabase } from "../utility/database";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
 import { getMeta } from "../utility/metadata";
 import { Vec3 } from "../utility/vector";
-import { getPlayer } from "./tracker";
+import { getAllPlayerNames, getPlayer } from "./tracker";
 
 //! In case it's not obvioius, this is a debugging entity.
 class Cuboid extends Entity {
@@ -60,7 +63,11 @@ class Player {
 
 	setPosition(pos: Vec3): void {
 		this.position.copyFrom(pos);
-		this.visualEntity?.move_to(this.position);
+		this.visualEntity?.move_to(this.position, true);
+	}
+
+	getPosition(): Vec3 {
+		return this.position.clone();
 	}
 
 	moveCamera(): void {
@@ -116,8 +123,6 @@ export function deployPlayerEntity(): void {
 
 		pData.setPosition(new Vec3(0, 1, 0));
 
-		print(pData.position.toString());
-
 		players.set(name, pData);
 
 		// Then the camera would be treated like a yaw and pitch, along with zoom.
@@ -132,6 +137,19 @@ export function deployPlayerEntity(): void {
 		}
 	});
 
+	registerServerTickFunction(() => {
+		for (const name of getAllPlayerNames()) {
+			const pData = players.get(name);
+			if (pData == null) {
+				continue;
+			}
+
+			pData.setPosition(
+				pData.getPosition().addImmutable(new Vec3(1, 0, 0))
+			);
+		}
+	});
+
 	registerClientTickFunction((player) => {
 		const name = player.get_player_name();
 
@@ -141,7 +159,6 @@ export function deployPlayerEntity(): void {
 		if (pData == null) {
 			return;
 		}
-		print(pData.position.toString());
 
 		pData.moveCamera();
 	});
