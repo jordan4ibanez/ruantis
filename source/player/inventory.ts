@@ -1,8 +1,8 @@
 import { fma, normalize } from "../utility/math";
 import { registerWindowSizeChangeFunction } from "./window";
 
-core.register_on_player_receive_fields((player, formname) => {
-	print("hmm", "[", formname, "]");
+core.register_on_player_receive_fields((player, formname, fields) => {
+	print("hmm", "[", formname, "]", dump(fields));
 });
 
 // todo: maybe keep track of this? Could make movable windows in a horrific manor.
@@ -18,6 +18,13 @@ export function deployInventoryHandling(): void {
 		const width = windowInfo.size.x / magicNumber;
 		const height = windowInfo.size.y / magicNumber;
 
+		// Attempt to put a button in the middle of the screen.
+
+		const xPos = windowInfo.size.x / 2 / magicNumber;
+		const yPos = windowInfo.size.y / 2 / magicNumber;
+
+		//attempt to put a 1 pixel button on the screen
+
 		let hackjob =
 			"formspec_version[9]" +
 			`size[${width},${height},true]` +
@@ -28,8 +35,8 @@ export function deployInventoryHandling(): void {
 			"padding[0,0]" +
 			// "allow_close[false]" +
 			"button[0,0;1,1;test;]" +
-			"button[0,4;1,1;test;]";
+			`button[${xPos},${yPos};1,1;test;]`;
 
-		player.set_inventory_formspec(hackjob);
+		core.show_formspec(name, "current_player", hackjob);
 	});
 }
