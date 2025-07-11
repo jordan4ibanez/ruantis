@@ -86,6 +86,11 @@ export class Vec2 implements ShallowVector2 {
 		this.y = y;
 	}
 
+	copyFrom(other: ShallowVector2): void {
+		this.x = other.x;
+		this.y = other.y;
+	}
+
 	randomize(minX: number, maxX: number, minY: number, maxY: number): Vec2 {
 		this.x = rr(minX, maxX);
 		this.y = rr(minY, maxY);
