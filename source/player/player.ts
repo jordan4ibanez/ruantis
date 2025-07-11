@@ -23,10 +23,12 @@ class Cuboid extends Entity {
 		print(this.object.get_pos());
 	}
 	on_step(delta: number, moveResult: MoveResult | null): void {
-		print(this.object.get_pos());
+		// print(this.object.get_pos());
 
 		const pos = new Vec3();
+
 		pos.copyFrom(this.object.get_pos());
+
 		pos.x += 0.5;
 		pos.y -= 0.5;
 		pos.z += 0.5;
@@ -45,33 +47,40 @@ registerEntity(Cuboid);
 
 class Player {
 	name: string;
+	ltPlayer: ObjectRef;
 	position: Vec3 = new Vec3();
 	cameraPosition: Vec3 = new Vec3();
-
 	private visualEntity: ObjectRef | null = null;
 
-	constructor(name: string) {
-		this.name = name;
+	constructor(ltPlayer: ObjectRef) {
+		this.name = ltPlayer.get_player_name();
+		this.ltPlayer = ltPlayer;
+		this.visualEntity = spawnEntity(this.position, Cuboid);
 	}
 
 	setPosition(pos: Vec3): void {
 		this.position.copyFrom(pos);
+		this.visualEntity?.move_to(this.position);
 	}
 
 	moveCamera(): void {
-		const player = getPlayer(this.name);
-		if (player == null) {
+		if (this.ltPlayer == null) {
 			throw new Error(
 				`Object for player ${this.name} was not cleaned up.`
 			);
 		}
+
 		// This is a random hardcode for now.
 
 		this.cameraPosition.x = this.position.x + 3;
 		this.cameraPosition.y = this.position.y + 6;
 		this.cameraPosition.z = this.position.z + 3;
 
-		player.set_pos(this.cameraPosition);
+		this.ltPlayer.add_pos(
+			this.cameraPosition.subtractImmutable(this.ltPlayer.get_pos())
+		);
+
+		// player.move_to(this.cameraPosition);
 	}
 
 	getEntity(): ObjectRef {
@@ -98,22 +107,23 @@ class Player {
 const players = new Map<string, Player>();
 
 export function deployPlayerEntity(): void {
-	afterPlayerJoins((player) => {
+	afterPlayerJoins((ltPlayer) => {
 		// todo: get from database.
 		// getDatabase()
 
-		// So this is the player entity.
-		const playerEntity = spawnEntity(new Vec3(0, 1, 0), Cuboid);
+		const name = ltPlayer.get_player_name();
+		const pData = new Player(ltPlayer);
 
-		const pData = new Player(player.get_player_name());
-		pData.setPosition(new Vec3(0, 0, 0));
+		pData.setPosition(new Vec3(0, 1, 0));
+
+		print(pData.position.toString());
+
+		players.set(name, pData);
 
 		// Then the camera would be treated like a yaw and pitch, along with zoom.
-		const cameraYaw = 0;
-		const cameraPitch = -math.pi / 2;
-		const zoom = 1;
-
-		player.set_pos(new Vec3(3, 6, 3));
+		// const cameraYaw = 0;
+		// const cameraPitch = -math.pi / 2;
+		// const zoom = 1;
 
 		for (const x of $range(-10, 10)) {
 			for (const z of $range(-10, 10)) {
@@ -131,6 +141,7 @@ export function deployPlayerEntity(): void {
 		if (pData == null) {
 			return;
 		}
+		print(pData.position.toString());
 
 		pData.moveCamera();
 	});
