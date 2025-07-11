@@ -10,7 +10,7 @@ const prototype__winInfoGet = core.get_player_window_information;
  */
 export class WindowInfo {
 	size: Vec2 = new Vec2();
-	formSpecSize: Vec2 = new Vec2();
+	guiScale: number = 0;
 }
 
 const windowSizes = new Map<string, WindowInfo>();
@@ -50,9 +50,7 @@ export function deployWindowHandling(): void {
 
 			if (changed) {
 				sizeInfo.size.copyFrom(__rawWindowInfo.size);
-				sizeInfo.formSpecSize.copyFrom(
-					__rawWindowInfo.max_formspec_size
-				);
+				sizeInfo.guiScale = __rawWindowInfo.real_gui_scaling;
 
 				for (const func of windowChangeFuncs) {
 					func(player, sizeInfo);
