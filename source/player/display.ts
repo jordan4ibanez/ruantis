@@ -91,8 +91,6 @@ export function deployDisplayHandling(): void {
 			}
 
 			sizeInfo.changed = changed;
-
-			print(changed);
 		}
 	});
 }
