@@ -32,6 +32,14 @@ export class Vec3 implements ShallowVector3 {
 		this.z = z;
 	}
 
+	addImmutable(other: ShallowVector3): Vec3 {
+		const output = new Vec3();
+		output.x = this.x + other.x;
+		output.y = this.y + other.y;
+		output.z = this.z + other.z;
+		return output;
+	}
+
 	subtractImmutable(other: ShallowVector3): Vec3 {
 		const output = new Vec3();
 		output.x = this.x - other.x;
@@ -107,6 +115,13 @@ export class Vec2 implements ShallowVector2 {
 	set(x: number, y: number): void {
 		this.x = x;
 		this.y = y;
+	}
+
+	addImmutable(other: ShallowVector3): Vec2 {
+		const output = new Vec2();
+		output.x = this.x + other.x;
+		output.y = this.y + other.y;
+		return output;
 	}
 
 	subtractImmutable(other: ShallowVector2): Vec2 {
