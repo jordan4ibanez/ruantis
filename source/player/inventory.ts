@@ -1,7 +1,8 @@
+import { fma, normalize } from "../utility/math";
 import { registerWindowSizeChangeFunction } from "./window";
 
 core.register_on_player_receive_fields((player, formname) => {
-	print("hmm");
+	print("hmm", "[", formname, "]");
 });
 
 // todo: maybe keep track of this? Could make movable windows in a horrific manor.
@@ -10,26 +11,24 @@ export function deployInventoryHandling(): void {
 	registerWindowSizeChangeFunction((player, windowInfo) => {
 		const name = player.get_player_name();
 
-		print(windowInfo.size.toString());
+		//? I just kept testing things until something worked.
+		const magicNormalizedMultiplier = windowInfo.guiScale * 0.55;
+		const magicNumber = 96 * magicNormalizedMultiplier;
 
-		const magicNumber = (96 * 2) / 1.5;
+		const width = windowInfo.size.x / magicNumber;
+		const height = windowInfo.size.y / magicNumber;
 
 		let hackjob =
 			"formspec_version[9]" +
-			`size[${windowInfo.size.x / magicNumber},${
-				windowInfo.size.y / magicNumber
-			},true]` +
-			"position[0,0]" +
-			"anchor[0,0]" +
-			"padding[0,0]" +
-			"real_coordinates[true]" +
+			`size[${width},${height},true]` +
+			"position[0.5,0.5]" +
+			"anchor[0.5,0.5]" +
 			"no_prepend[]" +
-			"allow_close[false]" +
-			"container[1,1]" +
+			"real_coordinates[true]" +
+			"padding[0,0]" +
+			// "allow_close[false]" +
 			"button[0,0;1,1;test;]" +
-			"container_end[]";
-
-		// ;
+			"button[0,4;1,1;test;]";
 
 		player.set_inventory_formspec(hackjob);
 	});
