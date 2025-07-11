@@ -27,15 +27,34 @@ export function deployTracker(): void {
 			if (!found) {
 				core.log(
 					LogLevel.error,
-					`Player ${player.get_player_name()} is a ghost player now. Please report this issue.`
+					`Player ${player.get_player_name()} is a ghost player now. Please report this issue. [1]`
+				);
+			} else {
+				delete playerList[index];
+			}
+		}
+		{
+			const name = player.get_player_name();
+
+			let found = false;
+			let index = 0;
+			for (const n of nameList) {
+				if (n == name) {
+					found = true;
+					break;
+				}
+				index++;
+			}
+			if (!found) {
+				core.log(
+					LogLevel.error,
+					`Player ${name} is a ghost player for now. Please report this issue. [2]`
 				);
 				return;
+			} else {
+				delete nameList[index];
 			}
-
-			delete playerList[index];
 		}
-
-		
 	});
 }
 
@@ -54,4 +73,12 @@ export function getAllPlayers(): readonly ObjectRef[] {
  */
 export function getPlayer(name: string): ObjectRef | null {
 	return playerMap.get(name) || null;
+}
+
+/**
+ * Get all player's names which are currently online.
+ * @returns The list of all currently online player names.
+ */
+export function getAllPlayerNames(): readonly string[] {
+	return nameList;
 }
