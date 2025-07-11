@@ -46,8 +46,6 @@ import {
 } from "./source/utility/enums";
 import { Vec3 } from "./source/utility/vector";
 
-
-
 //? Everything was just dumped in as I looked down the lua_api.md
 
 // Shallow vectors are only known to have the xy and z fields when getting returned from engine functions.
@@ -786,22 +784,6 @@ interface core {
 		httpfetch_additional_methods: boolean;
 	};
 }
-
-// /** @noSelf **/ interface HeightMapObject {
-
-// }
-
-// /** @noSelf **/ interface BiomeMapObject {
-
-// }
-
-// /** @noSelf **/ interface HeatMapObject {
-
-// }
-
-// /** @noSelf **/ interface HumidityMapObject {
-
-// }
 
 //~ Structs. (Plain Old Data: NO implicit self [this is null]) ===============================================
 
