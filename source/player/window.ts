@@ -1,10 +1,5 @@
-import { ShallowVector2 } from "../../minetest-api";
-import { whenPlayerJoins, whenPlayerLeaves } from "../logic/player";
-import {
-	registerServerTickFunction,
-	registerTargetedTemporaryClientTickFunction,
-} from "../logic/tick";
-import { LogLevel } from "../utility/enums";
+import { whenPlayerLeaves } from "../logic/player";
+import { registerServerTickFunction } from "../logic/tick";
 import { Vec2 } from "../utility/vector";
 import { getAllPlayers } from "./tracker";
 
@@ -17,17 +12,6 @@ export class WindowInfo {
 	size: Vec2 = new Vec2();
 	formSpecSize: Vec2 = new Vec2();
 }
-
-/**
- * Gets the window information for a player.
- */
-// function getWinInfo(name: string): WindowInfo | null {
-// 	const data = prototype__winInfoGet(name);
-// 	if (data == null) {
-// 		return null;
-// 	}
-// 	return new WindowInfo(data.size, data.max_formspec_size);
-// }
 
 const windowSizes = new Map<string, WindowInfo>();
 
