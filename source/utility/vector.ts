@@ -18,6 +18,14 @@ export class Vec3 implements ShallowVector3 {
 		return new Vec3(0, 0, 0);
 	}
 
+	clone(): Vec3 {
+		const output = new Vec3();
+		output.x = this.x;
+		output.y = this.y;
+		output.z = this.z;
+		return output;
+	}
+
 	set(x: number, y: number, z: number): void {
 		this.x = x;
 		this.y = y;
@@ -87,6 +95,13 @@ export class Vec2 implements ShallowVector2 {
 
 	static zero(): Vec2 {
 		return new Vec2(0, 0);
+	}
+
+	clone(): Vec2 {
+		const output = new Vec2();
+		output.x = this.x;
+		output.y = this.y;
+		return output;
 	}
 
 	set(x: number, y: number): void {
