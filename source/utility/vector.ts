@@ -1,9 +1,9 @@
-import { ShallowVector2 } from "../../minetest-api";
+import { ShallowVector2, ShallowVector3 } from "../../minetest-api";
 import { randomRange } from "./math";
 
 const rr = randomRange;
 
-export class Vec3 {
+export class Vec3 implements ShallowVector3 {
 	x: number = 0;
 	y: number = 0;
 	z: number = 0;
