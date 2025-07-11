@@ -34,9 +34,21 @@ export class Vec3 {
 	distance(other: Vec3): number {
 		return vector.distance(this, other);
 	}
+
+	toString(): string {
+		return (
+			"(" +
+			tostring(this.x) +
+			"," +
+			tostring(this.y) +
+			"," +
+			tostring(this.z) +
+			")"
+		);
+	}
 }
 
-export  class Vec2 {
+export class Vec2 {
 	x: number = 0;
 	y: number = 0;
 
@@ -58,5 +70,9 @@ export  class Vec2 {
 
 	distance(other: Vec2): number {
 		return vector.distance(this, other);
+	}
+
+	toString(): string {
+		return "(" + tostring(this.x) + "," + tostring(this.y) + ")";
 	}
 }
