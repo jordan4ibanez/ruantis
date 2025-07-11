@@ -1,9 +1,11 @@
 import { afterPlayerJoins, whenPlayerJoins } from "../logic/player";
+import { registerClientTickFunction } from "../logic/tick";
 import { getDatabase } from "../utility/database";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
 import { getMeta } from "../utility/metadata";
 import { Vec3 } from "../utility/vector";
+import { getPlayer } from "./tracker";
 
 //! In case it's not obvioius, this is a debugging entity.
 class Cuboid extends Entity {
@@ -44,6 +46,7 @@ registerEntity(Cuboid);
 class Player {
 	name: string;
 	position: Vec3 = new Vec3();
+	cameraPosition: Vec3 = new Vec3();
 
 	private visualEntity: ObjectRef | null = null;
 
@@ -53,6 +56,22 @@ class Player {
 
 	setPosition(pos: Vec3): void {
 		this.position.copyFrom(pos);
+	}
+
+	moveCamera(): void {
+		const player = getPlayer(this.name);
+		if (player == null) {
+			throw new Error(
+				`Object for player ${this.name} was not cleaned up.`
+			);
+		}
+		// This is a random hardcode for now.
+
+		this.cameraPosition.x = this.position.x + 3;
+		this.cameraPosition.y = this.position.y + 6;
+		this.cameraPosition.z = this.position.z + 3;
+
+		player.set_pos(this.cameraPosition);
 	}
 
 	getEntity(): ObjectRef {
@@ -82,9 +101,12 @@ export function deployPlayerEntity(): void {
 	afterPlayerJoins((player) => {
 		// todo: get from database.
 		// getDatabase()
-		
+
 		// So this is the player entity.
 		const playerEntity = spawnEntity(new Vec3(0, 1, 0), Cuboid);
+
+		const pData = new Player(player.get_player_name());
+		pData.setPosition(new Vec3(0, 0, 0));
 
 		// Then the camera would be treated like a yaw and pitch, along with zoom.
 		const cameraYaw = 0;
@@ -98,7 +120,18 @@ export function deployPlayerEntity(): void {
 				core.set_node(new Vec3(x, 0, z), { name: "debug" });
 			}
 		}
+	});
 
-		// core.add_entity(new Vec3(0, 0, 2), "undefined");
+	registerClientTickFunction((player) => {
+		const name = player.get_player_name();
+
+		const pData = players.get(name);
+
+		// Player might be one tick late.
+		if (pData == null) {
+			return;
+		}
+
+		pData.moveCamera();
 	});
 }
