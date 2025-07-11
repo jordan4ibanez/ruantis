@@ -57,16 +57,17 @@ export function spawnEntity(
 	pos: Vec3,
 	clazz: leClassType,
 	initFunction?: (obj: ObjectRef) => void
-): void {
+): ObjectRef | null {
 	const ent = core.add_entity(pos, clazz.name);
 	if (ent == null || !ent.is_valid()) {
 		core.log(
 			LogLevel.error,
 			`Failed to spawn entity at: ${pos.toString()}`
 		);
-		return;
+		return null;
 	}
 	if (initFunction) {
 		initFunction(ent);
 	}
+	return ent;
 }
