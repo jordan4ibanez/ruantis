@@ -6,6 +6,7 @@ import {
 import { getAllPlayers } from "./tracker";
 
 class DisplayInformation {}
+const winInfoGet = core.get_player_window_information;
 const windowSizes = new Map<string, WindowInfo>();
 
 export function deployDisplayHandling(): void {
