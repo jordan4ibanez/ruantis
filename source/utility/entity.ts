@@ -1,3 +1,4 @@
+import { LogLevel } from "./enums";
 import { Vec2, Vec3 } from "./vector";
 
 export interface EntityFireTable {
@@ -5,7 +6,7 @@ export interface EntityFireTable {
 	visualSize: Vec2;
 }
 
-/** Typescript Luaentity. :) */
+/** Typescript Luaentity. */
 export abstract class Entity implements LuaEntity {
 	name: string = "";
 	object: ObjectRef = {} as ObjectRef;
@@ -33,10 +34,39 @@ export abstract class Entity implements LuaEntity {
 	get_staticdata?(): string;
 }
 
+// French jump scare.
+type leClassType = { new (): LuaEntity };
+
 /**
  * A bolt on to allow you to directly register MT lua entities as TS classes.
  * @param clazz Class definition.
  */
-export function registerEntity(clazz: { new (): LuaEntity }) {
-	core.register_entity(":" + clazz.name, new clazz());
+export function registerEntity(clazz: leClassType) {
+	const instance = new clazz();
+	instance.name = clazz.name;
+	core.register_entity(":" + clazz.name, instance);
+}
+
+/**
+ * I don't feel like dealing with unsound string typos. So this fixes that.
+ * @param pos Position in world.
+ * @param clazz LuaEntity descendant.
+ * @param initFunction A decorator function for when (and if) the entity spawns.
+ */
+export function spawnEntity(
+	pos: Vec3,
+	clazz: leClassType,
+	initFunction?: (obj: ObjectRef) => void
+): void {
+	const ent = core.add_entity(pos, clazz.name);
+	if (ent == null) {
+		core.log(
+			LogLevel.error,
+			`Failed to spawn entity at: ${pos.toString()}`
+		);
+		return;
+	}
+	if (initFunction) {
+		initFunction(ent);
+	}
 }
