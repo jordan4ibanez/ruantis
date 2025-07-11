@@ -28,7 +28,9 @@ export function deployDisplayHandling(): void {
 			player.get_player_name(),
 			(player) => {
 				const name = player.get_player_name();
-				const windowInfo = core.get_player_window_information(name);
+
+				const windowInfo = winInfoGet(name);
+
 				if (windowInfo == null) {
 					return false;
 				}
