@@ -18,6 +18,12 @@ export class Vec3 {
 		return new Vec3(0, 0, 0);
 	}
 
+	set(x: number, y: number, z: number): void {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
 	randomize(
 		minX: number,
 		maxX: number,
@@ -67,6 +73,11 @@ export class Vec2 implements ShallowVector2 {
 
 	static zero(): Vec2 {
 		return new Vec2(0, 0);
+	}
+
+	set(x: number, y: number): void {
+		this.x = x;
+		this.y = y;
 	}
 
 	randomize(minX: number, maxX: number, minY: number, maxY: number): Vec2 {
