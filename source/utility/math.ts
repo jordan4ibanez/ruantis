@@ -59,3 +59,7 @@ export function invsqrt(r: number): number {
 export function safeAsin(r: number): number {
 	return r <= -1.0 ? -PI_HALF : r >= 1.0 ? PI_HALF : asin(r);
 }
+
+export function normalize(min: number, max: number, value: number): number {
+	return value * (max - min) + min;
+}
