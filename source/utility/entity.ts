@@ -59,7 +59,7 @@ export function spawnEntity(
 	initFunction?: (obj: ObjectRef) => void
 ): void {
 	const ent = core.add_entity(pos, clazz.name);
-	if (ent == null) {
+	if (ent == null || !ent.is_valid()) {
 		core.log(
 			LogLevel.error,
 			`Failed to spawn entity at: ${pos.toString()}`
