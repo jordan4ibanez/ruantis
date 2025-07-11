@@ -37,7 +37,7 @@ function getWinInfo(name: string): WindowInfo | null {
 
 const windowSizes = new Map<string, WindowInfo>();
 
-export function deployDisplayHandling(): void {
+export function deployWindowHandling(): void {
 	whenPlayerJoins((player) => {
 		// Get this data into memory as fast as possible.
 		registerTargetedTemporaryClientTickFunction(
