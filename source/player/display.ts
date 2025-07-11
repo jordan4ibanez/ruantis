@@ -100,7 +100,7 @@ export function deployDisplayHandling(): void {
  * @param name The player's name.
  * @returns Window resolution and if it has changed.
  */
-export function getWindowInfo(name: string): WindowInfo | null {
+export function getPlayerWindowInfo(name: string): WindowInfo | null {
 	const data = windowSizes.get(name);
 	if (data == null) {
 		return null;
