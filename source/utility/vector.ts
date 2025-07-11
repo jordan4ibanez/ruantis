@@ -32,7 +32,10 @@ export class Vec3 {
 	}
 
 	distance(other: Vec3): number {
-		return vector.distance(this, other);
+		const x = this.x - other.x;
+		const y = this.y - other.y;
+		const z = this.z - other.z;
+		return math.sqrt(x * x + y * y + z * z);
 	}
 
 	equals(other: Vec3): boolean {
@@ -73,7 +76,9 @@ export class Vec2 {
 	}
 
 	distance(other: Vec2): number {
-		return vector.distance(this, other);
+		const x = this.x - other.x;
+		const y = this.y - other.y;
+		return math.sqrt(x * x + y * y);
 	}
 
 	equals(other: Vec2): boolean {
