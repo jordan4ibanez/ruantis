@@ -5,8 +5,19 @@ import {
 } from "../logic/tick";
 import { getAllPlayers } from "./tracker";
 
-class DisplayInformation {}
 const winInfoGet = core.get_player_window_information;
+
+export class WindowInfo {
+	size: Vec2 = new Vec2();
+	changed: boolean;
+
+	constructor(init: Vec2) {
+		this.size.x = init.x;
+		this.size.y = init.y;
+		this.changed = true;
+	}
+}
+
 const windowSizes = new Map<string, WindowInfo>();
 
 export function deployDisplayHandling(): void {
