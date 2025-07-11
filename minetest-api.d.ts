@@ -44,9 +44,9 @@ import {
 	TexturePoolComponentFade,
 	TileAnimationType,
 } from "./source/utility/enums";
-import { Vec2, Vec3 } from "./source/utility/vector";
+import { Vec3 } from "./source/utility/vector";
 
-export {};
+
 
 //? Everything was just dumped in as I looked down the lua_api.md
 
@@ -919,8 +919,8 @@ declare global {
 	}
 
 	/** @noSelf **/ interface WindowInformation {
-		size: Vec2;
-		max_formspec_size: Vec2;
+		size: ShallowVec2;
+		max_formspec_size: ShallowVec2;
 		real_gui_scaling: number;
 		real_hud_scaling: number;
 	}
@@ -1725,7 +1725,7 @@ declare global {
 		ambient: DynamicColorSpec;
 		height: number;
 		thickness: number;
-		speed: Vec2;
+		speed: ShallowVec2;
 	}
 
 	/** @noSelf **/ interface LightShadowsSpec {
@@ -1761,14 +1761,14 @@ declare global {
 		selectionbox?: number[];
 		pointable?: boolean;
 		visual?: EntityVisual;
-		visual_size?: Vec3 | Vec2;
+		visual_size?: Vec3 | ShallowVec2;
 		mesh?: string;
 		textures?: (string | TileDefinition)[] | TileDefinition;
 		colors?: DynamicColorSpec[];
 		use_texture_alpha?: boolean;
-		spritediv?: Vec2;
+		spritediv?: ShallowVec2;
 		node?: NodeTable;
-		initial_sprite_basepos?: Vec2;
+		initial_sprite_basepos?: ShallowVec2;
 		is_visible?: boolean;
 		makes_footstep_sound?: boolean;
 		automatic_rotate?: number;
@@ -1808,18 +1808,18 @@ declare global {
 
 	/** @noSelf **/ interface HudDefinition {
 		type: HudElementType;
-		position?: Vec2;
+		position?: ShallowVec2;
 		name?: string;
-		scale?: Vec2;
+		scale?: ShallowVec2;
 		text?: string;
 		text2?: string;
 		number?: number;
 		item?: number;
 		direction?: number;
-		alignment?: Vec2;
-		offset?: Vec2;
+		alignment?: ShallowVec2;
+		offset?: ShallowVec2;
 		world_pos?: Vec3;
-		size?: Vec2;
+		size?: ShallowVec2;
 		z_index?: number;
 		style?: number;
 	}
@@ -1892,13 +1892,13 @@ declare global {
 		z: number;
 	}
 
-	type ParticleSpawnerTextureScaleTween = Array<Vec2>;
+	type ParticleSpawnerTextureScaleTween = Array<ShallowVec2>;
 
 	/** @noSelf **/ interface ParticleSpawnerTextureDefinition {
 		name: string;
 		alpha: number;
 		alpha_tween: number[];
-		scale: number | Vec2;
+		scale: number | ShallowVec2;
 		scale_tween: ParticleSpawnerTextureScaleTween;
 		blend: ParticleSpawnerTextureBlend;
 		animation: TileAnimationDefinition;
@@ -1925,7 +1925,7 @@ declare global {
 
 	/** @noSelf **/ interface ParticleSpawnerAttractionDefinition {
 		kind: ParticleSpawnerAttractionType;
-		strength: Vec2;
+		strength: ShallowVec2;
 		origin: Vec3;
 		direction: Vec3;
 		origin_attached: ObjectRef;
@@ -1960,7 +1960,7 @@ declare global {
 		jitter?: Vec3RangeBias;
 		drag?: Vec3RangeBias;
 		bounce?: Vec3RangeBias;
-		exptime?: Vec2;
+		exptime?: ShallowVec2;
 		attract?: ParticleSpawnerAttractionDefinition;
 		radius?: Vec3RangeBias;
 		pos_tween?: ParticleSpawnerTweenDefinition;
@@ -2296,9 +2296,9 @@ declare global {
 		set_wielded_item(item: ItemStackObject | string): boolean;
 		get_armor_groups(): { string: number };
 		set_armor_groups(groups: Dictionary<string, number>): void;
-		get_animation(): Array<Vec2 | number>;
+		get_animation(): Array<ShallowVec2 | number>;
 		set_animation(
-			frameRange: Vec2,
+			frameRange: ShallowVec2,
 			frameSpeed: number,
 			frameBlend: number,
 			loop?: boolean
@@ -2335,7 +2335,7 @@ declare global {
 		set_texture_mod(mod: string): void;
 		get_texture_mod(): string;
 		set_sprite(
-			startFrame: Vec2,
+			startFrame: ShallowVec2,
 			numberOfFrames: number,
 			frameLength: number,
 			selectXByCamera: boolean
@@ -2405,13 +2405,19 @@ declare global {
 		override_day_night_ratio(ratio: number | null): void;
 		get_day_night_ratio(): number | null;
 		set_local_animation(
-			idle: Vec2,
-			walk: Vec2,
-			dig: Vec2,
-			walkWhileDig: Vec2,
+			idle: ShallowVec2,
+			walk: ShallowVec2,
+			dig: ShallowVec2,
+			walkWhileDig: ShallowVec2,
 			frameSpeed: number
 		): void;
-		get_local_animation(): [Vec2, Vec2, Vec2, Vec2, number];
+		get_local_animation(): [
+			ShallowVec2,
+			ShallowVec2,
+			ShallowVec2,
+			ShallowVec2,
+			number
+		];
 		set_eye_offset(
 			firstPerson: Vec3,
 			thirdPersonBack: Vec3,
@@ -2431,16 +2437,16 @@ declare global {
 	}
 
 	interface PerlinNoiseObject {
-		get_2d(position: Vec2): number;
+		get_2d(position: ShallowVec2): number;
 		get_3d(position: Vec3): number;
 	}
 
 	interface PerlinNoiseMapObject {
-		get_2d_map(pos: Vec2): number[][];
+		get_2d_map(pos: ShallowVec2): number[][];
 		get_3d_map(pos: Vec3): number[][][];
-		get_2d_map_flat(pos: Vec2, buffer: number[]): number[];
+		get_2d_map_flat(pos: ShallowVec2, buffer: number[]): number[];
 		get_3d_map_flat(pos: Vec3, buffer: number[]): number[];
-		calc_2d_map(pos: Vec2): void;
+		calc_2d_map(pos: ShallowVec2): void;
 		calc_3d_map(pos: Vec3): void;
 		get_map_slice(
 			sliceOffset: Vec3,
