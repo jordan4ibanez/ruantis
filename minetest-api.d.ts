@@ -162,7 +162,11 @@ interface core {
 		) => void
 	): void;
 	register_on_generated(
-		fun: (minp: ShallowVector3, maxp: ShallowVector3, blockSeed: number) => void
+		fun: (
+			minp: ShallowVector3,
+			maxp: ShallowVector3,
+			blockSeed: number
+		) => void
 	): void;
 	register_on_newplayer(fun: (player: ObjectRef) => void): void;
 	register_on_punchplayer(
@@ -328,8 +332,13 @@ interface core {
 	place_node(position: ShallowVector3, nodeTable: NodeTable): void;
 	dig_node(position: ShallowVector3): boolean;
 	punch_node(position: ShallowVector3): void;
-	spawn_falling_node(position: ShallowVector3): [boolean, ObjectRef] | boolean;
-	find_nodes_with_meta(pos1: ShallowVector3, pos2: ShallowVector3): ShallowVector3[];
+	spawn_falling_node(
+		position: ShallowVector3
+	): [boolean, ObjectRef] | boolean;
+	find_nodes_with_meta(
+		pos1: ShallowVector3,
+		pos2: ShallowVector3
+	): ShallowVector3[];
 	get_meta(position: ShallowVector3): MetaRef;
 	get_node_timer(position: ShallowVector3): NodeTimerObject;
 	add_entity(
@@ -346,7 +355,10 @@ interface core {
 		position: ShallowVector3,
 		radius: number
 	): ObjectRef[];
-	get_objects_in_area(pos1: ShallowVector3, pos2: ShallowVector3): ObjectRef[];
+	get_objects_in_area(
+		pos1: ShallowVector3,
+		pos2: ShallowVector3
+	): ObjectRef[];
 	set_timeofday(newTimeOfDay: number): void;
 	get_timeofday(): number;
 	get_gametime(): number;
@@ -381,7 +393,10 @@ interface core {
 		persistence: number,
 		spread: number
 	): PerlinNoiseObject;
-	get_voxel_manip(pos1: ShallowVector3, pos2: ShallowVector3): VoxelManipObject;
+	get_voxel_manip(
+		pos1: ShallowVector3,
+		pos2: ShallowVector3
+	): VoxelManipObject;
 	set_gen_notify(flags: GenNotifyFlags, decorationIDs: number[]): void;
 	get_gen_notify(): number[];
 	get_decoration_id(decorationName: string): number;
@@ -422,7 +437,10 @@ interface core {
 		param: any
 	): void;
 	delete_area(pos1: ShallowVector3, pos2: ShallowVector3): void;
-	line_of_sight(pos1: ShallowVector3, pos2: ShallowVector3): [boolean, ShallowVector3];
+	line_of_sight(
+		pos1: ShallowVector3,
+		pos2: ShallowVector3
+	): [boolean, ShallowVector3];
 	raycast(
 		pos1: ShallowVector3,
 		pos2: ShallowVector3,
@@ -1564,7 +1582,10 @@ declare global {
 		_pos1: ShallowVector3,
 		_pos2: ShallowVector3
 	): VoxelManipObject;
-	function VoxelArea(_min: ShallowVector3, _max: ShallowVector3): VoxelAreaObject;
+	function VoxelArea(
+		_min: ShallowVector3,
+		_max: ShallowVector3
+	): VoxelAreaObject;
 	function Raycast(
 		_pos1: ShallowVector3,
 		_pos2: ShallowVector3,
@@ -2195,7 +2216,11 @@ declare global {
 		set_node_at(position: ShallowVector3, node: MapNode): void;
 		get_data(): number[];
 		set_data(buffer: number[]): void;
-		set_lighting(light: number, p1: ShallowVector3, p2: ShallowVector3): void;
+		set_lighting(
+			light: number,
+			p1: ShallowVector3,
+			p2: ShallowVector3
+		): void;
 		get_light_data(): number[];
 		set_light_data(lightData: number[]): void;
 		get_param2_data(buffer: number[]): number[];
