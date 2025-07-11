@@ -1,6 +1,8 @@
 import { afterPlayerJoins, whenPlayerJoins } from "../logic/player";
+import { getDatabase } from "../utility/database";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
+import { getMeta } from "../utility/metadata";
 import { Vec3 } from "../utility/vector";
 
 //! In case it's not obvioius, this is a debugging entity.
@@ -74,8 +76,13 @@ class Player {
 	}
 }
 
+const players = new Map<string, Player>();
+
 export function deployPlayerEntity(): void {
 	afterPlayerJoins((player) => {
+		// todo: get from database.
+		// getDatabase()
+		
 		// So this is the player entity.
 		const playerEntity = spawnEntity(new Vec3(0, 1, 0), Cuboid);
 
