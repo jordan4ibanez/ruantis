@@ -2339,6 +2339,7 @@ declare global {
 		is_valid(): boolean;
 		get_pos(): ShallowVector3;
 		set_pos(position: ShallowVector3): void;
+		add_pos(pos: ShallowVector3): void;
 		get_velocity(): ShallowVector3;
 		add_velocity(velocity: ShallowVector3): void;
 		move_to(newPos: ShallowVector3, continuous?: boolean): void;
