@@ -4,6 +4,7 @@ import { deployWindowHandling } from "./player/window";
 import { deployInventoryHandling } from "./player/inventory";
 import { deployTracker } from "./player/tracker";
 import { deployPlayerEntity } from "./player/player_entity";
+import { loadNodes } from "./tiles/debug_tiles";
 
 function main() {
 	deployTickTimer();
@@ -12,5 +13,6 @@ function main() {
 	deployCameraHandling();
 	deployInventoryHandling();
 	deployPlayerEntity();
+	loadNodes();
 }
 main();
