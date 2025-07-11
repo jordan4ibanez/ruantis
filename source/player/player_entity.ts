@@ -34,8 +34,6 @@ registerEntity(Cuboid);
 
 export function deployPlayerEntity(): void {
 	whenPlayerJoins((player) => {
-		player.set_pos(new Vec3(0, 0, 0));
-
 		player.set_physics_override({
 			speed: 0,
 			jump: 0,
@@ -53,19 +51,19 @@ export function deployPlayerEntity(): void {
 
 	afterPlayerJoins((player) => {
 		// core.after(0, () => {
-		spawnEntity(new Vec3(0, 0, 2), Cuboid, (obj) => {
-			player.set_attach(
-				obj,
-				"",
-				new Vec3(0, 20, 0),
-				new Vec3(0, 20, 0),
-				true
-			);
+		// spawnEntity(new Vec3(0, 0, 2), Cuboid, (obj) => {
+		// 	player.set_attach(
+		// 		obj,
+		// 		"",
+		// 		new Vec3(0, 20, 0),
+		// 		new Vec3(0, 20, 0),
+		// 		true
+		// 	);
 
-			print("wat");
+		// 	print("wat");
 
-			// print(core.load_area(new Vec3(0, 0, 2), new Vec3(0, 0, 2)));
-		});
+		// 	// print(core.load_area(new Vec3(0, 0, 2), new Vec3(0, 0, 2)));
+		// });
 
 		// });
 		// core.add_entity(new Vec3(0, 0, 2), "undefined");
