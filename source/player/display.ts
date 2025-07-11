@@ -3,6 +3,7 @@ import {
 	registerServerTickFunction,
 	registerTargetedTemporaryClientTickFunction,
 } from "../logic/tick";
+import { LogLevel } from "../utility/enums";
 import { Vec2 } from "../utility/vector";
 import { getAllPlayers } from "./tracker";
 
@@ -60,12 +61,6 @@ export function deployDisplayHandling(): void {
 	registerServerTickFunction((delta) => {
 		for (const player of getAllPlayers()) {
 			const name = player.get_player_name();
-			const windowInfo = prototype__winInfoGet(name);
-			// Player's window info has not been submitted by the client.
-			// If this starts hitting null randomly there is probably an issue with the client.
-			if (windowInfo == null) {
-				continue;
-			}
 
 			const sizeInfo = windowSizes.get(player.get_player_name());
 
@@ -74,10 +69,27 @@ export function deployDisplayHandling(): void {
 				continue;
 			}
 
-			// print(changed);
+			const __rawWindowInfo = prototype__winInfoGet(name);
 
-			// sizeInfo.x = windowInfo.size.x;
-			// sizeInfo.y = windowInfo.size.y;
+			// Player's window info has not been submitted by the client.
+			// If this starts hitting null randomly there is probably an issue with the client.
+			if (__rawWindowInfo == null) {
+				core.log(
+					LogLevel.warning,
+					`Player ${name} submitted null window info.`
+				);
+				continue;
+			}
+
+			const changed = !sizeInfo.size.equals(__rawWindowInfo.size);
+
+			if (changed) {
+				sizeInfo.size.copyFrom(__rawWindowInfo.size);
+			}
+
+			sizeInfo.changed = changed;
+
+			print(changed);
 		}
 	});
 }
