@@ -64,6 +64,14 @@ class Player {
 		}
 		return this.visualEntity;
 	}
+
+	getLuaEntity(): Cuboid {
+		const luaEntity = this.getEntity().get_luaentity();
+		if (luaEntity == null) {
+			throw new Error(`LuaEntity for player ${this.name} is gone.`);
+		}
+		return luaEntity as Cuboid;
+	}
 }
 
 export function deployPlayerEntity(): void {
