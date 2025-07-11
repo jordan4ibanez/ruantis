@@ -1,6 +1,7 @@
+import { whenPlayerJoins } from "../logic/player";
 import { CameraModeType } from "../utility/enums";
 
-export function setUpCamera(player: ObjectRef): void {
+function setUpCamera(player: ObjectRef): void {
 	assert(player.is_player());
 	player.hud_set_flags({
 		hotbar: false,
@@ -10,4 +11,10 @@ export function setUpCamera(player: ObjectRef): void {
 		minimap: true,
 	});
 	player.set_camera({ mode: CameraModeType.first });
+}
+
+export function deployCameraHandling(): void {
+	whenPlayerJoins((player) => {
+		setUpCamera(player);
+	});
 }
