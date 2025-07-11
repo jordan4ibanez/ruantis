@@ -7,8 +7,7 @@ export interface EntityFireTable {
 
 /** Typescript Luaentity. :) */
 export abstract class Entity implements LuaEntity {
-	// Name is required.
-	abstract name: string;
+	name: string = "";
 	object: ObjectRef = {} as ObjectRef;
 	fireEntity: ObjectRef | null = null;
 	fireTable: EntityFireTable | null = null;
@@ -32,4 +31,12 @@ export abstract class Entity implements LuaEntity {
 	on_detach_child?(child: ObjectRef): void;
 	on_detach?(parent: ObjectRef): void;
 	get_staticdata?(): string;
+}
+
+/**
+ * A bolt on to allow you to directly register MT lua entities as TS classes.
+ * @param clazz Class definition.
+ */
+export function registerEntity(clazz: { new (): LuaEntity }) {
+	core.register_entity(":" + clazz.name, new clazz());
 }
