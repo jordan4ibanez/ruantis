@@ -1,3 +1,4 @@
+import { ShallowVector2 } from "../../minetest-api";
 import { whenPlayerJoins, whenPlayerLeaves } from "../logic/player";
 import {
 	registerServerTickFunction,
@@ -14,12 +15,12 @@ const prototype__winInfoGet = core.get_player_window_information;
  */
 export class WindowInfo {
 	size: Vec2 = new Vec2();
-	changed: boolean;
+	formSpecSize: Vec2 = new Vec2();
+	firstRun: boolean = true;
 
-	constructor(init: Vec2) {
-		this.size.x = init.x;
-		this.size.y = init.y;
-		this.changed = true;
+	constructor(init: ShallowVector2, formSpecSize: ShallowVector2) {
+		this.size.copyFrom(init);
+		this.formSpecSize.copyFrom(formSpecSize);
 	}
 }
 
@@ -31,7 +32,7 @@ function getWinInfo(name: string): WindowInfo | null {
 	if (data == null) {
 		return null;
 	}
-	return new WindowInfo(new Vec2(data.size.x, data.size.y));
+	return new WindowInfo(data.size, data.max_formspec_size);
 }
 
 const windowSizes = new Map<string, WindowInfo>();
@@ -86,11 +87,10 @@ export function deployDisplayHandling(): void {
 
 			const changed = !sizeInfo.size.equals(__rawWindowInfo.size);
 
-			if (changed) {
+			if (changed || sizeInfo.firstRun) {
+				sizeInfo.firstRun = false;
 				sizeInfo.size.copyFrom(__rawWindowInfo.size);
 			}
-
-			sizeInfo.changed = changed;
 		}
 	});
 }
@@ -98,7 +98,7 @@ export function deployDisplayHandling(): void {
 /**
  * Get a player's window information. This changes twice per second.
  * @param name The player's name.
- * @returns Window resolution and if it has changed.
+ * @returns Window resolution and max formspec size.
  */
 export function getPlayerWindowInfo(name: string): WindowInfo | null {
 	const data = windowSizes.get(name);
@@ -107,3 +107,5 @@ export function getPlayerWindowInfo(name: string): WindowInfo | null {
 	}
 	return data;
 }
+
+type windowChangeFunction = (player: ObjectRef, windowInfo: WindowInfo) => void;
