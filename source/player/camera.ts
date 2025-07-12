@@ -43,6 +43,23 @@ whenPlayerJoins((player) => {
 	setUpCamera(player);
 });
 
+export class Camera {
+	yaw: number = 0;
+	pitch: number = math.pi / 2.0;
+	zoom: number = 1;
+	outputPosition: Vec3 = new Vec3();
+	changed: boolean = true;
+
+	calculate(): void {
+		// Nothing to do.
+		if (!this.changed) {
+			return;
+		}
+
+		// todo: camera output position calculation.
+	}
+}
+
 /**
  * Tree-shake removal function.
  *
