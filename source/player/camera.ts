@@ -39,8 +39,13 @@ function setUpCamera(player: ObjectRef): void {
 	});
 }
 
-export function deployCameraHandling(): void {
-	whenPlayerJoins((player) => {
-		setUpCamera(player);
-	});
-}
+whenPlayerJoins((player) => {
+	setUpCamera(player);
+});
+
+/**
+ * Tree-shake removal function.
+ *
+ * Never use this!
+ */
+export function deployCameraHandling(): void {}
