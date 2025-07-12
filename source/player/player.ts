@@ -138,6 +138,7 @@ afterPlayerJoins((ltPlayer) => {
 	}
 });
 
+//! Debugging.
 registerClientTickFunction((player) => {
 	const name = player.get_player_name();
 	const pData = players.get(name);
@@ -145,7 +146,7 @@ registerClientTickFunction((player) => {
 		return;
 	}
 
-	pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
+	// pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
 });
 
 registerClientTickFunction((player) => {
