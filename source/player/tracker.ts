@@ -4,59 +4,57 @@ const playerList: ObjectRef[] = [];
 const playerMap = new Map<string, ObjectRef>();
 const nameList: string[] = [];
 
-export function deployTracker(): void {
-	core.register_on_joinplayer((player: ObjectRef) => {
-		playerList.push(player);
-		playerMap.set(player.get_player_name(), player);
-		nameList.push(player.get_player_name());
-	});
+core.register_on_joinplayer((player: ObjectRef) => {
+	playerList.push(player);
+	playerMap.set(player.get_player_name(), player);
+	nameList.push(player.get_player_name());
+});
 
-	core.register_on_leaveplayer((player: ObjectRef) => {
-		playerMap.delete(player.get_player_name());
-		{
-			let found = false;
-			let index = 0;
-			for (const p of playerList) {
-				if (p == player) {
-					found = true;
-					break;
-				}
-				index++;
+core.register_on_leaveplayer((player: ObjectRef) => {
+	playerMap.delete(player.get_player_name());
+	{
+		let found = false;
+		let index = 0;
+		for (const p of playerList) {
+			if (p == player) {
+				found = true;
+				break;
 			}
-			// If this is ever hit, I accidentally found a bug in the engine.
-			if (!found) {
-				core.log(
-					LogLevel.error,
-					`Player ${player.get_player_name()} is a ghost player now. Please report this issue. [1]`
-				);
-			} else {
-				delete playerList[index];
-			}
+			index++;
 		}
-		{
-			const name = player.get_player_name();
+		// If this is ever hit, I accidentally found a bug in the engine.
+		if (!found) {
+			core.log(
+				LogLevel.error,
+				`Player ${player.get_player_name()} is a ghost player now. Please report this issue. [1]`
+			);
+		} else {
+			delete playerList[index];
+		}
+	}
+	{
+		const name = player.get_player_name();
 
-			let found = false;
-			let index = 0;
-			for (const n of nameList) {
-				if (n == name) {
-					found = true;
-					break;
-				}
-				index++;
+		let found = false;
+		let index = 0;
+		for (const n of nameList) {
+			if (n == name) {
+				found = true;
+				break;
 			}
-			if (!found) {
-				core.log(
-					LogLevel.error,
-					`Player ${name} is a ghost player for now. Please report this issue. [2]`
-				);
-				return;
-			} else {
-				delete nameList[index];
-			}
+			index++;
 		}
-	});
-}
+		if (!found) {
+			core.log(
+				LogLevel.error,
+				`Player ${name} is a ghost player for now. Please report this issue. [2]`
+			);
+			return;
+		} else {
+			delete nameList[index];
+		}
+	}
+});
 
 /**
  * Gets all players currently online.
@@ -82,3 +80,10 @@ export function getPlayer(name: string): ObjectRef | null {
 export function getAllPlayerNames(): readonly string[] {
 	return nameList;
 }
+
+/**
+ * Tree-shake removal function.
+ *
+ * Never use this!
+ */
+export function deployTracker(): void {}
