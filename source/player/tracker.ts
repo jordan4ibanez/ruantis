@@ -86,4 +86,4 @@ export function getAllPlayerNames(): readonly string[] {
  *
  * Never use this!
  */
-export function deployTracker(): void {}
+export function deployPlayerTracker(): void {}
