@@ -1680,7 +1680,7 @@ declare global {
 		[id in K]?: V;
 	};
 
-	/** @noSelf **/ interface PlayerControlObject
+	/** @noSelf **/ interface LTPlayerControlObject
 		extends Dictionary<string, boolean | number> {
 		up: boolean;
 		down: boolean;
@@ -2436,7 +2436,7 @@ declare global {
 		get_inventory_formspec(): string;
 		set_formspec_prepend(formSpec: string): void;
 		get_formspec_prepend(): string;
-		get_player_control(): PlayerControlObject;
+		get_player_control(): LTPlayerControlObject;
 		get_player_control_bits(): number;
 		set_physics_override(override: PhysicsOverride): void;
 		get_physics_override(): PhysicsOverride;
