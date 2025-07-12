@@ -3,11 +3,6 @@ import { getUUID } from "../utility/uuid";
 
 import { whenPlayerJoins, whenPlayerLeaves } from "./player";
 
-export function deployTickTimer(): void {
-	core.register_globalstep(tick);
-	deployTargetedFunctionLogic();
-}
-
 //? Forever functions.
 
 type clientTickFunctionType = (player: ObjectRef, delta: number) => void;
@@ -84,23 +79,21 @@ const temporaryTargetedServerTickFunctions = new Map<
 	Map<number, temporaryTargetedServerTickFunctionType>
 >();
 
-function deployTargetedFunctionLogic(): void {
-	whenPlayerJoins((player) => {
-		temporaryTargetedClientTickFunctions.set(
-			player.get_player_name(),
-			new Map<number, temporaryTargetedClientTickFunctionType>()
-		);
-		temporaryTargetedServerTickFunctions.set(
-			player.get_player_name(),
-			new Map<number, temporaryTargetedServerTickFunctionType>()
-		);
-	});
+whenPlayerJoins((player) => {
+	temporaryTargetedClientTickFunctions.set(
+		player.get_player_name(),
+		new Map<number, temporaryTargetedClientTickFunctionType>()
+	);
+	temporaryTargetedServerTickFunctions.set(
+		player.get_player_name(),
+		new Map<number, temporaryTargetedServerTickFunctionType>()
+	);
+});
 
-	whenPlayerLeaves((player) => {
-		temporaryTargetedClientTickFunctions.delete(player.get_player_name());
-		temporaryTargetedServerTickFunctions.delete(player.get_player_name());
-	});
-}
+whenPlayerLeaves((player) => {
+	temporaryTargetedClientTickFunctions.delete(player.get_player_name());
+	temporaryTargetedServerTickFunctions.delete(player.get_player_name());
+});
 
 /**
  * Register a temporary client tick function targeted at a player. (smoother)
@@ -244,3 +237,11 @@ function tick(delta: number): void {
 		}
 	}
 }
+
+/**
+ * Tree-shake removal function.
+ *
+ * Never use this!
+ */
+export function deployTickTimer(): void {}
+core.register_globalstep(tick);
