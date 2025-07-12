@@ -15,52 +15,49 @@ export class WindowInfo {
 
 const windowSizes = new Map<string, WindowInfo>();
 
-export function deployWindowHandling(): void {
-	function createPlayerWindowData(player: ObjectRef): WindowInfo {
-		const name = player.get_player_name();
-		const newData =
-			windowSizes.set(name, new WindowInfo()).get(name) || null;
-		if (newData == null) {
-			throw new Error("Failed to create player window data.");
-		}
-		return newData;
+function createPlayerWindowData(player: ObjectRef): WindowInfo {
+	const name = player.get_player_name();
+	const newData = windowSizes.set(name, new WindowInfo()).get(name) || null;
+	if (newData == null) {
+		throw new Error("Failed to create player window data.");
 	}
+	return newData;
+}
 
-	whenPlayerLeaves((player) => {
-		windowSizes.delete(player.get_player_name());
-	});
+whenPlayerLeaves((player) => {
+	windowSizes.delete(player.get_player_name());
+});
 
-	registerServerTickFunction(() => {
-		for (const player of getAllPlayers()) {
-			const name = player.get_player_name();
+registerServerTickFunction(() => {
+	for (const player of getAllPlayers()) {
+		const name = player.get_player_name();
 
-			const sizeInfo =
-				windowSizes.get(player.get_player_name()) ||
-				createPlayerWindowData(player);
+		const sizeInfo =
+			windowSizes.get(player.get_player_name()) ||
+			createPlayerWindowData(player);
 
-			const __rawWindowInfo = prototype__winInfoGet(name);
+		const __rawWindowInfo = prototype__winInfoGet(name);
 
-			// Player's window info has not been submitted by the client.
-			// If this starts hitting null randomly there is probably an issue with the client.
-			if (__rawWindowInfo == null) {
-				continue;
-			}
+		// Player's window info has not been submitted by the client.
+		// If this starts hitting null randomly there is probably an issue with the client.
+		if (__rawWindowInfo == null) {
+			continue;
+		}
 
-			const changed =
-				!sizeInfo.size.equals(__rawWindowInfo.size) ||
-				sizeInfo.guiScale != __rawWindowInfo.real_gui_scaling;
+		const changed =
+			!sizeInfo.size.equals(__rawWindowInfo.size) ||
+			sizeInfo.guiScale != __rawWindowInfo.real_gui_scaling;
 
-			if (changed) {
-				sizeInfo.size.copyFrom(__rawWindowInfo.size);
-				sizeInfo.guiScale = __rawWindowInfo.real_gui_scaling;
+		if (changed) {
+			sizeInfo.size.copyFrom(__rawWindowInfo.size);
+			sizeInfo.guiScale = __rawWindowInfo.real_gui_scaling;
 
-				for (const func of windowChangeFuncs) {
-					func(player, sizeInfo);
-				}
+			for (const func of windowChangeFuncs) {
+				func(player, sizeInfo);
 			}
 		}
-	});
-}
+	}
+});
 
 /**
  * Get a player's window information. This changes twice per second.
@@ -88,3 +85,10 @@ export function registerWindowSizeChangeFunction(
 ): void {
 	windowChangeFuncs.push(func);
 }
+
+/**
+ * Tree-shake removal function.
+ *
+ * Never use this!
+ */
+export function deployWindowHandling(): void {}
