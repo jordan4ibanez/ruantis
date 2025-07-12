@@ -61,8 +61,11 @@ class Player {
 	}
 
 	setPosition(pos: Vec3): void {
+		print(pos);
+		this.visualEntity?.add_pos(
+			new Vec3().copyFrom(pos).subtractImmutable(this.position)
+		);
 		this.position.copyFrom(pos);
-		this.visualEntity?.move_to(this.position, true);
 	}
 
 	getPosition(): Vec3 {
@@ -135,15 +138,14 @@ afterPlayerJoins((ltPlayer) => {
 	}
 });
 
-registerServerTickFunction(() => {
-	for (const name of getAllPlayerNames()) {
-		const pData = players.get(name);
-		if (pData == null) {
-			continue;
-		}
-
-		pData.setPosition(pData.getPosition().addImmutable(new Vec3(1, 0, 0)));
+registerClientTickFunction((player) => {
+	const name = player.get_player_name();
+	const pData = players.get(name);
+	if (pData == null) {
+		return;
 	}
+
+	pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
 });
 
 registerClientTickFunction((player) => {
