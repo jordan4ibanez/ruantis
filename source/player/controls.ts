@@ -3,14 +3,23 @@ import { registerClientTickFunction } from "../logic/tick";
 
 class Controls {
 	/** Held down. */
-	leftDown: boolean = false;
+	readonly leftDown: boolean = false;
 	/** Held down. */
-	rightDown: boolean = false;
+	readonly rightDown: boolean = false;
 
 	/** Single press. */
-	leftPressed: boolean = false;
+	readonly leftPressed: boolean = false;
 	/** Single press. */
-	rightPressed: boolean = false;
+	readonly rightPressed: boolean = false;
+
+	update(rawControl: LTPlayerControlObject) {
+		let leftWasPressed = this.leftDown;
+		let rightWasPressed = this.rightDown;
+		(this.leftDown as boolean) = rawControl.left;
+		(this.rightDown as boolean) = rawControl.right;
+		(this.leftPressed as boolean) = !leftWasPressed && this.leftDown;
+		(this.rightPressed as boolean) = !rightWasPressed && this.rightDown;
+	}
 }
 
 const controlMap = new Map<string, Controls>();
@@ -25,14 +34,22 @@ whenPlayerLeaves((player) => {
 
 registerClientTickFunction((player) => {
 	const name = player.get_player_name();
-	const rawControl = player.get_player_control();
-
 	const data = controlMap.get(name);
-
 	if (data == null) {
 		throw new Error(`Player ${name} was never given a controls object.`);
 	}
-
-	data.leftDown = rawControl.left;
-	data.rightDown = rawControl.right;
+	data.update(player.get_player_control());
 });
+
+/**
+ * Get player control inputs.
+ * @param name Player name.
+ * @returns Player Control object.
+ */
+export function getControls(name: string): Controls {
+	const data = controlMap.get(name);
+	if (data == null) {
+		throw new Error(`Player ${name} has no controls object.`);
+	}
+	return data;
+}
