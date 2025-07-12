@@ -126,22 +126,11 @@ afterPlayerJoins((ltPlayer) => {
 	// const cameraPitch = -math.pi / 2;
 	// const zoom = 1;
 
-	for (const x of $range(-10, 10)) {
-		for (const z of $range(-10, 10)) {
-			core.set_node(new Vec3(x, 0, z), { name: "debug" });
-		}
-	}
-});
-
-//! Debugging.
-registerClientTickFunction((player) => {
-	const name = player.get_player_name();
-	const pData = players.get(name);
-	if (pData == null) {
-		return;
-	}
-
-	// pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
+	// for (const x of $range(-10, 10)) {
+	// 	for (const z of $range(-10, 10)) {
+	// 		core.set_node(new Vec3(x, 0, z), { name: "debug" });
+	// 	}
+	// }
 });
 
 registerClientTickFunction((player) => {
@@ -155,6 +144,8 @@ registerClientTickFunction((player) => {
 	}
 
 	pData.recalculateCamera();
+
+	// pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
 });
 
 /**
