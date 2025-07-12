@@ -1,4 +1,4 @@
-import { afterPlayerJoins, whenPlayerJoins } from "../logic/player";
+import { afterPlayerJoins, whenPlayerJoins } from "../logic/player_join_leave";
 import {
 	registerClientTickFunction,
 	registerServerTickFunction,

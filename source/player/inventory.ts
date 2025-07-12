@@ -1,4 +1,4 @@
-import { afterPlayerJoins, whenPlayerJoins } from "../logic/player";
+import { afterPlayerJoins, whenPlayerJoins } from "../logic/player_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";

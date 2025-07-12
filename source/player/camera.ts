@@ -1,4 +1,4 @@
-import { whenPlayerJoins } from "../logic/player";
+import { whenPlayerJoins } from "../logic/player_join_leave";
 import { CameraModeType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 
