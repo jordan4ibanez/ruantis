@@ -7,6 +7,7 @@ import { getDatabase } from "../utility/database";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
+import { Camera } from "./camera";
 import { getAllPlayerNames, getPlayer } from "./tracker";
 
 //! In case it's not obvioius, this is a debugging entity.
@@ -51,7 +52,7 @@ class Player {
 	private name: string;
 	private ltPlayer: ObjectRef;
 	private position: Vec3 = new Vec3();
-	private cameraPosition: Vec3 = new Vec3();
+	private camera: Camera = new Camera();
 	private visualEntity: ObjectRef | null = null;
 
 	constructor(ltPlayer: ObjectRef) {
@@ -72,24 +73,18 @@ class Player {
 		return this.position.clone();
 	}
 
-	moveCamera(): void {
+	recalculateCamera(): void {
 		if (this.ltPlayer == null) {
 			throw new Error(
 				`Object for player ${this.name} was not cleaned up.`
 			);
 		}
 
-		// This is a random hardcode for now.
-
-		this.cameraPosition.x = this.position.x + 3;
-		this.cameraPosition.y = this.position.y + 6;
-		this.cameraPosition.z = this.position.z + 3;
-
 		this.ltPlayer.add_pos(
-			this.cameraPosition.subtractImmutable(this.ltPlayer.get_pos())
+			this.camera.outputPosition.subtractImmutable(
+				this.ltPlayer.get_pos()
+			)
 		);
-
-		// player.move_to(this.cameraPosition);
 	}
 
 	getEntity(): ObjectRef {
@@ -159,7 +154,7 @@ registerClientTickFunction((player) => {
 		return;
 	}
 
-	pData.moveCamera();
+	pData.recalculateCamera();
 });
 
 /**
