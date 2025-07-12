@@ -48,10 +48,11 @@ export class Vec3 implements ShallowVector3 {
 		return output;
 	}
 
-	copyFrom(other: ShallowVector3): void {
+	copyFrom(other: ShallowVector3): Vec3 {
 		this.x = other.x;
 		this.y = other.y;
 		this.z = other.z;
+		return this;
 	}
 
 	randomize(
@@ -131,9 +132,10 @@ export class Vec2 implements ShallowVector2 {
 		return output;
 	}
 
-	copyFrom(other: ShallowVector2): void {
+	copyFrom(other: ShallowVector2): Vec2 {
 		this.x = other.x;
 		this.y = other.y;
+		return this;
 	}
 
 	randomize(minX: number, maxX: number, minY: number, maxY: number): Vec2 {
