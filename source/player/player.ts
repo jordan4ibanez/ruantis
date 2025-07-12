@@ -6,7 +6,6 @@ import {
 import { getDatabase } from "../utility/database";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
-import { getMeta } from "../utility/metadata";
 import { Vec3 } from "../utility/vector";
 import { getAllPlayerNames, getPlayer } from "./tracker";
 
@@ -113,53 +112,56 @@ class Player {
 
 const players = new Map<string, Player>();
 
-export function deployPlayerEntity(): void {
-	afterPlayerJoins((ltPlayer) => {
-		// todo: get from database.
-		// getDatabase()
+afterPlayerJoins((ltPlayer) => {
+	// todo: get from database.
+	// getDatabase()
 
-		const name = ltPlayer.get_player_name();
-		const pData = new Player(ltPlayer);
+	const name = ltPlayer.get_player_name();
+	const pData = new Player(ltPlayer);
 
-		pData.setPosition(new Vec3(0, 1, 0));
+	pData.setPosition(new Vec3(0, 1, 0));
 
-		players.set(name, pData);
+	players.set(name, pData);
 
-		// Then the camera would be treated like a yaw and pitch, along with zoom.
-		// const cameraYaw = 0;
-		// const cameraPitch = -math.pi / 2;
-		// const zoom = 1;
+	// Then the camera would be treated like a yaw and pitch, along with zoom.
+	// const cameraYaw = 0;
+	// const cameraPitch = -math.pi / 2;
+	// const zoom = 1;
 
-		for (const x of $range(-10, 10)) {
-			for (const z of $range(-10, 10)) {
-				core.set_node(new Vec3(x, 0, z), { name: "debug" });
-			}
+	for (const x of $range(-10, 10)) {
+		for (const z of $range(-10, 10)) {
+			core.set_node(new Vec3(x, 0, z), { name: "debug" });
 		}
-	});
+	}
+});
 
-	registerServerTickFunction(() => {
-		for (const name of getAllPlayerNames()) {
-			const pData = players.get(name);
-			if (pData == null) {
-				continue;
-			}
-
-			pData.setPosition(
-				pData.getPosition().addImmutable(new Vec3(1, 0, 0))
-			);
-		}
-	});
-
-	registerClientTickFunction((player) => {
-		const name = player.get_player_name();
-
+registerServerTickFunction(() => {
+	for (const name of getAllPlayerNames()) {
 		const pData = players.get(name);
-
-		// Player might be one tick late.
 		if (pData == null) {
-			return;
+			continue;
 		}
 
-		pData.moveCamera();
-	});
-}
+		pData.setPosition(pData.getPosition().addImmutable(new Vec3(1, 0, 0)));
+	}
+});
+
+registerClientTickFunction((player) => {
+	const name = player.get_player_name();
+
+	const pData = players.get(name);
+
+	// Player might be one tick late.
+	if (pData == null) {
+		return;
+	}
+
+	pData.moveCamera();
+});
+
+/**
+ * Tree-shake removal function.
+ *
+ * Never use this!
+ */
+export function deployPlayerEntity(): void {}
