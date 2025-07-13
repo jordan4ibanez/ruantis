@@ -132,7 +132,10 @@ registerClientTickFunction((player) => {
 		return;
 	}
 
-	pData.setPosition(pData.getPosition().add(new Vec3(0.1, 0.0)));
+	if (player.get_player_control().jump) {
+		pData.setPosition(pData.getPosition().add(new Vec3(0.1, 0.0)));
+	}
+
 	pData.doCameraControls(getControls(name));
 
 	// pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
