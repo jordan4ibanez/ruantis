@@ -124,6 +124,9 @@ export class Vec3 implements ShallowVector3 {
 		return this.x == other.x && this.y == other.y && this.z == other.z;
 	}
 
+	length(): number {
+		return math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+	}
 	/**
 	 * Set the vector to a yaw.
 	 * @param yaw The yaw in radians.
