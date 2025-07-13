@@ -162,17 +162,55 @@ export class Vec2 implements ShallowVector2 {
 		this.y = y;
 	}
 
-	addImmutable(other: ShallowVector3): Vec2 {
+	add(other: ShallowVector2): Vec2 {
+		this.x = this.x + other.x;
+		this.y = this.y + other.y;
+		return this;
+	}
+
+	addImmutable(other: ShallowVector2): Vec2 {
 		const output = new Vec2();
 		output.x = this.x + other.x;
 		output.y = this.y + other.y;
 		return output;
 	}
 
+	subtract(other: ShallowVector2): Vec2 {
+		this.x = this.x - other.x;
+		this.y = this.y - other.y;
+		return this;
+	}
+
 	subtractImmutable(other: ShallowVector2): Vec2 {
 		const output = new Vec2();
 		output.x = this.x - other.x;
 		output.y = this.y - other.y;
+		return output;
+	}
+
+	divide(other: ShallowVector2): Vec2 {
+		this.x = this.x / other.x;
+		this.y = this.y / other.y;
+		return this;
+	}
+
+	divideImmutable(other: ShallowVector2): Vec2 {
+		const output = new Vec2();
+		output.x = this.x / other.x;
+		output.y = this.y / other.y;
+		return output;
+	}
+
+	multiply(other: ShallowVector2): Vec2 {
+		this.x = this.x * other.x;
+		this.y = this.y * other.y;
+		return this;
+	}
+
+	multiplyImmutable(other: ShallowVector2): Vec2 {
+		const output = new Vec2();
+		output.x = this.x * other.x;
+		output.y = this.y * other.y;
 		return output;
 	}
 
