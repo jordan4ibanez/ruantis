@@ -75,7 +75,7 @@ class Player {
 	}
 
 	doCameraControls(control: Controls): void {
-		this.camera.doControls(control, this.ltPlayer);
+		this.camera.doControls(control, this.ltPlayer, this.position);
 	}
 
 	getEntity(): ObjectRef {
