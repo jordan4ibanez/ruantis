@@ -3,9 +3,9 @@ import { registerClientTickFunction } from "../logic/tick";
 
 export class Controls {
 	/** Held down. */
-	readonly leftDown: boolean = false;
+	readonly leftHeld: boolean = false;
 	/** Held down. */
-	readonly rightDown: boolean = false;
+	readonly rightHeld: boolean = false;
 
 	/** Single press. */
 	readonly leftPressed: boolean = false;
@@ -13,19 +13,19 @@ export class Controls {
 	readonly rightPressed: boolean = false;
 
 	/** Held down. */
-	readonly upDown: boolean = false;
+	readonly upHeld: boolean = false;
 	/** Held down. */
-	readonly downDown: boolean = false;
+	readonly downHeld: boolean = false;
 
 	update(rawControl: LTPlayerControlObject) {
-		let leftWasPressed = this.leftDown;
-		let rightWasPressed = this.rightDown;
-		(this.leftDown as boolean) = rawControl.left;
-		(this.rightDown as boolean) = rawControl.right;
-		(this.upDown as boolean) = rawControl.up;
-		(this.downDown as boolean) = rawControl.down;
-		(this.leftPressed as boolean) = !leftWasPressed && this.leftDown;
-		(this.rightPressed as boolean) = !rightWasPressed && this.rightDown;
+		let leftWasPressed = this.leftHeld;
+		let rightWasPressed = this.rightHeld;
+		(this.leftHeld as boolean) = rawControl.left;
+		(this.rightHeld as boolean) = rawControl.right;
+		(this.upHeld as boolean) = rawControl.up;
+		(this.downHeld as boolean) = rawControl.down;
+		(this.leftPressed as boolean) = !leftWasPressed && this.leftHeld;
+		(this.rightPressed as boolean) = !rightWasPressed && this.rightHeld;
 	}
 }
 
