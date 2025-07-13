@@ -77,9 +77,9 @@ export class Camera {
 		}
 
 		if (control.upHeld) {
-			this.pitch += 0.05;
+			this.pitch += 0.025;
 		} else if (control.downHeld) {
-			this.pitch -= 0.05;
+			this.pitch -= 0.025;
 		}
 
 		if (this.yaw < -math.pi) {
