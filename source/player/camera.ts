@@ -63,11 +63,18 @@ export class Camera {
 		}
 		this.changed = false;
 
-		const dir = new Vec3().fromYaw(this.yaw);
+		if (control.leftDown) {
+			this.yaw -= 0.01;
+		} else if (control.rightDown) {
+			this.yaw += 0.01;
+		}
 
-		print("camera update");
-
-		// todo: camera output position calculation.
+		// Todo: the vector library needs a scalar.
+		this.outputPosition
+			.set(this.pitch, this.yaw, 0)
+			.toDirection()
+			.multiply(new Vec3(10, 10, 10))
+			.add(playerPos);
 
 		const output = this.outputPosition.subtractImmutable(
 			ltPlayer.get_pos()
