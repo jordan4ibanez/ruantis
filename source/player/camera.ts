@@ -46,12 +46,12 @@ whenPlayerJoins((player) => {
 
 export class Camera {
 	private yaw: number = 0;
-	private pitch: number = math.pi / 2.0;
+	private pitch: number = 0;
 	private zoom: number = 1;
 	private outputPosition: Vec3 = new Vec3();
 	private changed: boolean = true;
 
-	doControls(control: Controls, ltPlayer: ObjectRef): void {
+	doControls(control: Controls, ltPlayer: ObjectRef, playerPos: Vec3): void {
 		if (control.leftDown || control.rightDown) {
 			// todo: also needs pitch controls and zoom
 			this.changed = true;
@@ -63,11 +63,20 @@ export class Camera {
 		}
 		this.changed = false;
 
+		const dir = new Vec3().fromYaw(this.yaw);
+
+		print("camera update");
+
 		// todo: camera output position calculation.
 
-		ltPlayer.add_pos(
-			this.outputPosition.subtractImmutable(ltPlayer.get_pos())
+		const output = this.outputPosition.subtractImmutable(
+			ltPlayer.get_pos()
 		);
+
+		//! This is debug.
+		print(output.addImmutable(ltPlayer.get_pos()));
+
+		ltPlayer.add_pos(output);
 	}
 }
 
