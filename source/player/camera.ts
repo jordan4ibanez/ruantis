@@ -59,6 +59,7 @@ export class Camera {
 	}
 
 	doControls(control: Controls, ltPlayer: ObjectRef, playerPos: Vec3): void {
+		let reCalculateRotation = false;
 		if (
 			control.leftHeld ||
 			control.rightHeld ||
@@ -67,6 +68,7 @@ export class Camera {
 		) {
 			// todo: also needs pitch controls and zoom
 			this.changed = true;
+			reCalculateRotation = true;
 		}
 
 		// Nothing to do.
@@ -75,33 +77,35 @@ export class Camera {
 		}
 		this.changed = false;
 
-		// Camera controls.
-		if (control.leftHeld) {
-			this.yaw += 0.05;
-		} else if (control.rightHeld) {
-			this.yaw -= 0.05;
-		}
-		if (control.upHeld) {
-			this.pitch += 0.025;
-		} else if (control.downHeld) {
-			this.pitch -= 0.025;
-		}
+		if (reCalculateRotation) {
+			// Camera controls.
+			if (control.leftHeld) {
+				this.yaw += 0.05;
+			} else if (control.rightHeld) {
+				this.yaw -= 0.05;
+			}
+			if (control.upHeld) {
+				this.pitch += 0.025;
+			} else if (control.downHeld) {
+				this.pitch -= 0.025;
+			}
 
-		// Camera limiters.
-		if (this.yaw < -math.pi) {
-			this.yaw += doublePi;
-		} else if (this.yaw > math.pi) {
-			this.yaw -= doublePi;
-		}
-		if (this.pitch < 0.4) {
-			this.pitch = 0.4;
-		} else if (this.pitch > 1.2) {
-			this.pitch = 1.2;
-		}
+			// Camera limiters.
+			if (this.yaw < -math.pi) {
+				this.yaw += doublePi;
+			} else if (this.yaw > math.pi) {
+				this.yaw -= doublePi;
+			}
+			if (this.pitch < 0.4) {
+				this.pitch = 0.4;
+			} else if (this.pitch > 1.2) {
+				this.pitch = 1.2;
+			}
 
-		// This focuses the camera on the player so you don't get confused.
-		ltPlayer.set_look_vertical(this.pitch);
-		ltPlayer.set_look_horizontal(-this.yaw + halfPi);
+			// This focuses the camera on the player so you don't get confused.
+			ltPlayer.set_look_vertical(this.pitch);
+			ltPlayer.set_look_horizontal(-this.yaw + halfPi);
+		}
 
 		// Todo: the vector library needs a scalar.
 		this.outputPosition
