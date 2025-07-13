@@ -8,6 +8,7 @@ import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 import { Camera } from "./camera";
+import { Controls, getControls } from "./controls";
 import { getAllPlayerNames, getPlayer } from "./tracker";
 
 //! In case it's not obvioius, this is a debugging entity.
@@ -73,7 +74,7 @@ class Player {
 		return this.position.clone();
 	}
 
-	recalculateCamera(): void {
+	recalculateCamera(control: Controls): void {
 		if (this.ltPlayer == null) {
 			throw new Error(
 				`Object for player ${this.name} was not cleaned up.`
@@ -135,7 +136,6 @@ afterPlayerJoins((ltPlayer) => {
 
 registerClientTickFunction((player) => {
 	const name = player.get_player_name();
-
 	const pData = players.get(name);
 
 	// Player might be one tick late.
@@ -143,7 +143,7 @@ registerClientTickFunction((player) => {
 		return;
 	}
 
-	pData.recalculateCamera();
+	pData.recalculateCamera(getControls(name));
 
 	// pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
 });

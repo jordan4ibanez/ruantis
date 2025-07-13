@@ -1,7 +1,7 @@
 import { whenPlayerJoins, whenPlayerLeaves } from "../logic/player_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
 
-class Controls {
+export class Controls {
 	/** Held down. */
 	readonly leftDown: boolean = false;
 	/** Held down. */
