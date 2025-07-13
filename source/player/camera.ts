@@ -52,7 +52,7 @@ export class Camera {
 	private changed: boolean = true;
 
 	doControls(control: Controls, ltPlayer: ObjectRef, playerPos: Vec3): void {
-		if (control.leftDown || control.rightDown) {
+		if (control.leftHeld || control.rightHeld) {
 			// todo: also needs pitch controls and zoom
 			this.changed = true;
 		}
@@ -63,9 +63,9 @@ export class Camera {
 		}
 		this.changed = false;
 
-		if (control.leftDown) {
+		if (control.leftHeld) {
 			this.yaw -= 0.01;
-		} else if (control.rightDown) {
+		} else if (control.rightHeld) {
 			this.yaw += 0.01;
 		}
 
