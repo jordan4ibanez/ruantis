@@ -54,6 +54,10 @@ export class Camera {
 	private outputPosition: Vec3 = new Vec3();
 	private changed: boolean = true;
 
+	triggerRecalculation(): void {
+		this.changed = true;
+	}
+
 	doControls(control: Controls, ltPlayer: ObjectRef, playerPos: Vec3): void {
 		if (
 			control.leftHeld ||
