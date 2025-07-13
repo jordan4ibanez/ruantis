@@ -12,11 +12,18 @@ export class Controls {
 	/** Single press. */
 	readonly rightPressed: boolean = false;
 
+	/** Held down. */
+	readonly upDown: boolean = false;
+	/** Held down. */
+	readonly downDown: boolean = false;
+
 	update(rawControl: LTPlayerControlObject) {
 		let leftWasPressed = this.leftDown;
 		let rightWasPressed = this.rightDown;
 		(this.leftDown as boolean) = rawControl.left;
 		(this.rightDown as boolean) = rawControl.right;
+		(this.upDown as boolean) = rawControl.up;
+		(this.downDown as boolean) = rawControl.down;
 		(this.leftPressed as boolean) = !leftWasPressed && this.leftDown;
 		(this.rightPressed as boolean) = !rightWasPressed && this.rightDown;
 	}
