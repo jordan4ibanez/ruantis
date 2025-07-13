@@ -20,10 +20,12 @@ export class Controls {
 	update(rawControl: LTPlayerControlObject) {
 		let leftWasPressed = this.leftHeld;
 		let rightWasPressed = this.rightHeld;
+
 		(this.leftHeld as boolean) = rawControl.left;
 		(this.rightHeld as boolean) = rawControl.right;
 		(this.upHeld as boolean) = rawControl.up;
 		(this.downHeld as boolean) = rawControl.down;
+
 		(this.leftPressed as boolean) = !leftWasPressed && this.leftHeld;
 		(this.rightPressed as boolean) = !rightWasPressed && this.rightHeld;
 	}
