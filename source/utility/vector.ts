@@ -62,6 +62,21 @@ export class Vec3 implements ShallowVector3 {
 		return output;
 	}
 
+	divide(other: ShallowVector3): Vec3 {
+		this.x = this.x / other.x;
+		this.y = this.y / other.y;
+		this.z = this.z / other.z;
+		return this;
+	}
+
+	divideImmutable(other: ShallowVector3): Vec3 {
+		const output = new Vec3();
+		output.x = this.x / other.x;
+		output.y = this.y / other.y;
+		output.z = this.z / other.z;
+		return output;
+	}
+
 	copyFrom(other: ShallowVector3): Vec3 {
 		this.x = other.x;
 		this.y = other.y;
