@@ -26,10 +26,11 @@ export class Vec3 implements ShallowVector3 {
 		return output;
 	}
 
-	set(x: number, y: number, z: number): void {
+	set(x: number, y: number, z: number): Vec3 {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		return this;
 	}
 
 	add(other: ShallowVector3): Vec3 {
@@ -127,6 +128,26 @@ export class Vec3 implements ShallowVector3 {
 	length(): number {
 		return math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
 	}
+
+	normalize(): Vec3 {
+		const len = this.length();
+		if (len == 0) {
+			this.set(0, 0, 0);
+		} else {
+			this.divide(new Vec3(len, len, len));
+		}
+		return this;
+	}
+
+	normalizeImmutable(): Vec3 {
+		const len = this.length();
+		if (len == 0) {
+			return new Vec3(0, 0, 0);
+		} else {
+			return new Vec3().copyFrom(this).divide(new Vec3(len, len, len));
+		}
+	}
+
 	/**
 	 * Set the vector to a yaw.
 	 * @param yaw The yaw in radians.
@@ -145,6 +166,58 @@ export class Vec3 implements ShallowVector3 {
 	 */
 	toYaw(): number {
 		return -math.atan2(this.x, this.z);
+	}
+
+	/**
+	 * Convert a direction vector into a rotation vector.
+	 * @returns This as a rotation vector.
+	 */
+	toRotation(): Vec3 {
+		const forward = this.normalizeImmutable();
+		return this.set(
+			math.asin(forward.y),
+			-math.atan2(forward.x, forward.z),
+			0
+		);
+	}
+
+	/**
+	 * Create a new rotation vector from a direction vector.
+	 * @returns A new rotation vector.
+	 */
+	toRotationImmutable(): Vec3 {
+		const forward = this.normalizeImmutable();
+		return new Vec3(
+			math.asin(forward.y),
+			-math.atan2(forward.x, forward.z),
+			0
+		);
+	}
+
+	/**
+	 * Convert a rotation vector into a direction vector.
+	 * @returns This as a direction vector.
+	 */
+	toDirection(): Vec3 {
+		const len = math.cos(this.x);
+		return this.set(
+			len * math.cos(this.y),
+			math.sin(this.x),
+			len * math.sin(-this.y)
+		);
+	}
+
+	/**
+	 * Create a new direction vector from a rotation vector.
+	 * @returns A new direction vector.
+	 */
+	toDirectionImmutable(): Vec3 {
+		const len = math.cos(this.x);
+		return new Vec3(
+			len * math.cos(this.y),
+			math.sin(this.x),
+			len * math.sin(-this.y)
+		);
 	}
 
 	toString(): string {
@@ -180,9 +253,10 @@ export class Vec2 implements ShallowVector2 {
 		return output;
 	}
 
-	set(x: number, y: number): void {
+	set(x: number, y: number): Vec2 {
 		this.x = x;
 		this.y = y;
+		return this;
 	}
 
 	add(other: ShallowVector2): Vec2 {
