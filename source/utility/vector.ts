@@ -32,12 +32,26 @@ export class Vec3 implements ShallowVector3 {
 		this.z = z;
 	}
 
+	add(other: ShallowVector3): Vec3 {
+		this.x = this.x + other.x;
+		this.y = this.y + other.y;
+		this.z = this.z + other.z;
+		return this;
+	}
+
 	addImmutable(other: ShallowVector3): Vec3 {
 		const output = new Vec3();
 		output.x = this.x + other.x;
 		output.y = this.y + other.y;
 		output.z = this.z + other.z;
 		return output;
+	}
+
+	subtract(other: ShallowVector3): Vec3 {
+		this.x = this.x - other.x;
+		this.y = this.y - other.y;
+		this.z = this.z - other.z;
+		return this;
 	}
 
 	subtractImmutable(other: ShallowVector3): Vec3 {
