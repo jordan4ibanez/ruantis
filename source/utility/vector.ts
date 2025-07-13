@@ -124,6 +124,26 @@ export class Vec3 implements ShallowVector3 {
 		return this.x == other.x && this.y == other.y && this.z == other.z;
 	}
 
+	/**
+	 * Set the vector to a yaw.
+	 * @param yaw The yaw in radians.
+	 * @returns This.
+	 */
+	fromYaw(yaw: number): Vec3 {
+		this.x = -math.sin(yaw);
+		this.y = 0;
+		this.z = math.cos(yaw);
+		return this;
+	}
+
+	/**
+	 * Get the yaw of the vector.
+	 * @returns The yaw in radians.
+	 */
+	toYaw(): number {
+		return -math.atan2(this.x, this.z);
+	}
+
 	toString(): string {
 		return (
 			"(" +
