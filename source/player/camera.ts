@@ -1,6 +1,7 @@
 import { whenPlayerJoins } from "../logic/player_join_leave";
 import { CameraModeType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
+import { Controls } from "./controls";
 
 function setUpCamera(player: ObjectRef): void {
 	assert(player.is_player());
@@ -44,19 +45,29 @@ whenPlayerJoins((player) => {
 });
 
 export class Camera {
-	yaw: number = 0;
-	pitch: number = math.pi / 2.0;
-	zoom: number = 1;
-	outputPosition: Vec3 = new Vec3();
-	changed: boolean = true;
+	private yaw: number = 0;
+	private pitch: number = math.pi / 2.0;
+	private zoom: number = 1;
+	private outputPosition: Vec3 = new Vec3();
+	private changed: boolean = true;
 
-	calculate(): void {
+	doControls(control: Controls, ltPlayer: ObjectRef): void {
+		if (control.leftDown || control.rightDown) {
+			// todo: also needs pitch controls and zoom
+			this.changed = true;
+		}
+
 		// Nothing to do.
 		if (!this.changed) {
 			return;
 		}
+		this.changed = false;
 
 		// todo: camera output position calculation.
+
+		ltPlayer.add_pos(
+			this.outputPosition.subtractImmutable(ltPlayer.get_pos())
+		);
 	}
 }
 
