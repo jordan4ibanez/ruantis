@@ -73,8 +73,8 @@ class Player {
 		return this.position.clone();
 	}
 
-	doCameraControls(control: Controls): void {
-		this.camera.doControls(control, this.ltPlayer, this.position);
+	doCameraControls(control: Controls, delta: number): void {
+		this.camera.doControls(control, this.ltPlayer, this.position, delta);
 	}
 
 	getEntity(): ObjectRef {
@@ -130,7 +130,7 @@ afterPlayerJoins((ltPlayer) => {
 	});
 });
 
-registerClientTickFunction((player) => {
+registerClientTickFunction((player, delta) => {
 	const name = player.get_player_name();
 	const pData = players.get(name);
 
@@ -143,7 +143,7 @@ registerClientTickFunction((player) => {
 		pData.setPosition(pData.getPosition().add(new Vec3(0.1, 0.0)));
 	}
 
-	pData.doCameraControls(getControls(name));
+	pData.doCameraControls(getControls(name), delta);
 
 	// pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
 });
