@@ -5,11 +5,10 @@ import {
 } from "../logic/tick";
 import { getDatabase } from "../utility/database";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
-import { EntityVisual } from "../utility/enums";
-import { Vec3 } from "../utility/vector";
+import { EntityVisual, HudElementType } from "../utility/enums";
+import { Vec2, Vec3 } from "../utility/vector";
 import { Camera } from "./camera";
 import { Controls, getControls } from "./controls";
-import { getAllPlayerNames, getPlayer } from "./tracker";
 
 //! In case it's not obvioius, this is a debugging entity.
 class Cuboid extends Entity {
