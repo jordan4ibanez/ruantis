@@ -45,6 +45,7 @@ whenPlayerJoins((player) => {
 });
 
 const doublePi = math.pi * 2;
+const halfPi = math.pi / 2;
 
 export class Camera {
 	private yaw: number = math.pi / 4;
@@ -94,12 +95,17 @@ export class Camera {
 			this.pitch = 1.2;
 		}
 
+		// This focuses the camera on the player so you don't get confused.
+		ltPlayer.set_look_vertical(this.pitch);
+		ltPlayer.set_look_horizontal(-this.yaw + halfPi);
+
 		// Todo: the vector library needs a scalar.
 		this.outputPosition
 			.set(this.pitch, this.yaw, 0)
 			.toDirection()
 			.multiply(new Vec3(10, 10, 10))
-			.add(playerPos);
+			.add(playerPos)
+			.add(new Vec3(0.5, 0.5, 0.5));
 
 		const output = this.outputPosition.subtractImmutable(
 			ltPlayer.get_pos()
