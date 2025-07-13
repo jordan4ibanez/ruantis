@@ -44,15 +44,22 @@ whenPlayerJoins((player) => {
 	setUpCamera(player);
 });
 
+const doublePi = math.pi * 2;
+
 export class Camera {
-	private yaw: number = 0;
-	private pitch: number = 0;
+	private yaw: number = math.pi / 4;
+	private pitch: number = math.pi / 4;
 	private zoom: number = 1;
 	private outputPosition: Vec3 = new Vec3();
 	private changed: boolean = true;
 
 	doControls(control: Controls, ltPlayer: ObjectRef, playerPos: Vec3): void {
-		if (control.leftHeld || control.rightHeld) {
+		if (
+			control.leftHeld ||
+			control.rightHeld ||
+			control.upHeld ||
+			control.downHeld
+		) {
 			// todo: also needs pitch controls and zoom
 			this.changed = true;
 		}
@@ -64,10 +71,24 @@ export class Camera {
 		this.changed = false;
 
 		if (control.leftHeld) {
-			this.yaw -= 0.01;
+			this.yaw += 0.05;
 		} else if (control.rightHeld) {
-			this.yaw += 0.01;
+			this.yaw -= 0.05;
 		}
+
+		if (control.upHeld) {
+			this.pitch += 0.05;
+		} else if (control.downHeld) {
+			this.pitch -= 0.05;
+		}
+
+		if (this.yaw < -math.pi) {
+			this.yaw += doublePi;
+		} else if (this.yaw > math.pi) {
+			this.yaw -= doublePi;
+		}
+
+		print(this.yaw);
 
 		// Todo: the vector library needs a scalar.
 		this.outputPosition
@@ -81,7 +102,7 @@ export class Camera {
 		);
 
 		//! This is debug.
-		print(output.addImmutable(ltPlayer.get_pos()));
+		// print(output.addImmutable(ltPlayer.get_pos()));
 
 		ltPlayer.add_pos(output);
 	}
