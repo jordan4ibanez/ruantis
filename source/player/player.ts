@@ -121,6 +121,13 @@ afterPlayerJoins((ltPlayer) => {
 	// 		core.set_node(new Vec3(x, 0, z), { name: "debug" });
 	// 	}
 	// }
+
+	ltPlayer.hud_add({
+		type: HudElementType.text,
+		text: "Caution: Garbage area. Use caution.",
+		offset: new Vec2(264, 12),
+		position: new Vec2(0, 0),
+	});
 });
 
 registerClientTickFunction((player) => {
