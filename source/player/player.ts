@@ -63,11 +63,11 @@ class Player {
 	}
 
 	setPosition(pos: Vec3): void {
-		print(pos);
 		this.visualEntity?.add_pos(
 			new Vec3().copyFrom(pos).subtractImmutable(this.position)
 		);
 		this.position.copyFrom(pos);
+		this.camera.triggerRecalculation();
 	}
 
 	getPosition(): Vec3 {
