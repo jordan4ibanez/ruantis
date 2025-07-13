@@ -58,7 +58,12 @@ export class Camera {
 		this.changed = true;
 	}
 
-	doControls(control: Controls, ltPlayer: ObjectRef, playerPos: Vec3): void {
+	doControls(
+		control: Controls,
+		ltPlayer: ObjectRef,
+		playerPos: Vec3,
+		delta: number
+	): void {
 		let reCalculateRotation = false;
 		if (
 			control.leftHeld ||
@@ -80,14 +85,14 @@ export class Camera {
 		if (reCalculateRotation) {
 			// Camera controls.
 			if (control.leftHeld) {
-				this.yaw += 0.05;
+				this.yaw += delta * 2;
 			} else if (control.rightHeld) {
-				this.yaw -= 0.05;
+				this.yaw -= delta * 2;
 			}
 			if (control.upHeld) {
-				this.pitch += 0.025;
+				this.pitch += delta;
 			} else if (control.downHeld) {
-				this.pitch -= 0.025;
+				this.pitch -= delta;
 			}
 
 			// Camera limiters.
