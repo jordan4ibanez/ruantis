@@ -74,18 +74,8 @@ class Player {
 		return this.position.clone();
 	}
 
-	recalculateCamera(control: Controls): void {
-		if (this.ltPlayer == null) {
-			throw new Error(
-				`Object for player ${this.name} was not cleaned up.`
-			);
-		}
-
-		this.ltPlayer.add_pos(
-			this.camera.outputPosition.subtractImmutable(
-				this.ltPlayer.get_pos()
-			)
-		);
+	doCameraControls(control: Controls): void {
+		this.camera.doControls(control, this.ltPlayer);
 	}
 
 	getEntity(): ObjectRef {
@@ -143,7 +133,7 @@ registerClientTickFunction((player) => {
 		return;
 	}
 
-	pData.recalculateCamera(getControls(name));
+	pData.doCameraControls(getControls(name));
 
 	// pData.setPosition(pData.getPosition().addImmutable(new Vec3(0.05, 0, 0)));
 });
