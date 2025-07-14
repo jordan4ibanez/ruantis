@@ -83,20 +83,20 @@ const temporaryTargetedServerTickFunctions = new Map<
 	Map<number, temporaryTargetedServerTickFunctionType>
 >();
 
-whenClientJoins((player) => {
+whenClientJoins((client) => {
 	temporaryTargetedClientTickFunctions.set(
-		player.get_player_name(),
+		client.get_player_name(),
 		new Map<number, temporaryTargetedClientTickFunctionType>()
 	);
 	temporaryTargetedServerTickFunctions.set(
-		player.get_player_name(),
+		client.get_player_name(),
 		new Map<number, temporaryTargetedServerTickFunctionType>()
 	);
 });
 
-whenClientLeaves((player) => {
-	temporaryTargetedClientTickFunctions.delete(player.get_player_name());
-	temporaryTargetedServerTickFunctions.delete(player.get_player_name());
+whenClientLeaves((client) => {
+	temporaryTargetedClientTickFunctions.delete(client.get_player_name());
+	temporaryTargetedServerTickFunctions.delete(client.get_player_name());
 });
 
 /**
