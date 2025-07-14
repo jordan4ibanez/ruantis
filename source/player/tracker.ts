@@ -47,7 +47,7 @@ core.register_on_leaveplayer((player: ObjectRef) => {
 		if (!found) {
 			core.log(
 				LogLevel.error,
-				`Player ${name} is a ghost player for now. Please report this issue. [2]`
+				`Client ${name} is a ghost client for now. Please report this issue. [2]`
 			);
 			return;
 		} else {
@@ -57,25 +57,25 @@ core.register_on_leaveplayer((player: ObjectRef) => {
 });
 
 /**
- * Gets all players currently online.
- * @returns All players currently online.
+ * Gets all client currently online.
+ * @returns All client currently online.
  */
 export function getAllClients(): readonly ObjectRef[] {
 	return clientList;
 }
 
 /**
- * Try to get a player by name.
- * @param name The player's name.
- * @returns The player. Or null.
+ * Try to get a client by name.
+ * @param name The client's name.
+ * @returns The client. Or null.
  */
 export function getClient(name: string): ObjectRef | null {
 	return clientMap.get(name) || null;
 }
 
 /**
- * Get all player's names which are currently online.
- * @returns The list of all currently online player names.
+ * Get all client's names which are currently online.
+ * @returns The list of all currently online client names.
  */
 export function getAllClientNames(): readonly string[] {
 	return nameList;
