@@ -4,10 +4,10 @@ const clientList: ObjectRef[] = [];
 const clientMap = new Map<string, ObjectRef>();
 const nameList: string[] = [];
 
-core.register_on_joinplayer((player: ObjectRef) => {
-	clientList.push(player);
-	clientMap.set(player.get_player_name(), player);
-	nameList.push(player.get_player_name());
+core.register_on_joinplayer((client: ObjectRef) => {
+	clientList.push(client);
+	clientMap.set(client.get_player_name(), client);
+	nameList.push(client.get_player_name());
 });
 
 core.register_on_leaveplayer((player: ObjectRef) => {
