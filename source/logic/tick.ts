@@ -1,7 +1,7 @@
 import { getAllClients } from "../player/tracker";
 import { getUUID } from "../utility/uuid";
 
-import { whenPlayerJoins, whenPlayerLeaves } from "./player_join_leave";
+import { whenPlayerJoins, whenPlayerLeaves } from "./client_join_leave";
 
 //? Forever functions.
 
