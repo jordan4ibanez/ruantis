@@ -130,6 +130,8 @@ afterClientJoins((ltPlayer) => {
 	// todo: get from database.
 	// getDatabase()
 
+	//? The client becomes a player.
+
 	const name = ltPlayer.get_player_name();
 	const pData = new Player(ltPlayer);
 
@@ -167,6 +169,15 @@ registerClientTickFunction((player, delta) => {
 
 	pData.doCameraControls(getControls(name), delta);
 });
+
+/**
+ * Get a player.
+ * @param name The player's name.
+ * @returns The player or null.
+ */
+export function getPlayer(name: string): Player | null {
+	return players.get(name) || null;
+}
 
 /**
  * Tree-shake removal function.
