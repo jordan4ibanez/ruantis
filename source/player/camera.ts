@@ -61,7 +61,7 @@ export class Camera {
 
 	doControls(
 		control: Controls,
-		ltPlayer: ObjectRef,
+		client: ObjectRef,
 		playerPos: Vec3,
 		delta: number
 	): void {
@@ -109,8 +109,8 @@ export class Camera {
 			}
 
 			// This focuses the camera on the player so you don't get confused.
-			ltPlayer.set_look_vertical(this.pitch);
-			ltPlayer.set_look_horizontal(-this.yaw + halfPi);
+			client.set_look_vertical(this.pitch);
+			client.set_look_horizontal(-this.yaw + halfPi);
 		}
 
 		// Todo: the vector library needs a scalar.
@@ -121,14 +121,12 @@ export class Camera {
 			.add(playerPos)
 			.add(new Vec3(0.5, 0.5, 0.5));
 
-		const output = this.outputPosition.subtractImmutable(
-			ltPlayer.get_pos()
-		);
+		const output = this.outputPosition.subtractImmutable(client.get_pos());
 
 		//! This is debug.
 		// print(output.addImmutable(ltPlayer.get_pos()));
 
-		ltPlayer.add_pos(output);
+		client.add_pos(output);
 	}
 }
 
