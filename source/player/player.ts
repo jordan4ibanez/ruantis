@@ -107,11 +107,12 @@ class Player {
 	}
 
 	getEntity(): PlayerVisualEntity {
-		const luaEntity = this.getObjectRef().get_luaentity();
-		if (luaEntity == null) {
+		const entity =
+			this.getObjectRef().get_luaentity() as PlayerVisualEntity | null;
+		if (entity == null) {
 			throw new Error(`LuaEntity for player ${this.name} is gone.`);
 		}
-		return luaEntity as PlayerVisualEntity;
+		return entity;
 	}
 }
 
