@@ -16,14 +16,14 @@ whenPlayerLeaves((player) => {
 });
 registerClientTickFunction((player, delta) => {
 	const name = player.get_player_name();
-	let data = clickTimeoutMap.get(name) || 0;
-	if (data > 0) {
-		data -= delta;
-		if (data < 0) {
-			data = 0;
+	let timer = clickTimeoutMap.get(name) || 0;
+	if (timer > 0) {
+		timer -= delta;
+		if (timer < 0) {
+			timer = 0;
 		}
 	}
-	clickTimeoutMap.set(name, data);
+	clickTimeoutMap.set(name, timer);
 });
 // End anti server explosion code.
 
