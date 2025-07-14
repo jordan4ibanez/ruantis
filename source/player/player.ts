@@ -50,11 +50,10 @@ registerEntity(PlayerVisualEntity);
 class Player {
 	private readonly name: string;
 	private readonly ltPlayer: ObjectRef;
-	private readonly visualPosition: Vec3 = new Vec3();
-	
 
 	private readonly camera: Camera = new Camera();
 	private readonly visualEntity: ObjectRef | null = null;
+	private readonly visualPosition: Vec3 = new Vec3();
 
 	constructor(ltPlayer: ObjectRef) {
 		this.name = ltPlayer.get_player_name();
