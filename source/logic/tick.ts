@@ -215,19 +215,19 @@ function tick(delta: number): void {
 
 		//? Temporary targeted.
 
-		for (const player of getAllClients()) {
+		for (const client of getAllClients()) {
 			// This is specific to the player so it must remain in this scope.
 
 			const tFuncs = temporaryTargetedServerTickFunctions.get(
-				player.get_player_name()
+				client.get_player_name()
 			);
 			if (tFuncs == null) {
 				throw new Error(
-					`Player ${player.get_player_name()} was never given a server temp target map.`
+					`Player ${client.get_player_name()} was never given a server temp target map.`
 				);
 			}
 			for (const [id, func] of tFuncs) {
-				if (func(player, delta)) {
+				if (func(client, delta)) {
 					tempTargetedServerDeletionQueue.push(id);
 				}
 			}
