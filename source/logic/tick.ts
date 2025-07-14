@@ -129,7 +129,7 @@ export function registerTargetedTemporaryServerTickFunction(
 	const database = temporaryTargetedServerTickFunctions.get(name);
 	if (database == null) {
 		throw new Error(
-			`Player ${name} was never given a server temp target map.`
+			`Client ${name} was never given a server temp target map.`
 		);
 	}
 	database.set(getUUID(), func);
