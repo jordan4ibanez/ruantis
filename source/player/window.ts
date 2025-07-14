@@ -64,7 +64,7 @@ registerServerTickFunction(() => {
  * @param name The player's name.
  * @returns Window resolution and max formspec size.
  */
-export function getPlayerWindowInfo(name: string): WindowInfo | null {
+export function getClientWindowInfo(name: string): WindowInfo | null {
 	const data = windowSizes.get(name);
 	if (data == null) {
 		return null;
