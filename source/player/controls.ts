@@ -45,20 +45,20 @@ registerClientTickFunction((client) => {
 	const name = client.get_player_name();
 	const data = controlMap.get(name);
 	if (data == null) {
-		throw new Error(`Player ${name} was never given a controls object.`);
+		throw new Error(`Client ${name} was never given a controls object.`);
 	}
 	data.update(client.get_player_control());
 });
 
 /**
- * Get player control inputs.
- * @param name Player name.
- * @returns Player Control object.
+ * Get client control inputs.
+ * @param name Client name.
+ * @returns Control object.
  */
 export function getControls(name: string): Controls {
 	const data = controlMap.get(name);
 	if (data == null) {
-		throw new Error(`Player ${name} has no controls object.`);
+		throw new Error(`Client ${name} has no controls object.`);
 	}
 	return data;
 }
