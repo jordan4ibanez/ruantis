@@ -160,7 +160,7 @@ function tick(delta: number): void {
 		}
 
 		//? Temporary targeted.
-		// This is specific to the player so it must remain in this scope.
+		// This is specific to the client so it must remain in this scope.
 		const tFuncs = temporaryTargetedClientTickFunctions.get(
 			client.get_player_name()
 		);
