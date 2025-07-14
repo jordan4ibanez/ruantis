@@ -10,13 +10,13 @@ core.register_on_joinplayer((client: ObjectRef) => {
 	nameList.push(client.get_player_name());
 });
 
-core.register_on_leaveplayer((player: ObjectRef) => {
-	clientMap.delete(player.get_player_name());
+core.register_on_leaveplayer((client: ObjectRef) => {
+	clientMap.delete(client.get_player_name());
 	{
 		let found = false;
 		let index = 0;
 		for (const p of clientList) {
-			if (p == player) {
+			if (p == client) {
 				found = true;
 				break;
 			}
@@ -26,14 +26,14 @@ core.register_on_leaveplayer((player: ObjectRef) => {
 		if (!found) {
 			core.log(
 				LogLevel.error,
-				`Player ${player.get_player_name()} is a ghost player now. Please report this issue. [1]`
+				`Player ${client.get_player_name()} is a ghost player now. Please report this issue. [1]`
 			);
 		} else {
 			delete clientList[index];
 		}
 	}
 	{
-		const name = player.get_player_name();
+		const name = client.get_player_name();
 
 		let found = false;
 		let index = 0;
