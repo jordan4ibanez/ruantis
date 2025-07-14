@@ -41,8 +41,8 @@ function setUpCamera(client: ObjectRef): void {
 	);
 }
 
-whenClientJoins((player) => {
-	setUpCamera(player);
+whenClientJoins((client) => {
+	setUpCamera(client);
 });
 
 const doublePi = math.pi * 2;
