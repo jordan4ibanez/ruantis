@@ -26,7 +26,7 @@ core.register_on_leaveplayer((client: ObjectRef) => {
 		if (!found) {
 			core.log(
 				LogLevel.error,
-				`Player ${client.get_player_name()} is a ghost player now. Please report this issue. [1]`
+				`Client ${client.get_player_name()} is a ghost client now. Please report this issue. [1]`
 			);
 		} else {
 			delete clientList[index];
