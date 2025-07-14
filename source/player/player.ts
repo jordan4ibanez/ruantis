@@ -52,7 +52,7 @@ class Player {
 	private readonly ltPlayer: ObjectRef;
 
 	private readonly camera: Camera = new Camera();
-	private readonly ____visualEntity: ObjectRef;
+	private readonly ____visualObjectRef: ObjectRef;
 	private readonly visualPosition: Vec3 = new Vec3();
 
 	constructor(ltPlayer: ObjectRef) {
