@@ -33,21 +33,21 @@ export class Controls {
 
 const controlMap = new Map<string, Controls>();
 
-whenClientJoins((player) => {
-	controlMap.set(player.get_player_name(), new Controls());
+whenClientJoins((client) => {
+	controlMap.set(client.get_player_name(), new Controls());
 });
 
-whenClientLeaves((player) => {
-	controlMap.delete(player.get_player_name());
+whenClientLeaves((client) => {
+	controlMap.delete(client.get_player_name());
 });
 
-registerClientTickFunction((player) => {
-	const name = player.get_player_name();
+registerClientTickFunction((client) => {
+	const name = client.get_player_name();
 	const data = controlMap.get(name);
 	if (data == null) {
 		throw new Error(`Player ${name} was never given a controls object.`);
 	}
-	data.update(player.get_player_control());
+	data.update(client.get_player_control());
 });
 
 /**
