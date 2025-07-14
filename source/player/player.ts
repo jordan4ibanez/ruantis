@@ -10,7 +10,6 @@ import { Vec2, Vec3 } from "../utility/vector";
 import { Camera } from "./camera";
 import { Controls, getControls } from "./controls";
 
-//! In case it's not obvioius, this is a debugging entity.
 class PlayerVisualEntity extends Entity {
 	initial_properties: ObjectProperties = {
 		visual: EntityVisual.mesh,
