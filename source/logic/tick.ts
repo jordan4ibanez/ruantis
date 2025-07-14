@@ -100,8 +100,8 @@ whenClientLeaves((client) => {
 });
 
 /**
- * Register a temporary client tick function targeted at a player. (smoother)
- * @param name The player's name.
+ * Register a temporary client tick function targeted at a client. (smoother)
+ * @param name The client's name.
  * @param func A function that returns true when it's completed.
  */
 export function registerTargetedTemporaryClientTickFunction(
@@ -111,15 +111,15 @@ export function registerTargetedTemporaryClientTickFunction(
 	const database = temporaryTargetedClientTickFunctions.get(name);
 	if (database == null) {
 		throw new Error(
-			`Player ${name} was never given a client temp target map.`
+			`Client ${name} was never given a client temp target map.`
 		);
 	}
 	database.set(getUUID(), func);
 }
 
 /**
- * Register a temporary server tick function targeted at a player. (lighter)
- * @param name The player's name.
+ * Register a temporary server tick function targeted at a client. (lighter)
+ * @param name The client's name.
  * @param func A function that returns true when it's completed.
  */
 export function registerTargetedTemporaryServerTickFunction(
