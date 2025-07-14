@@ -11,7 +11,7 @@ import { Camera } from "./camera";
 import { Controls, getControls } from "./controls";
 
 //! In case it's not obvioius, this is a debugging entity.
-class Cuboid extends Entity {
+class PlayerVisualEntity extends Entity {
 	initial_properties: ObjectProperties = {
 		visual: EntityVisual.mesh,
 		mesh: "cube.gltf",
@@ -46,7 +46,7 @@ class Cuboid extends Entity {
 		});
 	}
 }
-registerEntity(Cuboid);
+registerEntity(PlayerVisualEntity);
 
 class Player {
 	private name: string;
@@ -58,7 +58,7 @@ class Player {
 	constructor(ltPlayer: ObjectRef) {
 		this.name = ltPlayer.get_player_name();
 		this.ltPlayer = ltPlayer;
-		this.visualEntity = spawnEntity(this.position, Cuboid);
+		this.visualEntity = spawnEntity(this.position, PlayerVisualEntity);
 	}
 
 	setPosition(pos: Vec3): void {
@@ -79,7 +79,7 @@ class Player {
 
 	getEntity(): ObjectRef {
 		if (this.visualEntity == null) {
-			const newVisual = spawnEntity(this.position, Cuboid);
+			const newVisual = spawnEntity(this.position, PlayerVisualEntity);
 
 			if (newVisual == null || !newVisual.is_valid()) {
 				throw new Error(`Failed to add visual entity to ${this.name}`);
@@ -89,12 +89,12 @@ class Player {
 		return this.visualEntity;
 	}
 
-	getLuaEntity(): Cuboid {
+	getLuaEntity(): PlayerVisualEntity {
 		const luaEntity = this.getEntity().get_luaentity();
 		if (luaEntity == null) {
 			throw new Error(`LuaEntity for player ${this.name} is gone.`);
 		}
-		return luaEntity as Cuboid;
+		return luaEntity as PlayerVisualEntity;
 	}
 }
 
