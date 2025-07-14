@@ -7,16 +7,16 @@ core.override_item("", {
 	range: 100,
 });
 
-function setUpCamera(player: ObjectRef): void {
-	assert(player.is_player());
-	player.hud_set_flags({
+function setUpCamera(client: ObjectRef): void {
+	assert(client.is_player());
+	client.hud_set_flags({
 		hotbar: false,
 		healthbar: false,
 		wielditem: false,
 		breathbar: false,
 		minimap: true,
 	});
-	player.set_physics_override({
+	client.set_physics_override({
 		speed: 1,
 		jump: 0,
 		gravity: 0,
@@ -29,12 +29,12 @@ function setUpCamera(player: ObjectRef): void {
 		acceleration_air: 0,
 		sneak: false,
 	});
-	player.set_camera({ mode: CameraModeType.first });
-	const offset = player.get_properties().eye_height;
+	client.set_camera({ mode: CameraModeType.first });
+	const offset = client.get_properties().eye_height;
 	if (offset == null) {
 		throw new Error("Eye height was null");
 	}
-	player.set_eye_offset(
+	client.set_eye_offset(
 		new Vec3(0, -offset * 10, 0),
 		new Vec3(0, -offset * 10, 0),
 		new Vec3(0, -offset * 10, 0)
