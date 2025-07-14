@@ -50,8 +50,8 @@ registerEntity(PlayerVisualEntity);
 class Player {
 	private name: string;
 	private ltPlayer: ObjectRef;
-
 	private visualPosition: Vec3 = new Vec3();
+	
 
 	private camera: Camera = new Camera();
 	private visualEntity: ObjectRef | null = null;
@@ -59,7 +59,10 @@ class Player {
 	constructor(ltPlayer: ObjectRef) {
 		this.name = ltPlayer.get_player_name();
 		this.ltPlayer = ltPlayer;
-		this.visualEntity = spawnEntity(this.visualPosition, PlayerVisualEntity);
+		this.visualEntity = spawnEntity(
+			this.visualPosition,
+			PlayerVisualEntity
+		);
 	}
 
 	setPosition(pos: Vec3): void {
@@ -75,12 +78,20 @@ class Player {
 	}
 
 	doCameraControls(control: Controls, delta: number): void {
-		this.camera.doControls(control, this.ltPlayer, this.visualPosition, delta);
+		this.camera.doControls(
+			control,
+			this.ltPlayer,
+			this.visualPosition,
+			delta
+		);
 	}
 
 	getEntity(): ObjectRef {
 		if (this.visualEntity == null) {
-			const newVisual = spawnEntity(this.visualPosition, PlayerVisualEntity);
+			const newVisual = spawnEntity(
+				this.visualPosition,
+				PlayerVisualEntity
+			);
 
 			if (newVisual == null || !newVisual.is_valid()) {
 				throw new Error(`Failed to add visual entity to ${this.name}`);
