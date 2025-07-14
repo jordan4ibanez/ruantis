@@ -100,7 +100,8 @@ class Player {
 			if (newVisual == null || !newVisual.is_valid()) {
 				throw new Error(`Failed to add visual entity to ${this.name}`);
 			}
-			this.visualEntity = newVisual;
+			// Cast away the const because this is a facade.
+			(this.visualEntity as ObjectRef) = newVisual;
 		}
 		return this.visualEntity;
 	}
