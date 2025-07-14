@@ -70,7 +70,7 @@ class Player {
 	}
 
 	setPosition(pos: Vec3): void {
-		this.____visualObjectRef?.add_pos(
+		this.getObjectRef().add_pos(
 			new Vec3().copyFrom(pos).subtractImmutable(this.visualPosition)
 		);
 		this.visualPosition.copyFrom(pos);
