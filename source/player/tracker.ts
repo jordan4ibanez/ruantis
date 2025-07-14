@@ -60,7 +60,7 @@ core.register_on_leaveplayer((player: ObjectRef) => {
  * Gets all players currently online.
  * @returns All players currently online.
  */
-export function getAllPlayers(): readonly ObjectRef[] {
+export function getAllClients(): readonly ObjectRef[] {
 	return playerList;
 }
 
@@ -69,7 +69,7 @@ export function getAllPlayers(): readonly ObjectRef[] {
  * @param name The player's name.
  * @returns The player. Or null.
  */
-export function getPlayer(name: string): ObjectRef | null {
+export function getClient(name: string): ObjectRef | null {
 	return playerMap.get(name) || null;
 }
 
@@ -77,7 +77,7 @@ export function getPlayer(name: string): ObjectRef | null {
  * Get all player's names which are currently online.
  * @returns The list of all currently online player names.
  */
-export function getAllPlayerNames(): readonly string[] {
+export function getAllClientNames(): readonly string[] {
 	return nameList;
 }
 
@@ -86,4 +86,4 @@ export function getAllPlayerNames(): readonly string[] {
  *
  * Never use this!
  */
-export function deployPlayerTracker(): void {}
+export function deployClientTracker(): void {}

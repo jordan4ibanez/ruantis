@@ -1,7 +1,7 @@
 import { whenPlayerLeaves } from "../logic/player_join_leave";
 import { registerServerTickFunction } from "../logic/tick";
 import { Vec2 } from "../utility/vector";
-import { getAllPlayers } from "./tracker";
+import { getAllClients } from "./tracker";
 
 const prototype__winInfoGet = core.get_player_window_information;
 
@@ -29,7 +29,7 @@ whenPlayerLeaves((player) => {
 });
 
 registerServerTickFunction(() => {
-	for (const player of getAllPlayers()) {
+	for (const player of getAllClients()) {
 		const name = player.get_player_name();
 
 		const sizeInfo =

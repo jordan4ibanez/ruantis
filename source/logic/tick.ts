@@ -1,4 +1,4 @@
-import { getAllPlayers } from "../player/tracker";
+import { getAllClients } from "../player/tracker";
 import { getUUID } from "../utility/uuid";
 
 import { whenPlayerJoins, whenPlayerLeaves } from "./player_join_leave";
@@ -146,7 +146,7 @@ const tempTargetedServerDeletionQueue: number[] = [];
 function tick(delta: number): void {
 	// Client tick always runs.
 
-	for (const player of getAllPlayers()) {
+	for (const player of getAllClients()) {
 		//? Forever.
 		for (const func of clientFunctions) {
 			func(player, delta);
@@ -215,7 +215,7 @@ function tick(delta: number): void {
 
 		//? Temporary targeted.
 
-		for (const player of getAllPlayers()) {
+		for (const player of getAllClients()) {
 			// This is specific to the player so it must remain in this scope.
 
 			const tFuncs = temporaryTargetedServerTickFunctions.get(
