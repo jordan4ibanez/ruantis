@@ -37,6 +37,12 @@ function tileClick(
 	if (puncher == null) {
 		return;
 	}
+	const name = puncher.get_player_name();
+	const timer = clickTimeoutMap.get(name) || 1;
+	if (timer > 0) {
+		return;
+	}
+
 	if (pointedThing.type != PointedThingType.node) {
 		throw new Error("Logic error.");
 	}
@@ -46,8 +52,6 @@ function tileClick(
 
 	const diff = above.subtractImmutable(below);
 
-	const name = puncher.get_player_name();
-
 	if (!diff.equals(clickCheck)) {
 		core.log(LogLevel.warning, `Player ${name} is clicking under the map.`);
 		return;
@@ -56,6 +60,7 @@ function tileClick(
 	const targetPos = new Vec3().copyFrom(position).add(clickCheck);
 
 	print(targetPos.toString());
+	clickTimeoutMap.set(name, tickRate);
 }
 
 // todo: make this into a ghost tile or something.
