@@ -49,7 +49,7 @@ registerEntity(PlayerVisualEntity);
 
 class Player {
 	private readonly name: string;
-	private readonly ltPlayer: ObjectRef;
+	private readonly client: ObjectRef;
 
 	private readonly currentPosition: Vec3 = new Vec3();
 	private readonly targetPosition: Vec3 = new Vec3();
@@ -59,9 +59,9 @@ class Player {
 	private readonly ____visualObjectRef: ObjectRef;
 	private readonly visualPosition: Vec3 = new Vec3();
 
-	constructor(ltPlayer: ObjectRef) {
-		this.name = ltPlayer.get_player_name();
-		this.ltPlayer = ltPlayer;
+	constructor(client: ObjectRef) {
+		this.name = client.get_player_name();
+		this.client = client;
 		const vObjectRef = spawnEntity(this.visualPosition, PlayerVisualEntity);
 
 		if (vObjectRef == null) {
@@ -92,7 +92,7 @@ class Player {
 	doCameraControls(control: Controls, delta: number): void {
 		this.camera.doControls(
 			control,
-			this.ltPlayer,
+			this.client,
 			this.visualPosition,
 			delta
 		);
