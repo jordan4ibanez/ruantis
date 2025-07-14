@@ -166,7 +166,7 @@ function tick(delta: number): void {
 		);
 		if (tFuncs == null) {
 			throw new Error(
-				`Player ${client.get_player_name()} was never given a client temp target map.`
+				`Client ${client.get_player_name()} was never given a client temp target map.`
 			);
 		}
 		for (const [id, func] of tFuncs) {
