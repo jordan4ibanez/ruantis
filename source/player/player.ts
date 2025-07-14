@@ -66,11 +66,11 @@ class Player {
 			);
 		}
 
-		this.____visualEntity = vEntity;
+		this.____visualObjectRef = vEntity;
 	}
 
 	setPosition(pos: Vec3): void {
-		this.____visualEntity?.add_pos(
+		this.____visualObjectRef?.add_pos(
 			new Vec3().copyFrom(pos).subtractImmutable(this.visualPosition)
 		);
 		this.visualPosition.copyFrom(pos);
@@ -91,7 +91,7 @@ class Player {
 	}
 
 	getObjectRef(): ObjectRef {
-		if (!this.____visualEntity.is_valid()) {
+		if (!this.____visualObjectRef.is_valid()) {
 			const newVisual = spawnEntity(
 				this.visualPosition,
 				PlayerVisualEntity
@@ -101,13 +101,13 @@ class Player {
 				throw new Error(`Failed to add visual entity to ${this.name}`);
 			}
 			// Cast away the const because this is a facade.
-			(this.____visualEntity as ObjectRef) = newVisual;
+			(this.____visualObjectRef as ObjectRef) = newVisual;
 		}
-		return this.____visualEntity;
+		return this.____visualObjectRef;
 	}
 
 	getLuaEntity(): PlayerVisualEntity {
-		const luaEntity = this.getEntity().get_luaentity();
+		const luaEntity = this.getObjectRef().get_luaentity();
 		if (luaEntity == null) {
 			throw new Error(`LuaEntity for player ${this.name} is gone.`);
 		}
