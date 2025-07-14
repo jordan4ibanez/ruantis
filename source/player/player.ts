@@ -90,8 +90,8 @@ class Player {
 		);
 	}
 
-	getEntity(): ObjectRef {
 		if (!this.visualEntity.is_valid()) {
+	getObjectRef(): ObjectRef {
 			const newVisual = spawnEntity(
 				this.visualPosition,
 				PlayerVisualEntity
