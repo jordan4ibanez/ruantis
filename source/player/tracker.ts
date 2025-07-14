@@ -1,21 +1,21 @@
 import { LogLevel } from "../utility/enums";
 
-const playerList: ObjectRef[] = [];
-const playerMap = new Map<string, ObjectRef>();
+const clientList: ObjectRef[] = [];
+const clientMap = new Map<string, ObjectRef>();
 const nameList: string[] = [];
 
 core.register_on_joinplayer((player: ObjectRef) => {
-	playerList.push(player);
-	playerMap.set(player.get_player_name(), player);
+	clientList.push(player);
+	clientMap.set(player.get_player_name(), player);
 	nameList.push(player.get_player_name());
 });
 
 core.register_on_leaveplayer((player: ObjectRef) => {
-	playerMap.delete(player.get_player_name());
+	clientMap.delete(player.get_player_name());
 	{
 		let found = false;
 		let index = 0;
-		for (const p of playerList) {
+		for (const p of clientList) {
 			if (p == player) {
 				found = true;
 				break;
@@ -29,7 +29,7 @@ core.register_on_leaveplayer((player: ObjectRef) => {
 				`Player ${player.get_player_name()} is a ghost player now. Please report this issue. [1]`
 			);
 		} else {
-			delete playerList[index];
+			delete clientList[index];
 		}
 	}
 	{
@@ -61,7 +61,7 @@ core.register_on_leaveplayer((player: ObjectRef) => {
  * @returns All players currently online.
  */
 export function getAllClients(): readonly ObjectRef[] {
-	return playerList;
+	return clientList;
 }
 
 /**
@@ -70,7 +70,7 @@ export function getAllClients(): readonly ObjectRef[] {
  * @returns The player. Or null.
  */
 export function getClient(name: string): ObjectRef | null {
-	return playerMap.get(name) || null;
+	return clientMap.get(name) || null;
 }
 
 /**
