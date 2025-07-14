@@ -4,16 +4,16 @@ const joinFuncs: pFunc[] = [];
 const leaveFuncs: pFunc[] = [];
 
 /**
- * Add a function to run when the player joins the server.
- * @param func Function to run when a player joins the server.
+ * Add a function to run when the client joins the server.
+ * @param func Function to run when a client joins the server.
  */
 export function whenClientJoins(func: pFunc): void {
 	joinFuncs.push(func);
 }
 
 /**
- * Add a function to run when the player leaves the server.
- * @param func Function to run when a player leaves the server.
+ * Add a function to run when the client leaves the server.
+ * @param func Function to run when a client leaves the server.
  */
 export function whenClientLeaves(func: pFunc): void {
 	leaveFuncs.push(func);
@@ -24,8 +24,8 @@ export function whenClientLeaves(func: pFunc): void {
 const afterJoinFuncs: pFunc[] = [];
 
 /**
- * Add a function to run immediately after the player joins the server.
- * @param func Function to run immediately after a player joins the server.
+ * Add a function to run immediately after the client joins the server.
+ * @param func Function to run immediately after a client joins the server.
  */
 export function afterClientJoins(func: pFunc): void {
 	afterJoinFuncs.push(func);
