@@ -1,7 +1,7 @@
 import { getAllClients } from "../player/tracker";
 import { getUUID } from "../utility/uuid";
 
-import { whenPlayerJoins, whenPlayerLeaves } from "./client_join_leave";
+import { whenClientJoins, whenClientLeaves } from "./client_join_leave";
 
 //? Forever functions.
 
@@ -83,7 +83,7 @@ const temporaryTargetedServerTickFunctions = new Map<
 	Map<number, temporaryTargetedServerTickFunctionType>
 >();
 
-whenPlayerJoins((player) => {
+whenClientJoins((player) => {
 	temporaryTargetedClientTickFunctions.set(
 		player.get_player_name(),
 		new Map<number, temporaryTargetedClientTickFunctionType>()
@@ -94,7 +94,7 @@ whenPlayerJoins((player) => {
 	);
 });
 
-whenPlayerLeaves((player) => {
+whenClientLeaves((player) => {
 	temporaryTargetedClientTickFunctions.delete(player.get_player_name());
 	temporaryTargetedServerTickFunctions.delete(player.get_player_name());
 });

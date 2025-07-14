@@ -1,4 +1,4 @@
-import { whenPlayerJoins, whenPlayerLeaves } from "../logic/client_join_leave";
+import { whenClientJoins, whenClientLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
 
 export class Controls {
@@ -33,11 +33,11 @@ export class Controls {
 
 const controlMap = new Map<string, Controls>();
 
-whenPlayerJoins((player) => {
+whenClientJoins((player) => {
 	controlMap.set(player.get_player_name(), new Controls());
 });
 
-whenPlayerLeaves((player) => {
+whenClientLeaves((player) => {
 	controlMap.delete(player.get_player_name());
 });
 

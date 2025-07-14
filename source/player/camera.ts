@@ -1,4 +1,4 @@
-import { whenPlayerJoins } from "../logic/client_join_leave";
+import { whenClientJoins } from "../logic/client_join_leave";
 import { CameraModeType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 import { Controls } from "./controls";
@@ -41,7 +41,7 @@ function setUpCamera(player: ObjectRef): void {
 	);
 }
 
-whenPlayerJoins((player) => {
+whenClientJoins((player) => {
 	setUpCamera(player);
 });
 

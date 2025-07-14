@@ -1,5 +1,5 @@
 import { ShallowVector3 } from "../../minetest-api";
-import { whenPlayerJoins, whenPlayerLeaves } from "../logic/client_join_leave";
+import { whenClientJoins, whenClientLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { LogLevel, PointedThingType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
@@ -8,10 +8,10 @@ const tickRate = serverTickRate;
 
 // This portion of code stops the server from exploding.
 const clickTimeoutMap = new Map<string, number>();
-whenPlayerJoins((player) => {
+whenClientJoins((player) => {
 	clickTimeoutMap.set(player.get_player_name(), 0);
 });
-whenPlayerLeaves((player) => {
+whenClientLeaves((player) => {
 	clickTimeoutMap.delete(player.get_player_name());
 });
 registerClientTickFunction((player, delta) => {

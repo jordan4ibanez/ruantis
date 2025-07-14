@@ -1,4 +1,4 @@
-import { whenPlayerLeaves } from "../logic/client_join_leave";
+import { whenClientLeaves } from "../logic/client_join_leave";
 import { registerServerTickFunction } from "../logic/tick";
 import { Vec2 } from "../utility/vector";
 import { getAllClients } from "./tracker";
@@ -24,7 +24,7 @@ function createPlayerWindowData(player: ObjectRef): WindowInfo {
 	return newData;
 }
 
-whenPlayerLeaves((player) => {
+whenClientLeaves((player) => {
 	windowSizes.delete(player.get_player_name());
 });
 

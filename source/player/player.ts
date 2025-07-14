@@ -1,4 +1,4 @@
-import { afterPlayerJoins, whenPlayerJoins } from "../logic/client_join_leave";
+import { afterClientJoins, whenClientJoins } from "../logic/client_join_leave";
 import {
 	registerClientTickFunction,
 	registerServerTickFunction,
@@ -126,7 +126,7 @@ class Player {
 
 const players = new Map<string, Player>();
 
-afterPlayerJoins((ltPlayer) => {
+afterClientJoins((ltPlayer) => {
 	// todo: get from database.
 	// getDatabase()
 

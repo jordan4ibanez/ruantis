@@ -1,4 +1,4 @@
-type pFunc = (player: ObjectRef) => void;
+type pFunc = (client: ObjectRef) => void;
 
 const joinFuncs: pFunc[] = [];
 const leaveFuncs: pFunc[] = [];
@@ -7,7 +7,7 @@ const leaveFuncs: pFunc[] = [];
  * Add a function to run when the player joins the server.
  * @param func Function to run when a player joins the server.
  */
-export function whenPlayerJoins(func: pFunc): void {
+export function whenClientJoins(func: pFunc): void {
 	joinFuncs.push(func);
 }
 
@@ -15,7 +15,7 @@ export function whenPlayerJoins(func: pFunc): void {
  * Add a function to run when the player leaves the server.
  * @param func Function to run when a player leaves the server.
  */
-export function whenPlayerLeaves(func: pFunc): void {
+export function whenClientLeaves(func: pFunc): void {
 	leaveFuncs.push(func);
 }
 
@@ -27,7 +27,7 @@ const afterJoinFuncs: pFunc[] = [];
  * Add a function to run immediately after the player joins the server.
  * @param func Function to run immediately after a player joins the server.
  */
-export function afterPlayerJoins(func: pFunc): void {
+export function afterClientJoins(func: pFunc): void {
 	afterJoinFuncs.push(func);
 }
 
