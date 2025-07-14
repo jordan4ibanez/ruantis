@@ -1,9 +1,33 @@
 import { ShallowVector3 } from "../../minetest-api";
+import { whenPlayerJoins, whenPlayerLeaves } from "../logic/player_join_leave";
+import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { LogLevel, PointedThingType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 
-const clickCheck = new Vec3(0, 1, 0);
+const tickRate = serverTickRate;
 
+// This portion of code stops the server from exploding.
+const clickTimeoutMap = new Map<string, number>();
+whenPlayerJoins((player) => {
+	clickTimeoutMap.set(player.get_player_name(), 0);
+});
+whenPlayerLeaves((player) => {
+	clickTimeoutMap.delete(player.get_player_name());
+});
+registerClientTickFunction((player, delta) => {
+	const name = player.get_player_name();
+	let data = clickTimeoutMap.get(name) || 0;
+	if (data > 0) {
+		data -= delta;
+		if (data < 0) {
+			data = 0;
+		}
+	}
+	clickTimeoutMap.set(name, data);
+});
+// End anti server explosion code.
+
+const clickCheck = new Vec3(0, 1, 0);
 function tileClick(
 	position: ShallowVector3,
 	node: NodeTable,
