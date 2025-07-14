@@ -48,13 +48,13 @@ class PlayerVisualEntity extends Entity {
 registerEntity(PlayerVisualEntity);
 
 class Player {
-	private name: string;
-	private ltPlayer: ObjectRef;
-	private visualPosition: Vec3 = new Vec3();
+	private readonly name: string;
+	private readonly ltPlayer: ObjectRef;
+	private readonly visualPosition: Vec3 = new Vec3();
 	
 
-	private camera: Camera = new Camera();
-	private visualEntity: ObjectRef | null = null;
+	private readonly camera: Camera = new Camera();
+	private readonly visualEntity: ObjectRef | null = null;
 
 	constructor(ltPlayer: ObjectRef) {
 		this.name = ltPlayer.get_player_name();
