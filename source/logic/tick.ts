@@ -5,7 +5,7 @@ import { whenClientJoins, whenClientLeaves } from "./client_join_leave";
 
 //? Forever functions.
 
-type clientTickFunctionType = (player: ObjectRef, delta: number) => void;
+type clientTickFunctionType = (client: ObjectRef, delta: number) => void;
 type serverTickFunctionType = (delta: number) => void;
 
 const clientFunctions: clientTickFunctionType[] = [];
@@ -34,7 +34,7 @@ export function registerServerTickFunction(func: serverTickFunctionType): void {
 //? Temporary non-targeted functions.
 
 type temporaryClientTickFunctionType = (
-	player: ObjectRef,
+	client: ObjectRef,
 	delta: number
 ) => boolean;
 type temporaryServerTickFunctionType = (delta: number) => boolean;
