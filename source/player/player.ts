@@ -58,15 +58,15 @@ class Player {
 	constructor(ltPlayer: ObjectRef) {
 		this.name = ltPlayer.get_player_name();
 		this.ltPlayer = ltPlayer;
-		const vEntity = spawnEntity(this.visualPosition, PlayerVisualEntity);
+		const vObjectRef = spawnEntity(this.visualPosition, PlayerVisualEntity);
 
-		if (vEntity == null) {
+		if (vObjectRef == null) {
 			throw new Error(
 				`Failed to spawn visual entity for player ${this.name}`
 			);
 		}
 
-		this.____visualObjectRef = vEntity;
+		this.____visualObjectRef = vObjectRef;
 	}
 
 	setPosition(pos: Vec3): void {
