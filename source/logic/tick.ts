@@ -65,12 +65,12 @@ export function registerTemporaryServerTickFunction(
 //? Temporary targeted functions.
 
 type temporaryTargetedClientTickFunctionType = (
-	player: ObjectRef,
+	client: ObjectRef,
 	delta: number
 ) => boolean;
 
 type temporaryTargetedServerTickFunctionType = (
-	player: ObjectRef,
+	client: ObjectRef,
 	delta: number
 ) => boolean;
 
