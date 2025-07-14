@@ -51,6 +51,10 @@ class Player {
 	private readonly name: string;
 	private readonly ltPlayer: ObjectRef;
 
+	private readonly currentPosition: Vec3 = new Vec3();
+	private readonly targetPosition: Vec3 = new Vec3();
+	private walkProgress: number = 0;
+
 	private readonly camera: Camera = new Camera();
 	private readonly ____visualObjectRef: ObjectRef;
 	private readonly visualPosition: Vec3 = new Vec3();
@@ -70,6 +74,10 @@ class Player {
 	}
 
 	setPosition(pos: Vec3): void {
+		this.currentPosition.copyFrom(pos);
+		this.targetPosition.copyFrom(pos);
+		this.walkProgress = 0;
+
 		this.getObjectRef().add_pos(
 			new Vec3().copyFrom(pos).subtractImmutable(this.visualPosition)
 		);
