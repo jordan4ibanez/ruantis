@@ -1,5 +1,5 @@
 import { ShallowVector3 } from "../../minetest-api";
-import { whenPlayerJoins, whenPlayerLeaves } from "../logic/player_join_leave";
+import { whenPlayerJoins, whenPlayerLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { LogLevel, PointedThingType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";

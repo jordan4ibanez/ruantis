@@ -1,4 +1,4 @@
-import { whenPlayerLeaves } from "../logic/player_join_leave";
+import { whenPlayerLeaves } from "../logic/client_join_leave";
 import { registerServerTickFunction } from "../logic/tick";
 import { Vec2 } from "../utility/vector";
 import { getAllClients } from "./tracker";

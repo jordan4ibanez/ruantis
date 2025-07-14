@@ -1,4 +1,4 @@
-import { whenPlayerJoins, whenPlayerLeaves } from "../logic/player_join_leave";
+import { whenPlayerJoins, whenPlayerLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
 
 export class Controls {
