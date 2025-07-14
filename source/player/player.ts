@@ -126,14 +126,14 @@ class Player {
 
 const players = new Map<string, Player>();
 
-afterClientJoins((ltPlayer) => {
+afterClientJoins((client) => {
 	// todo: get from database.
 	// getDatabase()
 
 	//? The client becomes a player.
 
-	const name = ltPlayer.get_player_name();
-	const pData = new Player(ltPlayer);
+	const name = client.get_player_name();
+	const pData = new Player(client);
 
 	pData.setPosition(new Vec3(0, 1, 0));
 
@@ -150,7 +150,7 @@ afterClientJoins((ltPlayer) => {
 	// 	}
 	// }
 
-	ltPlayer.hud_add({
+	client.hud_add({
 		type: HudElementType.text,
 		text: "Caution: Garbage area. Use caution.",
 		offset: new Vec2(264, 12),
