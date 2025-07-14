@@ -52,7 +52,7 @@ class Player {
 	private readonly ltPlayer: ObjectRef;
 
 	private readonly camera: Camera = new Camera();
-	private readonly visualEntity: ObjectRef;
+	private readonly ____visualEntity: ObjectRef;
 	private readonly visualPosition: Vec3 = new Vec3();
 
 	constructor(ltPlayer: ObjectRef) {
@@ -66,11 +66,11 @@ class Player {
 			);
 		}
 
-		this.visualEntity = vEntity;
+		this.____visualEntity = vEntity;
 	}
 
 	setPosition(pos: Vec3): void {
-		this.visualEntity?.add_pos(
+		this.____visualEntity?.add_pos(
 			new Vec3().copyFrom(pos).subtractImmutable(this.visualPosition)
 		);
 		this.visualPosition.copyFrom(pos);
@@ -90,8 +90,8 @@ class Player {
 		);
 	}
 
-		if (!this.visualEntity.is_valid()) {
 	getObjectRef(): ObjectRef {
+		if (!this.____visualEntity.is_valid()) {
 			const newVisual = spawnEntity(
 				this.visualPosition,
 				PlayerVisualEntity
@@ -101,9 +101,9 @@ class Player {
 				throw new Error(`Failed to add visual entity to ${this.name}`);
 			}
 			// Cast away the const because this is a facade.
-			(this.visualEntity as ObjectRef) = newVisual;
+			(this.____visualEntity as ObjectRef) = newVisual;
 		}
-		return this.visualEntity;
+		return this.____visualEntity;
 	}
 
 	getLuaEntity(): PlayerVisualEntity {
