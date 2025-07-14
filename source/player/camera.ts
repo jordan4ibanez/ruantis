@@ -3,6 +3,10 @@ import { CameraModeType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 import { Controls } from "./controls";
 
+core.override_item("", {
+	range: 100,
+});
+
 function setUpCamera(player: ObjectRef): void {
 	assert(player.is_player());
 	player.hud_set_flags({
@@ -35,9 +39,6 @@ function setUpCamera(player: ObjectRef): void {
 		new Vec3(0, -offset * 10, 0),
 		new Vec3(0, -offset * 10, 0)
 	);
-	core.override_item("", {
-		range: 100,
-	});
 }
 
 whenPlayerJoins((player) => {
