@@ -50,35 +50,37 @@ registerEntity(PlayerVisualEntity);
 class Player {
 	private name: string;
 	private ltPlayer: ObjectRef;
-	private position: Vec3 = new Vec3();
+
+	private visualPosition: Vec3 = new Vec3();
+
 	private camera: Camera = new Camera();
 	private visualEntity: ObjectRef | null = null;
 
 	constructor(ltPlayer: ObjectRef) {
 		this.name = ltPlayer.get_player_name();
 		this.ltPlayer = ltPlayer;
-		this.visualEntity = spawnEntity(this.position, PlayerVisualEntity);
+		this.visualEntity = spawnEntity(this.visualPosition, PlayerVisualEntity);
 	}
 
 	setPosition(pos: Vec3): void {
 		this.visualEntity?.add_pos(
-			new Vec3().copyFrom(pos).subtractImmutable(this.position)
+			new Vec3().copyFrom(pos).subtractImmutable(this.visualPosition)
 		);
-		this.position.copyFrom(pos);
+		this.visualPosition.copyFrom(pos);
 		this.camera.triggerRecalculation();
 	}
 
 	getPosition(): Vec3 {
-		return this.position.clone();
+		return this.visualPosition.clone();
 	}
 
 	doCameraControls(control: Controls, delta: number): void {
-		this.camera.doControls(control, this.ltPlayer, this.position, delta);
+		this.camera.doControls(control, this.ltPlayer, this.visualPosition, delta);
 	}
 
 	getEntity(): ObjectRef {
 		if (this.visualEntity == null) {
-			const newVisual = spawnEntity(this.position, PlayerVisualEntity);
+			const newVisual = spawnEntity(this.visualPosition, PlayerVisualEntity);
 
 			if (newVisual == null || !newVisual.is_valid()) {
 				throw new Error(`Failed to add visual entity to ${this.name}`);
