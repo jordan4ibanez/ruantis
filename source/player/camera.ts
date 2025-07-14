@@ -62,7 +62,7 @@ export class Camera {
 	doControls(
 		control: Controls,
 		client: ObjectRef,
-		playerPos: Vec3,
+		clientPos: Vec3,
 		delta: number
 	): void {
 		let reCalculateRotation = false;
@@ -118,7 +118,7 @@ export class Camera {
 			.set(this.pitch, this.yaw, 0)
 			.toDirection()
 			.multiply(new Vec3(10, 10, 10))
-			.add(playerPos)
+			.add(clientPos)
 			.add(new Vec3(0.5, 0.5, 0.5));
 
 		const output = this.outputPosition.subtractImmutable(client.get_pos());
