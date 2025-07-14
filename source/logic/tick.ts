@@ -11,6 +11,10 @@ type serverTickFunctionType = (delta: number) => void;
 const clientFunctions: clientTickFunctionType[] = [];
 const serverFunctions: serverTickFunctionType[] = [];
 
+export const serverTickRate = 0.5;
+
+const tickRate = serverTickRate;
+
 /**
  * Run a function every client tick. (smoother)
  * @param func Function.
@@ -187,8 +191,8 @@ function tick(delta: number): void {
 
 	serverTimer += delta;
 
-	if (serverTimer >= 0.5) {
-		serverTimer -= 0.5;
+	if (serverTimer >= tickRate) {
+		serverTimer -= tickRate;
 
 		//? Forever.
 		for (const func of serverFunctions) {
