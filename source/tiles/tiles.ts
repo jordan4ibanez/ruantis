@@ -40,11 +40,13 @@ function tileClick(
 	}
 	const name = puncher.get_player_name();
 
-	print(dump(getControls(name)));
+	print(name);
 
-	// if (getControls(name).leftPressed) {
-	// 	print("press");
-	// }
+	print(getControls(name).mouseLeftHeld);
+
+	if (getControls(name).leftPressed) {
+		print("press");
+	}
 
 	const timer = clickTimeoutMap.get(name) || 1;
 
@@ -71,7 +73,6 @@ function tileClick(
 	print(targetPos.toString());
 	clickTimeoutMap.set(name, tickRate);
 }
-
 core.register_on_punchnode(tileClick);
 
 // todo: make this into a ghost tile or something.
