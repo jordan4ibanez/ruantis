@@ -30,8 +30,21 @@ export class Controls {
 	readonly mouseLeftClick: boolean = false;
 	/** Single press. */
 	readonly mouseRightClick: boolean = false;
+}
+
+class MasterController extends Controls {
+	polled: boolean = false;
+
+	pollCheck(): void {
+		if (this.polled) {
+			throw new Error("Master controller double poll.");
+		}
+		this.polled = true;
+	}
 
 	update(rawControl: LTPlayerControlObject) {
+		this.pollCheck();
+
 		//? Keyboard.
 
 		let leftWasPressed = this.leftHeld;
@@ -60,10 +73,10 @@ export class Controls {
 	}
 }
 
-const controlMap = new Map<string, Controls>();
+const controlMap = new Map<string, MasterController>();
 
 whenClientJoins((client) => {
-	controlMap.set(client.get_player_name(), new Controls());
+	controlMap.set(client.get_player_name(), new MasterController());
 });
 
 whenClientLeaves((client) => {
@@ -76,6 +89,7 @@ registerClientTickFunction((client) => {
 	if (data == null) {
 		throw new Error(`Client ${name} was never given a controls object.`);
 	}
+
 	data.update(client.get_player_control());
 });
 
