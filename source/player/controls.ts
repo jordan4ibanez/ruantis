@@ -43,6 +43,9 @@ export class Controls {
 
 		(this.leftPressed as boolean) = !leftWasPressed && this.leftHeld;
 		(this.rightPressed as boolean) = !rightWasPressed && this.rightHeld;
+
+		//? Mouse.
+
 	}
 }
 
