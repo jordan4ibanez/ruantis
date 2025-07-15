@@ -2,6 +2,8 @@ import { whenClientJoins, whenClientLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
 
 export class Controls {
+	//? Keyboard.
+
 	/** Held down. */
 	readonly leftHeld: boolean = false;
 	/** Held down. */
