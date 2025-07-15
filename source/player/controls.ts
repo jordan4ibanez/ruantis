@@ -52,6 +52,10 @@ export class Controls {
 		(this.mouseLeftHeld as boolean) = rawControl.dig;
 		(this.mouseRightHeld as boolean) = rawControl.place;
 
+		(this.mouseLeftClick as boolean) =
+			!mouseLeftWasPressed && this.mouseLeftHeld;
+		(this.mouseRightClick as boolean) =
+			!mouseRightWasPressed && this.mouseRightHeld;
 	}
 }
 
