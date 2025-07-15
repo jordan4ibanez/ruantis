@@ -46,6 +46,8 @@ export class Controls {
 
 		//? Mouse.
 
+		let mouseLeftWasPressed = this.mouseLeftHeld;
+		let mouseRightWasPressed = this.mouseRightHeld;
 	}
 }
 
