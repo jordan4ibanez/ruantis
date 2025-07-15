@@ -101,8 +101,7 @@ registerClientTickFunction((client) => {
 	if (data == null) {
 		throw new Error(`Client ${name} was never given a controls object.`);
 	}
-
-	data.update(client.get_player_control());
+	controlUpdateLogic(data, name);
 });
 
 /**
@@ -115,5 +114,8 @@ export function getControls(name: string): Controls {
 	if (data == null) {
 		throw new Error(`Client ${name} has no controls object.`);
 	}
+
+	controlUpdateLogic(data, name);
+
 	return data;
 }
