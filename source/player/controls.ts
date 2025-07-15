@@ -85,6 +85,16 @@ whenClientLeaves((client) => {
 	controlMap.delete(client.get_player_name());
 });
 
+function controlUpdateLogic(data: MasterController, name: string): void {
+	if (data.__shouldUpdate()) {
+		const cli = getClient(name);
+		if (cli == null) {
+			throw new Error(`Client ${name} does not exist.`);
+		}
+		data.__update(cli.get_player_control());
+	}
+}
+
 registerClientTickFunction((client) => {
 	const name = client.get_player_name();
 	const data = controlMap.get(name);
