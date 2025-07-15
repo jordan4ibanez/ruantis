@@ -63,10 +63,11 @@ function tileClick(
 	clickTimeoutMap.set(name, tickRate);
 }
 
+core.register_on_punchnode(tileClick);
+
 // todo: make this into a ghost tile or something.
 core.register_node(":debug", {
 	tiles: ["ground.png"],
-	on_punch: tileClick,
 });
 
 // export function registerTile(def: TileDefinition): void {
