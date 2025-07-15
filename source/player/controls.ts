@@ -32,6 +32,7 @@ export class Controls {
 	readonly mouseRightClick: boolean = false;
 
 	update(rawControl: LTPlayerControlObject) {
+		//? Keyboard.
 		let leftWasPressed = this.leftHeld;
 		let rightWasPressed = this.rightHeld;
 
