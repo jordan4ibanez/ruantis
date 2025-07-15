@@ -85,7 +85,9 @@ whenClientLeaves((client) => {
 	controlMap.delete(client.get_player_name());
 });
 
-function controlUpdateLogic(data: MasterController, name: string): void {
+//? No matter what, this should at least attempt to synchronize the customized controls.
+
+function __controlUpdateLogic(data: MasterController, name: string): void {
 	if (data.__shouldUpdate()) {
 		const cli = getClient(name);
 		if (cli == null) {
@@ -101,7 +103,7 @@ registerClientTickFunction((client) => {
 	if (data == null) {
 		throw new Error(`Client ${name} was never given a controls object.`);
 	}
-	controlUpdateLogic(data, name);
+	__controlUpdateLogic(data, name);
 });
 
 /**
@@ -115,7 +117,7 @@ export function getControls(name: string): Controls {
 		throw new Error(`Client ${name} has no controls object.`);
 	}
 
-	controlUpdateLogic(data, name);
+	__controlUpdateLogic(data, name);
 
 	return data;
 }
