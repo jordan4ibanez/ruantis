@@ -1,5 +1,6 @@
 import { whenClientJoins, whenClientLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
+import { getClient } from "./tracker";
 
 export class Controls {
 	//? Keyboard.
