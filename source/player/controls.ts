@@ -46,9 +46,7 @@ class MasterController extends Controls {
 		return true;
 	}
 
-	update(rawControl: LTPlayerControlObject) {
-		this.pollCheck();
-
+	__update(rawControl: LTPlayerControlObject) {
 		//? Keyboard.
 
 		let leftWasPressed = this.leftHeld;
