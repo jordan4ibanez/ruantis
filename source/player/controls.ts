@@ -28,6 +28,9 @@ export class Controls {
 
 	/** Single press. */
 	readonly mouseLeftClick: boolean = false;
+	/** Single press. */
+	readonly mouseRightClick: boolean = false;
+
 	update(rawControl: LTPlayerControlObject) {
 		let leftWasPressed = this.leftHeld;
 		let rightWasPressed = this.rightHeld;
