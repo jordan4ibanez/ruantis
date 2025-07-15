@@ -34,7 +34,8 @@ export class Controls {
 }
 
 class MasterController extends Controls {
-	polled: boolean = false;
+	__polled: boolean = false;
+	__timeRecord: number = 0;
 
 	pollCheck(): void {
 		if (this.polled) {
