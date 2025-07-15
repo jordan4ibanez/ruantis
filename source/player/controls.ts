@@ -21,6 +21,8 @@ export class Controls {
 
 	//? Mouse.
 
+	/** Held down. */
+	readonly mouseLeftHeld: boolean = false;
 	update(rawControl: LTPlayerControlObject) {
 		let leftWasPressed = this.leftHeld;
 		let rightWasPressed = this.rightHeld;
