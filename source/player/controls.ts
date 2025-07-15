@@ -33,6 +33,7 @@ export class Controls {
 
 	update(rawControl: LTPlayerControlObject) {
 		//? Keyboard.
+
 		let leftWasPressed = this.leftHeld;
 		let rightWasPressed = this.rightHeld;
 
