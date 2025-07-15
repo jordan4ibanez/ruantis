@@ -25,6 +25,9 @@ export class Controls {
 	readonly mouseLeftHeld: boolean = false;
 	/** Held down. */
 	readonly mouseRightHeld: boolean = false;
+
+	/** Single press. */
+	readonly mouseLeftClick: boolean = false;
 	update(rawControl: LTPlayerControlObject) {
 		let leftWasPressed = this.leftHeld;
 		let rightWasPressed = this.rightHeld;
