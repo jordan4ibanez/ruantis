@@ -40,9 +40,7 @@ function tileClick(
 	}
 	const name = puncher.get_player_name();
 
-	print(name);
-
-	print(getControls(name).mouseLeftHeld);
+	print(dump(getControls(name)));
 
 	if (getControls(name).leftPressed) {
 		print("press");
