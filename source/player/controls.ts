@@ -37,11 +37,13 @@ class MasterController extends Controls {
 	__polled: boolean = false;
 	__timeRecord: number = 0;
 
-	pollCheck(): void {
-		if (this.polled) {
-			throw new Error("Master controller double poll.");
+	__shouldUpdate(): boolean {
+		const curTime = core.get_us_time();
+		if (this.__timeRecord == curTime) {
+			return false;
 		}
-		this.polled = true;
+		this.__timeRecord = curTime;
+		return true;
 	}
 
 	update(rawControl: LTPlayerControlObject) {
