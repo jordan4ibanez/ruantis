@@ -1,4 +1,8 @@
-import { afterClientJoins, whenClientLeaves } from "../logic/client_join_leave";
+import {
+	afterClientJoins,
+	whenClientJoins,
+	whenClientLeaves,
+} from "../logic/client_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
 import { HudElementType } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
@@ -10,6 +14,7 @@ core.override_item("", {
 class Player {
 	private readonly name: string;
 	private readonly client: ObjectRef;
+	private hp: number = 10;
 
 	constructor(client: ObjectRef) {
 		this.name = client.get_player_name();
@@ -19,8 +24,7 @@ class Player {
 
 const players = new Map<string, Player>();
 
-afterClientJoins((client) => {
-	// todo: get from database.
+whenClientJoins((client) => {
 	// getDatabase()
 
 	//? The client becomes a player.
