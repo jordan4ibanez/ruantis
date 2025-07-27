@@ -1,14 +1,7 @@
-import { afterClientJoins, whenClientJoins } from "../logic/client_join_leave";
-import {
-	registerClientTickFunction,
-	registerServerTickFunction,
-} from "../logic/tick";
-import { getDatabase } from "../utility/database";
-import { Entity, registerEntity, spawnEntity } from "../utility/entity";
-import { EntityVisual, HudElementType } from "../utility/enums";
+import { afterClientJoins } from "../logic/client_join_leave";
+import { registerClientTickFunction } from "../logic/tick";
+import { HudElementType } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
-
-import { Controls, getControls } from "./controls";
 
 core.override_item("", {
 	range: 100,
