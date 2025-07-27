@@ -32,8 +32,8 @@ afterClientJoins((client) => {
 
 	client.hud_add({
 		type: HudElementType.text,
-		text: "Caution: Garbage area. Use caution.",
-		offset: new Vec2(264, 12),
+		text: "Ruantis prototype",
+		offset: new Vec2(64, 12),
 		position: new Vec2(0, 0),
 	});
 });
