@@ -48,6 +48,54 @@ core.register_on_mods_loaded(() => {
 
 	// todo: indices was somewhere in this area
 
+	const vIndices = jData.meshes[mesh + 1]?.primitives[1].indices;
+
+	if (vIndices == null) {
+		throw new Error("Indices are missing");
+	}
+
+	const vIndicesAccessor = jData.accessors[vIndices + 1];
+
+	if (vIndicesAccessor.componentType != 5123) {
+		throw new Error("indices not in ushort");
+	}
+
+	const vindicesbufferView =
+		jData.bufferViews[vIndicesAccessor.bufferView + 1];
+
+	if (vindicesbufferView == null) {
+		throw new Error("indices buffer view doesn't exist");
+	}
+
+	const vIndicBuffer = vindicesbufferView.buffer;
+	const vIndicOffset = vindicesbufferView.byteOffset;
+
+	if (vIndicBuffer == null) {
+		throw new Error("Missing indices buffer index");
+	}
+
+	if (vIndicOffset == null) {
+		throw new Error("Missing indices buffer offset");
+	}
+
+	const indexBuffer = jData.buffers[vIndicBuffer + 1];
+
+	const rawIndexBufferData: string | null = indexBuffer.uri;
+
+	if (rawIndexBufferData == null) {
+		throw new Error("Index buffer data missing");
+	}
+
+	if (
+		!rawIndexBufferData.startsWith("data:application/octet-stream;base64,")
+	) {
+		throw new Error("Index buffer data raw encoding");
+	}
+
+	print(dump(indexBuffer));
+
+	//~ ========================== pos
+
 	const posVERT = jData.meshes[mesh + 1]?.primitives[1]?.attributes?.POSITION;
 
 	if (posVERT == null) {
@@ -98,7 +146,7 @@ core.register_on_mods_loaded(() => {
 
 	const buffer = jData.buffers[bufferIndexVert + 1];
 
-	print(dump(buffer));
+	// print(dump(buffer));
 
 	// print(dump(jData.accessors));
 
