@@ -1,11 +1,53 @@
 import { afterClientJoins } from "../logic/client_join_leave";
 import { Drawtype } from "../utility/enums";
+import { parseJson, readFileToString } from "../utility/file";
 import { Vec3 } from "../utility/vector";
 
 core.register_node(":chunk_template", {
 	drawtype: Drawtype.mesh,
 	mesh: "chunk_0_0.gltf",
 	tiles: ["chunk_0_0.png"],
+});
+
+core.register_on_mods_loaded(() => {
+	const t: string | null = core.get_modpath("ruantis");
+	if (t == null) {
+		throw new Error("wat");
+	}
+	// core.parse_json(t + "/models/chunk_0_0.gltf");
+	// 	core.parse_json(`{
+	// 	"hi": true
+	// }`);
+
+	// JSON.parse(t + "/models/chunk_0_0.gltf");
+
+	const jData = parseJson(t + "/models/chunk_0_0.gltf");
+
+	if (jData.meshes == null) {
+		throw new Error("no mesh");
+	}
+
+	let mesh = 0;
+
+	for (const d of jData.nodes) {
+		if (d.name == "ground") {
+			if (d.mesh == null) {
+				throw new Error("No mesh for ground");
+			}
+			// todo: might need translation, maybe?
+
+			mesh = d.mesh;
+			break;
+		}
+	}
+
+	print(dump(jData.nodes[1]));
+
+	// if (jData.meshes[0].primitives == null) {
+	// 	throw new Error("no primitive");
+	// }
+
+	// print(readFileToString(t + "/models/test.json"));
 });
 
 afterClientJoins(() => {
