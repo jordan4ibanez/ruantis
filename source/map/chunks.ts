@@ -70,19 +70,18 @@ core.register_on_mods_loaded(() => {
 		throw new Error("vert buffer not in vec3 format!");
 	}
 
-	const vertBufferView = vertPOSAccessor.bufferView;
+	const bufferViewVertIndex = vertPOSAccessor.bufferView;
 
-	print(vertBufferView);
-
-	if (jData.accessors?.POSITION) {
-		const posIndex: number = jData.accessors.POSITION + 1;
-
-		print(dump(jData.accessors[posIndex]));
-
-		// for (const d of jData.accessors.POSITION) {
-
-		// }
+	if (bufferViewVertIndex == null) {
+		throw new Error("No vert buffer view index");
 	}
+
+	const vertBufferView = jData.bufferViews[bufferViewVertIndex + 1];
+
+	if (vertBufferView == null) {
+		throw new Error("vertex buffer view does not exist");
+	}
+
 	// print(dump(jData.accessors));
 
 	// if (jData.meshes[0].primitives == null) {
