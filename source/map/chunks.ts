@@ -60,8 +60,6 @@ core.register_on_mods_loaded(() => {
 		throw new Error("null vert pos accessor");
 	}
 
-	print(dump(vertPOSAccessor));
-
 	if (vertPOSAccessor.componentType != 5126) {
 		throw new Error("vert buffer not in float format!");
 	}
@@ -81,6 +79,19 @@ core.register_on_mods_loaded(() => {
 	if (vertBufferView == null) {
 		throw new Error("vertex buffer view does not exist");
 	}
+
+	const bufferIndexVert = vertBufferView.buffer;
+	const bufferVertStride = vertBufferView.byteStride;
+
+	if (bufferIndexVert == null) {
+		throw new Error("The buffer index is missing");
+	}
+
+	if (bufferVertStride == null) {
+		throw new Error("The buffer stride is missing");
+	}
+
+	
 
 	// print(dump(jData.accessors));
 
