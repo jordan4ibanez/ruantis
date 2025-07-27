@@ -5,6 +5,8 @@ export function readFileToString(path: string): string {
 		throw new Error(`File ${path} does not exist.`);
 	}
 
+	io.close(f);
+
 	let output: string = "";
 
 	for (const [line] of io.lines(path)) {
