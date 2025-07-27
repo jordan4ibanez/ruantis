@@ -29,19 +29,53 @@ core.register_on_mods_loaded(() => {
 
 	let mesh = 0;
 
+	let found = false;
 	for (const d of jData.nodes) {
 		if (d.name == "ground") {
 			if (d.mesh == null) {
 				throw new Error("No mesh for ground");
 			}
 			// todo: might need translation, maybe?
-
+			found = true;
 			mesh = d.mesh;
 			break;
 		}
 	}
+	if (!found) {
+		throw new Error("Ground not found");
+	}
+	found = false;
 
-	print(dump(jData.nodes[1]));
+	const posVERT = jData.meshes[mesh + 1]?.primitives[1]?.attributes?.POSITION;
+
+	if (posVERT == null) {
+		throw new Error("Failed to get vert index");
+	}
+
+	const vertPOSAccessor = jData.accessors[posVERT + 1];
+
+	if (vertPOSAccessor == null) {
+		throw new Error("null vert pos accessor");
+	}
+
+	print(dump(vertPOSAccessor));
+
+	if (vertPOSAccessor.componentType != 5126) {
+		throw new Error("vert buffer not in float format!");
+	}
+
+	const vertBufferView = vertPOSAccessor.bufferView;
+
+	if (jData.accessors?.POSITION) {
+		const posIndex: number = jData.accessors.POSITION + 1;
+
+		print(dump(jData.accessors[posIndex]));
+
+		// for (const d of jData.accessors.POSITION) {
+
+		// }
+	}
+	// print(dump(jData.accessors));
 
 	// if (jData.meshes[0].primitives == null) {
 	// 	throw new Error("no primitive");
