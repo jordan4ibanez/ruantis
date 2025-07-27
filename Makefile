@@ -1,6 +1,6 @@
 # This expects you to already have made the debugging world.
 defaults:
-	@node --no-warnings=ExperimentalWarning ts_lua_project_bridge.ts
+	@npx tstl
 	@echo Starting Luanti.
 	@luanti --go --gameid ruantis --world $$HOME/.minetest/worlds/world1
 
