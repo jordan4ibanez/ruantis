@@ -4,6 +4,7 @@ import { deployInventoryHandling } from "./player/inventory";
 import { deployClientTracker } from "./player/tracker";
 import { deployPlayerEntity } from "./player/player";
 import { loadNodes } from "./map/tiles";
+import { loadChunks } from "./map/chunks";
 
 function main() {
 	deployTickTimer();
@@ -12,5 +13,6 @@ function main() {
 	deployInventoryHandling();
 	deployPlayerEntity();
 	loadNodes();
+	loadChunks();
 }
 main();
