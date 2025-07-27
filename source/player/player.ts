@@ -1,4 +1,4 @@
-import { afterClientJoins } from "../logic/client_join_leave";
+import { afterClientJoins, whenClientLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
 import { HudElementType } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
@@ -36,6 +36,10 @@ afterClientJoins((client) => {
 		offset: new Vec2(264, 12),
 		position: new Vec2(0, 0),
 	});
+});
+
+whenClientLeaves((client) => {
+	players.delete(client.get_player_name());
 });
 
 registerClientTickFunction((player, delta) => {
