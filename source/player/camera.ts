@@ -3,9 +3,6 @@ import { CameraModeType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 import { Controls } from "./controls";
 
-core.override_item("", {
-	range: 100,
-});
 
 function setUpCamera(client: ObjectRef): void {
 	assert(client.is_player());
@@ -48,87 +45,87 @@ whenClientJoins((client) => {
 const doublePi = math.pi * 2;
 const halfPi = math.pi / 2;
 
-export class Camera {
-	private yaw: number = math.pi / 4;
-	private pitch: number = math.pi / 4;
-	private zoom: number = 1;
-	private outputPosition: Vec3 = new Vec3();
-	private changed: boolean = true;
+// export class Camera {
+// 	private yaw: number = math.pi / 4;
+// 	private pitch: number = math.pi / 4;
+// 	private zoom: number = 1;
+// 	private outputPosition: Vec3 = new Vec3();
+// 	private changed: boolean = true;
 
-	triggerRecalculation(): void {
-		this.changed = true;
-	}
+// 	triggerRecalculation(): void {
+// 		this.changed = true;
+// 	}
 
-	doControls(
-		control: Controls,
-		client: ObjectRef,
-		clientPos: Vec3,
-		delta: number
-	): void {
-		let reCalculateRotation = false;
-		if (
-			control.leftHeld ||
-			control.rightHeld ||
-			control.upHeld ||
-			control.downHeld
-		) {
-			// todo: also needs pitch controls and zoom
-			this.changed = true;
-			reCalculateRotation = true;
-		}
+// 	doControls(
+// 		control: Controls,
+// 		client: ObjectRef,
+// 		clientPos: Vec3,
+// 		delta: number
+// 	): void {
+// 		let reCalculateRotation = false;
+// 		if (
+// 			control.leftHeld ||
+// 			control.rightHeld ||
+// 			control.upHeld ||
+// 			control.downHeld
+// 		) {
+// 			// todo: also needs pitch controls and zoom
+// 			this.changed = true;
+// 			reCalculateRotation = true;
+// 		}
 
-		// Nothing to do.
-		if (!this.changed) {
-			return;
-		}
-		this.changed = false;
+// 		// Nothing to do.
+// 		if (!this.changed) {
+// 			return;
+// 		}
+// 		this.changed = false;
 
-		if (reCalculateRotation) {
-			// Camera controls.
-			if (control.leftHeld) {
-				this.yaw += delta * 2;
-			} else if (control.rightHeld) {
-				this.yaw -= delta * 2;
-			}
-			if (control.upHeld) {
-				this.pitch += delta;
-			} else if (control.downHeld) {
-				this.pitch -= delta;
-			}
+// 		if (reCalculateRotation) {
+// 			// Camera controls.
+// 			if (control.leftHeld) {
+// 				this.yaw += delta * 2;
+// 			} else if (control.rightHeld) {
+// 				this.yaw -= delta * 2;
+// 			}
+// 			if (control.upHeld) {
+// 				this.pitch += delta;
+// 			} else if (control.downHeld) {
+// 				this.pitch -= delta;
+// 			}
 
-			// Camera limiters.
-			if (this.yaw < -math.pi) {
-				this.yaw += doublePi;
-			} else if (this.yaw > math.pi) {
-				this.yaw -= doublePi;
-			}
-			if (this.pitch < 0.4) {
-				this.pitch = 0.4;
-			} else if (this.pitch > 1.2) {
-				this.pitch = 1.2;
-			}
+// 			// Camera limiters.
+// 			if (this.yaw < -math.pi) {
+// 				this.yaw += doublePi;
+// 			} else if (this.yaw > math.pi) {
+// 				this.yaw -= doublePi;
+// 			}
+// 			if (this.pitch < 0.4) {
+// 				this.pitch = 0.4;
+// 			} else if (this.pitch > 1.2) {
+// 				this.pitch = 1.2;
+// 			}
 
-			// This focuses the camera on the player so you don't get confused.
-			client.set_look_vertical(this.pitch);
-			client.set_look_horizontal(-this.yaw + halfPi);
-		}
+// 			// This focuses the camera on the player so you don't get confused.
+// 			client.set_look_vertical(this.pitch);
+// 			client.set_look_horizontal(-this.yaw + halfPi);
+// 		}
 
-		// Todo: the vector library needs a scalar.
-		this.outputPosition
-			.set(this.pitch, this.yaw, 0)
-			.toDirection()
-			.multiply(new Vec3(10, 10, 10))
-			.add(clientPos)
-			.add(new Vec3(0.5, 0.5, 0.5));
+// 		// Todo: the vector library needs a scalar.
+// 		this.outputPosition
+// 			.set(this.pitch, this.yaw, 0)
+// 			.toDirection()
+// 			.multiply(new Vec3(10, 10, 10))
+// 			.add(clientPos)
+// 			.add(new Vec3(0.5, 0.5, 0.5));
 
-		const output = this.outputPosition.subtractImmutable(client.get_pos());
+// 		const output = this.outputPosition.subtractImmutable(client.get_pos());
 
-		//! This is debug.
-		// print(output.addImmutable(ltPlayer.get_pos()));
+// 		//! This is debug.
+// 		// print(output.addImmutable(ltPlayer.get_pos()));
 
-		client.add_pos(output);
-	}
-}
+// 		client.add_pos(output);
+// 	}
+// }
 
 /**
  * Tree-shake removal function.
