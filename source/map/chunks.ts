@@ -102,14 +102,15 @@ core.register_on_mods_loaded(() => {
 		i < vIndicOffset + 1 + vIndicBufferLength;
 		i += 2 // ushort
 	) {
+		print(rawIndexBufferData.substring(i, i + 1));
 		const first: number = string.byte(
 			rawIndexBufferData.substring(i, i + 1)
 		);
-		const second: number = string.byte(
-			rawIndexBufferData.substring(i + 1, i + 2)
-		);
+		// const second: number = string.byte(
+		// 	rawIndexBufferData.substring(i + 1, i + 2)
+		// );
 
-		print(first, second);
+		print(first);
 	}
 
 	// print(dump(indexBuffer));
