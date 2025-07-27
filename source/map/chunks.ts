@@ -81,17 +81,24 @@ core.register_on_mods_loaded(() => {
 	}
 
 	const bufferIndexVert = vertBufferView.buffer;
+	const bufferVertOffset = vertBufferView.byteOffset;
 	const bufferVertStride = vertBufferView.byteStride;
 
 	if (bufferIndexVert == null) {
 		throw new Error("The buffer index is missing");
 	}
 
+	if (bufferVertOffset == null) {
+		throw new Error("The buffer offset is missing");
+	}
+
 	if (bufferVertStride == null) {
 		throw new Error("The buffer stride is missing");
 	}
 
-	
+	const buffer = jData.buffers[bufferIndexVert + 1];
+
+	print(dump(buffer));
 
 	// print(dump(jData.accessors));
 
