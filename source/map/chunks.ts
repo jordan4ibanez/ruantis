@@ -4,8 +4,8 @@ import { Vec3 } from "../utility/vector";
 
 core.register_node(":chunk_template", {
 	drawtype: Drawtype.mesh,
-	mesh: "chunk_template.gltf",
-	tiles: ["chunk_template.png"],
+	mesh: "chunk_0_0.gltf",
+	tiles: ["chunk_0_0.png"],
 });
 
 afterClientJoins(() => {
