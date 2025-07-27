@@ -4,29 +4,7 @@ import { Vec3 } from "../utility/vector";
 import { Controls } from "./controls";
 
 function setUpCamera(client: ObjectRef): void {
-	assert(client.is_player());
 
-	client.hud_set_flags({
-		hotbar: false,
-		healthbar: false,
-		wielditem: false,
-		breathbar: false,
-		minimap: true,
-	});
-
-	client.set_physics_override({
-		speed: 1,
-		jump: 0,
-		gravity: 10000,
-		speed_climb: 0,
-		speed_crouch: 0,
-		liquid_fluidity: 0,
-		liquid_fluidity_smooth: 0,
-		liquid_sink: 0,
-		acceleration_default: 0,
-		acceleration_air: 0,
-		sneak: false,
-	});
 
 	client.set_camera({ mode: CameraModeType.first });
 	const offset = client.get_properties().eye_height;

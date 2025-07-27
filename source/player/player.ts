@@ -24,6 +24,30 @@ class Player {
 
 const players = new Map<string, Player>();
 
+function setUpPlayer(client: ObjectRef): void {
+	client.hud_set_flags({
+		hotbar: false,
+		healthbar: false,
+		wielditem: false,
+		breathbar: false,
+		minimap: true,
+	});
+
+	client.set_physics_override({
+		speed: 1,
+		jump: 0,
+		gravity: 10000,
+		speed_climb: 0,
+		speed_crouch: 0,
+		liquid_fluidity: 0,
+		liquid_fluidity_smooth: 0,
+		liquid_sink: 0,
+		acceleration_default: 0,
+		acceleration_air: 0,
+		sneak: false,
+	});
+}
+
 whenClientJoins((client) => {
 	// getDatabase()
 
@@ -33,6 +57,8 @@ whenClientJoins((client) => {
 	const pData = new Player(client);
 
 	players.set(name, pData);
+
+	setUpPlayer(client);
 
 	client.hud_add({
 		type: HudElementType.text,
