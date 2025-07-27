@@ -46,6 +46,8 @@ core.register_on_mods_loaded(() => {
 	}
 	found = false;
 
+	// todo: indices was somewhere in this area
+
 	const posVERT = jData.meshes[mesh + 1]?.primitives[1]?.attributes?.POSITION;
 
 	if (posVERT == null) {
@@ -64,7 +66,13 @@ core.register_on_mods_loaded(() => {
 		throw new Error("vert buffer not in float format!");
 	}
 
+	if (vertPOSAccessor.type != "VEC3") {
+		throw new Error("vert buffer not in vec3 format!");
+	}
+
 	const vertBufferView = vertPOSAccessor.bufferView;
+
+	print(vertBufferView);
 
 	if (jData.accessors?.POSITION) {
 		const posIndex: number = jData.accessors.POSITION + 1;
