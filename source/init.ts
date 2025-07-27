@@ -12,7 +12,6 @@ function main() {
 	deployWindowHandling();
 	deployCameraHandling();
 	deployInventoryHandling();
-	deployPlayerEntity();
 	loadNodes();
 }
 main();
