@@ -69,6 +69,7 @@ core.register_on_mods_loaded(() => {
 
 	const vIndicBuffer = vindicesbufferView.buffer;
 	const vIndicOffset = vindicesbufferView.byteOffset;
+	const vIndicBufferLength = vindicesbufferView.byteLength;
 
 	if (vIndicBuffer == null) {
 		throw new Error("Missing indices buffer index");
@@ -76,6 +77,10 @@ core.register_on_mods_loaded(() => {
 
 	if (vIndicOffset == null) {
 		throw new Error("Missing indices buffer offset");
+	}
+
+	if (vIndicBufferLength == null) {
+		throw new Error("Missing buffer length");
 	}
 
 	const indexBuffer = jData.buffers[vIndicBuffer + 1];
@@ -92,7 +97,22 @@ core.register_on_mods_loaded(() => {
 		throw new Error("Index buffer data raw encoding");
 	}
 
-	print(dump(indexBuffer));
+	for (
+		let i = vIndicOffset + 1;
+		i < vIndicOffset + 1 + vIndicBufferLength;
+		i += 2 // ushort
+	) {
+		const first: number = string.byte(
+			rawIndexBufferData.substring(i, i + 1)
+		);
+		const second: number = string.byte(
+			rawIndexBufferData.substring(i + 1, i + 2)
+		);
+
+		print(first, second);
+	}
+
+	// print(dump(indexBuffer));
 
 	//~ ========================== pos
 
