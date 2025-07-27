@@ -7,6 +7,8 @@ import { Vec3 } from "../utility/vector";
 
 const tickRate = serverTickRate;
 
+//! This file is mainly for invisible shapes.
+
 // This portion of code stops the server from exploding.
 const clickTimeoutMap = new Map<string, number>();
 whenClientJoins((player) => {
@@ -81,6 +83,9 @@ core.register_node(":debug", {
 // export function registerTile(def: TileDefinition): void {
 // 	core.register_node(":" + def.name);
 // }
+
+
+
 
 /**
  * Tree-shake removal function.

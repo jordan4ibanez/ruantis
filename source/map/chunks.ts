@@ -1,3 +1,10 @@
+import { afterClientJoins } from "../logic/client_join_leave";
+
+afterClientJoins(() => {
+	
+})
+
+
 /**
  * Tree-shake removal function.
  *
