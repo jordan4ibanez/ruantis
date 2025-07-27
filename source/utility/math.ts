@@ -6,6 +6,9 @@ const random = math.random;
 const sqrt = math.sqrt;
 const asin = math.asin;
 
+export const doublePi = math.pi * 2;
+export const halfPi = math.pi / 2;
+
 export function randomRange(min: number, max: number): number {
 	return random() * (max - min) + min;
 }

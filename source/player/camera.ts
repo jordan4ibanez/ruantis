@@ -22,8 +22,7 @@ whenClientJoins((client) => {
 	setUpCamera(client);
 });
 
-const doublePi = math.pi * 2;
-const halfPi = math.pi / 2;
+
 
 // export class Camera {
 // 	private yaw: number = math.pi / 4;
