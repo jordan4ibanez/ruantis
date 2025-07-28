@@ -664,7 +664,7 @@ interface core {
 	get_content_id(name: string): number;
 	get_name_from_content_id(id: number): string;
 	// fixme: This is probably wrong.
-	parse_json(string: string, nullValue?: any): Dictionary<string, any>;
+	parse_json(string: string, nullValue?: any): JSON;
 	write_json(data: any[], styled: boolean): string | null;
 	serialize(any: any): string;
 	deserialize(string: string, safe?: boolean): any;
