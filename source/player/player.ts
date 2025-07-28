@@ -3,12 +3,29 @@ import {
 	whenClientJoins,
 	whenClientLeaves,
 } from "../logic/client_join_leave";
-import { registerClientTickFunction } from "../logic/tick";
+import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { HudElementType, SkyParametersType } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 
 core.override_item("", {
-	range: 100,
+	range: 3,
+	tool_capabilities: {
+		groupcaps: {
+			mine: {
+				uses: 20,
+				times: {
+					1: serverTickRate,
+					2: serverTickRate * 2,
+					3: serverTickRate * 3,
+					4: serverTickRate * 4,
+					5: serverTickRate * 5,
+					6: serverTickRate * 6,
+					7: serverTickRate * 7,
+					8: serverTickRate * 8,
+				},
+			},
+		},
+	},
 });
 
 class Player {
