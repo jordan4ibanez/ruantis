@@ -84,10 +84,10 @@ function setUpPlayer(client: ObjectRef): void {
 	client.set_sky({
 		clouds: false,
 		base_color: "black",
-		fog: {
-			fog_distance: 30,
-			fog_start: 10,
-		},
+		// fog: {
+		// 	fog_distance: 30,
+		// 	fog_start: 10,
+		// },
 		type: SkyParametersType.plain,
 	});
 	client.set_sun({
