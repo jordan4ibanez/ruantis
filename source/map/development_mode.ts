@@ -37,7 +37,19 @@ if (devMode) {
 			name: string,
 			param: string
 		): LuaMultiReturn<[boolean, string]> | void {
-			
+			const pos = core.get_player_by_name(name)!.get_pos();
+
+			pos.x = math.floor(pos.x / 16) * 16;
+			pos.y = math.floor(pos.y / 16) * 16;
+			pos.z = math.floor(pos.z / 16) * 16;
+
+			for (const x of $range(0, 15)) {
+				for (const z of $range(0, 15)) {
+					core.place_node(new Vec3(x + pos.x, 0.5, z + pos.z), {
+						name: "i_grass",
+					});
+				}
+			}
 		},
 	});
 
