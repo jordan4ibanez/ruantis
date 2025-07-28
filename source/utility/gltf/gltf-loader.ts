@@ -4,26 +4,15 @@
 import { BINARY_HEADER_MAGIC, GLTFBinaryData } from "./glb-decoder";
 import { GltfAsset } from "./gltf-asset";
 import { LoaderUtils } from "./loaderutils";
-import { LoadingManager } from "./loadingmanager";
 
 // main library exports
 import * as gltf from "./gltf";
 import { parseJson } from "../file";
 export { gltf };
 export * from "./gltf-asset";
-export * from "./loadingmanager";
 
 /** Main class of the library */
 export class GltfLoader {
-	private manager: LoadingManager;
-
-	/**
-	 * Pass in a custom `LoadingManager` for progress reporting.
-	 */
-	constructor(manager?: LoadingManager) {
-		this.manager = manager || new LoadingManager();
-	}
-
 	/**
 	 * Load glTF from a URL. Only the main file is loaded - external buffer and image files
 	 * are loaded lazily when needed. To load all, you can use `GltfAsset.preFetchAll()`
@@ -43,6 +32,6 @@ export class GltfLoader {
 			);
 		}
 
-		return new GltfAsset(json, path, undefined, this.manager);
+		return new GltfAsset(json, path, undefined);
 	}
 }
