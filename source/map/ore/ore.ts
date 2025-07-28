@@ -1,10 +1,11 @@
-import { Drawtype, Nodeboxtype } from "../../utility/enums";
+import { Drawtype, Nodeboxtype, TextureAlpha } from "../../utility/enums";
 import { registerBlock } from "../block_database";
 
 registerBlock({
 	name: "ore",
 	drawtype: Drawtype.mesh,
 	mesh: "ore.gltf",
+	use_texture_alpha: TextureAlpha.clip,
 	tiles: ["ore_base.png", "blank.png"],
 	collision_box: {
 		type: Nodeboxtype.fixed,
