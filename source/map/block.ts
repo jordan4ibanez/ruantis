@@ -32,7 +32,7 @@ registerClientTickFunction((player, delta) => {
 // End anti server explosion code.
 
 const clickCheck = new Vec3(0, 1, 0);
-export function tileClick(
+export function blockClick(
 	position: ShallowVector3,
 	node: NodeTable,
 	puncher: ObjectRef | null,
@@ -74,21 +74,16 @@ export function tileClick(
 	print(targetPos.toString());
 	clickTimeoutMap.set(name, tickRate);
 }
-core.register_on_punchnode(tileClick);
+core.register_on_punchnode(blockClick);
 
-// todo: make this into a ghost tile or something.
-core.register_node(":debug", {
-	tiles: ["ground.png"],
-});
-
-export interface Tile extends NodeDefinition {
+export interface BlockDef extends NodeDefinition {
 	name: string;
 }
 
-const tileDatabase = new Map<string, Tile>();
+const blockDatabase = new Map<string, BlockDef>();
 
-export function registerTile(def: Tile): void {
-	if (tileDatabase.has(def.name)) {
+export function registerBlock(def: BlockDef): void {
+	if (blockDatabase.has(def.name)) {
 		throw new Error(`${def.name} already exists.`);
 	}
 
@@ -98,13 +93,13 @@ export function registerTile(def: Tile): void {
 	}
 
 	core.register_node(":" + def.name, def);
-	tileDatabase.set(def.name, def);
+	blockDatabase.set(def.name, def);
 }
 
-export function getTile(name: string): Tile {
-	const out = tileDatabase.get(name);
+export function getBlockDef(name: string): BlockDef {
+	const out = blockDatabase.get(name);
 	if (out == null) {
-		throw new Error(`Tile ${name} does not exist.`);
+		throw new Error(`Block ${name} does not exist.`);
 	}
 	return out;
 }
