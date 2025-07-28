@@ -26,13 +26,12 @@ registerBlock({
 		if (mine == 0) {
 			mine = 10;
 			meta.set_int(TREE_MINE, mine);
-			return;
 		}
-
-		print(mine);
 
 		mine -= 1;
 		meta.set_int(TREE_MINE, mine);
+
+		core.sound_play("tree_chop", { pos: pos });
 
 		if (mine == 1) {
 			setBlock(pos, "tree_stump");
