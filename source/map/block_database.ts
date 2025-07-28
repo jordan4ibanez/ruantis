@@ -14,7 +14,7 @@ export function registerBlock(def: BlockDef): void {
 	if (def.pointable == null) {
 		def.pointable = false;
 	}
-	def.light_source = 15;
+	def.light_source = 14;
 	def.sunlight_propagates = true;
 
 	core.register_node(":" + def.name, def);
