@@ -34,7 +34,7 @@ export class GltfLoader {
 
 		const loader = new FileLoader(this.manager);
 
-		return this.parse(data, path);
+		return this.parse(path);
 	}
 
 	/**
