@@ -15,9 +15,13 @@ import { Vec3 } from "../utility/vector";
 
 export const devMode = true;
 
-if (devMode) {
-	const modifiedChunks = new Set<string>();
+const __live_map_chunks = new Set<string>();
 
+export function ____acceptModifiedChunks(chunkRoot: Vec3) {
+	__live_map_chunks.add(core.serialize(chunkRoot));
+}
+
+if (devMode) {
 	afterClientJoins((client) => {
 		client.hud_add({
 			type: HudElementType.text,
@@ -37,9 +41,7 @@ if (devMode) {
 		): LuaMultiReturn<[boolean, string]> | void {
 			const worker = new Vec3();
 
-			
-
-			for (const cPosHash of modifiedChunks) {
+			for (const cPosHash of __live_map_chunks) {
 				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
 
 				if (chunkPosRoot == null) {
@@ -70,11 +72,11 @@ if (devMode) {
 
 		const cPosStr = core.serialize(new Vec3().copyFrom(pos));
 
-		if (!modifiedChunks.has(cPosStr)) {
+		if (!__live_map_chunks.has(cPosStr)) {
 			print(`Detected modification at ${pos}`);
 		}
 
-		modifiedChunks.add(cPosStr);
+		__live_map_chunks.add(cPosStr);
 
 		// print(dump(modifiedChunks));
 	}

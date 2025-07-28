@@ -1,5 +1,6 @@
 import { Vec3 } from "../../utility/vector";
 import { setBlock } from "../block_database";
+import { ____acceptModifiedChunks } from "../development_mode";
 import { ____automation_internal_only_automate_set_up_chunks } from "./__auto_chunk_data";
 import { Chunk } from "./chunk";
 
@@ -16,6 +17,8 @@ export function __automation_internal_only_processData() {
 		root.x = c.pos.x * 16;
 		root.y = c.pos.y * 16;
 		root.z = c.pos.z * 16;
+
+		____acceptModifiedChunks(root);
 
 		if (!core.forceload_block(root, false, -1)) {
 			throw new Error(`Failed to force load chunk ${work.toString()}`);
