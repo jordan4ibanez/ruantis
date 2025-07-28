@@ -1,6 +1,7 @@
+import { serverTickRate } from "../../logic/tick";
 import { Drawtype, Nodeboxtype, TextureAlpha } from "../../utility/enums";
 import { Vec3 } from "../../utility/vector";
-import { registerBlock } from "../block_database";
+import { registerBlock, setBlock } from "../block_database";
 
 registerBlock({
 	name: "ore",
@@ -18,25 +19,27 @@ const ORE_MINE = "ore_mine";
 
 function on_dig(pos: Vec3) {
 	const meta = core.get_meta(pos);
-	let mine = meta.get_int(TREE_MINE);
+	let mine = meta.get_int(ORE_MINE);
 
 	if (mine == 0) {
 		mine = 10;
-		meta.set_int(TREE_MINE, mine);
+		meta.set_int(ORE_MINE, mine);
 	}
 
 	mine -= 1;
-	meta.set_int(TREE_MINE, mine);
+	meta.set_int(ORE_MINE, mine);
 
 	core.sound_play("tree_chop", { pos: pos });
 
+	print(core.get_node(pos).name.substring(4));
+
 	// Could do an axe calculation here.
 	if (math.random(1, 1000) > 900) {
-		print("got logs");
+		print("got ore");
 	}
 
 	if (mine == 1) {
-		setBlock(pos, "tree_stump");
+		setBlock(pos, "ore");
 		core.get_node_timer(pos).start(serverTickRate * math.random(3, 10));
 	}
 }
@@ -51,6 +54,9 @@ registerBlock({
 		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 	},
 	pointable: true,
+	on_dig: on_dig,
+	node_dig_prediction: "",
+	groups: { mine: 1 },
 });
 
 registerBlock({
@@ -63,6 +69,9 @@ registerBlock({
 		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 	},
 	pointable: true,
+	on_dig: on_dig,
+	node_dig_prediction: "",
+	groups: { mine: 1 },
 });
 
 registerBlock({
@@ -75,6 +84,9 @@ registerBlock({
 		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 	},
 	pointable: true,
+	on_dig: on_dig,
+	node_dig_prediction: "",
+	groups: { mine: 1 },
 });
 
 registerBlock({
@@ -87,6 +99,9 @@ registerBlock({
 		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 	},
 	pointable: true,
+	on_dig: on_dig,
+	node_dig_prediction: "",
+	groups: { mine: 1 },
 });
 
 /**
