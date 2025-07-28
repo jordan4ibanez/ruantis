@@ -9,6 +9,7 @@ import { LoadingManager } from "./loadingmanager";
 
 // main library exports
 import * as gltf from "./gltf";
+import { parseJson } from "../file";
 export { gltf };
 export * from "./gltf-asset";
 export * from "./loadingmanager";
@@ -28,17 +29,12 @@ export class GltfLoader {
 	 * Load glTF from a URL. Only the main file is loaded - external buffer and image files
 	 * are loaded lazily when needed. To load all, you can use `GltfAsset.preFetchAll()`
 	 */
-	async load(
-		url: string,
-		onProgress?: (xhr: XMLHttpRequest) => void
-	): Promise<GltfAsset> {
-		// TODO!!: test data URI here
+	load(url: string): GltfAsset {
 		const path = LoaderUtils.extractUrlBase(url);
-		// TODO!: allow changing loader options(headers etc.)?
+
 		const loader = new FileLoader(this.manager);
-		loader.responseType = "arraybuffer";
-		const data = await loader.load(url, onProgress);
-		return await this.parse(data, path);
+
+		return this.parse(data, path);
 	}
 
 	/**
