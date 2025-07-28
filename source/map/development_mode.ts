@@ -45,8 +45,7 @@ if (devMode) {
 import { Chunk } from "./chunk";
 import { ____automation_internal_only_add_chunk } from "./chunks_database";
 
-export function ____automation_internal_only_automate_set_up_chunks() {
-`,
+export function ____automation_internal_only_automate_set_up_chunks() {`,
 			];
 
 			for (const cPosHash of __live_map_chunks) {
@@ -63,9 +62,9 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				}
 
 				saveString.push(`
-const c_${chunkPosRoot.x}_${chunkPosRoot.y}_${chunkPosRoot.z}: Chunk {
-	pos: new Vec3(${chunkPosRoot.x}, ${chunkPosRoot.y}, ${chunkPosRoot.z}),
-	blocks: [`);
+	____automation_internal_only_add_chunk({
+		pos: new Vec3(${chunkPosRoot.x}, ${chunkPosRoot.y}, ${chunkPosRoot.z}),
+		blocks: [`);
 
 				for (const x of $range(0, 15)) {
 					for (const y of $range(0, 15)) {
@@ -88,24 +87,30 @@ const c_${chunkPosRoot.x}_${chunkPosRoot.y}_${chunkPosRoot.z}: Chunk {
 							}
 
 							saveString.push(`
-	{
-		pos: new Vec3(${worker.x}, ${worker.y}, ${worker.z}),
-		block: "${dat.name}",
-		param2: ${dat.param2 || 0},
-	},`);
+			{
+				pos: new Vec3(${worker.x}, ${worker.y}, ${worker.z}),
+				block: "${dat.name}",
+				param2: ${dat.param2 || 0},
+			},`);
 						}
 					}
 				}
 
-				saveString.push(`\n	]\n}\n`);
+				saveString.push(`\n\		],\n\	});\n`);
 
 				core.forceload_free_block(chunkPosRoot, false);
 			}
 
 			saveString.push("}");
 
+			const heir = core.get_modpath("ruantis")!.split("/");
+			heir.pop();
+			heir.pop();
+			const path = heir.join("/");
+			print(path);
+
 			core.safe_file_write(
-				core.get_modpath("ruantis")! + "/mods/test.txt",
+				path + "/source/map/chunk_database/__auto_chunk_data.ts",
 				saveString.join("")
 			);
 
