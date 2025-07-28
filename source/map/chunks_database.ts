@@ -41,9 +41,12 @@ function processData() {
 		root.x = c.pos.x * 16 - 1;
 		root.y = c.pos.y * 16 - 1;
 		root.z = c.pos.z * 16 - 1;
-		
 
-		print(dump(c));
+		for (const b of c.bocks) {
+			print(dump(b));
+		}
+
+		// print(dump(c));
 	}
 }
 
