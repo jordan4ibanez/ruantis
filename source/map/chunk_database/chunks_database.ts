@@ -8,11 +8,11 @@ export function ____automation_internal_only_add_chunk(c: Chunk) {
 	const root = new Vec3();
 	const work = new Vec3();
 
+	____acceptModifiedChunks(c.pos);
+
 	root.x = c.pos.x * 16;
 	root.y = c.pos.y * 16;
 	root.z = c.pos.z * 16;
-
-	____acceptModifiedChunks(root);
 
 	if (!core.forceload_block(root, false, -1)) {
 		throw new Error(`Failed to force load chunk ${work.toString()}`);
