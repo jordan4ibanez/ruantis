@@ -1,15 +1,19 @@
 import { Drawtype, Nodeboxtype } from "../../utility/enums";
 import { registerBlock } from "../block_database";
 
+const treeCbox: NodeBox = {
+	type: Nodeboxtype.fixed,
+	fixed: [-0.5, -0.5, -0.5, 0.5, 3, 0.5],
+};
+
 registerBlock({
 	name: "tree",
 	drawtype: Drawtype.mesh,
 	mesh: "tree.gltf",
 	tiles: ["tree.png"],
-	collision_box: {
-		type: Nodeboxtype.fixed,
-		fixed: [-0.5, -0.5, -0.5, 0.5, 2.5, 0.5],
-	},
+	pointable: true,
+	collision_box: treeCbox,
+	selection_box: treeCbox,
 });
 
 /**
