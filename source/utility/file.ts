@@ -16,6 +16,6 @@ export function readFileToString(path: string): string {
 	return output;
 }
 
-export function parseJson(path: string): JSON {
+export function parseJson(path: string): any {
 	return core.parse_json(readFileToString(path));
 }
