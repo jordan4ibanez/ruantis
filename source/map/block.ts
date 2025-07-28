@@ -2,7 +2,7 @@ import { ShallowVector3 } from "../../minetest-api";
 import { whenClientJoins, whenClientLeaves } from "../logic/client_join_leave";
 import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { getControls } from "../player/controls";
-import { LogLevel, PointedThingType } from "../utility/enums";
+import { Drawtype, LogLevel, PointedThingType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 import { loadOutside } from "./floor/outside";
 
@@ -81,7 +81,7 @@ core.register_node(":debug", {
 	tiles: ["ground.png"],
 });
 
-interface Tile extends NodeDefinition {
+export interface Tile extends NodeDefinition {
 	name: string;
 }
 
@@ -91,6 +91,12 @@ export function registerTile(def: Tile): void {
 	if (tileDatabase.has(def.name)) {
 		throw new Error(`${def.name} already exists.`);
 	}
+
+	def.drop = "";
+	if (def.pointable == null) {
+		def.pointable = false;
+	}
+
 	core.register_node(":" + def.name, def);
 	tileDatabase.set(def.name, def);
 }

@@ -1,3 +1,9 @@
+const invisibleGround: Tile = {
+
+}
+
+
+
 for (const i of $range(1,3)) {
 	
 }
