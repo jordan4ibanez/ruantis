@@ -61,5 +61,3 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 
 	____automation_internal_only_add_chunk(c_0_0);
 }
-
-export function ____automation_internal_only_deploy_map_data() {}
