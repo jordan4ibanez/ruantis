@@ -85,7 +85,7 @@ core.register_on_mods_loaded(() => {
 
 	const indexBuffer = jData.buffers[vIndicBuffer + 1];
 
-	const rawIndexBufferData: string | null = indexBuffer.uri;
+	let rawIndexBufferData: string | null = indexBuffer.uri;
 
 	if (rawIndexBufferData == null) {
 		throw new Error("Index buffer data missing");
@@ -97,21 +97,28 @@ core.register_on_mods_loaded(() => {
 		throw new Error("Index buffer data raw encoding");
 	}
 
-	for (
-		let i = vIndicOffset + 1;
-		i < vIndicOffset + 1 + vIndicBufferLength;
-		i += 2 // ushort
-	) {
-		print(rawIndexBufferData.substring(i, i + 1));
-		const first: number = string.byte(
-			rawIndexBufferData.substring(i, i + 1)
-		);
-		// const second: number = string.byte(
-		// 	rawIndexBufferData.substring(i + 1, i + 2)
-		// );
+	// Remove: data:application/octet-stream;base64,
+	rawIndexBufferData = rawIndexBufferData.substring(37);
 
-		print(first);
-	}
+	// print(rawIndexBufferData);
+
+	// print(rawIndexBufferData.substring(0, 3));
+
+	// for (
+	// 	let i = vIndicOffset + 1;
+	// 	i < vIndicOffset + 1 + vIndicBufferLength;
+	// 	i += 2 // ushort
+	// ) {
+	// 	// print(rawIndexBufferData.substring(i, i + 1));
+	// 	const first: number = string.byte(
+	// 		rawIndexBufferData.substring(i, i + 1)
+	// 	);
+	// 	const second: number = string.byte(
+	// 		rawIndexBufferData.substring(i + 1, i + 2)
+	// 	);
+
+	// 	// print(first + second * 0x100);
+	// }
 
 	// print(dump(indexBuffer));
 
