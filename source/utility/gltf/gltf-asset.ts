@@ -44,13 +44,13 @@ export class GltfAsset {
 	 * `Accessor`.
 	 * NOTE: To avoid any unnessary copies, the data is returned as a `Uint8Array` instead of an `ArrayBuffer`.
 	 */
-	async bufferViewData(index: GlTfId): Promise<Uint8Array> {
+	bufferViewData(index: GlTfId): Uint8Array {
 		if (!this.gltf.bufferViews) {
 			/* istanbul ignore next */
 			throw new Error("No buffer views found.");
 		}
 		const bufferView = this.gltf.bufferViews[index];
-		const bufferData = await this.bufferData.get(bufferView.buffer);
+		const bufferData = this.bufferData.get(bufferView.buffer);
 		const byteLength = bufferView.byteLength || 0;
 		const byteOffset = bufferView.byteOffset || 0;
 
@@ -72,7 +72,7 @@ export class GltfAsset {
 	 * - `accessor.bufferView` is undefined: create a buffer initialized with zeroes.
 	 * - `accessor.sparse` is defined: Copy underlying buffer view and apply values from `sparse`.
 	 */
-	async accessorData(index: GlTfId): Promise<Uint8Array> {
+	accessorData(index: GlTfId): Uint8Array {
 		if (!this.gltf.accessors) {
 			/* istanbul ignore next */
 			throw new Error("No accessors views found.");
@@ -81,7 +81,7 @@ export class GltfAsset {
 		const elementsPerType = GLTF_ELEMENTS_PER_TYPE[acc.type];
 		let data;
 		if (acc.bufferView !== undefined) {
-			data = await this.bufferViewData(acc.bufferView);
+			data = this.bufferViewData(acc.bufferView);
 		} else {
 			const byteSize =
 				GLTF_COMPONENT_TYPE_ARRAYS[acc.componentType]
@@ -95,7 +95,7 @@ export class GltfAsset {
 			// parse sparse data
 			const { count, indices, values } = acc.sparse;
 			let typedArray = GLTF_COMPONENT_TYPE_ARRAYS[indices.componentType];
-			let bufferViewData = await this.bufferViewData(indices.bufferView);
+			let bufferViewData = this.bufferViewData(indices.bufferView);
 			const indexData = new typedArray(
 				bufferViewData.buffer,
 				bufferViewData.byteOffset + (indices.byteOffset || 0),
@@ -103,9 +103,9 @@ export class GltfAsset {
 			);
 
 			typedArray = GLTF_COMPONENT_TYPE_ARRAYS[acc.componentType];
-			bufferViewData = await this.bufferViewData(values.bufferView);
+			bufferViewData = this.bufferViewData(values.bufferView);
 			const valueData = new typedArray(
-				(await this.bufferViewData(values.bufferView)).buffer,
+				this.bufferViewData(values.bufferView).buffer,
 				bufferViewData.byteOffset + (values.byteOffset || 0),
 				count * elementsPerType
 			);
@@ -131,8 +131,8 @@ export class GltfAsset {
 	}
 
 	/** Pre-fetches all buffer and image data. Useful to avoid stalls due to lazy loading. */
-	async preFetchAll(): Promise<void[][]> {
-		return Promise.all([this.bufferData.preFetchAll()]);
+	preFetchAll(): void[][] {
+		return [this.bufferData.preFetchAll()];
 	}
 }
 
