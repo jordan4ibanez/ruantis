@@ -48,7 +48,7 @@ function setUpData() {
 	});
 
 	c_0_0.blocks.push({
-		pos: new Vec3(8, 1, 4),
+		pos: new Vec3(8, 1, 10),
 		block: "tree",
 	});
 
