@@ -47,6 +47,11 @@ function setUpData() {
 		param2: 2,
 	});
 
+	c_0_0.bocks.push({
+		pos: new Vec3(8, 1, 4),
+		block: "tree",
+	});
+
 	add(c_0_0);
 }
 
