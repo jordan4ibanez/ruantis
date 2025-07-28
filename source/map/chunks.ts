@@ -2,7 +2,8 @@ import { afterClientJoins } from "../logic/client_join_leave";
 import { numberToBinary } from "../utility/bitmanip";
 import { Drawtype } from "../utility/enums";
 import { parseJson, readFileToString } from "../utility/file";
-import { GltfLoader } from "../utility/gltf/gltf-loader";
+import { GlTf } from "../utility/gltf/gltf";
+import { GltfAsset, GltfLoader } from "../utility/gltf/gltf-loader";
 import { Vec3 } from "../utility/vector";
 
 core.register_node(":chunk_template", {
@@ -23,9 +24,13 @@ core.register_on_mods_loaded(() => {
 
 	// JSON.parse(t + "/models/chunk_0_0.gltf");
 
-	const loader = new GltfLoader();
+	// const loader = new GltfLoader();
 
-	loader.load(t + "/models/chunk_0_0.gltf");
+	// const gltf: GltfAsset = loader.load(t + "/models/chunk_0_0.gltf");
+
+	// print(dump(gltf.accessorData(0)));
+
+	// print(dump(gltf.bufferViewData(0)));
 
 	// const jData = parseJson(t + "/models/chunk_0_0.gltf");
 
