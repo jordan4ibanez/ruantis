@@ -1,10 +1,12 @@
 import { Drawtype, Nodeboxtype } from "../../utility/enums";
-import { registerBlock } from "../block_database";
+import { registerBlock, setBlock } from "../block_database";
 
 const treeCbox: NodeBox = {
 	type: Nodeboxtype.fixed,
 	fixed: [-0.5, -0.5, -0.5, 0.5, 3, 0.5],
 };
+
+const TREE_MINE = "tree_mine";
 
 registerBlock({
 	name: "tree",
@@ -14,6 +16,39 @@ registerBlock({
 	pointable: true,
 	collision_box: treeCbox,
 	selection_box: treeCbox,
+
+	on_punch: (pos) => {
+		const meta = core.get_meta(pos);
+		let mine = meta.get_int(TREE_MINE);
+
+		if (mine == 0) {
+			mine = 10;
+			meta.set_int(TREE_MINE, mine);
+			return;
+		}
+
+		print(mine);
+
+		mine -= 1;
+		meta.set_int(TREE_MINE, mine);
+
+		if (mine == 1) {
+			setBlock(pos, "tree_stump");
+			core.get_node_timer(pos).start(1);
+		}
+	},
+});
+
+registerBlock({
+	name: "tree_stump",
+	drawtype: Drawtype.mesh,
+	mesh: "tree_stump.gltf",
+	tiles: ["tree_stump.png"],
+	on_timer: (pos) => {
+		setBlock(pos, "tree");
+		const meta = core.get_meta(pos);
+		meta.set_int(TREE_MINE, 10);
+	},
 });
 
 /**
