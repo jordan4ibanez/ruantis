@@ -1,19 +1,7 @@
-import { afterClientJoins } from "../../logic/client_join_leave";
-import { Drawtype, ParamType2 } from "../../utility/enums";
 import { Vec3 } from "../../utility/vector";
 import { setBlock } from "../block_database";
 import { ____automation_internal_only_automate_set_up_chunks } from "./auto_chunk_data";
-
-interface PlacementData {
-	pos: Vec3;
-	block: string;
-	param2?: number;
-}
-
-export interface Chunk {
-	pos: Vec3;
-	blocks: PlacementData[];
-}
+import { Chunk } from "./chunk";
 
 const chunkDatabase = new Map<Vec3, Chunk>();
 
