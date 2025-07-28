@@ -26,23 +26,23 @@ const URI_MEDIATYPES = [
 	"data:image/jpeg;base64,",
 ];
 
-// local function resolveURI(uri, basePath)
-// 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs
-// 	if uri:sub(1, 5) == "data:" then
-// 		local b64offset
-// 		for _, h in pairs(URI_MEDIATYPES) do
-// 			if uri:sub(1, h:len()) == h then
-// 				b64offset = h:len() + 1
-// 			end
-// 		end
-// 		if b64offset == nil then
-// 			error("illegal mediatype")
-// 			//[[ "When data: URI is used for buffer storage, its
-// 			mediatype field MUST be set to application/octet-stream
-// 			or application/gltf-buffer." ]]
-// 		end
-// 		return base64.decode(uri:sub(b64offset))
-// 	end
+local function resolveURI(uri, basePath)
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs
+	if uri:sub(1, 5) == "data:" then
+		local b64offset
+		for _, h in pairs(URI_MEDIATYPES) do
+			if uri:sub(1, h:len()) == h then
+				b64offset = h:len() + 1
+			end
+		end
+		if b64offset == nil then
+			error("illegal mediatype")
+			//[[ "When data: URI is used for buffer storage, its
+			mediatype field MUST be set to application/octet-stream
+			or application/gltf-buffer." ]]
+		end
+		return base64.decode(uri:sub(b64offset))
+	end
 
 // 	// URI ABNF: https://datatracker.ietf.org/doc/html/rfc3986#appendix-A
 // 	uri = unescapePercent(uri)
