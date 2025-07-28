@@ -52,6 +52,11 @@ function setUpData() {
 		block: "tree",
 	});
 
+	c_0_0.blocks.push({
+		pos: new Vec3(8, 1, 4),
+		block: "ore",
+	});
+
 	add(c_0_0);
 }
 
