@@ -13,6 +13,54 @@ registerBlock({
 	},
 });
 
+registerBlock({
+	name: "ore_coal",
+	drawtype: Drawtype.mesh,
+	mesh: "ore.gltf",
+	tiles: ["ore_base.png", "ore_coal.png"],
+	collision_box: {
+		type: Nodeboxtype.fixed,
+		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
+	},
+	pointable: true,
+});
+
+registerBlock({
+	name: "ore_copper",
+	drawtype: Drawtype.mesh,
+	mesh: "ore.gltf",
+	tiles: ["ore_base.png", "ore_copper.png"],
+	collision_box: {
+		type: Nodeboxtype.fixed,
+		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
+	},
+	pointable: true,
+});
+
+registerBlock({
+	name: "ore_tin",
+	drawtype: Drawtype.mesh,
+	mesh: "ore.gltf",
+	tiles: ["ore_base.png", "ore_tin.png"],
+	collision_box: {
+		type: Nodeboxtype.fixed,
+		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
+	},
+	pointable: true,
+});
+
+registerBlock({
+	name: "ore_iron",
+	drawtype: Drawtype.mesh,
+	mesh: "ore.gltf",
+	tiles: ["ore_base.png", "ore_iron.png"],
+	collision_box: {
+		type: Nodeboxtype.fixed,
+		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
+	},
+	pointable: true,
+});
+
 /**
  * Tree-shake removal function.
  *
