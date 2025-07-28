@@ -57,6 +57,26 @@ function setUpData() {
 		block: "ore",
 	});
 
+	c_0_0.blocks.push({
+		pos: new Vec3(9, 1, 4),
+		block: "ore_coal",
+	});
+
+	c_0_0.blocks.push({
+		pos: new Vec3(10, 1, 4),
+		block: "ore_copper",
+	});
+
+	c_0_0.blocks.push({
+		pos: new Vec3(11, 1, 4),
+		block: "ore_tin",
+	});
+
+	c_0_0.blocks.push({
+		pos: new Vec3(12, 1, 4),
+		block: "ore_iron",
+	});
+
 	add(c_0_0);
 }
 
