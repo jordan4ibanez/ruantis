@@ -37,7 +37,7 @@ function setUpData() {
 
 	c_0_0.bocks.push({
 		pos: new Vec3(5, 1, 5),
-		block: "stone_stair",
+		block: "fountain",
 		param2: 2,
 	});
 
