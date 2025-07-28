@@ -7,7 +7,7 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 		blocks: [
 			{
 				pos: new Vec3(0, 0, 0),
-				block: "grass_1",
+				block: "grass_2",
 				param2: 0,
 			},
 			{
@@ -1004,11 +1004,6 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				pos: new Vec3(11, 1, 6),
 				block: "grass_3",
 				param2: 0,
-			},
-			{
-				pos: new Vec3(11, 2, 6),
-				block: "stone_stair",
-				param2: 1,
 			},
 			{
 				pos: new Vec3(12, 0, 0),
