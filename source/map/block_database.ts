@@ -18,6 +18,13 @@ export function registerBlock(def: BlockDef): void {
 	def.light_source = 14;
 	def.sunlight_propagates = true;
 
+	if (devMode) {
+		if (def.groups == null) {
+			def.groups = {};
+		}
+		def.groups.dev_mine = 1;
+	}
+
 	core.register_node(":" + def.name, def);
 	blockDatabase.set(def.name, def);
 }
