@@ -1,5 +1,10 @@
 import { serverTickRate } from "../../logic/tick";
-import { Drawtype, Nodeboxtype, TextureAlpha } from "../../utility/enums";
+import {
+	Drawtype,
+	Nodeboxtype,
+	SchematicSerializationOption,
+	TextureAlpha,
+} from "../../utility/enums";
 import { Vec3 } from "../../utility/vector";
 import { registerBlock, setBlock } from "../block_database";
 
@@ -13,9 +18,15 @@ registerBlock({
 		type: Nodeboxtype.fixed,
 		fixed: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 	},
+	on_timer: (pos) => {
+		const meta = core.get_meta(pos);
+		let oldOre = meta.get_string(OLD_ORE);
+		setBlock(pos, `ore_${oldOre}`);
+	},
 });
 
 const ORE_MINE = "ore_mine";
+const OLD_ORE = "old_ore";
 
 function on_dig(pos: Vec3) {
 	const meta = core.get_meta(pos);
@@ -31,15 +42,16 @@ function on_dig(pos: Vec3) {
 
 	core.sound_play("tree_chop", { pos: pos });
 
-	print(core.get_node(pos).name.substring(4));
+	const oreType = core.get_node(pos).name.substring(4);
 
 	// Could do an axe calculation here.
 	if (math.random(1, 1000) > 900) {
-		print("got ore");
+		print(`got ${oreType}`);
 	}
 
 	if (mine == 1) {
 		setBlock(pos, "ore");
+		meta.set_string(OLD_ORE, oreType);
 		core.get_node_timer(pos).start(serverTickRate * math.random(3, 10));
 	}
 }
