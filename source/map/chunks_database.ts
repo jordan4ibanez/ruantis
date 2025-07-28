@@ -81,13 +81,12 @@ function setUpData() {
 }
 
 function processData() {
+	const root = new Vec3();
+	const work = new Vec3();
 	for (const c of chunkDatabase.values()) {
-		const root = new Vec3();
 		root.x = c.pos.x * 16;
 		root.y = c.pos.y * 16;
 		root.z = c.pos.z * 16;
-
-		const work = new Vec3();
 
 		if (!core.forceload_block(root, false, -1)) {
 			throw new Error(`Failed to force load chunk ${work.toString()}`);
