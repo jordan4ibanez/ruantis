@@ -86,6 +86,9 @@ function setUpPlayer(client: ObjectRef): void {
 	client.set_moon({
 		visible: false,
 	});
+	client.set_stars({
+		visible: false,
+	});
 }
 
 whenClientJoins((client) => {
