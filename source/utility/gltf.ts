@@ -1,12 +1,12 @@
 local gltf = {}
 
-gltf.componentTypes = {               -- (little endian)
-	[5120] = {size = 1, fmt = "<b"},  -- signed byte
-	[5121] = {size = 1, fmt = "<B"},  -- unsigned byte
-	[5122] = {size = 2, fmt = "<i2"}, -- signed short
-	[5123] = {size = 2, fmt = "<I2"}, -- unsigned short
-	[5125] = {size = 4, fmt = "<I4"}, -- unsigned int
-	[5126] = {size = 4, fmt = "<f"},  -- float
+gltf.componentTypes = {               // (little endian)
+	[5120] = {size = 1, fmt = "<b"},  // signed byte
+	[5121] = {size = 1, fmt = "<B"},  // unsigned byte
+	[5122] = {size = 2, fmt = "<i2"}, // signed short
+	[5123] = {size = 2, fmt = "<I2"}, // unsigned short
+	[5125] = {size = 4, fmt = "<I4"}, // unsigned int
+	[5126] = {size = 4, fmt = "<f"},  // float
 }
 
 // local json = require("cjson")
@@ -23,7 +23,7 @@ gltf.componentTypes = {               -- (little endian)
 // 	"data:image/jpeg;base64,"
 // }
 // local function resolveURI(uri, basePath)
-// 	-- https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs
+// 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs
 // 	if uri:sub(1, 5) == "data:" then
 // 		local b64offset
 // 		for _, h in pairs(URI_MEDIATYPES) do
@@ -33,14 +33,14 @@ gltf.componentTypes = {               -- (little endian)
 // 		end
 // 		if b64offset == nil then
 // 			error("illegal mediatype")
-// 			--[[ "When data: URI is used for buffer storage, its
+// 			//[[ "When data: URI is used for buffer storage, its
 // 			mediatype field MUST be set to application/octet-stream
 // 			or application/gltf-buffer." ]]
 // 		end
 // 		return base64.decode(uri:sub(b64offset))
 // 	end
 
-// 	-- URI ABNF: https://datatracker.ietf.org/doc/html/rfc3986#appendix-A
+// 	// URI ABNF: https://datatracker.ietf.org/doc/html/rfc3986#appendix-A
 // 	uri = unescapePercent(uri)
 // 	local nzncend = (uri:find("/")) or 0
 // 	local firstcolon = (uri:find(":")) or 0
@@ -59,7 +59,7 @@ gltf.componentTypes = {               -- (little endian)
 // 	end
 
 // 	local assetMeta = getmetatable(getmetatable(buffer).asset)
-// 	if buffer.uri == nil and assetMeta.bin then -- GLB stored buffer
+// 	if buffer.uri == nil and assetMeta.bin then // GLB stored buffer
 // 		return assetMeta.bin
 // 	end
 // 	local data = resolveURI(buffer.uri, assetMeta.basePath)
@@ -192,8 +192,8 @@ gltf.componentTypes = {               -- (little endian)
 
 // 	local asset, bin
 // 	if file:sub(1, 4) == "glTF" then
-// 		assert(string.unpack("<I4", file, 5) == 2, "incompatible glTF verison") -- version
-// 		assert(string.unpack("<I4", file, 9) == file:len()) -- length
+// 		assert(string.unpack("<I4", file, 5) == 2, "incompatible glTF verison") // version
+// 		assert(string.unpack("<I4", file, 9) == file:len()) // length
 // 		local GLTF_HEADER_SZ = 12
 // 		local CHUNK_HEADER_SZ = 8
 // 		assert(file:len() >= GLTF_HEADER_SZ + CHUNK_HEADER_SZ)
@@ -386,12 +386,12 @@ gltf.componentTypes = {               -- (little endian)
 
 // 	for _, texture in pairs(asset.textures or {}) do
 // 		if texture.sampler then
-// 			texture.sampler = asset.samplers[texture.sampler + 1] --[[ TODO:
+// 			texture.sampler = asset.samplers[texture.sampler + 1] //[[ TODO:
 // 			"When undefined, a sampler with repeat wrapping and auto filtering
 // 			SHOULD be used." ]]
 // 		end
 // 		if texture.source then
-// 			texture.source = asset.images[texture.source + 1] --[[ TODO:
+// 			texture.source = asset.images[texture.source + 1] //[[ TODO:
 // 			"When undefined, an extension or other mechanism SHOULD supply
 // 			an alternate texture source, otherwise behavior is undefined." ]]
 // 		end
