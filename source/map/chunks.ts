@@ -1,9 +1,5 @@
 import { afterClientJoins } from "../logic/client_join_leave";
-import { numberToBinary } from "../utility/bitmanip";
 import { Drawtype } from "../utility/enums";
-import { parseJson, readFileToString } from "../utility/file";
-import { GlTf } from "../utility/gltf/gltf";
-import { GltfAsset, GltfLoader } from "../utility/gltf/gltf-loader";
 import { Vec3 } from "../utility/vector";
 
 core.register_node(":chunk_template", {
