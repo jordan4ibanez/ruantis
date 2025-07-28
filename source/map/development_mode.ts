@@ -29,6 +29,18 @@ if (devMode) {
 		});
 	});
 
+	core.register_chatcommand("floor", {
+		params: "",
+		description: "",
+		privs: { server: true },
+		func: function (
+			name: string,
+			param: string
+		): LuaMultiReturn<[boolean, string]> | void {
+			
+		},
+	});
+
 	core.register_chatcommand("save", {
 		params: "",
 		description: "",
