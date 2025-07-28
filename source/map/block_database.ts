@@ -1,5 +1,6 @@
 import { ShallowVector3 } from "../../minetest-api";
 import { BlockDef } from "./block_def";
+import { devMode } from "./development_mode";
 
 //! This file is mainly for invisible shapes.
 
@@ -11,7 +12,7 @@ export function registerBlock(def: BlockDef): void {
 	}
 
 	def.drop = "";
-	if (def.pointable == null) {
+	if (def.pointable == null && !devMode) {
 		def.pointable = false;
 	}
 	def.light_source = 14;
