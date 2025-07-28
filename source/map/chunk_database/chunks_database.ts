@@ -9,7 +9,7 @@ export function ____automation_internal_only_add_chunk(chunk: Chunk) {
 	chunkDatabase.set(chunk.pos, chunk);
 }
 
-function processData() {
+export function __automation_internal_only_processData() {
 	const root = new Vec3();
 	const work = new Vec3();
 	for (const c of chunkDatabase.values()) {
@@ -44,14 +44,6 @@ function processData() {
 		core.forceload_free_block(root, false);
 	}
 }
-
-function deployWorld() {
-	core.after(0, () => {
-		processData();
-	});
-}
-
-core.register_on_mods_loaded(deployWorld);
 
 /**
  * Tree-shake removal function.
