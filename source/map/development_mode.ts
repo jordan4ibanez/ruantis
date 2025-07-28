@@ -10,7 +10,7 @@
 
 import { ShallowVector3 } from "../../minetest-api";
 import { afterClientJoins } from "../logic/client_join_leave";
-import { HudElementType } from "../utility/enums";
+import { HudElementType, LogLevel } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 
 export const devMode = true;
@@ -56,6 +56,12 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 					throw new Error("Serialization error?");
 				}
 
+				if (!core.forceload_block(chunkPosRoot, false, -1)) {
+					throw new Error(
+						`Failed to force load chunk ${chunkPosRoot.toString()}`
+					);
+				}
+
 				for (const x of $range(0, 15)) {
 					for (const y of $range(0, 15)) {
 						for (const z of $range(0, 15)) {
@@ -64,9 +70,22 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 							worker.z = z + chunkPosRoot.z;
 
 							const dat: NodeTable = core.get_node(worker);
+
+							if (dat.name == "unknown" || dat.name == "ignore") {
+								core.log(
+									LogLevel.error,
+									"Engine is producing ub"
+								);
+							}
+
+							if (dat.name == "air") {
+								continue;
+							}
 						}
 					}
 				}
+
+				core.forceload_free_block(chunkPosRoot, false);
 			}
 			saveString.push("}");
 
