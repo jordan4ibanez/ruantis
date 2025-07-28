@@ -16,7 +16,7 @@ interface Chunk {
 
 const chunkDatabase = new Map<Vec3, Chunk>();
 
-function add(chunk: Chunk) {
+export function ____automation_internal_only_add_chunk(chunk: Chunk) {
 	chunkDatabase.set(chunk.pos, chunk);
 }
 
@@ -77,7 +77,7 @@ function setUpData() {
 		block: "ore_iron",
 	});
 
-	add(c_0_0);
+	____automation_internal_only_add_chunk(c_0_0);
 }
 
 function processData() {
