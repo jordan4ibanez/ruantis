@@ -97,23 +97,8 @@ export class GltfLoader {
 		return asset;
 	}
 
-	private async parse(data: ArrayBuffer, path: string): Promise<GltfAsset> {
-		let content: string;
-		// tslint:disable-next-line:no-unnecessary-initializer
-		let glbData: GLTFBinaryData | undefined = undefined;
-		if (typeof data === "string") {
-			content = data;
-		} else {
-			const magic = LoaderUtils.decodeText(new Uint8Array(data, 0, 4));
-			if (magic === BINARY_HEADER_MAGIC) {
-				glbData = new GLTFBinaryData(data);
-				content = glbData.json;
-			} else {
-				content = LoaderUtils.decodeText(new Uint8Array(data));
-			}
-		}
-
-		const json = JSON.parse(content);
+	private parse(path: string): GltfAsset {
+		const json = parseJson(path);
 
 		if (json.asset === undefined || json.asset.version[0] < 2) {
 			throw new Error(
@@ -121,6 +106,6 @@ export class GltfLoader {
 			);
 		}
 
-		return new GltfAsset(json, path, glbData, this.manager);
+		return new GltfAsset(json, path, undefined, this.manager);
 	}
 }
