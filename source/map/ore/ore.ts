@@ -40,7 +40,7 @@ function on_dig(pos: Vec3) {
 	mine -= 1;
 	meta.set_int(ORE_MINE, mine);
 
-	core.sound_play("tree_chop", { pos: pos });
+	core.sound_play("ore_mine", { pos: pos });
 
 	const oreType = core.get_node(pos).name.substring(4);
 
