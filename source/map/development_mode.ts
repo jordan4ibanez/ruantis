@@ -29,8 +29,6 @@ if (devMode) {
 		});
 	});
 
-	let saveString = "";
-
 	core.register_chatcommand("save", {
 		params: "",
 		description: "",
@@ -40,6 +38,16 @@ if (devMode) {
 			param: string
 		): LuaMultiReturn<[boolean, string]> | void {
 			const worker = new Vec3();
+
+			// Create the __auto_chunk_data.ts file.
+			const saveString: string[] = [
+				`import { Vec3 } from "../../utility/vector";
+import { Chunk } from "./chunk";
+import { ____automation_internal_only_add_chunk } from "./chunks_database";
+
+export function ____automation_internal_only_automate_set_up_chunks() {
+`,
+			];
 
 			for (const cPosHash of __live_map_chunks) {
 				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
@@ -60,8 +68,11 @@ if (devMode) {
 					}
 				}
 			}
+			saveString.push("}");
 
-			// throw new Error("Function not implemented.");
+			print(saveString.join(""));
+
+			// print(saveString);
 		},
 	});
 
