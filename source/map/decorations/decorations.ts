@@ -1,4 +1,4 @@
-import { Drawtype, Nodeboxtype } from "../../utility/enums";
+import { Drawtype, Nodeboxtype, ParamType2 } from "../../utility/enums";
 import { registerBlock } from "../block_database";
 
 registerBlock({
@@ -15,6 +15,7 @@ registerBlock({
 registerBlock({
 	name: "log_sideways",
 	drawtype: Drawtype.mesh,
+	paramtype2: ParamType2["4dir"],
 	mesh: "log_sideways.gltf",
 	tiles: ["log_sideways.png"],
 });
