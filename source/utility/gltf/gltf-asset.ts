@@ -28,8 +28,6 @@ export class GltfAsset {
 	glbData: GLTFBinaryData | undefined;
 	/** Helper for accessing buffer data */
 	bufferData: BufferData;
-	/** Helper for accessing image data */
-	imageData: ImageData;
 
 	constructor(
 		gltf: GlTf,
@@ -39,7 +37,6 @@ export class GltfAsset {
 		this.gltf = gltf;
 		this.glbData = glbData;
 		this.bufferData = new BufferData(this, baseUri);
-		this.imageData = new ImageData(this, baseUri);
 	}
 
 	/**
@@ -135,10 +132,7 @@ export class GltfAsset {
 
 	/** Pre-fetches all buffer and image data. Useful to avoid stalls due to lazy loading. */
 	async preFetchAll(): Promise<void[][]> {
-		return Promise.all([
-			this.bufferData.preFetchAll(),
-			this.imageData.preFetchAll(),
-		]);
+		return Promise.all([this.bufferData.preFetchAll()]);
 	}
 }
 
@@ -161,38 +155,12 @@ export class BufferData {
 	 * To avoid any delays, use `preFetchAll` to pre-fetch everything.
 	 * NOTE: To avoid any unnessary copies, the data is returned as a `Uint8Array` instead of an `ArrayBuffer`.
 	 */
-	async get(index: GlTfId): Promise<Uint8Array> {
+	get(index: GlTfId): Uint8Array {
 		if (this.bufferCache[index] !== undefined) {
 			return this.bufferCache[index];
+		} else {
+			throw new Error("External .bin not supported.");
 		}
-
-		const gltf = this.asset.gltf;
-		if (!gltf.buffers) {
-			/* istanbul ignore next */
-			throw new Error("No buffers found.");
-		}
-		const buffer = gltf.buffers[index];
-		// If present, GLB container is required to be the first buffer.
-		if (buffer.uri === undefined) {
-			/* istanbul ignore next */
-			if (index !== 0) {
-				throw new Error(
-					"GLB container is required to be the first buffer"
-				);
-			}
-			if (this.asset.glbData === undefined) {
-				throw new Error(
-					"invalid gltf: buffer has no uri nor is there a GLB buffer"
-				);
-			}
-			return this.asset.glbData.binaryChunk;
-		}
-
-		const url = resolveURL(buffer.uri, this.baseUri);
-		const bufferData: ArrayBuffer = await this.loader.load(url);
-		const bufferDataView = new Uint8Array(bufferData);
-		this.bufferCache[index] = bufferDataView;
-		return bufferDataView;
 	}
 
 	/** Pre-fetches all buffer data. */
@@ -205,27 +173,4 @@ export class BufferData {
 			void[]
 		>;
 	}
-}
-
-
-// TODO!!: function required in this form?
-export function resolveURL(url: string, path: string) {
-	// Invalid URL
-	if (typeof url !== "string" || url === "") {
-		return "";
-	}
-	// Absolute URL http://,https://,//
-	if (/^(https?:)?\/\//i.test(url)) {
-		return url;
-	}
-	// Data URI
-	if (/^data:.*,.*$/i.test(url)) {
-		return url;
-	}
-	// Blob URL
-	if (/^blob:.*$/i.test(url)) {
-		return url;
-	}
-	// Relative URL
-	return path + url;
 }
