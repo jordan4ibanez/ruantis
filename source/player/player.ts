@@ -33,6 +33,10 @@ function setUpPlayer(client: ObjectRef): void {
 		minimap: true,
 	});
 
+	client.set_properties({
+		stepheight: 0.25,
+	});
+
 	client.set_physics_override({
 		speed: 1,
 		jump: 0,

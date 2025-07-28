@@ -66,7 +66,7 @@ function processData() {
 			work.y = root.y + b.pos.y;
 			work.z = root.z + b.pos.z;
 
-			print(dump(work));
+			// print(dump(work));
 
 			// print(dump(work));
 			setBlock(work, b.block);
