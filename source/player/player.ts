@@ -4,15 +4,25 @@ import {
 	whenClientLeaves,
 } from "../logic/client_join_leave";
 import { registerClientTickFunction, serverTickRate } from "../logic/tick";
+import { devMode } from "../map/development_mode";
 import { HudElementType, SkyParametersType } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 
+let devMine;
+if (devMode) {
+	devMine = {
+		times: {
+			1: 0,
+		},
+	};
+}
+
 core.override_item("", {
-	range: 3,
+	range: devMode ? 100 : 3,
+
 	tool_capabilities: {
 		groupcaps: {
 			mine: {
-				uses: 20,
 				times: {
 					1: serverTickRate,
 					2: serverTickRate * 2,
@@ -24,6 +34,7 @@ core.override_item("", {
 					8: serverTickRate * 8,
 				},
 			},
+			dev_mine: devMine,
 		},
 	},
 });
