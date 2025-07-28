@@ -47,7 +47,6 @@ function processData() {
 
 function deployWorld() {
 	core.after(0, () => {
-		____automation_internal_only_automate_set_up_chunks();
 		processData();
 	});
 }
