@@ -11,7 +11,7 @@
 import { ShallowVector3 } from "../../minetest-api";
 import { afterClientJoins } from "../logic/client_join_leave";
 import { HudElementType, LogLevel } from "../utility/enums";
-import { Vec3 } from "../utility/vector";
+import { Vec2, Vec3 } from "../utility/vector";
 
 export const devMode = true;
 
@@ -26,6 +26,8 @@ if (devMode) {
 		client.hud_add({
 			type: HudElementType.text,
 			text: "DEVELOPER MODE",
+			offset: new Vec2(100, 100),
+			style: 2,
 		});
 	});
 
