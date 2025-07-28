@@ -164,13 +164,11 @@ export class BufferData {
 	}
 
 	/** Pre-fetches all buffer data. */
-	async preFetchAll(): Promise<void[]> {
+	preFetchAll(): void[] {
 		const buffers = this.asset.gltf.buffers;
 		if (!buffers) {
 			return [];
 		}
-		return Promise.all(buffers.map((_, i): any => this.get(i))) as Promise<
-			void[]
-		>;
+		return buffers.map((_, i): any => this.get(i));
 	}
 }
