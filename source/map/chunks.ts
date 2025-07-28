@@ -107,7 +107,7 @@ core.register_on_mods_loaded(() => {
 
 	// print(rawIndexBufferData.substring(vIndicOffset, vIndicOffset + 20));
 
-	print(rawIndexBufferData.at(0));
+	// print(string.sub(rawIndexBufferData, 1, 3));
 
 	for (
 		let i = vIndicOffset + 1;
@@ -115,14 +115,16 @@ core.register_on_mods_loaded(() => {
 		i += 2 // ushort
 	) {
 		// print(rawIndexBufferData.substring(i, i + 1));
-		const firstChar = rawIndexBufferData.substring(i, i + 1);
-		let first: number = string.byte(firstChar);
 
-		const second: number = string.byte(
-			rawIndexBufferData.substring(i + 1, i + 2)
-		);
+		let first: number = string.byte(rawIndexBufferData, i);
+		const second: number = string.byte(rawIndexBufferData, i + 1);
 
-		print(numberToBinary(first, 16), first, firstChar);
+		first = first << 8;
+		const third = first | second;
+
+		print(numberToBinary(third, 16), third);
+
+		// print(numberToBinary(second, 16), second, secondChar);
 
 		// print(first + second * 0x100);
 	}
