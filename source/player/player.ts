@@ -34,7 +34,7 @@ function setUpPlayer(client: ObjectRef): void {
 	});
 
 	client.set_properties({
-		stepheight: 0.25,
+		stepheight: 0.255,
 	});
 
 	client.set_physics_override({
