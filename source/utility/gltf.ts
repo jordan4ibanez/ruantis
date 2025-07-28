@@ -1,13 +1,14 @@
-local gltf = {}
+// local gltf = {}
 
-gltf.componentTypes = {               // (little endian)
-	[5120] = {size = 1, fmt = "<b"},  // signed byte
-	[5121] = {size = 1, fmt = "<B"},  // unsigned byte
-	[5122] = {size = 2, fmt = "<i2"}, // signed short
-	[5123] = {size = 2, fmt = "<I2"}, // unsigned short
-	[5125] = {size = 4, fmt = "<I4"}, // unsigned int
-	[5126] = {size = 4, fmt = "<f"},  // float
-}
+export const componentTypes = {
+	// (little endian)
+	[5120]: { size: 1, fmt: "<b" }, // signed byte
+	[5121]: { size: 1, fmt: "<B" }, // unsigned byte
+	[5122]: { size: 2, fmt: "<i2" }, // signed short
+	[5123]: { size: 2, fmt: "<I2" }, // unsigned short
+	[5125]: { size: 4, fmt: "<I4" }, // unsigned int
+	[5126]: { size: 4, fmt: "<f" }, // float
+};
 
 // local json = require("cjson")
 // local base64 = require("base64")
