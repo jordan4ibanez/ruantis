@@ -29,8 +29,12 @@ export function getBlockDef(name: string): BlockDef {
 	return out;
 }
 
-export function setBlock(pos: ShallowVector3, name: string): void {
-	core.set_node(pos, { name: name });
+export function setBlock(
+	pos: ShallowVector3,
+	name: string,
+	param2?: number
+): void {
+	core.set_node(pos, { name: name, param2: param2 });
 }
 
 /**
