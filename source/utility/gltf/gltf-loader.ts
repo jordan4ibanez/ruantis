@@ -18,15 +18,19 @@ export class GltfLoader {
 	 * are loaded lazily when needed. To load all, you can use `GltfAsset.preFetchAll()`
 	 */
 	load(url: string): GltfAsset {
-		const path = LoaderUtils.extractUrlBase(url);
-
-		return this.parse(path);
+		// const path = LoaderUtils.extractUrlBase(url);
+		// print(path);
+		return this.parse(url);
 	}
 
 	private parse(path: string): GltfAsset {
 		const json = parseJson(path);
 
-		if (json.asset === undefined || json.asset.version[0] < 2) {
+		// print(dump(json));
+		// print(tonumber(json.asset.version));
+
+		const v = tonumber(json?.asset?.version || "0") || 0;
+		if (json.asset === undefined || v < 2) {
 			throw new Error(
 				"Unsupported asset. glTF versions >=2.0 are supported."
 			);
