@@ -1,1 +1,2 @@
 tree_chop: https://freesound.org/people/birdswkaren/sounds/712099/
+ore_mine: https://freesound.org/people/CaptainYulef/sounds/638696/
