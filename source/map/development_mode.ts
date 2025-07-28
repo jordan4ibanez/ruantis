@@ -92,9 +92,13 @@ export function ____automation_internal_only_automate_set_up_chunks() {`,
 				for (const x of $range(0, 15)) {
 					for (const y of $range(0, 15)) {
 						for (const z of $range(0, 15)) {
-							worker.x = x + chunkPosRoot.x;
-							worker.y = y + chunkPosRoot.y;
-							worker.z = z + chunkPosRoot.z;
+							const xRoot = chunkPosRoot.x * 16;
+							const yRoot = chunkPosRoot.y * 16;
+							const zRoot = chunkPosRoot.z * 16;
+
+							worker.x = x + xRoot;
+							worker.y = y + yRoot;
+							worker.z = z + zRoot;
 
 							const dat: NodeTable = core.get_node(worker);
 
@@ -111,7 +115,7 @@ export function ____automation_internal_only_automate_set_up_chunks() {`,
 
 							saveString.push(`
 			{
-				pos: new Vec3(${worker.x}, ${worker.y}, ${worker.z}),
+				pos: new Vec3(${x}, ${y}, ${z}),
 				block: "${dat.name}",
 				param2: ${dat.param2 || 0},
 			},`);
