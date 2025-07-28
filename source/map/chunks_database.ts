@@ -28,15 +28,28 @@ function setUpData() {
 		for (const z of $range(0, 15)) {
 			c_0_0.bocks.push({
 				pos: new Vec3(x, 0, z),
-				block: "",
+				block: "i_grass",
 			});
 		}
 	}
 	add(c_0_0);
 }
 
+function processData() {
+	for (const c of chunkDatabase.values()) {
+		const root = new Vec3();
+		root.x = c.pos.x * 16 - 1;
+		root.y = c.pos.y * 16 - 1;
+		root.z = c.pos.z * 16 - 1;
+		
+
+		print(dump(c));
+	}
+}
+
 function deployWorld() {
 	setUpData();
+	processData();
 }
 
 core.register_on_mods_loaded(deployWorld);
