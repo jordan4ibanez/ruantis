@@ -18,6 +18,8 @@ export function registerBlock(def: BlockDef): void {
 	def.light_source = 14;
 	def.sunlight_propagates = true;
 
+	// todo: if not dev mode and a player punches an unpunchable block, kick them.
+
 	if (devMode) {
 		if (def.groups == null) {
 			def.groups = {};
