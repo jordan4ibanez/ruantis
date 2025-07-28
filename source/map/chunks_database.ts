@@ -69,7 +69,7 @@ function processData() {
 			// print(dump(work));
 
 			// print(dump(work));
-			setBlock(work, b.block);
+			setBlock(work, b.block, b.param2);
 			// print(dump(b));
 		}
 
