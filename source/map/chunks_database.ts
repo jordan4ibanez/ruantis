@@ -1,11 +1,12 @@
 import { afterClientJoins } from "../logic/client_join_leave";
-import { Drawtype } from "../utility/enums";
+import { Drawtype, ParamType2 } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 import { setBlock } from "./block_database";
 
 interface PlacementData {
 	pos: Vec3;
 	block: string;
+	param2?: number;
 }
 
 interface Chunk {
@@ -33,6 +34,13 @@ function setUpData() {
 			});
 		}
 	}
+
+	c_0_0.bocks.push({
+		pos: new Vec3(5, 1, 5),
+		block: "stone_stair",
+		param2: 2,
+	});
+
 	add(c_0_0);
 }
 
