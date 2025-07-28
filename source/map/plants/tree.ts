@@ -33,6 +33,11 @@ registerBlock({
 
 		core.sound_play("tree_chop", { pos: pos });
 
+		// Could do an axe calculation here.
+		if (math.random(1, 100) > 90) {
+			print("got logs");
+		}
+
 		if (mine == 1) {
 			setBlock(pos, "tree_stump");
 			core.get_node_timer(pos).start(serverTickRate * math.random(3, 10));
