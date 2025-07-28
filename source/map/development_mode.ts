@@ -149,9 +149,9 @@ export function ____automation_internal_only_automate_set_up_chunks() {`,
 
 		const cPosStr = core.serialize(new Vec3().copyFrom(pos));
 
-		if (!__live_map_chunks.has(cPosStr)) {
-			print(`Detected modification at ${pos}`);
-		}
+		// if (!__live_map_chunks.has(cPosStr)) {
+		print(`Detected modification at ${pos}`);
+		// }
 
 		__live_map_chunks.add(cPosStr);
 
