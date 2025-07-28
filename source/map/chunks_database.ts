@@ -41,6 +41,12 @@ function setUpData() {
 		param2: 2,
 	});
 
+	c_0_0.bocks.push({
+		pos: new Vec3(10, 1, 5),
+		block: "stone_stair",
+		param2: 2,
+	});
+
 	add(c_0_0);
 }
 
