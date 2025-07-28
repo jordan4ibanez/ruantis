@@ -58,4 +58,4 @@ core.register_on_mods_loaded(deployWorld);
  *
  * Never use this!
  */
-export function loadChunks(): void {}
+export function loadChunkDatabase(): void {}
