@@ -4,6 +4,7 @@ import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { getControls } from "../player/controls";
 import { LogLevel, PointedThingType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
+import { loadOutside } from "./floor/outside";
 
 const tickRate = serverTickRate;
 
@@ -31,7 +32,7 @@ registerClientTickFunction((player, delta) => {
 // End anti server explosion code.
 
 const clickCheck = new Vec3(0, 1, 0);
-function tileClick(
+export function tileClick(
 	position: ShallowVector3,
 	node: NodeTable,
 	puncher: ObjectRef | null,
@@ -80,12 +81,29 @@ core.register_node(":debug", {
 	tiles: ["ground.png"],
 });
 
-// export function registerTile(def: TileDefinition): void {
-// 	core.register_node(":" + def.name);
-// }
+interface Tile extends NodeDefinition {
+	name: string;
+}
 
+const tileDatabase = new Map<string, Tile>();
 
+export function registerTile(def: Tile): void {
+	if (tileDatabase.has(def.name)) {
+		throw new Error(`${def.name} already exists.`);
+	}
+	core.register_node(":" + def.name, def);
+	tileDatabase.set(def.name, def);
+}
 
+export function getTile(name: string): Tile {
+	const out = tileDatabase.get(name);
+	if (out == null) {
+		throw new Error(`Tile ${name} does not exist.`);
+	}
+	return out;
+}
+
+loadOutside();
 
 /**
  * Tree-shake removal function.
