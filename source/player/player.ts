@@ -4,7 +4,7 @@ import {
 	whenClientLeaves,
 } from "../logic/client_join_leave";
 import { registerClientTickFunction } from "../logic/tick";
-import { HudElementType } from "../utility/enums";
+import { HudElementType, SkyParametersType } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 
 core.override_item("", {
@@ -36,15 +36,34 @@ function setUpPlayer(client: ObjectRef): void {
 	client.set_physics_override({
 		speed: 1,
 		jump: 0,
-		gravity: 0, //10000,
+		gravity: 1000,
 		speed_climb: 0,
 		speed_crouch: 0,
 		liquid_fluidity: 0,
 		liquid_fluidity_smooth: 0,
 		liquid_sink: 0,
-		acceleration_default: 0,
+		acceleration_default: 1,
 		acceleration_air: 0,
 		sneak: false,
+	});
+
+	client.set_armor_groups({ immortal: 1 });
+
+	client.set_sky({
+		clouds: false,
+		base_color: "black",
+		fog: {
+			fog_distance: 30,
+			fog_start: 10,
+		},
+		type: SkyParametersType.plain,
+	});
+	client.set_sun({
+		visible: false,
+		sunrise_visible: false,
+	});
+	client.set_moon({
+		visible: false,
 	});
 }
 
