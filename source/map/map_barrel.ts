@@ -1,4 +1,5 @@
 import { loadBlockDatabase } from "./block_database";
+import { loadDecorations } from "./decorations/decorations";
 import { loadOutside } from "./floor/outside";
 import { loadStairs } from "./floor/stairs";
 
@@ -14,3 +15,5 @@ loadBlockDatabase();
 loadOutside();
 
 loadStairs();
+
+loadDecorations();
