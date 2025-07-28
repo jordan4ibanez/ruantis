@@ -8,7 +8,7 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 		blocks: [
 			{
 				pos: new Vec3(0, 0, 0),
-				block: "grass_2",
+				block: "grass_3",
 				param2: 0,
 			},
 			{
@@ -407,6 +407,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(4, 1, 7),
+				block: "fountain",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(5, 0, 0),
 				block: "grass_3",
 				param2: 0,
@@ -507,6 +512,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(6, 0, 4),
+				block: "grass_3",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(6, 0, 5),
 				block: "grass_3",
 				param2: 0,
@@ -578,6 +588,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			},
 			{
 				pos: new Vec3(7, 0, 3),
+				block: "grass_1",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(7, 0, 4),
 				block: "grass_1",
 				param2: 0,
 			},
@@ -897,9 +912,9 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
-				pos: new Vec3(10, 1, 5),
+				pos: new Vec3(10, 1, 6),
 				block: "stone_stair",
-				param2: 2,
+				param2: 1,
 			},
 			{
 				pos: new Vec3(11, 0, 0),
@@ -985,6 +1000,16 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				pos: new Vec3(11, 1, 4),
 				block: "ore_tin",
 				param2: 0,
+			},
+			{
+				pos: new Vec3(11, 1, 6),
+				block: "grass_3",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(11, 2, 6),
+				block: "stone_stair",
+				param2: 1,
 			},
 			{
 				pos: new Vec3(12, 0, 0),
