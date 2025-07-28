@@ -14,6 +14,8 @@ export function registerBlock(def: BlockDef): void {
 	if (def.pointable == null) {
 		def.pointable = false;
 	}
+	def.light_source = 15;
+	def.sunlight_propagates = true;
 
 	core.register_node(":" + def.name, def);
 	blockDatabase.set(def.name, def);

@@ -13,7 +13,7 @@ registerBlock({
 });
 
 for (const i of $range(1, 3)) {
-	registerBlock({ name: `grass_${i}` });
+	registerBlock({ name: `grass_${i}`, tiles: [`grass_${i}.png`] });
 }
 
 afterClientJoins((client) => {
