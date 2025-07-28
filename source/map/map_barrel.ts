@@ -1,5 +1,5 @@
 import { loadBlockDatabase } from "./block_database";
-import { ____automation_internal_only_deploy_map_data } from "./chunk_database/auto_chunk_data";
+import { loadChunkBarrel } from "./chunk_database/chunk_barrel";
 import { loadDecorations } from "./decorations/decorations";
 import { loadDevelopmentMode } from "./development_mode";
 import { loadOutside } from "./floor/outside";
@@ -28,4 +28,4 @@ loadTrees();
 
 loadOre();
 
-____automation_internal_only_deploy_map_data();
+loadChunkBarrel();
