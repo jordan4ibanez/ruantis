@@ -1,3 +1,4 @@
+import { serverTickRate } from "../../logic/tick";
 import { Drawtype, Nodeboxtype } from "../../utility/enums";
 import { registerBlock, setBlock } from "../block_database";
 
@@ -16,8 +17,9 @@ registerBlock({
 	pointable: true,
 	collision_box: treeCbox,
 	selection_box: treeCbox,
-
-	on_punch: (pos) => {
+	node_dig_prediction: "",
+	groups: { mine: 1 },
+	on_dig: (pos) => {
 		const meta = core.get_meta(pos);
 		let mine = meta.get_int(TREE_MINE);
 
@@ -34,7 +36,7 @@ registerBlock({
 
 		if (mine == 1) {
 			setBlock(pos, "tree_stump");
-			core.get_node_timer(pos).start(1);
+			core.get_node_timer(pos).start(serverTickRate * math.random(3, 10));
 		}
 	},
 });
@@ -47,7 +49,7 @@ registerBlock({
 	on_timer: (pos) => {
 		setBlock(pos, "tree");
 		const meta = core.get_meta(pos);
-		meta.set_int(TREE_MINE, 10);
+		meta.set_int(TREE_MINE, 10 + math.random(1, 5));
 	},
 });
 
