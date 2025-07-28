@@ -12,6 +12,13 @@ registerBlock({
 	},
 });
 
+registerBlock({
+	name: "log_sideways",
+	drawtype: Drawtype.mesh,
+	mesh: "log_sideways.gltf",
+	tiles: ["log_sideways.png"],
+});
+
 /**
  * Tree-shake removal function.
  *
