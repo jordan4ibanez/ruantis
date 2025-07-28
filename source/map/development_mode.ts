@@ -107,7 +107,6 @@ export function ____automation_internal_only_automate_set_up_chunks() {`,
 			heir.pop();
 			heir.pop();
 			const path = heir.join("/");
-			print(path);
 
 			core.safe_file_write(
 				path + "/source/map/chunk_database/__auto_chunk_data.ts",
