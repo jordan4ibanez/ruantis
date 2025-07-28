@@ -34,7 +34,7 @@ registerBlock({
 		core.sound_play("tree_chop", { pos: pos });
 
 		// Could do an axe calculation here.
-		if (math.random(1, 100) > 90) {
+		if (math.random(1, 1000) > 900) {
 			print("got logs");
 		}
 
