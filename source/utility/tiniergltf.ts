@@ -44,20 +44,18 @@ function checkIndex<T>(vec: T[] | null, i?: number): void {
 	}
 }
 
-// template <typename T>
-//  void checkIndex(const std::vector<T> &vec,
-// 		const std::optional<std::size_t> &i) {
-// 	if (!i.has_value()) return;
-// 	check(i < vec.size());
-// }
+function checkForall<T, F extends (arg0: T) => void>(
+	vec: T[] | null,
+	cond: F
+): void {
+	if (vec == null) {
+		return;
+	}
 
-// template <typename T, typename F>
-//  void checkForall(const std::optional<std::vector<T>> &vec, const F &cond) {
-// 	if (!vec.has_value())
-// 		return;
-// 	for (const T &v : vec.value())
-// 		cond(v);
-// }
+	for (const v of vec) {
+		cond(v);
+	}
+}
 
 // template <typename T>
 //  void checkDuplicateFree(const std::vector<T> &vec) {
