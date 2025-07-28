@@ -4,19 +4,10 @@ import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { getControls } from "../player/controls";
 import { Drawtype, LogLevel, PointedThingType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
+import { BlockDef } from "./block_def";
 import { loadOutside } from "./floor/outside";
 
-
-
 //! This file is mainly for invisible shapes.
-
-
-
-
-
-export interface BlockDef extends NodeDefinition {
-	name: string;
-}
 
 const blockDatabase = new Map<string, BlockDef>();
 
@@ -46,11 +37,9 @@ export function setBlock(pos: ShallowVector3, name: string): void {
 	core.set_node(pos, { name: name });
 }
 
-loadOutside();
-
 /**
  * Tree-shake removal function.
  *
  * Never use this!
  */
-export function loadNodes(): void {}
+export function loadBlockDatabase(): void {}

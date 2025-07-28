@@ -71,3 +71,7 @@ export function blockClick(
 	clickTimeoutMap.set(name, serverTickRate);
 }
 core.register_on_punchnode(blockClick);
+
+export interface BlockDef extends NodeDefinition {
+	name: string;
+}

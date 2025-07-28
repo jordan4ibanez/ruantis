@@ -1,4 +1,4 @@
-import { BlockDef, registerBlock, setBlock } from "../block_database";
+import { registerBlock, setBlock } from "../block_database";
 
 registerBlock({
 	name: "i_grass",
