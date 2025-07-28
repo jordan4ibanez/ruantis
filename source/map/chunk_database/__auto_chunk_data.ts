@@ -7,7 +7,7 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 		blocks: [
 			{
 				pos: new Vec3(0, 0, 0),
-				block: "grass_2",
+				block: "grass_3",
 				param2: 0,
 			},
 			{
@@ -571,6 +571,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(6, 1, 14),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(7, 0, 0),
 				block: "grass_3",
 				param2: 0,
@@ -692,7 +697,7 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			},
 			{
 				pos: new Vec3(8, 0, 8),
-				block: "grass_2",
+				block: "grass_3",
 				param2: 0,
 			},
 			{
@@ -1704,6 +1709,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(3, 0, 15),
 				block: "grass_2",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(3, 1, 4),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -5619,6 +5629,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(9, 1, 2),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(10, 0, 0),
 				block: "grass_3",
 				param2: 0,
@@ -5696,6 +5711,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(10, 0, 15),
 				block: "grass_2",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(10, 1, 10),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -6585,6 +6605,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(5, 1, 8),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(6, 0, 0),
 				block: "grass_2",
 				param2: 0,
@@ -6742,6 +6767,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(7, 0, 15),
 				block: "grass_2",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(7, 1, 3),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -6903,6 +6933,16 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				pos: new Vec3(9, 0, 15),
 				block: "grass_2",
 				param2: 0,
+			},
+			{
+				pos: new Vec3(9, 1, 8),
+				block: "log_sideways",
+				param2: 2,
+			},
+			{
+				pos: new Vec3(9, 1, 9),
+				block: "log_sideways",
+				param2: 2,
 			},
 			{
 				pos: new Vec3(10, 0, 0),
@@ -7222,6 +7262,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(13, 0, 15),
 				block: "grass_1",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(13, 1, 9),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -7631,6 +7676,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(2, 1, 12),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(3, 0, 0),
 				block: "grass_2",
 				param2: 0,
@@ -7871,6 +7921,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(5, 1, 9),
+				block: "log_sideways",
+				param2: 1,
+			},
+			{
 				pos: new Vec3(6, 0, 0),
 				block: "grass_3",
 				param2: 0,
@@ -7949,6 +8004,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				pos: new Vec3(6, 0, 15),
 				block: "grass_2",
 				param2: 0,
+			},
+			{
+				pos: new Vec3(6, 1, 9),
+				block: "log_sideways",
+				param2: 1,
 			},
 			{
 				pos: new Vec3(7, 0, 0),
@@ -8191,6 +8251,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(9, 1, 6),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(10, 0, 0),
 				block: "grass_3",
 				param2: 0,
@@ -8428,6 +8493,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(12, 0, 15),
 				block: "grass_3",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(12, 1, 14),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -8837,6 +8907,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(1, 1, 7),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(2, 0, 0),
 				block: "grass_2",
 				param2: 0,
@@ -9237,6 +9312,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(6, 1, 15),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(7, 0, 0),
 				block: "grass_2",
 				param2: 0,
@@ -9394,6 +9474,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(8, 0, 15),
 				block: "grass_2",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(8, 1, 3),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -10069,7 +10154,7 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			},
 			{
 				pos: new Vec3(1, 0, 5),
-				block: "grass_1",
+				block: "grass_2",
 				param2: 0,
 			},
 			{
@@ -10200,6 +10285,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(2, 0, 15),
 				block: "grass_1",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(2, 1, 2),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -10360,6 +10450,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(4, 0, 15),
 				block: "grass_3",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(4, 1, 13),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -10810,6 +10905,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(9, 0, 15),
 				block: "grass_3",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(9, 1, 5),
+				block: "tree",
 				param2: 0,
 			},
 			{
@@ -11290,6 +11390,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(15, 0, 15),
 				block: "grass_3",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(15, 1, 13),
+				block: "tree",
 				param2: 0,
 			},
 		],
@@ -11859,6 +11964,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 				param2: 0,
 			},
 			{
+				pos: new Vec3(6, 1, 2),
+				block: "tree",
+				param2: 0,
+			},
+			{
 				pos: new Vec3(7, 0, 0),
 				block: "grass_3",
 				param2: 0,
@@ -12496,6 +12606,11 @@ export function ____automation_internal_only_automate_set_up_chunks() {
 			{
 				pos: new Vec3(14, 0, 15),
 				block: "grass_1",
+				param2: 0,
+			},
+			{
+				pos: new Vec3(14, 1, 4),
+				block: "tree",
 				param2: 0,
 			},
 			{
