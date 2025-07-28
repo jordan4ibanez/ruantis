@@ -3,4 +3,4 @@
  *
  * Never use this!
  */
-export function loadChunks(): void {}
+export function loadTrees(): void {}
