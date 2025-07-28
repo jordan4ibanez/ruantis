@@ -24,30 +24,35 @@
 // }
 // #endif
 
+// function check(cond: boolean): void {
+// 	if (!cond) {
+// 		throw new Error("invalid glTF");
+// 	}
+// }
 
+const INVALID_GLTF = "INVALID GLTF";
 
- void check(bool cond) {
-	if (!cond)
-		throw std::runtime_error("invalid glTF");
+function checkIndex<T>(vec: T[] | null, i?: number): void {
+	if (i == null) {
+		return;
+	}
+	if (vec == null) {
+		throw new Error(INVALID_GLTF);
+	}
+	if (i >= vec.length) {
+		throw new Error(INVALID_GLTF);
+	}
 }
 
 // template <typename T>
-// static inline void checkIndex(const std::optional<std::vector<T>> &vec,
-// 		const std::optional<std::size_t> &i) {
-// 	if (!i.has_value()) return;
-// 	check(vec.has_value());
-// 	check(i < vec->size());
-// }
-
-// template <typename T>
-// static inline void checkIndex(const std::vector<T> &vec,
+//  void checkIndex(const std::vector<T> &vec,
 // 		const std::optional<std::size_t> &i) {
 // 	if (!i.has_value()) return;
 // 	check(i < vec.size());
 // }
 
 // template <typename T, typename F>
-// static inline void checkForall(const std::optional<std::vector<T>> &vec, const F &cond) {
+//  void checkForall(const std::optional<std::vector<T>> &vec, const F &cond) {
 // 	if (!vec.has_value())
 // 		return;
 // 	for (const T &v : vec.value())
@@ -55,12 +60,12 @@
 // }
 
 // template <typename T>
-// static inline void checkDuplicateFree(const std::vector<T> &vec) {
+//  void checkDuplicateFree(const std::vector<T> &vec) {
 // 	check(std::unordered_set<T>(vec.begin(), vec.end()).size() == vec.size());
 // }
 
 // template <typename T>
-// static inline T as(const Json::Value &o);
+//  T as(const Json::Value &o);
 
 // template<>
 // bool as(const Json::Value &o) {
@@ -1097,7 +1102,7 @@
 // template<> Texture as(const Json::Value &o) { return o; }
 
 // using UriResolver = std::function<std::string(const std::string &uri)>;
-// static inline std::string uriError(const std::string &uri) {
+//  std::string uriError(const std::string &uri) {
 // 	// only base64 data URI support by default
 // 	throw std::runtime_error("unsupported URI: " + uri);
 // }
@@ -1480,5 +1485,3 @@
 
 // 	return GlTF(readJson({data, static_cast<uint32_t>(len)}), resolveUri);
 // }
-
-
