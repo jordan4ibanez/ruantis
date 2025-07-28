@@ -1,4 +1,4 @@
-import { ____automation_internal_only_automate_set_up_chunks } from "./auto_chunk_data";
+import { ____automation_internal_only_automate_set_up_chunks } from "./__auto_chunk_data";
 import { __automation_internal_only_processData } from "./chunks_database";
 
 function deployWorld() {

@@ -1,6 +1,6 @@
 import { Vec3 } from "../../utility/vector";
 import { setBlock } from "../block_database";
-import { ____automation_internal_only_automate_set_up_chunks } from "./auto_chunk_data";
+import { ____automation_internal_only_automate_set_up_chunks } from "./__auto_chunk_data";
 import { Chunk } from "./chunk";
 
 const chunkDatabase = new Map<Vec3, Chunk>();
