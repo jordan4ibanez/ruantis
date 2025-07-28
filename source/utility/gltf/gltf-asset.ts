@@ -1,7 +1,5 @@
-import { FileLoader } from "./fileloader";
 import { GLTFBinaryData } from "./glb-decoder";
 import { GlTf, GlTfId } from "./gltf";
-import { LoadingManager } from "./loadingmanager";
 
 /** Spec: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#accessor-element-size */
 export const GLTF_COMPONENT_TYPE_ARRAYS: { [index: number]: any } = {
@@ -36,13 +34,12 @@ export class GltfAsset {
 	constructor(
 		gltf: GlTf,
 		baseUri: string,
-		glbData: GLTFBinaryData | undefined,
-		manager: LoadingManager = new LoadingManager()
+		glbData: GLTFBinaryData | undefined
 	) {
 		this.gltf = gltf;
 		this.glbData = glbData;
-		this.bufferData = new BufferData(this, baseUri, manager);
-		this.imageData = new ImageData(this, baseUri, manager);
+		this.bufferData = new BufferData(this, baseUri);
+		this.imageData = new ImageData(this, baseUri);
 	}
 
 	/**
@@ -149,17 +146,12 @@ export class GltfAsset {
 export class BufferData {
 	asset: GltfAsset;
 	baseUri: string;
-	manager: LoadingManager;
-	loader: FileLoader;
 
 	private bufferCache: Array<Uint8Array> = [];
 
-	constructor(asset: GltfAsset, baseUri: string, manager: LoadingManager) {
+	constructor(asset: GltfAsset, baseUri: string) {
 		this.asset = asset;
 		this.baseUri = baseUri;
-		this.manager = manager;
-		this.loader = new FileLoader(manager);
-		this.loader.responseType = "arraybuffer";
 	}
 
 	/**
