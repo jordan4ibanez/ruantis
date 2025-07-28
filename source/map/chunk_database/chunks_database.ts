@@ -1,7 +1,7 @@
-import { afterClientJoins } from "../logic/client_join_leave";
-import { Drawtype, ParamType2 } from "../utility/enums";
-import { Vec3 } from "../utility/vector";
-import { setBlock } from "./block_database";
+import { afterClientJoins } from "../../logic/client_join_leave";
+import { Drawtype, ParamType2 } from "../../utility/enums";
+import { Vec3 } from "../../utility/vector";
+import { setBlock } from "../block_database";
 
 interface PlacementData {
 	pos: Vec3;
