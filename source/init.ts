@@ -3,8 +3,8 @@ import { deployWindowHandling } from "./player/window";
 import { deployInventoryHandling } from "./player/inventory";
 import { deployClientTracker } from "./player/tracker";
 import { deployPlayerEntity } from "./player/player";
-import { loadNodes } from "./map/block_database";
 import { loadChunks } from "./map/chunks";
+import { loadNodes } from "./map/map_barrel";
 
 function main() {
 	deployTickTimer();
