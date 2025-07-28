@@ -2,6 +2,7 @@ import { loadBlockDatabase } from "./block_database";
 import { loadDecorations } from "./decorations/decorations";
 import { loadOutside } from "./floor/outside";
 import { loadStairs } from "./floor/stairs";
+import { loadOre } from "./ore/ore";
 import { loadTrees } from "./plants/tree";
 
 /**
@@ -20,3 +21,5 @@ loadStairs();
 loadDecorations();
 
 loadTrees();
+
+loadOre();
