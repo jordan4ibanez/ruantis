@@ -54,7 +54,7 @@ const players = new Map<string, Player>();
 
 function setUpPlayer(client: ObjectRef): void {
 	client.hud_set_flags({
-		hotbar: false,
+		hotbar: devMode ? true : false,
 		healthbar: false,
 		wielditem: false,
 		breathbar: false,
