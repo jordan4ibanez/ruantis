@@ -112,8 +112,6 @@ export function ____automation_internal_only_automate_set_up_chunks() {`,
 				path + "/source/map/chunk_database/__auto_chunk_data.ts",
 				saveString.join("")
 			);
-
-			// print(saveString);
 		},
 	});
 
