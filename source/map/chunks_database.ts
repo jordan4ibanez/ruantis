@@ -74,16 +74,10 @@ function processData() {
 			work.y = root.y + b.pos.y;
 			work.z = root.z + b.pos.z;
 
-			
-
-			
 			setBlock(work, b.block, b.param2);
-			
 		}
 
 		core.forceload_free_block(root, false);
-
-		
 	}
 }
 
