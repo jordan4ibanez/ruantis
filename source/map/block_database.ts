@@ -6,30 +6,11 @@ import { Drawtype, LogLevel, PointedThingType } from "../utility/enums";
 import { Vec3 } from "../utility/vector";
 import { loadOutside } from "./floor/outside";
 
-const tickRate = serverTickRate;
+
 
 //! This file is mainly for invisible shapes.
 
-// This portion of code stops the server from exploding.
-const clickTimeoutMap = new Map<string, number>();
-whenClientJoins((player) => {
-	clickTimeoutMap.set(player.get_player_name(), 0);
-});
-whenClientLeaves((player) => {
-	clickTimeoutMap.delete(player.get_player_name());
-});
-registerClientTickFunction((player, delta) => {
-	const name = player.get_player_name();
-	let timer = clickTimeoutMap.get(name) || 0;
-	if (timer > 0) {
-		timer -= delta;
-		if (timer < 0) {
-			timer = 0;
-		}
-	}
-	clickTimeoutMap.set(name, timer);
-});
-// End anti server explosion code.
+
 
 
 
