@@ -1,12 +1,6 @@
 //? Developer mode is a very specific feature to this game.
 //?
 //? It allows automated regeneration of map chunks that become modified during development.
-//?
-//? If you're reading this and wondering how I designed this.
-//?
-//? I hand crafted everything you see and experience for you to enjoy.
-//?
-//? ~jordan4ibanez
 
 import { ShallowVector3 } from "../../minetest-api";
 import { afterClientJoins } from "../logic/client_join_leave";
@@ -31,28 +25,37 @@ if (devMode) {
 		});
 	});
 
+	function gfunc(
+		name: string,
+		param: string
+	): LuaMultiReturn<[boolean, string]> | void {
+		const pos = core.get_player_by_name(name)!.get_pos();
+
+		pos.x = math.floor(pos.x / 16) * 16;
+		pos.y = math.floor(pos.y / 16) * 16;
+		pos.z = math.floor(pos.z / 16) * 16;
+
+		for (const x of $range(0, 15)) {
+			for (const z of $range(0, 15)) {
+				core.place_node(new Vec3(x + pos.x, 0.5, z + pos.z), {
+					name: "i_grass",
+				});
+			}
+		}
+	}
+
 	core.register_chatcommand("floor", {
 		params: "",
 		description: "",
 		privs: { server: true },
-		func: function (
-			name: string,
-			param: string
-		): LuaMultiReturn<[boolean, string]> | void {
-			const pos = core.get_player_by_name(name)!.get_pos();
+		func: gfunc,
+	});
 
-			pos.x = math.floor(pos.x / 16) * 16;
-			pos.y = math.floor(pos.y / 16) * 16;
-			pos.z = math.floor(pos.z / 16) * 16;
-
-			for (const x of $range(0, 15)) {
-				for (const z of $range(0, 15)) {
-					core.place_node(new Vec3(x + pos.x, 0.5, z + pos.z), {
-						name: "i_grass",
-					});
-				}
-			}
-		},
+	core.register_chatcommand("ground", {
+		params: "",
+		description: "",
+		privs: { server: true },
+		func: gfunc,
 	});
 
 	core.register_chatcommand("save", {
