@@ -1,11 +1,5 @@
 import { ShallowVector3 } from "../../minetest-api";
-import { whenClientJoins, whenClientLeaves } from "../logic/client_join_leave";
-import { registerClientTickFunction, serverTickRate } from "../logic/tick";
-import { getControls } from "../player/controls";
-import { Drawtype, LogLevel, PointedThingType } from "../utility/enums";
-import { Vec3 } from "../utility/vector";
 import { BlockDef } from "./block_def";
-import { loadOutside } from "./floor/outside";
 
 //! This file is mainly for invisible shapes.
 
