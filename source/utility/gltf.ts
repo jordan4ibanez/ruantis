@@ -13,16 +13,19 @@ export const componentTypes = {
 // local json = require("cjson")
 // local base64 = require("base64")
 
-// local function unescapePercent(str)
-// 	return (str:gsub("%%(%x%x)", function(x) return string.char(tonumber(x, 16)) end))
-// end
+function unescapePercent(str: string) {
+	return string.gsub(str, "%%(%x%x)", function (x) {
+		return string.char(tonumber(x, 16) || 0);
+	});
+}
 
-// local URI_MEDIATYPES = {
-// 	"data:application/octet-stream;base64,",
-// 	"data:application/gltf-buffer;base64,",
-// 	"data:image/png;base64,",
-// 	"data:image/jpeg;base64,"
-// }
+const URI_MEDIATYPES = [
+	"data:application/octet-stream;base64,",
+	"data:application/gltf-buffer;base64,",
+	"data:image/png;base64,",
+	"data:image/jpeg;base64,",
+];
+
 // local function resolveURI(uri, basePath)
 // 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs
 // 	if uri:sub(1, 5) == "data:" then
