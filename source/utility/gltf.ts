@@ -44,18 +44,18 @@ local function resolveURI(uri, basePath)
 		return base64.decode(uri:sub(b64offset))
 	end
 
-// 	// URI ABNF: https://datatracker.ietf.org/doc/html/rfc3986#appendix-A
-// 	uri = unescapePercent(uri)
-// 	local nzncend = (uri:find("/")) or 0
-// 	local firstcolon = (uri:find(":")) or 0
-// 	if firstcolon < nzncend or nzncend == 1 or uri:len() == 0 then
-// 		error("expected data URI or relative path")
-// 	end
-// 	local file = io.open(basePath .. uri, "rb")
-// 	local data = file:read("*a")
-// 	file:close()
-// 	return data
-// end
+	// URI ABNF: https://datatracker.ietf.org/doc/html/rfc3986#appendix-A
+	uri = unescapePercent(uri)
+	local nzncend = (uri:find("/")) or 0
+	local firstcolon = (uri:find(":")) or 0
+	if firstcolon < nzncend or nzncend == 1 or uri:len() == 0 then
+		error("expected data URI or relative path")
+	end
+	local file = io.open(basePath .. uri, "rb")
+	local data = file:read("*a")
+	file:close()
+	return data
+end
 
 // local function getBufferData(buffer)
 // 	if buffer == nil then
