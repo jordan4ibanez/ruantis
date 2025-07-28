@@ -1,4 +1,5 @@
 import { afterClientJoins } from "../logic/client_join_leave";
+import { convertBin } from "../utility/bitmanip";
 import { Drawtype } from "../utility/enums";
 import { parseJson, readFileToString } from "../utility/file";
 import { Vec3 } from "../utility/vector";
@@ -71,6 +72,8 @@ core.register_on_mods_loaded(() => {
 	const vIndicOffset = vindicesbufferView.byteOffset;
 	const vIndicBufferLength = vindicesbufferView.byteLength;
 
+	// print(vIndicBufferLength);
+
 	if (vIndicBuffer == null) {
 		throw new Error("Missing indices buffer index");
 	}
@@ -102,23 +105,25 @@ core.register_on_mods_loaded(() => {
 
 	// print(rawIndexBufferData);
 
-	// print(rawIndexBufferData.substring(0, 3));
+	// print(rawIndexBufferData.substring(vIndicOffset, vIndicOffset + 20));
 
-	// for (
-	// 	let i = vIndicOffset + 1;
-	// 	i < vIndicOffset + 1 + vIndicBufferLength;
-	// 	i += 2 // ushort
-	// ) {
-	// 	// print(rawIndexBufferData.substring(i, i + 1));
-	// 	const first: number = string.byte(
-	// 		rawIndexBufferData.substring(i, i + 1)
-	// 	);
-	// 	const second: number = string.byte(
-	// 		rawIndexBufferData.substring(i + 1, i + 2)
-	// 	);
+	for (
+		let i = vIndicOffset + 1;
+		i < vIndicOffset + 1 + vIndicBufferLength;
+		i += 2 // ushort
+	) {
+		// print(rawIndexBufferData.substring(i, i + 1));
+		const first: number = string.byte(
+			rawIndexBufferData.substring(i, i + 1)
+		);
+		const second: number = string.byte(
+			rawIndexBufferData.substring(i + 1, i + 2)
+		);
 
-	// 	// print(first + second * 0x100);
-	// }
+		print(convertBin(second));
+
+		// print(first + second * 0x100);
+	}
 
 	// print(dump(indexBuffer));
 
