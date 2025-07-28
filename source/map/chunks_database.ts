@@ -11,7 +11,7 @@ interface PlacementData {
 
 interface Chunk {
 	pos: Vec3;
-	bocks: PlacementData[];
+	blocks: PlacementData[];
 }
 
 const chunkDatabase = new Map<Vec3, Chunk>();
@@ -23,31 +23,31 @@ function add(chunk: Chunk) {
 function setUpData() {
 	const c_0_0: Chunk = {
 		pos: new Vec3(0, 0, 0),
-		bocks: [],
+		blocks: [],
 	};
 
 	for (const x of $range(0, 15)) {
 		for (const z of $range(0, 15)) {
-			c_0_0.bocks.push({
+			c_0_0.blocks.push({
 				pos: new Vec3(x, 0, z),
 				block: "i_grass",
 			});
 		}
 	}
 
-	c_0_0.bocks.push({
+	c_0_0.blocks.push({
 		pos: new Vec3(5, 1, 5),
 		block: "fountain",
 		param2: 2,
 	});
 
-	c_0_0.bocks.push({
+	c_0_0.blocks.push({
 		pos: new Vec3(10, 1, 5),
 		block: "stone_stair",
 		param2: 2,
 	});
 
-	c_0_0.bocks.push({
+	c_0_0.blocks.push({
 		pos: new Vec3(8, 1, 4),
 		block: "tree",
 	});
@@ -80,7 +80,7 @@ function processData() {
 			}
 		}
 
-		for (const b of c.bocks) {
+		for (const b of c.blocks) {
 			work.x = root.x + b.pos.x;
 			work.y = root.y + b.pos.y;
 			work.z = root.z + b.pos.z;
