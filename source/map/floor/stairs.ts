@@ -1,5 +1,6 @@
 import { Drawtype, Nodeboxtype, ParamType2 } from "../../utility/enums";
 import { registerBlock, setBlock } from "../block_database";
+import { slopeNodeBox } from "./slope_boxes";
 
 const stairBox: NodeBox = {
 	type: Nodeboxtype.fixed,
@@ -18,6 +19,7 @@ registerBlock({
 	paramtype2: ParamType2["4dir"],
 	drawtype: Drawtype.nodebox,
 	node_box: stairBox,
+	collision_box: slopeNodeBox,
 	tiles: ["stone_1.png", "stone_1.png", "stone_2.png"],
 });
 
