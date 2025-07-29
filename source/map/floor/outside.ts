@@ -42,7 +42,7 @@ for (const i of $range(1, 3)) {
 	registerBlock({
 		name: `grass_slope_${i}`,
 		drawtype: Drawtype.mesh,
-		mesh: "grass_slope.gltf",
+		mesh: "slope.gltf",
 		tiles: [`grass_${i}.png`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
@@ -67,7 +67,7 @@ for (const i of $range(1, 3)) {
 	registerBlock({
 		name: `grass_corner_${i}`,
 		drawtype: Drawtype.mesh,
-		mesh: "grass_corner.gltf",
+		mesh: "corner.gltf",
 		tiles: [`smile.png^[invert:rgb`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
