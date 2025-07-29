@@ -55,6 +55,12 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 
 	const work3 = new Vec3();
 
+	// front left front right etc.
+	const fl = new Vec2();
+	const fr = new Vec2();
+	const rl = new Vec2();
+	const rr = new Vec2();
+
 	for (const x of $range(minp.x, maxp.x)) {
 		for (const z of $range(minp.z, maxp.z)) {
 			worker.x = x;
@@ -109,8 +115,6 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 			// Simplex check. (1 side)
 			if (adder == 0) {
 				// Inverse corner check.
-
-				
 			} else if (adder == 1) {
 				// Regular slope check.
 
