@@ -18,7 +18,7 @@ registerBlock({
 	paramtype2: ParamType2["4dir"],
 	drawtype: Drawtype.nodebox,
 	node_box: stairBox,
-	tiles: ["stone_stair_1.png", "stone_stair_1.png", "stone_stair_2.png"],
+	tiles: ["stone_1.png", "stone_1.png", "stone_2.png"],
 });
 
 /**
