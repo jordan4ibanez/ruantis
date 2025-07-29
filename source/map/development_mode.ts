@@ -67,87 +67,37 @@ if (devMode) {
 			name: string,
 			param: string
 		): LuaMultiReturn<[boolean, string]> | void {
+			core.create_schematic(
+				new Vec3(0, 0, 0),
+				new Vec3(15, 15, 15),
+				null,
+				`${core.get_modpath("ruantis")}/schematics/chunks/testing.mts`,
+				null
+			);
 
-			
+			for (const cPosHash of __live_map_chunks) {
+				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
 
-// 			const worker = new Vec3();
+				if (chunkPosRoot == null) {
+					throw new Error("Serialization error?");
+				}
 
-// 			// Create the __auto_chunk_data.ts file.
-// 			const saveString: string[] = [
-// 				`import { Vec3 } from "../../utility/vector";
-// import { ____automation_internal_only_add_chunk } from "./chunks_database";
+				if (!core.forceload_block(chunkPosRoot, false, -1)) {
+					throw new Error(
+						`Failed to force load chunk ${chunkPosRoot.toString()}`
+					);
+				}
 
-// export function ____automation_internal_only_automate_set_up_chunks() {`,
-// 			];
+				const min = new Vec3(
+					chunkPosRoot.x * 16,
+					chunkPosRoot.y * 16,
+					chunkPosRoot.z * 16
+				);
 
-// 			for (const cPosHash of __live_map_chunks) {
-// 				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
+				const max = new Vec3().copyFrom(min).add(new Vec3(16, 16, 16));
 
-// 				if (chunkPosRoot == null) {
-// 					throw new Error("Serialization error?");
-// 				}
-
-// 				if (!core.forceload_block(chunkPosRoot, false, -1)) {
-// 					throw new Error(
-// 						`Failed to force load chunk ${chunkPosRoot.toString()}`
-// 					);
-// 				}
-
-// 				saveString.push(`
-// 	____automation_internal_only_add_chunk({
-// 		pos: new Vec3(${chunkPosRoot.x}, ${chunkPosRoot.y}, ${chunkPosRoot.z}),
-// 		blocks: [`);
-
-// 				for (const x of $range(0, 15)) {
-// 					for (const y of $range(0, 15)) {
-// 						for (const z of $range(0, 15)) {
-// 							const xRoot = chunkPosRoot.x * 16;
-// 							const yRoot = chunkPosRoot.y * 16;
-// 							const zRoot = chunkPosRoot.z * 16;
-
-// 							worker.x = x + xRoot;
-// 							worker.y = y + yRoot;
-// 							worker.z = z + zRoot;
-
-// 							const dat: NodeTable = core.get_node(worker);
-
-// 							if (dat.name == "unknown" || dat.name == "ignore") {
-// 								core.log(
-// 									LogLevel.error,
-// 									"Engine is producing ub"
-// 								);
-// 							}
-
-// 							if (dat.name == "air") {
-// 								continue;
-// 							}
-
-// 							saveString.push(`
-// 			{
-// 				pos: new Vec3(${x}, ${y}, ${z}),
-// 				block: "${dat.name}",
-// 				param2: ${dat.param2 || 0},
-// 			},`);
-// 						}
-// 					}
-// 				}
-
-// 				saveString.push(`\n\		],\n\	});\n`);
-
-// 				core.forceload_free_block(chunkPosRoot, false);
-// 			}
-
-// 			saveString.push("}");
-
-// 			const heir = core.get_modpath("ruantis")!.split("/");
-// 			heir.pop();
-// 			heir.pop();
-// 			const path = heir.join("/");
-
-// 			core.safe_file_write(
-// 				path + "/source/map/chunk_database/__auto_chunk_data.ts",
-// 				saveString.join("")
-// 			);
+				core.forceload_free_block(chunkPosRoot, false);
+			}
 		},
 	});
 
