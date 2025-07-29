@@ -34,6 +34,17 @@ for (const i of $range(1, detail - 1)) {
 }
 cornerNodeBox.fixed = sdr;
 
+const slopeNodeBox: NodeBox = {
+	type: Nodeboxtype.fixed,
+};
+let slp = [];
+for (const i of $range(1, detail - 1)) {
+	const notch = i / detail;
+	const invNotch = 1 - notch;
+	slp.push([-0.5, -0.5, -0.5 + notch, 0.5, 0.5 - invNotch, 0.5]);
+}
+cornerNodeBox.fixed = slp;
+
 //? Regular grass blocks.
 
 // Randomizer.
