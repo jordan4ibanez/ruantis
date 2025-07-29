@@ -23,6 +23,14 @@ registerBlock({
 	tiles: ["log_sideways.png"],
 });
 
+registerBlock({
+	name: "bench",
+	drawtype: Drawtype.mesh,
+	paramtype2: ParamType2["4dir"],
+	mesh: "bench.gltf",
+	tiles: ["bench.png"],
+});
+
 for (const i of $range(1, 3)) {
 	registerBlock({
 		name: `camp_fire_${i}`,
