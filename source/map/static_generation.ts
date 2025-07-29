@@ -10,6 +10,10 @@ const MULTIPLIER = 2;
 core.set_mapgen_setting("seed", FIXED_SEED, true);
 
 core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
+	if (minp.y != -32) {
+		return;
+	}
+
 	const noise: NoiseObject = core.get_value_noise({
 		seed: FIXED_SEED,
 
