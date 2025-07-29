@@ -144,6 +144,26 @@ for (const i of $range(1, 3)) {
 	});
 }
 
+//? Stone path.
+
+// Randomizer.
+registerBlock({
+	name: "i_stone_path",
+	drawtype: Drawtype.airlike,
+
+	on_construct: (pos) => {
+		const i = math.random(1, 3);
+		setBlock(pos, `stone_path_${i}`);
+	},
+});
+
+for (const i of $range(1, 3)) {
+	registerBlock({
+		name: `stone_path_${i}`,
+		tiles: [`stone_${i}.png`],
+	});
+}
+
 /**
  * Tree-shake removal function.
  *
