@@ -105,18 +105,16 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 				// todo: corner
 			} else if (adder == 1) {
 				if (frontHeight > currentHeight) {
-					setBlock(work3, "i_grass_single_slope", 0);
+					setBlock(work3, "i_grass_slope", 0);
 				} else if (backHeight > currentHeight) {
-					setBlock(work3, "i_grass_single_slope", 2);
+					setBlock(work3, "i_grass_slope", 2);
 				} else if (leftHeight > currentHeight) {
-					setBlock(work3, "i_grass_single_slope", 3);
+					setBlock(work3, "i_grass_slope", 3);
 				} else if (rightHeight > currentHeight) {
-					setBlock(work3, "i_grass_single_slope", 1);
+					setBlock(work3, "i_grass_slope", 1);
 				}
-			} else if (adder == 3) {
-				core.after(3, () => {
-					print("found gulf");
-				});
+			} else if (adder == 2) {
+				print("found corner");
 			} else if (adder == 4) {
 				// There's a hole.
 				print("found a hole");
