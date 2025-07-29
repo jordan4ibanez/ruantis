@@ -87,17 +87,23 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 
 			// todo: then check for corner (will need different algorithm)
 
+			let enc = 0;
+
 			if (frontHeight > currentHeight) {
 				adder++;
+				enc += 1;
 			}
 			if (backHeight > currentHeight) {
 				adder++;
+				enc += 10;
 			}
 			if (leftHeight > currentHeight) {
 				adder++;
+				enc += 100;
 			}
 			if (rightHeight > currentHeight) {
 				adder++;
+				enc += 1000;
 			}
 
 			// Simplex check. (1 side)
@@ -114,7 +120,23 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 					setBlock(work3, "i_grass_slope", 1);
 				}
 			} else if (adder == 2) {
-				print("found corner");
+				// Corner check.
+
+				if (enc == 101) {
+					//? Front left
+					setBlock(work3, "i_grass_corner", 0);
+				} else if (enc == 1001) {
+					//? Front right.
+					setBlock(work3, "i_grass_corner", 1);
+				} else if (enc == 110) {
+					//? Back left.
+					setBlock(work3, "i_grass_corner", 3);
+				} else if (enc == 1010) {
+					//? Back right.
+					setBlock(work3, "i_grass_corner", 2);
+				}
+
+				print(enc);
 			} else if (adder == 4) {
 				// There's a hole.
 				print("found a hole");
