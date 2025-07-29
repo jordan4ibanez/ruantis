@@ -96,6 +96,18 @@ if (devMode) {
 		__live_map_chunks.clear();
 	}
 
+	// It's an IDE autosave for development of the map.
+	let saveTimer = 0;
+	core.register_globalstep((delta) => {
+		saveTimer += delta;
+		if (saveTimer < 3) {
+			return;
+		}
+		saveTimer -= 3;
+
+		saveMap();
+	});
+
 	core.register_chatcommand("save", {
 		params: "",
 		description: "",
