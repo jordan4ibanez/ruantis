@@ -610,9 +610,9 @@ interface core {
 	create_schematic(
 		pos1: ShallowVector3,
 		pos2: ShallowVector3,
-		probabilityList: SchematicProbability[],
+		probabilityList: SchematicProbability[] | null,
 		fileName: string,
-		sliceProbList: SchematicSliceProbability[]
+		sliceProbList: SchematicSliceProbability[] | null
 	): void;
 	place_schematic(
 		position: ShallowVector3,
