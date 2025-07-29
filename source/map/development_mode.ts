@@ -81,7 +81,7 @@ if (devMode) {
 				math.floor(chunkID.z * 16)
 			);
 
-			const max = new Vec3().copyFrom(min).add(new Vec3(16, 16, 16));
+			const max = new Vec3().copyFrom(min).add(new Vec3(15, 15, 15));
 
 			core.create_schematic(
 				min,
