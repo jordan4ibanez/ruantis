@@ -56,7 +56,6 @@ const slopeNodeBox: NodeBox = (() => {
 registerBlock({
 	name: "i_grass",
 	drawtype: Drawtype.airlike,
-	groups: { static: 1 },
 	on_construct: (pos) => {
 		const i = math.random(1, 3);
 		setBlock(pos, `grass_${i}`);
@@ -67,7 +66,6 @@ for (const i of $range(1, 3)) {
 	registerBlock({
 		name: `grass_${i}`,
 		tiles: [`grass_${i}.png`],
-		groups: { static: 1 },
 	});
 }
 
@@ -77,7 +75,6 @@ for (const i of $range(1, 3)) {
 registerBlock({
 	name: "i_grass_slope",
 	drawtype: Drawtype.airlike,
-	groups: { static: 1 },
 	paramtype2: ParamType2["4dir"],
 	on_construct: (pos) => {
 		const i = math.random(1, 3);
@@ -91,7 +88,6 @@ for (const i of $range(1, 3)) {
 		drawtype: Drawtype.mesh,
 		mesh: "slope.gltf",
 		tiles: [`grass_${i}.png`],
-		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
 		node_box: slopeNodeBox,
 		selection_box: slopeNodeBox,
@@ -104,7 +100,6 @@ for (const i of $range(1, 3)) {
 registerBlock({
 	name: "i_grass_corner",
 	drawtype: Drawtype.airlike,
-	groups: { static: 1 },
 	paramtype2: ParamType2["4dir"],
 	on_construct: (pos) => {
 		const i = math.random(1, 3);
@@ -118,7 +113,6 @@ for (const i of $range(1, 3)) {
 		drawtype: Drawtype.mesh,
 		mesh: "corner.gltf",
 		tiles: [`grass_${i}.png`],
-		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
 		node_box: cornerNodeBox,
 		selection_box: cornerNodeBox,
@@ -131,7 +125,6 @@ for (const i of $range(1, 3)) {
 registerBlock({
 	name: "i_grass_inverse_corner",
 	drawtype: Drawtype.airlike,
-	groups: { static: 1 },
 	paramtype2: ParamType2["4dir"],
 	on_construct: (pos) => {
 		const i = math.random(1, 3);
@@ -145,7 +138,6 @@ for (const i of $range(1, 3)) {
 		drawtype: Drawtype.mesh,
 		mesh: "inverse_corner.gltf",
 		tiles: [`grass_${i}.png`],
-		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
 		node_box: invCornerNodeBox,
 		selection_box: invCornerNodeBox,
