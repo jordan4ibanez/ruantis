@@ -1,3 +1,4 @@
+import { loadCustomItemEntity } from "./item_entity";
 import { loadRegularItems } from "./regular_items";
 
 /**
@@ -7,4 +8,6 @@ import { loadRegularItems } from "./regular_items";
  */
 export function loadItems(): void {}
 
-loadRegularItems()
+loadRegularItems();
+
+loadCustomItemEntity();
