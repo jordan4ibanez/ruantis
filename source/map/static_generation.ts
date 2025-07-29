@@ -85,8 +85,6 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 
 			let adder = 0;
 
-			// todo: first check for quadrant (all sides)
-
 			// todo: then check for gulf (3 sides)
 			// todo: then check for duplex \/
 			// todo: then check for corner (will need different algorithm)
