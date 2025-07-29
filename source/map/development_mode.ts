@@ -67,14 +67,7 @@ if (devMode) {
 			name: string,
 			param: string
 		): LuaMultiReturn<[boolean, string]> | void {
-			core.create_schematic(
-				new Vec3(0, 0, 0),
-				new Vec3(15, 15, 15),
-				null,
-				`${core.get_modpath("ruantis")}/schematics/chunks/testing.mts`,
-				null
-			);
-
+			const mp = core.get_modpath("ruantis");
 			for (const cPosHash of __live_map_chunks) {
 				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
 
@@ -95,6 +88,14 @@ if (devMode) {
 				);
 
 				const max = new Vec3().copyFrom(min).add(new Vec3(16, 16, 16));
+
+				core.create_schematic(
+					min,
+					max,
+					null,
+					`${mp}/schematics/chunks/testing.mts`,
+					null
+				);
 
 				core.forceload_free_block(chunkPosRoot, false);
 			}
