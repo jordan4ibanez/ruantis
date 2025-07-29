@@ -3,52 +3,7 @@ import { Drawtype, Nodeboxtype, ParamType2 } from "../../utility/enums";
 import { Vec3 } from "../../utility/vector";
 import { registerBlock, setBlock } from "../block_database";
 
-const detail = 20;
 
-const invCornerNodeBox: NodeBox = (() => {
-	const t: NodeBox = {
-		type: Nodeboxtype.fixed,
-	};
-
-	let slT = [];
-	for (const i of $range(1, detail - 1)) {
-		const notch = i / detail;
-		const invNotch = 1 - notch;
-		slT.push([-0.5, -0.5, -0.5 + notch, 0.5 - notch, 0.5 - invNotch, 0.5]);
-	}
-	t.fixed = slT;
-	return t;
-})();
-
-const cornerNodeBox: NodeBox = (() => {
-	const t: NodeBox = {
-		type: Nodeboxtype.fixed,
-	};
-	let sdr = [];
-	for (const i of $range(1, detail - 1)) {
-		const notch = i / detail;
-		const invNotch = 1 - notch;
-
-		sdr.push([-0.5, -0.5, -0.5 + notch, 0.5, 0.5 - invNotch, 0.5]);
-		sdr.push([-0.5, -0.5, -0.5, 0.5 - notch, 0.5 - invNotch, 0.5]);
-	}
-	t.fixed = sdr;
-	return t;
-})();
-
-const slopeNodeBox: NodeBox = (() => {
-	const t: NodeBox = {
-		type: Nodeboxtype.fixed,
-	};
-	let slp = [];
-	for (const i of $range(1, detail - 1)) {
-		const notch = i / detail;
-		const invNotch = 1 - notch;
-		slp.push([-0.5, -0.5, -0.5 + notch, 0.5, 0.5 - invNotch, 0.5]);
-	}
-	t.fixed = slp;
-	return t;
-})();
 
 //? Regular grass blocks.
 
