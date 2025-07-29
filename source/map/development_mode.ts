@@ -12,9 +12,9 @@ export const devMode = true;
 
 const __live_map_chunks = new Set<string>();
 
-export function ____acceptModifiedChunks(chunkRoot: Vec3) {
-	__live_map_chunks.add(core.serialize(chunkRoot));
-}
+// export function ____acceptModifiedChunks(chunkRoot: Vec3) {
+// 	__live_map_chunks.add(core.serialize(chunkRoot));
+// }
 
 if (devMode) {
 	afterClientJoins((client) => {
