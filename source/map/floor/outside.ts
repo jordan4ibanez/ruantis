@@ -43,7 +43,7 @@ for (const i of $range(1, 3)) {
 		name: `grass_single_slope_${i}`,
 		drawtype: Drawtype.mesh,
 		mesh: "grass_single_slope.gltf",
-		tiles: [`grass_${i}.png`],
+		tiles: [`grass_${i}.png^[invert:rgb`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
 	});
