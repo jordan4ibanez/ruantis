@@ -9,6 +9,8 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 		spread: new Vec3(1, 1, 1),
 	});
 
+	print(minp, maxp);
+
 	print(dump(noise));
 });
 
