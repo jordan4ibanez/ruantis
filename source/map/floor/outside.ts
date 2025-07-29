@@ -1,7 +1,19 @@
 import { afterClientJoins } from "../../logic/client_join_leave";
-import { Drawtype, ParamType2 } from "../../utility/enums";
+import { Drawtype, Nodeboxtype, ParamType2 } from "../../utility/enums";
 import { Vec3 } from "../../utility/vector";
 import { registerBlock, setBlock } from "../block_database";
+
+const invCornerNodeBox: NodeBox = {
+	type: Nodeboxtype.fixed,
+};
+const detail = 20;
+let slT = [];
+for (const i of $range(1, detail - 1)) {
+	const notch = i / detail;
+	const invNotch = 1 - notch;
+	slT.push([-0.5, -0.5, -0.5 + notch, 0.5 - notch, 0.5 - invNotch, 0.5]);
+}
+invCornerNodeBox.fixed = slT;
 
 //? Regular grass blocks.
 
@@ -96,6 +108,8 @@ for (const i of $range(1, 3)) {
 		tiles: [`grass_${i}.png`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
+		node_box: invCornerNodeBox,
+		selection_box: invCornerNodeBox,
 	});
 }
 
