@@ -68,7 +68,7 @@ for (const i of $range(1, 3)) {
 		name: `grass_corner_${i}`,
 		drawtype: Drawtype.mesh,
 		mesh: "corner.gltf",
-		tiles: [`smile.png^[invert:rgb`],
+		tiles: [`grass_${i}.png`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
 	});
