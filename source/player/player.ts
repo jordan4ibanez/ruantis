@@ -100,6 +100,17 @@ function setUpPlayer(client: ObjectRef): void {
 	client.set_stars({
 		visible: false,
 	});
+
+	if (devMode) {
+		core.set_player_privs(client.get_player_name(), {
+			fly: true,
+			noclip: true,
+			fast: true,
+		});
+
+		//? This can be changed to continue working on an area.
+		client.set_pos(new Vec3(0, 1, 0));
+	}
 }
 
 whenClientJoins((client) => {
