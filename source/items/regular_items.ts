@@ -1,8 +1,8 @@
 import { registerItem } from "./utility";
 
 registerItem({
-	name: "logs",
-	image: "logs.png",
+	name: "log",
+	image: "log.png",
 });
 
 /**
