@@ -1,4 +1,5 @@
 import { ShallowVector3 } from "../../minetest-api";
+import { SchematicRotation } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 import { setBlock } from "./block_database";
 
@@ -187,8 +188,33 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 
 	//? Add in the actual game to the map.
 
-	const minX = minp.x 
+	const minX = math.floor(minp.x / 16);
+	const minY = math.floor(minp.y / 16);
+	const minZ = math.floor(minp.z / 16);
 
+	const maxX = minX + 4;
+	const maxY = minY + 4;
+	const maxZ = minZ + 4;
+
+	const mp = core.get_modpath("ruantis");
+	for (const x of $range(minX, maxX)) {
+		for (const y of $range(minY, maxY)) {
+			for (const z of $range(minZ, maxZ)) {
+				work3.x = x * 16;
+				work3.y = y * 16;
+				work3.z = z * 16;
+
+				core.place_schematic(
+					work3,
+					`${mp}/schematics/chunks/chunk_${x}_${y}_${z}.mts`,
+					SchematicRotation.zero,
+					{},
+					true,
+					""
+				);
+			}
+		}
+	}
 });
 
 /**
