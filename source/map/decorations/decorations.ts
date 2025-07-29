@@ -22,19 +22,36 @@ registerBlock({
 	mesh: "log_sideways.gltf",
 	tiles: ["log_sideways.png"],
 });
+(() => {
+	const benchBox = {
+		type: Nodeboxtype.fixed,
+		fixed: [-0.75, -0.5, -0.4, 0.75, 0.2, 0.4],
+	};
 
-registerBlock({
-	name: "bench",
-	drawtype: Drawtype.mesh,
-	paramtype2: ParamType2["4dir"],
-	mesh: "bench.gltf",
-	tiles: ["bench.png"],
-});
+	registerBlock({
+		name: "bench",
+		drawtype: Drawtype.mesh,
+		paramtype2: ParamType2["4dir"],
+		pointable: true,
+		collision_box: benchBox,
+		selection_box: benchBox,
+		mesh: "bench.gltf",
+		tiles: ["bench.png"],
+	});
+})();
 
 for (const i of $range(1, 3)) {
+	const fireBox = {
+		type: Nodeboxtype.fixed,
+		fixed: [-0.4, -0.5, -0.4, 0.4, 0.2, 0.4],
+	};
+
 	registerBlock({
 		name: `camp_fire_${i}`,
 		drawtype: Drawtype.mesh,
+		pointable: true,
+		collision_box: fireBox,
+		selection_box: fireBox,
 		mesh: `camp_fire_${i}.gltf`,
 		tiles: ["camp_fire.png"],
 	});
