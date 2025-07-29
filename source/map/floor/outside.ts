@@ -76,6 +76,29 @@ for (const i of $range(1, 3)) {
 
 //? Inverse corner grass block.
 
+// Randomizer.
+registerBlock({
+	name: "i_grass_inverse_corner",
+	drawtype: Drawtype.airlike,
+	groups: { static: 1 },
+	paramtype2: ParamType2["4dir"],
+	on_construct: (pos) => {
+		const i = math.random(1, 3);
+		setBlock(pos, `grass_inverse_corner_${i}`, core.get_node(pos).param2);
+	},
+});
+
+for (const i of $range(1, 3)) {
+	registerBlock({
+		name: `grass_inverse_corner_${i}`,
+		drawtype: Drawtype.mesh,
+		mesh: "inverse_corner.gltf",
+		tiles: [`grass_${i}.png`],
+		groups: { static: 1 },
+		paramtype2: ParamType2["4dir"],
+	});
+}
+
 /**
  * Tree-shake removal function.
  *
