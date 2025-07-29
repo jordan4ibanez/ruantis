@@ -184,6 +184,11 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 			}
 		}
 	}
+
+	//? Add in the actual game to the map.
+
+	const minX = minp.x 
+
 });
 
 /**

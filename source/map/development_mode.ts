@@ -68,23 +68,23 @@ if (devMode) {
 			param: string
 		): LuaMultiReturn<[boolean, string]> | void {
 			const mp = core.get_modpath("ruantis");
-			for (const cPosHash of __live_map_chunks) {
-				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
+			for (const IDC of __live_map_chunks) {
+				const chunkID: ShallowVector3 = core.deserialize(IDC);
 
-				if (chunkPosRoot == null) {
+				if (chunkID == null) {
 					throw new Error("Serialization error?");
 				}
 
-				if (!core.forceload_block(chunkPosRoot, false, -1)) {
+				if (!core.forceload_block(chunkID, false, -1)) {
 					throw new Error(
-						`Failed to force load chunk ${chunkPosRoot.toString()}`
+						`Failed to force load chunk ${chunkID.toString()}`
 					);
 				}
 
 				const min = new Vec3(
-					chunkPosRoot.x * 16,
-					chunkPosRoot.y * 16,
-					chunkPosRoot.z * 16
+					chunkID.x * 16,
+					chunkID.y * 16,
+					chunkID.z * 16
 				);
 
 				const max = new Vec3().copyFrom(min).add(new Vec3(16, 16, 16));
@@ -93,12 +93,14 @@ if (devMode) {
 					min,
 					max,
 					null,
-					`${mp}/schematics/chunks/testing.mts`,
+					`${mp}/schematics/chunks/chunk_${chunkID.x}_${chunkID.y}_${chunkID.z}.mts`,
 					null
 				);
 
-				core.forceload_free_block(chunkPosRoot, false);
+				core.forceload_free_block(chunkID, false);
 			}
+
+			__live_map_chunks.clear();
 		},
 	});
 
@@ -107,15 +109,13 @@ if (devMode) {
 		pos.y = math.floor(pos.y / 16);
 		pos.z = math.floor(pos.z / 16);
 
-		const cPosStr = core.serialize(new Vec3().copyFrom(pos));
+		const CID = core.serialize(new Vec3().copyFrom(pos));
 
-		// if (!__live_map_chunks.has(cPosStr)) {
-		print(`Detected modification at ${pos}`);
-		// }
+		if (!__live_map_chunks.has(CID)) {
+			print(`Detected modification at chunk ${CID}`);
+		}
 
-		__live_map_chunks.add(cPosStr);
-
-		// print(dump(modifiedChunks));
+		__live_map_chunks.add(CID);
 	}
 
 	core.register_on_placenode(modCheck);
