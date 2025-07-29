@@ -86,6 +86,7 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 			let adder = 0;
 
 			// todo: first check for quadrant (all sides)
+
 			// todo: then check for gulf (3 sides)
 			// todo: then check for duplex \/
 			// todo: then check for corner (will need different algorithm)
@@ -114,6 +115,10 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 				} else if (rightHeight > currentHeight) {
 					setBlock(work3, "i_grass_single_slope", 1);
 				}
+			} else if (adder == 4) {
+				// There's a hole.
+				print("found a hole");
+				setBlock(work3, "i_grass", 1);
 			}
 		}
 	}
