@@ -60,6 +60,47 @@ if (devMode) {
 		func: gfunc,
 	});
 
+	// This regenerates all saved chunks in case of a drastic change.
+	core.register_chatcommand("regen", {
+		params: "",
+		description: "",
+		privs: { server: true },
+		func: () => {
+			const mp = core.get_modpath("ruantis");
+
+			const f: LuaFile | undefined = io.popen(
+				`ls -pa ${mp}/schematics/chunks/ | grep -v /`
+			)[0];
+
+			if (f == null) {
+				throw new Error("Wrong dir");
+			}
+
+			for (const [line] of f.lines()) {
+				if (line == null) {
+					throw new Error("null chunk");
+				}
+
+				const one = line.substring(6);
+
+				const two = one.replace(".mts", "");
+
+				const three = two.split("_");
+
+				const realChunkID = new Vec3(
+					tonumber(three[0]),
+					tonumber(three[1]),
+					tonumber(three[2])
+				);
+
+				__live_map_chunks.add(core.serialize(realChunkID));
+			}
+			f.close();
+
+			saveMap();
+		},
+	});
+
 	function saveMap() {
 		const mp = core.get_modpath("ruantis");
 		for (const IDC of __live_map_chunks) {
