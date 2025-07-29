@@ -21,6 +21,7 @@ if (devMode) {
 			type: HudElementType.text,
 			text: "DEVELOPER MODE",
 			offset: new Vec2(100, 100),
+			number: 0xffffff,
 			style: 2,
 		});
 	});
