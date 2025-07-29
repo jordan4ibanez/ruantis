@@ -1308,7 +1308,7 @@ declare global {
 	}
 
 	/** @noSelf **/ interface ABMDefinition {
-		label: string;
+		label?: string;
 		nodenames: string[];
 		neighbors?: string[];
 		interval: number;
