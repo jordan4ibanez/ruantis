@@ -106,11 +106,13 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 			// Simplex check. (1 side)
 			if (adder == 1) {
 				if (frontHeight > currentHeight) {
-					// setBlock(work3, "i_grass_single_slope", 0);
+					setBlock(work3, "i_grass_single_slope", 0);
 				} else if (backHeight > currentHeight) {
 					setBlock(work3, "i_grass_single_slope", 2);
 				} else if (leftHeight > currentHeight) {
+					setBlock(work3, "i_grass_single_slope", 3);
 				} else if (rightHeight > currentHeight) {
+					setBlock(work3, "i_grass_single_slope", 1);
 				}
 			}
 		}
