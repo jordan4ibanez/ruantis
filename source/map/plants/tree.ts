@@ -36,7 +36,8 @@ registerBlock({
 
 		core.sound_play("tree_chop", { pos: pos });
 
-		// Could do an axe calculation here.
+		// todo: check for an axe!
+
 		if (math.random(1, 1000) > 900) {
 			const inv = digger.get_inventory();
 			if (inv == null) {
