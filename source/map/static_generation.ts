@@ -135,8 +135,6 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 					//? Back right.
 					setBlock(work3, "i_grass_corner", 2);
 				}
-
-				print(enc);
 			} else if (adder == 4) {
 				// There's a hole.
 				print("found a hole");
