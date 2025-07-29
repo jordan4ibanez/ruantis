@@ -43,7 +43,32 @@ for (const i of $range(1, 3)) {
 		name: `grass_slope_${i}`,
 		drawtype: Drawtype.mesh,
 		mesh: "grass_slope.gltf",
-		tiles: [`grass_${i}.png^[invert:rgb`],
+		tiles: [`grass_${i}.png`],
+		groups: { static: 1 },
+		paramtype2: ParamType2["4dir"],
+	});
+}
+
+//? Corner grass block.
+
+// Randomizer.
+registerBlock({
+	name: "i_grass_corner",
+	drawtype: Drawtype.airlike,
+	groups: { static: 1 },
+	paramtype2: ParamType2["4dir"],
+	on_construct: (pos) => {
+		const i = math.random(1, 3);
+		setBlock(pos, `grass_corner_${i}`, core.get_node(pos).param2);
+	},
+});
+
+for (const i of $range(1, 3)) {
+	registerBlock({
+		name: `grass_corner_${i}`,
+		drawtype: Drawtype.mesh,
+		mesh: "grass_corner.gltf",
+		tiles: [`smile.png^[invert:rgb`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
 	});
