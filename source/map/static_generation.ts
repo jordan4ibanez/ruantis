@@ -128,7 +128,28 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 				rr.x = x + 1;
 				rr.y = z - 1;
 
+				const hfl = math.floor(noise.get_2d(fl) * MULTIPLIER);
+				const hfr = math.floor(noise.get_2d(fr) * MULTIPLIER);
+				const hrl = math.floor(noise.get_2d(rl) * MULTIPLIER);
+				const hrr = math.floor(noise.get_2d(rr) * MULTIPLIER);
+
+
+				if (hfl > currentHeight) {
+					// Front left corner.
+
+				} else if (hfr > currentHeight) {
+					// Front right corner.
+
+				} else if (hrl > currentHeight) {
+					// Rear left corner.
+
+				} else if (hrr > currentHeight) {
+					// Rear right corner.
+
+				}
 				
+
+
 
 			} else if (adder == 1) {
 				// Regular slope check.
