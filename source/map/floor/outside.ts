@@ -34,7 +34,6 @@ registerBlock({
 	paramtype2: ParamType2["4dir"],
 	on_construct: (pos) => {
 		const i = math.random(1, 3);
-
 		setBlock(pos, `grass_single_slope_${i}`, core.get_node(pos).param2);
 	},
 });
