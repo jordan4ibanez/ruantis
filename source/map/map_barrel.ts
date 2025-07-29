@@ -6,6 +6,7 @@ import { loadOutside } from "./floor/outside";
 import { loadStairs } from "./floor/stairs";
 import { loadOre } from "./ore/ore";
 import { loadTrees } from "./plants/tree";
+import { loadStaticGeneration } from "./static_generation";
 
 /**
  * Tree-shake removal function.
@@ -29,3 +30,5 @@ loadTrees();
 loadOre();
 
 loadChunkBarrel();
+
+loadStaticGeneration();
