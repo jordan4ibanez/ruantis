@@ -108,8 +108,12 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 
 			// Simplex check. (1 side)
 			if (adder == 0) {
-				// todo: corner
+				// Inverse corner check.
+
+				
 			} else if (adder == 1) {
+				// Regular slope check.
+
 				if (frontHeight > currentHeight) {
 					setBlock(work3, "i_grass_slope", 0);
 				} else if (backHeight > currentHeight) {
@@ -121,7 +125,6 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 				}
 			} else if (adder == 2) {
 				// Corner check.
-
 				if (enc == 101) {
 					//? Front left
 					setBlock(work3, "i_grass_corner", 0);
