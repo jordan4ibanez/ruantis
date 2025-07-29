@@ -6,6 +6,8 @@ const FIXED_SEED = 18211451931165;
 
 const FIXED_SPREAD = 100;
 
+core.set_mapgen_setting("seed", FIXED_SEED, true);
+
 core.register_on_generated(
 	(minp: ShallowVector3, maxp: ShallowVector3, seed) => {
 		const noise: NoiseObject = core.get_value_noise({
