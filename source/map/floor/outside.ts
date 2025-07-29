@@ -2,6 +2,7 @@ import { afterClientJoins } from "../../logic/client_join_leave";
 import { Drawtype, Nodeboxtype, ParamType2 } from "../../utility/enums";
 import { Vec3 } from "../../utility/vector";
 import { registerBlock, setBlock } from "../block_database";
+import { cornerNodeBox, invCornerNodeBox, slopeNodeBox } from "./slope_boxes";
 
 
 
