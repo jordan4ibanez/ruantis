@@ -386,6 +386,7 @@ interface core {
 		pos2: ShallowVector3,
 		nodeNames: string[]
 	): ShallowVector3[];
+	get_value_noise(nodeParams: NoiseParams): PerlinNoiseObject;
 	get_perlin(nodeParams: NoiseParams): PerlinNoiseObject;
 	get_perlin(
 		seedDiff: number,
