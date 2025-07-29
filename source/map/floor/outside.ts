@@ -74,6 +74,8 @@ for (const i of $range(1, 3)) {
 	});
 }
 
+//? Inverse corner grass block.
+
 /**
  * Tree-shake removal function.
  *
