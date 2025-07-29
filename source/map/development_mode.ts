@@ -7,6 +7,7 @@ import { afterClientJoins } from "../logic/client_join_leave";
 import { HudElementType, LogLevel } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 
+//! To use dev mode, you have to disable mod security.
 export const devMode = true;
 
 const __live_map_chunks = new Set<string>();
