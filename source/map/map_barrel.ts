@@ -1,4 +1,5 @@
 import { loadBlockDatabase } from "./block_database";
+import { loadBuildingBlocks } from "./building_blocks/building_blocks";
 import { loadDecorations } from "./decorations/decorations";
 import { loadDevelopmentMode } from "./development_mode";
 import { loadOutside } from "./floor/outside";
@@ -27,5 +28,7 @@ loadDecorations();
 loadTrees();
 
 loadOre();
+
+loadBuildingBlocks();
 
 loadStaticGeneration();
