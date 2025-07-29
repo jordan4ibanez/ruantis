@@ -1382,7 +1382,7 @@ declare global {
 	/** @noSelf **/ interface NoiseParams {
 		offset?: number;
 		scale?: number;
-		spread?: ShallowVector3;
+		spread: ShallowVector3;
 		seed?: number;
 		octaves?: number;
 		// These two have the same effect.
