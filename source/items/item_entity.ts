@@ -3,7 +3,7 @@ import { EntityVisual } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 
 export class ItemEntity extends Entity {
-	name: string = ":__builtin:item";
+	name: string = "__builtin:item";
 	itemstring: string = "";
 	dropped_by: string = "";
 	// Item expiry
@@ -69,10 +69,7 @@ export class ItemEntity extends Entity {
 		print("hi");
 	}
 }
-
-print("RUNNING!!!")
-
-registerEntity(ItemEntity);
+registerEntity(ItemEntity, true);
 
 /**
  * Tree-shake removal function.
