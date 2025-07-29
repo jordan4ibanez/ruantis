@@ -85,8 +85,6 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 
 			let adder = 0;
 
-			// todo: then check for gulf (3 sides)
-			// todo: then check for duplex \/
 			// todo: then check for corner (will need different algorithm)
 
 			if (frontHeight > currentHeight) {
@@ -103,6 +101,9 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 			}
 
 			// Simplex check. (1 side)
+			if ((adder = 0)) {
+				// todo: corner
+			}
 			if (adder == 1) {
 				if (frontHeight > currentHeight) {
 					setBlock(work3, "i_grass_single_slope", 0);
@@ -113,6 +114,10 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 				} else if (rightHeight > currentHeight) {
 					setBlock(work3, "i_grass_single_slope", 1);
 				}
+			} else if (adder == 3) {
+				core.after(3, () => {
+					print("found gulf");
+				});
 			} else if (adder == 4) {
 				// There's a hole.
 				print("found a hole");
