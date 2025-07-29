@@ -386,14 +386,14 @@ interface core {
 		pos2: ShallowVector3,
 		nodeNames: string[]
 	): ShallowVector3[];
-	get_value_noise(nodeParams: NoiseParams): PerlinNoiseObject;
-	get_perlin(nodeParams: NoiseParams): PerlinNoiseObject;
+	get_value_noise(nodeParams: NoiseParams): NoiseObject;
+	get_perlin(nodeParams: NoiseParams): NoiseObject;
 	get_perlin(
 		seedDiff: number,
 		octaves: number,
 		persistence: number,
 		spread: number
-	): PerlinNoiseObject;
+	): NoiseObject;
 	get_voxel_manip(
 		pos1: ShallowVector3,
 		pos2: ShallowVector3
@@ -1596,7 +1596,7 @@ declare global {
 	function SecureRandom(): SecureRandomObject;
 	function Settings(_: string): LuantiSettingsObject;
 	function PcgRandom(seed: number, sequence: number[]): PcgRandomObject;
-	function PerlinNoise(params: NoiseParams): PerlinNoiseObject;
+	function PerlinNoise(params: NoiseParams): NoiseObject;
 	function PerlinNoiseMap(
 		params: NoiseParams,
 		size: ShallowVector3
@@ -2500,7 +2500,7 @@ declare global {
 		rand_normal_dist(min: number, max: number, trials: number): number;
 	}
 
-	interface PerlinNoiseObject {
+	interface NoiseObject {
 		get_2d(position: ShallowVector2): number;
 		get_3d(position: ShallowVector3): number;
 	}
