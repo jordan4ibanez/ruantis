@@ -24,25 +24,25 @@ for (const i of $range(1, 3)) {
 	});
 }
 
-//? 1 angle grass block.
+//? Sloped grass block.
 
 // Randomizer.
 registerBlock({
-	name: "i_grass_single_slope",
+	name: "i_grass_slope",
 	drawtype: Drawtype.airlike,
 	groups: { static: 1 },
 	paramtype2: ParamType2["4dir"],
 	on_construct: (pos) => {
 		const i = math.random(1, 3);
-		setBlock(pos, `grass_single_slope_${i}`, core.get_node(pos).param2);
+		setBlock(pos, `grass_slope_${i}`, core.get_node(pos).param2);
 	},
 });
 
 for (const i of $range(1, 3)) {
 	registerBlock({
-		name: `grass_single_slope_${i}`,
+		name: `grass_slope_${i}`,
 		drawtype: Drawtype.mesh,
-		mesh: "grass_single_slope.gltf",
+		mesh: "grass_slope.gltf",
 		tiles: [`grass_${i}.png^[invert:rgb`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
