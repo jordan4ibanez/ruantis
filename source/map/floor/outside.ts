@@ -6,6 +6,7 @@ import { registerBlock, setBlock } from "../block_database";
 registerBlock({
 	name: "i_grass",
 	drawtype: Drawtype.airlike,
+	groups: { static: 1 },
 	on_construct: (pos) => {
 		const i = math.random(1, 3);
 		setBlock(pos, `grass_${i}`);
@@ -13,7 +14,11 @@ registerBlock({
 });
 
 for (const i of $range(1, 3)) {
-	registerBlock({ name: `grass_${i}`, tiles: [`grass_${i}.png`] });
+	registerBlock({
+		name: `grass_${i}`,
+		tiles: [`grass_${i}.png`],
+		groups: { static: 1 },
+	});
 }
 
 afterClientJoins((client) => {
