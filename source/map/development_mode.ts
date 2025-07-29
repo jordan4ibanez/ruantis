@@ -59,6 +59,43 @@ if (devMode) {
 		func: gfunc,
 	});
 
+	function saveMap() {
+		const mp = core.get_modpath("ruantis");
+		for (const IDC of __live_map_chunks) {
+			const chunkID: ShallowVector3 = core.deserialize(IDC);
+
+			if (chunkID == null) {
+				throw new Error("Serialization error?");
+			}
+
+			if (!core.forceload_block(chunkID, false, -1)) {
+				throw new Error(
+					`Failed to force load chunk ${chunkID.toString()}`
+				);
+			}
+
+			const min = new Vec3(
+				chunkID.x * 16,
+				chunkID.y * 16,
+				chunkID.z * 16
+			);
+
+			const max = new Vec3().copyFrom(min).add(new Vec3(16, 16, 16));
+
+			core.create_schematic(
+				min,
+				max,
+				null,
+				`${mp}/schematics/chunks/chunk_${chunkID.x}_${chunkID.y}_${chunkID.z}.mts`,
+				null
+			);
+
+			core.forceload_free_block(chunkID, false);
+		}
+
+		__live_map_chunks.clear();
+	}
+
 	core.register_chatcommand("save", {
 		params: "",
 		description: "",
@@ -67,41 +104,12 @@ if (devMode) {
 			name: string,
 			param: string
 		): LuaMultiReturn<[boolean, string]> | void {
-			const mp = core.get_modpath("ruantis");
-			for (const IDC of __live_map_chunks) {
-				const chunkID: ShallowVector3 = core.deserialize(IDC);
-
-				if (chunkID == null) {
-					throw new Error("Serialization error?");
-				}
-
-				if (!core.forceload_block(chunkID, false, -1)) {
-					throw new Error(
-						`Failed to force load chunk ${chunkID.toString()}`
-					);
-				}
-
-				const min = new Vec3(
-					chunkID.x * 16,
-					chunkID.y * 16,
-					chunkID.z * 16
-				);
-
-				const max = new Vec3().copyFrom(min).add(new Vec3(16, 16, 16));
-
-				core.create_schematic(
-					min,
-					max,
-					null,
-					`${mp}/schematics/chunks/chunk_${chunkID.x}_${chunkID.y}_${chunkID.z}.mts`,
-					null
-				);
-
-				core.forceload_free_block(chunkID, false);
-			}
-
-			__live_map_chunks.clear();
+			saveMap();
 		},
+	});
+
+	core.register_on_shutdown(() => {
+		saveMap();
 	});
 
 	function modCheck(pos: ShallowVector3) {
