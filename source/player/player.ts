@@ -106,6 +106,8 @@ function setUpPlayer(client: ObjectRef): void {
 			fly: true,
 			noclip: true,
 			fast: true,
+			give: true,
+			grant: true,
 		});
 
 		//? This can be changed to continue working on an area.
