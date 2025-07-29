@@ -44,13 +44,13 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 		outputQueue.pop();
 	}
 
-	// north +z
+	// front north +z
 	const front = new Vec2();
-	// south -z
+	// rear south -z
 	const back = new Vec2();
-	// west -x
+	// left west -x
 	const left = new Vec2();
-	// east +x
+	// right east +x
 	const right = new Vec2();
 
 	const work3 = new Vec3();
@@ -115,6 +115,21 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 			// Simplex check. (1 side)
 			if (adder == 0) {
 				// Inverse corner check.
+
+				fl.x = x - 1;
+				fl.y = z + 1;
+
+				fr.x = x + 1;
+				fr.y = z + 1;
+
+				rl.x = x - 1;
+				rl.y = z - 1;
+
+				rr.x = x + 1;
+				rr.y = z - 1;
+
+				
+
 			} else if (adder == 1) {
 				// Regular slope check.
 
