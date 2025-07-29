@@ -113,6 +113,9 @@ function setUpPlayer(client: ObjectRef): void {
 
 		//? This can be changed to continue working on an area.
 		client.set_pos(new Vec3(0, 1, 0));
+	} else {
+		// This should be checking the meta to see if the player has been to the server before.
+		client.set_pos(new Vec3(0, 1, 0));
 	}
 }
 
