@@ -3,7 +3,6 @@ import { deployWindowHandling } from "./player/window";
 import { deployInventoryHandling } from "./player/inventory";
 import { deployClientTracker } from "./player/tracker";
 import { deployPlayerEntity } from "./player/player";
-import { loadChunkDatabase } from "./map/chunk_database/chunks_database";
 import { loadNodes } from "./map/map_barrel";
 
 function main() {
@@ -13,6 +12,5 @@ function main() {
 	deployInventoryHandling();
 	deployPlayerEntity();
 	loadNodes();
-	loadChunkDatabase();
 }
 main();

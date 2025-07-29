@@ -1,5 +1,4 @@
 import { loadBlockDatabase } from "./block_database";
-import { loadChunkBarrel } from "./chunk_database/chunk_barrel";
 import { loadDecorations } from "./decorations/decorations";
 import { loadDevelopmentMode } from "./development_mode";
 import { loadOutside } from "./floor/outside";
@@ -28,7 +27,5 @@ loadDecorations();
 loadTrees();
 
 loadOre();
-
-loadChunkBarrel();
 
 loadStaticGeneration();
