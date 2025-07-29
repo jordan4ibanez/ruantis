@@ -1,6 +1,6 @@
 import { ShallowVector3 } from "../../minetest-api";
 import { Entity, registerEntity } from "../utility/entity";
-import { EntityVisual } from "../utility/enums";
+import { EntityVisual, LogLevel } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 
 export class ItemEntity extends Entity {
@@ -12,16 +12,15 @@ export class ItemEntity extends Entity {
 
 	initial_properties = {
 		hp_max: 1,
-		visual: EntityVisual.wielditem,
+		visual: EntityVisual.sprite,
 		physical: true,
 		textures: [""],
-		automatic_rotate: 1.5,
 		is_visible: true,
-		pointable: false,
+		pointable: true,
 		collide_with_objects: false,
-		collisionbox: [-0.21, -0.21, -0.21, 0.21, 0.21, 0.21],
-		selectionbox: [-0.21, -0.21, -0.21, 0.21, 0.21, 0.21],
-		visual_size: new Vec2(0.21, 0.21),
+		collisionbox: [-0.25, -0.25, -0.25, 0.25, 0.25, 0.25],
+		selectionbox: [-0.25, -0.25, -0.25, 0.25, 0.25, 0.25],
+		visual_size: new Vec2(0.5, 0.5),
 	};
 
 	set_item(item: string | ItemStackObject | null) {
@@ -38,7 +37,7 @@ export class ItemEntity extends Entity {
 		const def: ItemDefinition | undefined = core.registered_items[itemname];
 
 		this.object.set_properties({
-			textures: [itemname],
+			textures: [def?.wield_image || ""],
 			wield_item: this.itemstring,
 			glow: def && def.light_source,
 		});
@@ -66,8 +65,12 @@ export class ItemEntity extends Entity {
 
 		this.set_item(this.itemstring);
 	}
-	on_step(delta: number, moveResult: MoveResult | null): void {
-		print("hi");
+	on_step(delta: number): void {
+		this.age += delta;
+		// 5 minutes and items disappear.
+		if (this.age > 300) {
+			this.object.remove();
+		}
 	}
 }
 registerEntity(ItemEntity, true);
@@ -77,10 +80,19 @@ core.item_drop = (
 	dropper: ObjectRef | null,
 	position: ShallowVector3
 ): [ItemStackObject, ObjectRef] | null => {
+	if (dropper == null || !dropper.is_player()) {
+		core.log(LogLevel.error, "Don't call core.item_drop.");
+		return null;
+	}
 
-	print("hi");
+	const pos = dropper.get_pos();
+	pos.y += 0.1;
+	const newEntity = core.add_item(pos, ItemStack(itemStack));
 
-	core.add_entity
+	if (newEntity) {
+		itemStack.clear();
+		return [itemStack, newEntity];
+	}
 
 	return null;
 };
