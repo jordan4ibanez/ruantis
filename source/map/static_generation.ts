@@ -133,24 +133,19 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 				const hrl = math.floor(noise.get_2d(rl) * MULTIPLIER);
 				const hrr = math.floor(noise.get_2d(rr) * MULTIPLIER);
 
-
 				if (hfl > currentHeight) {
 					// Front left corner.
-
+					setBlock(work3, "i_grass_inverse_corner", 0);
 				} else if (hfr > currentHeight) {
 					// Front right corner.
-
+					setBlock(work3, "i_grass_inverse_corner", 1);
 				} else if (hrl > currentHeight) {
 					// Rear left corner.
-
+					setBlock(work3, "i_grass_inverse_corner", 3);
 				} else if (hrr > currentHeight) {
 					// Rear right corner.
-
+					setBlock(work3, "i_grass_inverse_corner", 2);
 				}
-				
-
-
-
 			} else if (adder == 1) {
 				// Regular slope check.
 
