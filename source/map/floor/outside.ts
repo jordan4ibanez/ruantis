@@ -99,6 +99,8 @@ for (const i of $range(1, 3)) {
 		tiles: [`grass_${i}.png`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
+		node_box: slopeNodeBox,
+		selection_box: slopeNodeBox,
 	});
 }
 
