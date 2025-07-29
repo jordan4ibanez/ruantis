@@ -204,14 +204,21 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 				work3.y = y * 16;
 				work3.z = z * 16;
 
-				core.place_schematic(
-					work3,
-					`${mp}/schematics/chunks/chunk_${x}_${y}_${z}.mts`,
-					SchematicRotation.zero,
-					{},
-					true,
-					""
-				);
+				const fName = `${mp}/schematics/chunks/chunk_${x}_${y}_${z}.mts`;
+				const [f] = io.open(fName, "r");
+
+				if (f != null) {
+					core.place_schematic(
+						work3,
+						fName,
+						SchematicRotation.zero,
+						{},
+						true,
+						""
+					);
+
+					io.close(f);
+				}
 			}
 		}
 	}
