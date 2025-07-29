@@ -1,4 +1,4 @@
-import { loadCustomItemEntity } from "./item_entity";
+import { loadCustomItemEntity } from "./item_handling";
 import { loadRegularItems } from "./regular_items";
 
 /**

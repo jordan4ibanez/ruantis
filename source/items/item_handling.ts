@@ -1,3 +1,4 @@
+import { ShallowVector3 } from "../../minetest-api";
 import { Entity, registerEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
@@ -70,6 +71,19 @@ export class ItemEntity extends Entity {
 	}
 }
 registerEntity(ItemEntity, true);
+
+core.item_drop = (
+	itemStack: ItemStackObject,
+	dropper: ObjectRef | null,
+	position: ShallowVector3
+): [ItemStackObject, ObjectRef] | null => {
+
+	print("hi");
+
+	core.add_entity
+
+	return null;
+};
 
 /**
  * Tree-shake removal function.
