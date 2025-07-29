@@ -1,5 +1,6 @@
 import { ShallowVector3 } from "../../minetest-api";
 import { Vec2, Vec3 } from "../utility/vector";
+import { setBlock } from "./block_database";
 
 const FIXED_SEED = 18211451931165;
 
@@ -44,13 +45,15 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 	}
 
 	// north +z
-	const front = new Vec3();
+	const front = new Vec2();
 	// south -z
-	const back = new Vec3();
+	const back = new Vec2();
 	// west -x
-	const left = new Vec3();
+	const left = new Vec2();
 	// east +x
-	const right = new Vec3();
+	const right = new Vec2();
+
+	const work3 = new Vec3();
 
 	for (const x of $range(minp.x, maxp.x)) {
 		for (const z of $range(minp.z, maxp.z)) {
@@ -71,13 +74,45 @@ core.register_on_generated((minp: ShallowVector3, maxp: ShallowVector3) => {
 
 			const currentHeight = math.floor(noise.get_2d(worker) * MULTIPLIER);
 
+			work3.x = x;
+			work3.y = currentHeight + 1;
+			work3.z = z;
+
 			const frontHeight = math.floor(noise.get_2d(front) * MULTIPLIER);
-
 			const backHeight = math.floor(noise.get_2d(back) * MULTIPLIER);
-
 			const leftHeight = math.floor(noise.get_2d(left) * MULTIPLIER);
-
 			const rightHeight = math.floor(noise.get_2d(right) * MULTIPLIER);
+
+			let adder = 0;
+
+			// todo: first check for quadrant (all sides)
+			// todo: then check for gulf (3 sides)
+			// todo: then check for duplex \/
+			// todo: then check for corner (will need different algorithm)
+
+			if (frontHeight > currentHeight) {
+				adder++;
+			}
+			if (backHeight > currentHeight) {
+				adder++;
+			}
+			if (leftHeight > currentHeight) {
+				adder++;
+			}
+			if (rightHeight > currentHeight) {
+				adder++;
+			}
+
+			// Simplex check. (1 side)
+			if (adder == 1) {
+				if (frontHeight > currentHeight) {
+					// setBlock(work3, "i_grass_single_slope", 0);
+				} else if (backHeight > currentHeight) {
+					setBlock(work3, "i_grass_single_slope", 2);
+				} else if (leftHeight > currentHeight) {
+				} else if (rightHeight > currentHeight) {
+				}
+			}
 		}
 	}
 });
