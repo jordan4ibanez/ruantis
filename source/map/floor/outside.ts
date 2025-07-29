@@ -22,9 +22,7 @@ let sdr = [];
 for (const i of $range(1, detail - 1)) {
 	const notch = i / detail;
 	const invNotch = 1 - notch;
-
 	const halfNotch = notch / 2;
-
 	sdr.push([
 		-0.5,
 		-0.5,
