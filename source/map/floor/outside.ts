@@ -15,6 +15,27 @@ for (const i of $range(1, detail - 1)) {
 }
 invCornerNodeBox.fixed = slT;
 
+const cornerNodeBox: NodeBox = {
+	type: Nodeboxtype.fixed,
+};
+let sdr = [];
+for (const i of $range(1, detail - 1)) {
+	const notch = i / detail;
+	const invNotch = 1 - notch;
+
+	const halfNotch = notch / 2;
+
+	sdr.push([
+		-0.5,
+		-0.5,
+		-0.5 + halfNotch,
+		0.5 - halfNotch,
+		0.5 - invNotch,
+		0.5,
+	]);
+}
+cornerNodeBox.fixed = sdr;
+
 //? Regular grass blocks.
 
 // Randomizer.
@@ -83,6 +104,8 @@ for (const i of $range(1, 3)) {
 		tiles: [`grass_${i}.png`],
 		groups: { static: 1 },
 		paramtype2: ParamType2["4dir"],
+		node_box: cornerNodeBox,
+		selection_box: cornerNodeBox,
 	});
 }
 
