@@ -67,84 +67,87 @@ if (devMode) {
 			name: string,
 			param: string
 		): LuaMultiReturn<[boolean, string]> | void {
-			const worker = new Vec3();
 
-			// Create the __auto_chunk_data.ts file.
-			const saveString: string[] = [
-				`import { Vec3 } from "../../utility/vector";
-import { ____automation_internal_only_add_chunk } from "./chunks_database";
+			
 
-export function ____automation_internal_only_automate_set_up_chunks() {`,
-			];
+// 			const worker = new Vec3();
 
-			for (const cPosHash of __live_map_chunks) {
-				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
+// 			// Create the __auto_chunk_data.ts file.
+// 			const saveString: string[] = [
+// 				`import { Vec3 } from "../../utility/vector";
+// import { ____automation_internal_only_add_chunk } from "./chunks_database";
 
-				if (chunkPosRoot == null) {
-					throw new Error("Serialization error?");
-				}
+// export function ____automation_internal_only_automate_set_up_chunks() {`,
+// 			];
 
-				if (!core.forceload_block(chunkPosRoot, false, -1)) {
-					throw new Error(
-						`Failed to force load chunk ${chunkPosRoot.toString()}`
-					);
-				}
+// 			for (const cPosHash of __live_map_chunks) {
+// 				const chunkPosRoot: ShallowVector3 = core.deserialize(cPosHash);
 
-				saveString.push(`
-	____automation_internal_only_add_chunk({
-		pos: new Vec3(${chunkPosRoot.x}, ${chunkPosRoot.y}, ${chunkPosRoot.z}),
-		blocks: [`);
+// 				if (chunkPosRoot == null) {
+// 					throw new Error("Serialization error?");
+// 				}
 
-				for (const x of $range(0, 15)) {
-					for (const y of $range(0, 15)) {
-						for (const z of $range(0, 15)) {
-							const xRoot = chunkPosRoot.x * 16;
-							const yRoot = chunkPosRoot.y * 16;
-							const zRoot = chunkPosRoot.z * 16;
+// 				if (!core.forceload_block(chunkPosRoot, false, -1)) {
+// 					throw new Error(
+// 						`Failed to force load chunk ${chunkPosRoot.toString()}`
+// 					);
+// 				}
 
-							worker.x = x + xRoot;
-							worker.y = y + yRoot;
-							worker.z = z + zRoot;
+// 				saveString.push(`
+// 	____automation_internal_only_add_chunk({
+// 		pos: new Vec3(${chunkPosRoot.x}, ${chunkPosRoot.y}, ${chunkPosRoot.z}),
+// 		blocks: [`);
 
-							const dat: NodeTable = core.get_node(worker);
+// 				for (const x of $range(0, 15)) {
+// 					for (const y of $range(0, 15)) {
+// 						for (const z of $range(0, 15)) {
+// 							const xRoot = chunkPosRoot.x * 16;
+// 							const yRoot = chunkPosRoot.y * 16;
+// 							const zRoot = chunkPosRoot.z * 16;
 
-							if (dat.name == "unknown" || dat.name == "ignore") {
-								core.log(
-									LogLevel.error,
-									"Engine is producing ub"
-								);
-							}
+// 							worker.x = x + xRoot;
+// 							worker.y = y + yRoot;
+// 							worker.z = z + zRoot;
 
-							if (dat.name == "air") {
-								continue;
-							}
+// 							const dat: NodeTable = core.get_node(worker);
 
-							saveString.push(`
-			{
-				pos: new Vec3(${x}, ${y}, ${z}),
-				block: "${dat.name}",
-				param2: ${dat.param2 || 0},
-			},`);
-						}
-					}
-				}
+// 							if (dat.name == "unknown" || dat.name == "ignore") {
+// 								core.log(
+// 									LogLevel.error,
+// 									"Engine is producing ub"
+// 								);
+// 							}
 
-				saveString.push(`\n\		],\n\	});\n`);
+// 							if (dat.name == "air") {
+// 								continue;
+// 							}
 
-				core.forceload_free_block(chunkPosRoot, false);
-			}
+// 							saveString.push(`
+// 			{
+// 				pos: new Vec3(${x}, ${y}, ${z}),
+// 				block: "${dat.name}",
+// 				param2: ${dat.param2 || 0},
+// 			},`);
+// 						}
+// 					}
+// 				}
 
-			saveString.push("}");
+// 				saveString.push(`\n\		],\n\	});\n`);
 
-			const heir = core.get_modpath("ruantis")!.split("/");
-			heir.pop();
-			heir.pop();
-			const path = heir.join("/");
+// 				core.forceload_free_block(chunkPosRoot, false);
+// 			}
 
-			core.safe_file_write(
-				path + "/source/map/chunk_database/__auto_chunk_data.ts",
-				saveString.join("")
-			);
+// 			saveString.push("}");
+
+// 			const heir = core.get_modpath("ruantis")!.split("/");
+// 			heir.pop();
+// 			heir.pop();
+// 			const path = heir.join("/");
+
+// 			core.safe_file_write(
+// 				path + "/source/map/chunk_database/__auto_chunk_data.ts",
+// 				saveString.join("")
+// 			);
 		},
 	});
 
