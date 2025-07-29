@@ -105,6 +105,8 @@ if (devMode) {
 		}
 		saveTimer -= 3;
 
+		print("auto saved map");
+
 		saveMap();
 	});
 
