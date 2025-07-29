@@ -19,7 +19,10 @@ registerBlock({
 	selection_box: treeCbox,
 	node_dig_prediction: "",
 	groups: { mine: 1 },
-	on_dig: (pos) => {
+	on_dig: (pos, _, digger) => {
+		if (digger == null) {
+			return;
+		}
 		const meta = core.get_meta(pos);
 		let mine = meta.get_int(TREE_MINE);
 
@@ -35,6 +38,13 @@ registerBlock({
 
 		// Could do an axe calculation here.
 		if (math.random(1, 1000) > 900) {
+			const inv = digger.get_inventory();
+			if (inv == null) {
+				return;
+			}
+
+			inv.add_item("main", "log");
+
 			print("got logs");
 		}
 
