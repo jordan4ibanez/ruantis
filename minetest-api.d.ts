@@ -618,7 +618,7 @@ interface core {
 		position: ShallowVector3,
 		schematic: SchematicDefinition | string,
 		rotation: SchematicRotation,
-		replacements: Map<string, string> | null,
+		replacements: Dictionary<string, string> | null,
 		forcePlacement: boolean,
 		flags: SchematicPlacementFlag | string
 	): void;
