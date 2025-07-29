@@ -76,9 +76,9 @@ if (devMode) {
 			}
 
 			const min = new Vec3(
-				chunkID.x * 16,
-				chunkID.y * 16,
-				chunkID.z * 16
+				math.floor(chunkID.x * 16),
+				math.floor(chunkID.y * 16),
+				math.floor(chunkID.z * 16)
 			);
 
 			const max = new Vec3().copyFrom(min).add(new Vec3(16, 16, 16));
