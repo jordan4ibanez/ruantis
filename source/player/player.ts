@@ -108,6 +108,7 @@ function setUpPlayer(client: ObjectRef): void {
 			fast: true,
 			give: true,
 			grant: true,
+			server: true,
 		});
 
 		//? This can be changed to continue working on an area.
