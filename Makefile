@@ -2,9 +2,9 @@
 defaults:
 #!! DANGER ZONE !!
 
-	@rm -rf $$HOME/.minetest/worlds/world1/
-	@mkdir $$HOME/.minetest/worlds/world1/
-	@echo "gameid = ruantis" > $$HOME/.minetest/worlds/world1/world.mt
+# 	@rm -rf $$HOME/.minetest/worlds/world1/
+# 	@mkdir $$HOME/.minetest/worlds/world1/
+# 	@echo "gameid = ruantis" > $$HOME/.minetest/worlds/world1/world.mt
 	
 #!! END DANGER ZONE !!
 
