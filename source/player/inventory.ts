@@ -3,6 +3,9 @@ import { devMode } from "../map/development_mode";
 import { HudElementType } from "../utility/enums";
 import { Vec2 } from "../utility/vector";
 
+const PRIMARY = "primary";
+const SECONDARY = "secondary";
+
 whenClientJoins((client) => {
 	const inv = client.get_inventory();
 	if (inv == null) {
@@ -11,8 +14,8 @@ whenClientJoins((client) => {
 	inv.set_size("main", 32);
 
 	// Wield slots.
-	inv.set_size("primary", 1);
-	inv.set_size("secondary", 1);
+	inv.set_size(PRIMARY, 1);
+	inv.set_size(SECONDARY, 1);
 
 	if (devMode) {
 		client.hud_set_hotbar_itemcount(32);
@@ -31,6 +34,22 @@ whenClientJoins((client) => {
 		});
 	}
 });
+
+export function getPrimaryItem(client: ObjectRef): ItemStackObject {
+	const inv = client.get_inventory();
+	if (inv == null) {
+		throw new Error(`${client.get_player_name()} has no inventory.`);
+	}
+	return inv.get_stack(PRIMARY, 1);
+}
+
+export function getSecondaryItem(client: ObjectRef): ItemStackObject {
+	const inv = client.get_inventory();
+	if (inv == null) {
+		throw new Error(`${client.get_player_name()} has no inventory.`);
+	}
+	return inv.get_stack(SECONDARY, 1);
+}
 
 /**
  * Tree-shake removal function.
