@@ -33,7 +33,7 @@ function deployInventoryFormspec(client: ObjectRef) {
 		f += `list[current_player;inv_${i};4.25,${0.25 + i * 1.25};5,1;0]`;
 	}
 
-	f += `list[current_player;${PRIMARY};0.75,0.25;1,1;0]`;
+	f += `list[current_player;${PRIMARY};0.5,0.25;1,1;0]`;
 
 	f += `list[current_player;${SECONDARY};2.5,0.25;1,1;0]`;
 
