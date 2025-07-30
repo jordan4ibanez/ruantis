@@ -43,6 +43,10 @@ export class ItemEntity extends Entity {
 			wield_item: this.itemstring,
 			glow: def && def.light_source,
 		});
+
+		this.object.set_nametag_attributes({
+			text: this.itemstring,
+		});
 	}
 	get_staticdata(): string {
 		return core.serialize({
