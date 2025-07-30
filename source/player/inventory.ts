@@ -32,17 +32,17 @@ whenClientJoins((client) => {
 	} else {
 		client.hud_set_hotbar_itemcount(1);
 
-		// was 6
-		for (const i of $range(0, 0)) {
-			print(i);
+		for (const i of $range(0, 6)) {
+			const up = (i - 7) * 55 - 2;
+
 			client.hud_add({
 				type: HudElementType.inventory,
 				text: `inv_${i}`,
 				number: 32,
 				item: 0,
-				// offset: new Vec2(0.5, 1),
-				position: new Vec2(0.5, 1.0),
-				alignment: new Vec2(0.0, -1.0),
+				// Where it is on screen.
+				position: new Vec2(0, 1),
+				offset: new Vec2(2, up),
 			});
 		}
 	}
