@@ -12,8 +12,9 @@ const levels: number[] = [0];
 	}
 })();
 
-for (const i of $range(0, levels.length - 1)) {
-	print(`Level: [${i}] = ${levels[i]}`);
-}
+//? This is level debugging.
+// for (const i of $range(0, levels.length - 1)) {
+// 	print(`Level: [${i}] = ${levels[i]}`);
+// }
 
 export function getLevel(): void {}
