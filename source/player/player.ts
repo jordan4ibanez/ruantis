@@ -108,7 +108,7 @@ function setUpPlayer(client: ObjectRef): void {
 
 	// Wield slots.
 	inv.set_size("primary", 1);
-	inv.set_size("secondary", 2);
+	inv.set_size("secondary", 1);
 
 	if (devMode) {
 		core.set_player_privs(client.get_player_name(), {
