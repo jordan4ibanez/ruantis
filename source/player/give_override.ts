@@ -1,4 +1,9 @@
-local function handle_give_command(cmd, giver, receiver, stackstring)
+function handle_give_command(
+	cmd: string,
+	giver: string,
+	receiver: string,
+	stackstring: string
+) {
 	// core.log("action", giver .. " invoked " .. cmd
 	// 		.. ', stackstring="' .. stackstring .. '"')
 	// local itemstack = ItemStack(stackstring)
@@ -51,8 +56,7 @@ local function handle_give_command(cmd, giver, receiver, stackstring)
 	// 	end
 	// 	return true, msg_other
 	// end
-end
-
+}
 
 core.override_chatcommand("giveme", {
 	params: "",
@@ -62,7 +66,7 @@ core.override_chatcommand("giveme", {
 		name: string,
 		param: string
 	): LuaMultiReturn<[boolean, string]> | void {
-		const itemstring = string.match(param, "(.+)$");
+		const [itemstring] = string.match(param, "(.+)$");
 		if (itemstring == null) {
 			return $multi(false, "ItemString required.");
 		}
