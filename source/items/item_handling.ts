@@ -70,7 +70,7 @@ export class ItemEntity extends Entity {
 	on_step(delta: number): void {
 		this.age += delta;
 		// 5 minutes and items disappear.
-		if (this.age > 300) {
+		if (this.age >= 300) {
 			this.object.remove();
 		}
 	}
