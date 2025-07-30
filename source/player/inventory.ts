@@ -64,9 +64,21 @@ export abstract class Inventory {
 		item: ItemStackObject | string
 	): boolean {
 		const inv = getInv(client);
-
 		for (const i of $range(0, 6)) {
 			if (inv.room_for_item(`inv_${i}`, item)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static hasItem(
+		client: ObjectRef,
+		item: ItemStackObject | string
+	): boolean {
+		const inv = getInv(client);
+		for (const i of $range(0, 6)) {
+			if (inv.contains_item(`inv_${i}`, item)) {
 				return true;
 			}
 		}
