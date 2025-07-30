@@ -35,20 +35,20 @@ whenClientJoins((client) => {
 	}
 });
 
-export function getPrimaryItem(client: ObjectRef): ItemStackObject {
+function getInv(client: ObjectRef): InvRef {
 	const inv = client.get_inventory();
 	if (inv == null) {
 		throw new Error(`${client.get_player_name()} has no inventory.`);
 	}
-	return inv.get_stack(PRIMARY, 1);
+	return inv;
+}
+
+export function getPrimaryItem(client: ObjectRef): ItemStackObject {
+	return getInv(client).get_stack(PRIMARY, 1);
 }
 
 export function getSecondaryItem(client: ObjectRef): ItemStackObject {
-	const inv = client.get_inventory();
-	if (inv == null) {
-		throw new Error(`${client.get_player_name()} has no inventory.`);
-	}
-	return inv.get_stack(SECONDARY, 1);
+	return getInv(client).get_stack(SECONDARY, 1);
 }
 
 /**
