@@ -2,6 +2,7 @@ import { whenClientJoins } from "../logic/client_join_leave";
 import { devMode } from "../map/development_mode";
 import { HudElementType } from "../utility/enums";
 import { Vec2 } from "../utility/vector";
+import { deployGiveOverride } from "./give_override";
 
 // Wield.
 const PRIMARY = "primary";
@@ -46,8 +47,6 @@ function deployInventoryFormspec(client: ObjectRef) {
 	f += `list[current_player;${LEGS};1.5,5.25;1,1;0]`;
 
 	f += `list[current_player;${FEET};1.5,6.5;1,1;0]`;
-
-	f += "";
 
 	client.set_inventory_formspec(f);
 }
@@ -176,3 +175,5 @@ export abstract class Inventory {
  * Never use this!
  */
 export function deployInventoryHandling(): void {}
+
+deployGiveOverride();
