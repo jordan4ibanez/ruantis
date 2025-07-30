@@ -33,6 +33,14 @@ registerBlock({
 			return;
 		}
 
+		if (!Inventory.roomForItem(digger, "logs")) {
+			sendFailureNotification(
+				digger,
+				"You have no room in your inventory for logs."
+			);
+			return;
+		}
+
 		const meta = core.get_meta(pos);
 		let mine = meta.get_int(TREE_MINE);
 
