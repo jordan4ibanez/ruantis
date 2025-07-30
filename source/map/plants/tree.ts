@@ -1,5 +1,6 @@
 import { serverTickRate } from "../../logic/tick";
 import { Inventory } from "../../player/inventory";
+import { sendFailureNotification } from "../../utility/chat";
 import { Drawtype, Nodeboxtype } from "../../utility/enums";
 import { registerBlock, setBlock } from "../block_database";
 
@@ -42,8 +43,6 @@ registerBlock({
 
 		mine -= 1;
 		meta.set_int(TREE_MINE, mine);
-
-		const axeLevel = Inventory.getWieldingGroupLevel(digger, "axe");
 
 		core.sound_play("tree_chop", { pos: pos });
 
