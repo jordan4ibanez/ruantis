@@ -46,11 +46,8 @@ registerBlock({
 
 		core.sound_play("tree_chop", { pos: pos });
 
-		// todo: check for an axe!
-
 		if (math.random(1, 1000) > 1) {
 			Inventory.addItem(digger, "log");
-			print("got logs");
 		}
 
 		if (mine == 1) {
