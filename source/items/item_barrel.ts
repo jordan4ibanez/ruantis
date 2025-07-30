@@ -1,5 +1,6 @@
 import { loadCustomItemEntity } from "./item_handling";
 import { loadRegularItems } from "./regular_items";
+import { loadTools } from "./tools";
 
 /**
  * Tree-shake removal function.
@@ -11,3 +12,5 @@ export function loadItems(): void {}
 loadRegularItems();
 
 loadCustomItemEntity();
+
+loadTools();
