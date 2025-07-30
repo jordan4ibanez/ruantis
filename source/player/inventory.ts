@@ -49,12 +49,29 @@ whenClientJoins((client) => {
 	}
 });
 
-export function getPrimaryItem(client: ObjectRef): ItemStackObject {
-	return getInv(client).get_stack(PRIMARY, 1);
-}
+// Put this into a module so you can autocomplete as [Inve...]
+export abstract class Inventory {
+	public static getPrimaryItem(client: ObjectRef): ItemStackObject {
+		return getInv(client).get_stack(PRIMARY, 1);
+	}
 
-export function getSecondaryItem(client: ObjectRef): ItemStackObject {
-	return getInv(client).get_stack(SECONDARY, 1);
+	public static getSecondaryItem(client: ObjectRef): ItemStackObject {
+		return getInv(client).get_stack(SECONDARY, 1);
+	}
+
+	public static roomForItem(
+		client: ObjectRef,
+		item: ItemStackObject | string
+	): boolean {
+		const inv = getInv(client);
+
+		for (const i of $range(0, 6)) {
+			if (inv.room_for_item(`inv_${i}`, item)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 /**
