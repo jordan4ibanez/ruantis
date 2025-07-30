@@ -33,11 +33,19 @@ function deployInventoryFormspec(client: ObjectRef) {
 		f += `list[current_player;inv_${i};4.25,${0.25 + i * 1.25};5,1;0]`;
 	}
 
-	f += "";
+	f += `list[current_player;${PRIMARY};0.75,0.25;1,1;0]`;
 
-	f += "";
+	f += `list[current_player;${SECONDARY};2.5,0.25;1,1;0]`;
 
-	f += "";
+	f += `list[current_player;${HEAD};1.5,2.75;1,1;0]`;
+
+	f += `list[current_player;${TORSO};1.5,4;1,1;0]`;
+
+	f += `list[current_player;${HANDS};0.25,4;1,1;0]`;
+
+	f += `list[current_player;${LEGS};1.5,5.25;1,1;0]`;
+
+	f += `list[current_player;${FEET};1.5,6.5;1,1;0]`;
 
 	f += "";
 
