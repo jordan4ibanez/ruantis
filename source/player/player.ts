@@ -132,8 +132,8 @@ whenClientJoins((client) => {
 		type: HudElementType.text,
 		text: "Ruantis prototype",
 		number: 0xffffff,
-		offset: new Vec2(64, 12),
-		position: new Vec2(0, 0),
+		offset: new Vec2(360, -12),
+		position: new Vec2(0, 1),
 	});
 });
 
