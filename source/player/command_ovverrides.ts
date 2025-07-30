@@ -52,4 +52,4 @@ core.override_chatcommand("giveme", {
  *
  * Never use this!
  */
-export function deployGiveOverride(): void {}
+export function deployCommandOverrides(): void {}
