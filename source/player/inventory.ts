@@ -2,7 +2,6 @@ import { whenClientJoins } from "../logic/client_join_leave";
 import { devMode } from "../map/development_mode";
 import { HudElementType } from "../utility/enums";
 import { Vec2 } from "../utility/vector";
-import { deployGiveOverride } from "./give_override";
 
 // Wield.
 const PRIMARY = "primary";
@@ -175,5 +174,3 @@ export abstract class Inventory {
  * Never use this!
  */
 export function deployInventoryHandling(): void {}
-
-deployGiveOverride();
