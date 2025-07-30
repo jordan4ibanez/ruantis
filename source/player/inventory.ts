@@ -3,8 +3,16 @@ import { devMode } from "../map/development_mode";
 import { HudElementType } from "../utility/enums";
 import { Vec2 } from "../utility/vector";
 
+// Wield.
 const PRIMARY = "primary";
 const SECONDARY = "secondary";
+
+// Armor/equipment.
+const HEAD = "head";
+const TORSO = "torso";
+const HANDS = "hands";
+const LEGS = "legs";
+const FEET = "feet";
 
 function getInv(client: ObjectRef): InvRef {
 	const inv = client.get_inventory();
@@ -25,6 +33,13 @@ whenClientJoins((client) => {
 	// Wield slots.
 	inv.set_size(PRIMARY, 1);
 	inv.set_size(SECONDARY, 1);
+
+	// Armor/equpiment slots.
+	inv.set_size(HEAD, 1);
+	inv.set_size(TORSO, 1);
+	inv.set_size(HANDS, 1);
+	inv.set_size(LEGS, 1);
+	inv.set_size(FEET, 1);
 
 	if (devMode) {
 		inv.set_size("main", 32);
