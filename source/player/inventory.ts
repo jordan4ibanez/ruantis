@@ -34,17 +34,11 @@ function deployInventoryFormspec(client: ObjectRef) {
 	}
 
 	f += `list[current_player;${PRIMARY};0.5,0.25;1,1;0]`;
-
 	f += `list[current_player;${SECONDARY};2.5,0.25;1,1;0]`;
-
 	f += `list[current_player;${HEAD};1.5,2.75;1,1;0]`;
-
 	f += `list[current_player;${TORSO};1.5,4;1,1;0]`;
-
 	f += `list[current_player;${HANDS};0.25,4;1,1;0]`;
-
 	f += `list[current_player;${LEGS};1.5,5.25;1,1;0]`;
-
 	f += `list[current_player;${FEET};1.5,6.5;1,1;0]`;
 
 	client.set_inventory_formspec(f);
