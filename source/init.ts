@@ -5,7 +5,7 @@ import { deployClientTracker } from "./player/tracker";
 import { deployPlayerEntity } from "./player/player";
 import { loadNodes } from "./map/map_barrel";
 import { loadItems } from "./items/item_barrel";
-import { deployCommandOverrides } from "./player/command_ovverrides";
+import { deployCommandOverrides } from "./player/command_overrides";
 
 function main() {
 	deployTickTimer();
