@@ -1,4 +1,5 @@
 import { serverTickRate } from "../../logic/tick";
+import { Inventory } from "../../player/inventory";
 import { Drawtype, Nodeboxtype } from "../../utility/enums";
 import { registerBlock, setBlock } from "../block_database";
 
@@ -38,14 +39,8 @@ registerBlock({
 
 		// todo: check for an axe!
 
-		if (math.random(1, 1000) > 900) {
-			const inv = digger.get_inventory();
-			if (inv == null) {
-				return;
-			}
-
-			inv.add_item("main", "log");
-
+		if (math.random(1, 1000) > 1) {
+			Inventory.addItem(digger, "log");
 			print("got logs");
 		}
 
