@@ -1,4 +1,6 @@
 import { ShallowVector3 } from "../../minetest-api";
+import { Inventory } from "../player/inventory";
+import { sendFailureNotification } from "../utility/chat";
 import { Entity, registerEntity } from "../utility/entity";
 import { EntityVisual, LogLevel } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
@@ -70,6 +72,34 @@ export class ItemEntity extends Entity {
 		// 5 minutes and items disappear.
 		if (this.age > 300) {
 			this.object.remove();
+		}
+	}
+	on_punch(
+		puncher: ObjectRef | null,
+		timeFromLastPunch: number | null,
+		toolCapabilities: ToolCapabilities | null,
+		dir: Vec3 | null,
+		damage: number
+	): void {
+		if (puncher == null) {
+			return;
+		}
+
+		const itemObj = ItemStack(this.itemstring);
+
+		if (Inventory.roomForItem(puncher, itemObj)) {
+			core.chat_send_player(
+				puncher.get_player_name(),
+				`You pick up: ${this.itemstring}`
+			);
+			Inventory.addItem(puncher, itemObj);
+			this.object.remove();
+			return;
+		} else {
+			sendFailureNotification(
+				puncher,
+				`You have no room in your inventory for ${this.itemstring}`
+			);
 		}
 	}
 }
