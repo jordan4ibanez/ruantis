@@ -35,6 +35,8 @@ registerBlock({
 		mine -= 1;
 		meta.set_int(TREE_MINE, mine);
 
+		const axeLevel = Inventory.getWieldingGroupLevel(digger, "axe");
+
 		core.sound_play("tree_chop", { pos: pos });
 
 		// todo: check for an axe!
