@@ -188,9 +188,10 @@ export abstract class Inventory {
 		const prim = this.getPrimaryItem(client);
 		const seco = this.getSecondaryItem(client);
 
-		print(dump(prim), dump(seco));
+		const a = core.get_item_group(prim.get_name(), group);
+		const b = core.get_item_group(seco.get_name(), group);
 
-		return 0;
+		return math.max(a, b);
 	}
 }
 
