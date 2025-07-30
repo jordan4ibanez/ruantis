@@ -24,6 +24,14 @@ registerBlock({
 		if (digger == null) {
 			return;
 		}
+
+		const axeLevel = Inventory.getWieldingGroupLevel(digger, "axe");
+
+		if (axeLevel <= 0) {
+			sendFailureNotification(digger, "You need an axe to chop a tree.");
+			return;
+		}
+
 		const meta = core.get_meta(pos);
 		let mine = meta.get_int(TREE_MINE);
 
