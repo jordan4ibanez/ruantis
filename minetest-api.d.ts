@@ -1659,7 +1659,7 @@ declare global {
 	}
 
 	/** @noSelf **/ interface NametagAttributes {
-		text?: string;
+		text: string;
 		color?: RGBA;
 		bgcolor?: RGBA;
 	}
