@@ -83,6 +83,26 @@ whenClientJoins((client) => {
 				offset: new Vec2(2, up),
 			});
 		}
+
+		client.hud_add({
+			type: HudElementType.inventory,
+			text: PRIMARY,
+			number: 32,
+			item: 0,
+			// Where it is on screen.
+			position: new Vec2(0, 1),
+			offset: new Vec2(2, -442.5),
+		});
+
+		client.hud_add({
+			type: HudElementType.inventory,
+			text: SECONDARY,
+			number: 32,
+			item: 0,
+			// Where it is on screen.
+			position: new Vec2(0, 1),
+			offset: new Vec2(227.5, -442.5),
+		});
 	}
 
 	deployInventoryFormspec(client);
