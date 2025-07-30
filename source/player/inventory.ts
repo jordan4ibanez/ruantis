@@ -166,6 +166,18 @@ export abstract class Inventory {
 		// There's no room in the inventory at all.
 		return false;
 	}
+
+	public static getWieldingGroupLevel(
+		client: ObjectRef,
+		group: string
+	): number {
+		const prim = this.getPrimaryItem(client);
+		const seco = this.getSecondaryItem(client);
+
+		print(dump(prim), dump(seco));
+
+		return 0;
+	}
 }
 
 /**
