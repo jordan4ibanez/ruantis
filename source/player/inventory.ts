@@ -17,8 +17,7 @@ function getInv(client: ObjectRef): InvRef {
 whenClientJoins((client) => {
 	const inv = getInv(client);
 
-	inv.set_size("main", 1);
-
+	// 35 inventory slots.
 	for (const i of $range(0, 6)) {
 		inv.set_size(`inv_${i}`, 5);
 	}
@@ -28,8 +27,10 @@ whenClientJoins((client) => {
 	inv.set_size(SECONDARY, 1);
 
 	if (devMode) {
+		inv.set_size("main", 32);
 		client.hud_set_hotbar_itemcount(32);
 	} else {
+		inv.set_size("main", 1);
 		client.hud_set_hotbar_itemcount(1);
 
 		for (const i of $range(0, 6)) {
