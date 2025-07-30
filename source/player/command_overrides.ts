@@ -1,3 +1,4 @@
+import { devMode } from "../map/development_mode";
 import { LogLevel } from "../utility/enums";
 import { Inventory } from "./inventory";
 
@@ -28,7 +29,11 @@ function handle_give_command(
 		return;
 	}
 
-	Inventory.addItem(receiverref, itemstack);
+	if (devMode) {
+		receiverref.get_inventory()!.add_item("main", itemstack);
+	} else {
+		Inventory.addItem(receiverref, itemstack);
+	}
 }
 
 core.override_chatcommand("giveme", {
