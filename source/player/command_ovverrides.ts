@@ -47,6 +47,21 @@ core.override_chatcommand("giveme", {
 	},
 });
 
+core.override_chatcommand("clearinv", {
+	params: "",
+	description: "",
+	privs: { give: true, server: true },
+	func: function (
+		name: string,
+		param: string
+	): LuaMultiReturn<[boolean, string]> | void {
+		const p = core.get_player_by_name(name);
+		if (p != null) {
+			Inventory.clear(p);
+		}
+	},
+});
+
 /**
  * Tree-shake removal function.
  *

@@ -181,6 +181,22 @@ export abstract class Inventory {
 		return false;
 	}
 
+	public static clear(client: ObjectRef): void {
+		const inv = getInv(client);
+		for (const i of $range(0, 6)) {
+			inv.set_list(`inv_${i}`, [
+				ItemStack(""),
+				ItemStack(""),
+				ItemStack(""),
+				ItemStack(""),
+				ItemStack(""),
+			]);
+		}
+
+		inv.set_list(PRIMARY, [ItemStack("")]);
+		inv.set_list(SECONDARY, [ItemStack("")]);
+	}
+
 	public static getWieldingGroupLevel(
 		client: ObjectRef,
 		group: string
