@@ -84,6 +84,43 @@ export abstract class Inventory {
 		}
 		return false;
 	}
+
+	private static getRow(
+		client: ObjectRef,
+		item: ItemStackObject | string
+	): number | null {
+		const inv = getInv(client);
+		for (const i of $range(0, 6)) {
+			if (inv.contains_item(`inv_${i}`, item)) {
+				return i;
+			}
+		}
+		return null;
+	}
+
+	public static addItem(
+		client: ObjectRef,
+		item: ItemStackObject | string
+	): boolean {
+		const inv = getInv(client);
+		const row = this.getRow(client, item);
+		// Try to add it into the existing item.
+		if (row != null) {
+			if (inv.room_for_item(`inv_${row}`, item)) {
+				inv.add_item(`inv_${row}`, item);
+				return true;
+			}
+		}
+		// It failed to add to that row. Scan.
+		for (const i of $range(0, 6)) {
+			if (inv.room_for_item(`inv_${i}`, item)) {
+				inv.add_item(`inv_${i}`, item);
+				return true;
+			}
+		}
+		// There's no room in the inventory at all.
+		return false;
+	}
 }
 
 /**
