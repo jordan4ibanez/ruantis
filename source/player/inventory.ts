@@ -22,6 +22,28 @@ function getInv(client: ObjectRef): InvRef {
 	return inv;
 }
 
+function deployInventoryFormspec(client: ObjectRef) {
+	let f = "";
+
+	f += "formspec_version[9]";
+
+	f += "size[10.5,9]";
+
+	for (const i of $range(0, 6)) {
+		f += `list[current_player;inv_${i};4.25,${0.25 + i * 1.25};5,1;0]`;
+	}
+
+	f += "";
+
+	f += "";
+
+	f += "";
+
+	f += "";
+
+	client.set_inventory_formspec(f);
+}
+
 whenClientJoins((client) => {
 	const inv = getInv(client);
 
@@ -62,6 +84,8 @@ whenClientJoins((client) => {
 			});
 		}
 	}
+
+	deployInventoryFormspec(client);
 });
 
 // Put this into a module so you can autocomplete as [Inve...]
