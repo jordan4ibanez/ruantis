@@ -41,14 +41,14 @@ type leClassType = { new (): LuaEntity };
  * A bolt on to allow you to directly register MT lua entities as TS classes.
  * @param clazz Class definition.
  */
-export function registerEntity(clazz: leClassType, takeInternalName?: boolean) {
+export function registerEntity(clazz: leClassType) {
 	const instance = new clazz();
 
-	if (takeInternalName == null || takeInternalName == false) {
+	if (instance.name == "__builtin:item") {
+		core.register_entity(":" + instance.name, instance);
+	} else {
 		instance.name = clazz.name;
 		core.register_entity(":" + clazz.name, instance);
-	} else {
-		core.register_entity(":" + instance.name, instance);
 	}
 }
 
