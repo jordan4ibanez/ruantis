@@ -131,6 +131,13 @@ function setUpPlayer(client: ObjectRef): void {
 		visible: false,
 	});
 
+	const offset = 0.925;
+	client.set_eye_offset(
+		new Vec3(0, offset, 1),
+		new Vec3(0, offset, 0),
+		new Vec3(0, offset, 0)
+	);
+
 	if (devMode) {
 		core.set_player_privs(client.get_player_name(), {
 			fly: true,
