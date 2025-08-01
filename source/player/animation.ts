@@ -45,6 +45,7 @@ class DebugPlayerModel extends Entity {
 		mesh: "player.gltf",
 		textures: ["player.png"],
 		static_save: false,
+		// glow: 14,
 	};
 
 	public setAnimation(animation: PlayerAnimation): void {
