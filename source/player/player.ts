@@ -56,6 +56,20 @@ class Player {
 		this.name = client.get_player_name();
 		this.client = client;
 	}
+
+	setMoving(newState: boolean): void {
+		this.__isMoving = newState;
+	}
+	isMoving(): boolean {
+		return this.__isMoving;
+	}
+
+	setRunning(newState: boolean): void {
+		this.__isRunning = newState;
+	}
+	isRunning(): boolean {
+		return this.__isRunning;
+	}
 }
 
 const players = new Map<string, Player>();
