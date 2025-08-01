@@ -9,8 +9,8 @@ import { getControls } from "./controls";
  * Animations:
  *
  * 0-1 idle
- * 1-2 walk
- * 3-4 run
+ * 2-3 walk
+ * 4-5 run
  */
 
 class DebugPlayerModel extends Entity {
