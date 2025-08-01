@@ -72,8 +72,6 @@ afterClientJoins((client) => {
 
 	client.set_properties({ textures: ["blank.png"] });
 
-	playerEntities.set(client.get_player_name(), ent);
-
 	const luaEnt = ent.get_luaentity() as DebugPlayerModel | null;
 	if (luaEnt == null) {
 		throw new Error("Missing lua entity.");
