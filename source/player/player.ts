@@ -92,7 +92,7 @@ function setUpPlayer(client: ObjectRef): void {
 		jump: 0,
 		gravity: 1000,
 		speed_climb: 0,
-		speed_crouch: 3,
+		speed_crouch: 5, // todo 3 makes this equal to walking so mod this when stamina is in.
 		liquid_fluidity: 0,
 		liquid_fluidity_smooth: 0,
 		liquid_sink: 0,
