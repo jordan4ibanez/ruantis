@@ -77,6 +77,8 @@ afterClientJoins((client) => {
 		throw new Error("Missing lua entity.");
 	}
 	luaEnt.setAnimation(PlayerAnimation.run);
+
+	playerEntities.set(client.get_player_name(), luaEnt);
 });
 });
 
