@@ -1,3 +1,4 @@
+import { ShallowVector3 } from "../../minetest-api";
 import { LogLevel } from "./enums";
 import { Vec2, Vec3 } from "./vector";
 
@@ -59,7 +60,7 @@ export function registerEntity(clazz: leClassType) {
  * @param initFunction A decorator function for when (and if) the entity spawns.
  */
 export function spawnEntity(
-	pos: Vec3,
+	pos: ShallowVector3,
 	clazz: leClassType,
 	initFunction?: (obj: ObjectRef) => void
 ): ObjectRef | null {
