@@ -55,8 +55,6 @@ class Player {
 	}
 }
 
-
-
 const players = new Map<string, Player>();
 
 function setUpPlayer(client: ObjectRef): void {
@@ -130,7 +128,6 @@ function setUpPlayer(client: ObjectRef): void {
 	}
 }
 
-
 class DebugPlayerModel extends Entity {
 	initial_properties: ObjectProperties = {
 		visual: EntityVisual.mesh,
@@ -147,6 +144,8 @@ afterClientJoins((client) => {
 		throw new Error("wat");
 	}
 	ent.set_attach(client, "", new Vec3(), new Vec3(), true);
+
+	client.set_properties({ textures: ["blank.png"] });
 });
 
 whenClientJoins((client) => {
