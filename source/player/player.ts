@@ -128,33 +128,7 @@ function setUpPlayer(client: ObjectRef): void {
 	}
 }
 
-/**
- * Animations:
- *
- * 0-1 idle
- * 1-2 walk
- * 3-4 run
- */
 
-class DebugPlayerModel extends Entity {
-	initial_properties: ObjectProperties = {
-		visual: EntityVisual.mesh,
-		mesh: "player.gltf",
-		textures: ["player.png"],
-		static_save: false,
-	};
-}
-registerEntity(DebugPlayerModel);
-
-afterClientJoins((client) => {
-	const ent = spawnEntity(client.get_pos(), DebugPlayerModel);
-	if (ent == null) {
-		throw new Error("wat");
-	}
-	ent.set_attach(client, "", new Vec3(), new Vec3(), true);
-
-	client.set_properties({ textures: ["blank.png"] });
-});
 
 whenClientJoins((client) => {
 	// getDatabase()
