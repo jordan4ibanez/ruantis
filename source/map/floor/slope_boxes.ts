@@ -1,5 +1,6 @@
 import { Nodeboxtype } from "../../utility/enums";
 
+// This controls the detail of all the composite shapes.
 const detail = 120;
 
 export const invCornerNodeBox: NodeBox = (() => {
