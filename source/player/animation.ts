@@ -30,6 +30,9 @@ export class PlayerAnimation {
 }
 
 class DebugPlayerModel extends Entity {
+	// Set to walk so it immediately changes.
+	private currentAnim: PlayerAnimation = PlayerAnimation.walk;
+
 	initial_properties: ObjectProperties = {
 		visual: EntityVisual.mesh,
 		mesh: "player.gltf",
