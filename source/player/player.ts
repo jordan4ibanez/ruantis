@@ -49,6 +49,8 @@ class Player {
 	private readonly name: string;
 	private readonly client: ObjectRef;
 	private hp: number = 10;
+	private __isRunning = false;
+	private __isMoving = false;
 
 	constructor(client: ObjectRef) {
 		this.name = client.get_player_name();
