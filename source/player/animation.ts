@@ -4,6 +4,7 @@ import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual, LogLevel, TileAnimationType } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 import { getControls } from "./controls";
+import { getPlayer } from "./player";
 
 /**
  * Animations:
@@ -82,15 +83,25 @@ afterClientJoins((client) => {
 });
 
 registerClientTickFunction((client, delta) => {
-	const c = getControls(client.get_player_name());
 	const name = client.get_player_name();
+	const player = getPlayer(name);
 	const ent = playerEntities.get(name);
+
+	if (player == null) {
+		core.log(LogLevel.error, `Missing player ${name}!`);
+		return;
+	}
+
 	if (ent == null || !ent.object.is_valid()) {
 		core.log(LogLevel.error, `${name} is missing a player entity.`);
 		return;
 	}
-	if (c.downHeld || c.upHeld || c.leftHeld || c.rightHeld) {
-		ent.setAnimation(PlayerAnimation.walk);
+	if (player.isMoving()) {
+		if (player.isRunning()) {
+			ent.setAnimation(PlayerAnimation.run);
+		} else {
+			ent.setAnimation(PlayerAnimation.walk);
+		}
 	} else {
 		ent.setAnimation(PlayerAnimation.idle);
 	}
