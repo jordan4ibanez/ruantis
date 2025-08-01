@@ -31,6 +31,18 @@ export function registerServerTickFunction(func: serverTickFunctionType): void {
 	serverFunctions.push(func);
 }
 
+const serverTickClientFunctions: clientTickFunctionType[] = [];
+
+/**
+ * This is for all the time client focused functions that use the server tick rate.
+ * @param func Function.
+ */
+export function registerServerTickClientFunction(
+	func: clientTickFunctionType
+): void {
+	serverTickClientFunctions.push(func);
+}
+
 //? Temporary non-targeted functions.
 
 type temporaryClientTickFunctionType = (
@@ -213,9 +225,13 @@ function tick(delta: number): void {
 			}
 		}
 
-		//? Temporary targeted.
+		//? Temporary targeted and forever.
 
 		for (const client of getAllClients()) {
+			for (const func of serverTickClientFunctions) {
+				func(client, delta);
+			}
+
 			// This is specific to the client so it must remain in this scope.
 
 			const tFuncs = temporaryTargetedServerTickFunctions.get(
