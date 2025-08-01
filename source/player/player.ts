@@ -59,6 +59,7 @@ class DebugPlayerModel extends Entity {
 	initial_properties: ObjectProperties = {
 		visual: EntityVisual.mesh,
 		mesh: "player.gltf",
+		static_save: false,
 	};
 }
 
