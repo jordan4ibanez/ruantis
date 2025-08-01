@@ -71,11 +71,11 @@ function setUpPlayer(client: ObjectRef): void {
 	});
 
 	client.set_physics_override({
-		speed: 1,
+		speed: 0.5,
 		jump: 0,
 		gravity: 1000,
 		speed_climb: 0,
-		speed_crouch: 0,
+		speed_crouch: 3,
 		liquid_fluidity: 0,
 		liquid_fluidity_smooth: 0,
 		liquid_sink: 0,
