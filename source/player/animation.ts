@@ -25,7 +25,7 @@ export class PlayerAnimation {
 
 	public static readonly idle = new PlayerAnimation(0, 1, 1);
 	public static readonly walk = new PlayerAnimation(2, 3, 1);
-	public static readonly run = new PlayerAnimation(4, 5, 1.5);
+	public static readonly run = new PlayerAnimation(4, 5, 1.25);
 
 	value(): Vec2 {
 		return this.__v;
