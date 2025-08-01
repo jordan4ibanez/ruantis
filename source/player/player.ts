@@ -64,21 +64,6 @@ class DebugPlayerModel extends Entity {
 }
 
 registerEntity(DebugPlayerModel);
-core.register_chatcommand("test", {
-	params: "",
-	description: "",
-	privs: {},
-	func: function (
-		name: string,
-		param: string
-	): LuaMultiReturn<[boolean, string]> | void {
-		const p = core.get_player_by_name(name)!;
-
-		const pos = p.get_pos();
-
-		core.add_entity(pos, "DebugPlayerModel");
-	},
-});
 
 const players = new Map<string, Player>();
 
