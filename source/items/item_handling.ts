@@ -107,7 +107,7 @@ export class ItemEntity extends Entity {
 		}
 	}
 }
-registerEntity(ItemEntity, true);
+registerEntity(ItemEntity);
 
 core.item_drop = (
 	itemStack: ItemStackObject,
