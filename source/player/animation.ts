@@ -1,7 +1,9 @@
 import { afterClientJoins } from "../logic/client_join_leave";
+import { registerClientTickFunction } from "../logic/tick";
 import { Entity, registerEntity, spawnEntity } from "../utility/entity";
 import { EntityVisual } from "../utility/enums";
-import { Vec3 } from "../utility/vector";
+import { Vec2, Vec3 } from "../utility/vector";
+import { getControls } from "./controls";
 
 /**
  * Animations:
