@@ -29,6 +29,10 @@ export class PlayerAnimation {
 	value(): Vec2 {
 		return this.__v;
 	}
+
+	speed(): number {
+		return this.__sp;
+	}
 }
 
 class DebugPlayerModel extends Entity {
@@ -46,7 +50,12 @@ class DebugPlayerModel extends Entity {
 		if (this.currentAnim.value().equals(animation.value())) {
 			return;
 		}
-		this.object.set_animation(animation.value(), 1, 1, true);
+		this.object.set_animation(
+			animation.value(),
+			animation.speed(),
+			1,
+			true
+		);
 		this.currentAnim = animation;
 	}
 }
