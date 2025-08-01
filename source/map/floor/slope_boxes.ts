@@ -1,6 +1,6 @@
 import { Nodeboxtype } from "../../utility/enums";
 
-const detail = 20;
+const detail = 120;
 
 export const invCornerNodeBox: NodeBox = (() => {
 	const t: NodeBox = {
