@@ -128,6 +128,14 @@ function setUpPlayer(client: ObjectRef): void {
 	}
 }
 
+/**
+ * Animations:
+ *
+ * 0-1 idle
+ * 1-2 walk
+ * 3-4 run
+ */
+
 class DebugPlayerModel extends Entity {
 	initial_properties: ObjectProperties = {
 		visual: EntityVisual.mesh,
