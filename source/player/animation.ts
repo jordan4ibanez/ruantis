@@ -55,7 +55,7 @@ const playerEntities = new Map<string, ObjectRef>();
 afterClientJoins((client) => {
 	const ent = spawnEntity(client.get_pos(), DebugPlayerModel);
 	if (ent == null) {
-		throw new Error("wat");
+		throw new Error("Failed to add player entity.");
 	}
 	ent.set_attach(client, "", new Vec3(), new Vec3(), true);
 
