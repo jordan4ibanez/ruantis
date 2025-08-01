@@ -55,15 +55,7 @@ class Player {
 	}
 }
 
-class DebugPlayerModel extends Entity {
-	initial_properties: ObjectProperties = {
-		visual: EntityVisual.mesh,
-		mesh: "player.gltf",
-		static_save: false,
-	};
-}
 
-registerEntity(DebugPlayerModel);
 
 const players = new Map<string, Player>();
 
@@ -137,6 +129,17 @@ function setUpPlayer(client: ObjectRef): void {
 		client.set_pos(new Vec3(0, 1, 0));
 	}
 }
+
+
+class DebugPlayerModel extends Entity {
+	initial_properties: ObjectProperties = {
+		visual: EntityVisual.mesh,
+		mesh: "player.gltf",
+		textures: ["player.png"],
+		static_save: false,
+	};
+}
+registerEntity(DebugPlayerModel);
 
 afterClientJoins((client) => {
 	const ent = spawnEntity(client.get_pos(), DebugPlayerModel);
