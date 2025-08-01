@@ -50,6 +50,8 @@ class DebugPlayerModel extends Entity {
 }
 registerEntity(DebugPlayerModel);
 
+const playerEntities = new Map<string, ObjectRef>();
+
 afterClientJoins((client) => {
 	const ent = spawnEntity(client.get_pos(), DebugPlayerModel);
 	if (ent == null) {
