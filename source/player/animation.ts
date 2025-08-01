@@ -39,6 +39,14 @@ class DebugPlayerModel extends Entity {
 		textures: ["player.png"],
 		static_save: false,
 	};
+
+	public setAnimation(animation: PlayerAnimation): void {
+		if (this.currentAnim.value().equals(animation.value())) {
+			return;
+		}
+		this.object.set_animation(animation.value(), 1, 1, true);
+		this.currentAnim = animation;
+	}
 }
 registerEntity(DebugPlayerModel);
 
