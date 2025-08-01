@@ -34,6 +34,8 @@ export class Controls {
 	readonly mouseLeftClick: boolean = false;
 	/** Single press. */
 	readonly mouseRightClick: boolean = false;
+
+	readonly shifting: boolean = false;
 }
 
 class MasterController extends Controls {
@@ -75,6 +77,8 @@ class MasterController extends Controls {
 			!mouseLeftWasPressed && this.mouseLeftHeld;
 		(this.mouseRightClick as boolean) =
 			!mouseRightWasPressed && this.mouseRightHeld;
+
+		(this.shifting as boolean) = rawControl.sneak;
 	}
 }
 
