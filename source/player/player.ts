@@ -12,6 +12,7 @@ import {
 	SkyParametersType,
 } from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
+import { getControls } from "./controls";
 
 let devMine;
 if (devMode) {
