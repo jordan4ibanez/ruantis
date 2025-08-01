@@ -5,7 +5,12 @@ import {
 } from "../logic/client_join_leave";
 import { registerClientTickFunction, serverTickRate } from "../logic/tick";
 import { devMode } from "../map/development_mode";
-import { HudElementType, SkyParametersType } from "../utility/enums";
+import { Entity, registerEntity, spawnEntity } from "../utility/entity";
+import {
+	EntityVisual,
+	HudElementType,
+	SkyParametersType,
+} from "../utility/enums";
 import { Vec2, Vec3 } from "../utility/vector";
 
 let devMine;
