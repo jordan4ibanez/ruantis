@@ -15,14 +15,16 @@ import { getControls } from "./controls";
 
 export class PlayerAnimation {
 	private readonly __v = new Vec2();
-	private constructor(min: number, max: number) {
+	private readonly __sp;
+	private constructor(min: number, max: number, speed: number) {
 		this.__v.x = min;
 		this.__v.y = max;
+		this.__sp = speed;
 	}
 
-	public static readonly idle = new PlayerAnimation(0, 1);
-	public static readonly walk = new PlayerAnimation(2, 3);
-	public static readonly run = new PlayerAnimation(4, 5);
+	public static readonly idle = new PlayerAnimation(0, 1, 1);
+	public static readonly walk = new PlayerAnimation(2, 3, 1);
+	public static readonly run = new PlayerAnimation(4, 5, 2);
 
 	value(): Vec2 {
 		return this.__v;
