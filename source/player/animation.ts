@@ -13,6 +13,14 @@ import { getControls } from "./controls";
  * 4-5 run
  */
 
+export abstract class PlayerAnimations {
+	private constructor() {}
+
+	public static idle = new Vec2(0, 1);
+	public static walk = new Vec2(2, 3);
+	public static run = new Vec2(4, 5);
+}
+
 class DebugPlayerModel extends Entity {
 	initial_properties: ObjectProperties = {
 		visual: EntityVisual.mesh,
