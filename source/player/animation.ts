@@ -13,12 +13,20 @@ import { getControls } from "./controls";
  * 4-5 run
  */
 
-export abstract class PlayerAnimations {
-	private constructor() {}
+export class PlayerAnimation {
+	private readonly __v = new Vec2();
+	private constructor(min: number, max: number) {
+		this.__v.x = min;
+		this.__v.y = max;
+	}
 
-	public static idle = new Vec2(0, 1);
-	public static walk = new Vec2(2, 3);
-	public static run = new Vec2(4, 5);
+	public static readonly idle = new PlayerAnimation(0, 1);
+	public static readonly walk = new PlayerAnimation(2, 3);
+	public static readonly run = new PlayerAnimation(4, 5);
+
+	value(): Vec2 {
+		return this.__v;
+	}
 }
 
 class DebugPlayerModel extends Entity {
