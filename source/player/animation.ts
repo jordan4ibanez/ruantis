@@ -80,6 +80,20 @@ afterClientJoins((client) => {
 
 	playerEntities.set(client.get_player_name(), luaEnt);
 });
+
+registerClientTickFunction((client, delta) => {
+	const c = getControls(client.get_player_name());
+	const name = client.get_player_name();
+	const ent = playerEntities.get(name);
+	if (ent == null || !ent.object.is_valid()) {
+		core.log(LogLevel.error, `${name} is missing a player entity.`);
+		return;
+	}
+	if (c.downHeld || c.upHeld || c.leftHeld || c.rightHeld) {
+		ent.setAnimation(PlayerAnimation.walk);
+	} else {
+		ent.setAnimation(PlayerAnimation.idle);
+	}
 });
 
 /**
