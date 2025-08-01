@@ -145,8 +145,6 @@ function setUpPlayer(client: ObjectRef): void {
 	}
 }
 
-
-
 whenClientJoins((client) => {
 	// getDatabase()
 
@@ -172,13 +170,27 @@ whenClientLeaves((client) => {
 	players.delete(client.get_player_name());
 });
 
-registerClientTickFunction((player, delta) => {
-	const name = player.get_player_name();
-	const pData = players.get(name);
+registerClientTickFunction((client, delta) => {
+	const name = client.get_player_name();
+	const player: Player | undefined = players.get(name);
 
 	// Player might be one tick late.
-	if (pData == null) {
+	if (player == null) {
 		return;
+	}
+
+	const c = getControls(name);
+
+	if (c.downHeld || c.upHeld || c.leftHeld || c.rightHeld) {
+		player.setMoving(true);
+	} else {
+		player.setMoving(false);
+	}
+
+	if (c.shifting) {
+		player.setRunning(true);
+	} else {
+		player.setRunning(false);
 	}
 });
 
