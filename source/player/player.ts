@@ -143,6 +143,12 @@ function setUpPlayer(client: ObjectRef): void {
 		// This should be checking the meta to see if the player has been to the server before.
 		client.set_pos(new Vec3(0, 1, 0));
 	}
+
+	const ent = spawnEntity(client.get_pos(), DebugPlayerModel);
+	if (ent == null) {
+		throw new Error("wat");
+	}
+	ent.set_attach(client, "", new Vec3(), new Vec3(), true);
 }
 
 whenClientJoins((client) => {
