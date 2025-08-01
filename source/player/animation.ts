@@ -61,7 +61,7 @@ class DebugPlayerModel extends Entity {
 }
 registerEntity(DebugPlayerModel);
 
-const playerEntities = new Map<string, ObjectRef>();
+const playerEntities = new Map<string, DebugPlayerModel>();
 
 afterClientJoins((client) => {
 	const ent = spawnEntity(client.get_pos(), DebugPlayerModel);
